@@ -13,13 +13,16 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    rouletteEventsMain()
 
     var loggedin = localStorage.getItem('loggedin')
 
     if(loggedin === "0"){
 
       this.router.navigate(["/"])
+
+    }else{
+      
+      rouletteEventsMain()
 
     }
 

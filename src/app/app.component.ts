@@ -9,7 +9,7 @@ export class AppComponent implements OnInit{
 
   ngOnInit(): void {
 
-    localStorage.setItem('loggedin', false);
+    localStorage.setItem('loggedin', "0");
 
   }
 }

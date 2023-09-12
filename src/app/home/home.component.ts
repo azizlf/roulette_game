@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     rouletteEventsMain()
 
-    var loggedin = localStorage.getItem('loggedin');
+    var loggedin = (localStorage.getItem('loggedin') === "0")
 
     if(!loggedin){
 

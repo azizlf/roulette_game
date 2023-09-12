@@ -18,7 +18,7 @@ export class AuthComponent implements OnInit {
 
     if(login.value === "sayros" && password.value === "102030s"){
 
-      localStorage.setItem('loggedin', true);
+      localStorage.setItem('loggedin', "1");
 
       this.router.navigate(['/home']);
 
@@ -32,7 +32,7 @@ export class AuthComponent implements OnInit {
 
       },5000)
 
-      localStorage.setItem('loggedin', false);
+      localStorage.setItem('loggedin', "0");
 
     }
 

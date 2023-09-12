@@ -18,6 +18,8 @@ export class AuthComponent implements OnInit {
 
     if(login.value === "sayros" && password.value === "102030s"){
 
+      localStorage.setItem('loggedin', true);
+
       this.router.navigate(['/home']);
 
     }else{
@@ -30,10 +32,11 @@ export class AuthComponent implements OnInit {
 
       },5000)
 
+      localStorage.setItem('loggedin', false);
+
     }
 
   }
-
 
   ngOnInit(): void {
   }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 declare function rouletteEventsMain():void
 
@@ -9,10 +10,19 @@ declare function rouletteEventsMain():void
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     rouletteEventsMain()
+
+    var loggedin = localStorage.getItem('loggedin');
+
+    if(!loggedin){
+
+      this.router.navigate(["/"])
+
+    }
+
   }
 
 }

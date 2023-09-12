@@ -15,9 +15,9 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     rouletteEventsMain()
 
-    var loggedin = (localStorage.getItem('loggedin') === "0")
+    var loggedin = localStorage.getItem('loggedin')
 
-    if(!loggedin){
+    if(loggedin === "0"){
 
       this.router.navigate(["/"])
 

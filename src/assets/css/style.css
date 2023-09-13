@@ -151,6 +151,13 @@
 
 	}
 
+	.login-page .content-page .content button:active{
+
+		scale: .59;
+
+	}
+
+
 }
 
 

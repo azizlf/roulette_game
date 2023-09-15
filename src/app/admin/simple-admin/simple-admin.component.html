@@ -1,0 +1,31 @@
+<div class="container-app">
+	
+	<div class="menu">
+		
+		<div class="header">
+			<div class="logo"></div>
+		</div>
+		<div class="title">Navigation</div>
+		<div class="list">
+			<div class="ctn">
+				<div class="item" routerLink="/admin/management/users">
+					<i class="fa-solid fa-users"></i>
+					<span>Users</span>
+				</div>
+				<div class="item" routerLink="/admin/management/settings">
+					<i class="fa-solid fa-sliders"></i>
+					<span>Settings</span>
+				</div>
+			</div>
+		</div>
+		<div class="logout-btn" (click)="logout()">
+			<p>Logout</p>
+			<i class="fa-solid fa-arrow-right-from-bracket"></i>
+		</div>
+
+	</div>
+	<div class="main">
+		<router-outlet></router-outlet>
+	</div>
+
+</div>

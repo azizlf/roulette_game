@@ -1,0 +1,37 @@
+<div class="login-page">
+
+	<div class="error-msg">
+		<i class="fa-solid fa-circle-xmark"></i>
+		<div class="text">
+			<span>Error</span>
+			<p>Invalid login or password.</p>
+		</div>
+		
+	</div>
+	
+	<div class="form">
+
+		<img src="/assets/img/admin.png" />
+		
+		<div class="title">Member login</div>
+		
+		<br>
+		
+		<input type="text" #loginVal placeholder="Login"/>
+		
+		<br>
+		
+		<input type="password" #passwordVal placeholder="Password"/>
+		
+		<br>
+		
+		<div class="footer-form">
+		
+			<button class="login-btn" (click)="login(loginVal,passwordVal)" >login</button>
+			<div class="loading-icon"><div></div></div>
+		
+		</div>
+
+	</div>
+
+</div>

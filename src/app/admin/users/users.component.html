@@ -1,0 +1,62 @@
+<div class="users-page">
+	
+	<div class="header">
+		<div class="title">
+			<div class="return-btn" routerLink="/admin/management/admins" *ngIf="currentAdmin === 'super'">
+				<i class="fa-solid fa-arrow-left"></i>
+			</div>
+			<label>
+				<span *ngIf="currentAdmin === 'super'">Admin: 12345678</span>
+				<span *ngIf="currentAdmin === 'simple'">Users Management</span>
+			</label>
+		</div>
+		<div class="btns">
+			<div class="btn"  *ngIf="currentAdmin === 'simple'">
+				<i class="fa-solid fa-circle-plus"></i>
+				<p>Add new user</p>
+			</div>
+		</div>
+	</div>
+	<div class="list">
+		<div class="head-list">
+			<div class="item">#</div>
+			<div class="item">Name</div>
+			<div class="item">Date creation</div>
+			<div class="item">Status</div>
+			<div class="item">Action</div>
+		</div>
+		<div class="item-list" *ngFor="let user of users">
+			<div class="it id"> {{user.id}} </div>
+			<div class="it name"> {{user.name}} </div>
+			<div class="it">{{user.date_creation}}</div>
+			<div class="it">
+				<div class="status-account" *ngIf="user.status === 'active'">
+					<i class="fa-solid fa-circle" style="color:#0dd20d;"></i>
+					<span>Active</span>
+				</div>
+				<div class="status-account" *ngIf="user.status === 'desactive'">
+					<i class="fa-solid fa-circle" style="color:red;"></i>
+					<span>Desactive</span>
+				</div>
+			</div>
+			<div class="it">
+				<div class="btn edit">
+					<i class="fa-regular fa-pen-to-square"></i>
+				</div>
+				<div class="btn block" *ngIf="currentAdmin === 'simple' && user.status === 'active'">
+					<i class="fa-solid fa-lock"></i>
+				</div>
+				<div class="btn block" style="background-color: #32bf32;" *ngIf="currentAdmin === 'simple' && user.status === 'desactive'">
+					<i class="fa-solid fa-lock-open"></i>
+				</div>
+				<div class="btn block" *ngIf="currentAdmin === 'super' ">
+					<i class="fa-solid fa-trash-can"></i>
+				</div>
+				<div class="btn block" style="background-color: #3aa8ff;">
+					<i class="fa-solid fa-clock-rotate-left"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

@@ -1,0 +1,39 @@
+<div class="admins-page">
+	
+	<div class="header">
+		<div class="title">Admins Management</div>
+		<div class="btns">
+			<div class="btn">
+				<i class="fa-solid fa-circle-plus"></i>
+				<p>Add new admin</p>
+			</div>
+		</div>
+	</div>
+	<div class="list">
+		<div class="head-list">
+			<div class="item">#</div>
+			<div class="item">Name</div>
+			<div class="item">Date creation</div>
+			<div class="item">Role</div>
+			<div class="item">users</div>
+			<div class="item">Action</div>
+		</div>
+		<div class="item-list" *ngFor="let admin of admins">
+			<div class="it id">{{admin.id}}</div>
+			<div class="it name">{{admin.name}}</div>
+			<div class="it">{{admin.date_creation}}</div>
+			<div class="it">Admin</div>
+			<div class="it link">{{admin.users}} users<i class="fa-solid fa-eye" [routerLink]="'/admin/management/users/'+admin.id" ></i></div>
+			<div class="it">
+				<div class="btn edit">
+					<i class="fa-regular fa-pen-to-square"></i>
+				</div>
+				<div class="btn block">
+					<i class="fa-solid fa-trash-can"></i>
+				</div>
+			</div>
+		</div>
+
+	</div>		
+
+</div>

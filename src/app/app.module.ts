@@ -3,14 +3,16 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthComponent } from './auth/auth.component';
-import { HomeComponent } from './home/home.component';
+import { SuperAdminComponent } from './admin/super-admin/super-admin.component';
+import { SimpleAdminComponent } from './admin/simple-admin/simple-admin.component';
+import { ManagementComponent } from './admin/management/management.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AuthComponent,
-    HomeComponent
+    ManagementComponent,
+    SuperAdminComponent,
+    SimpleAdminComponent
   ],
   imports: [
     BrowserModule,
@@ -19,4 +21,4 @@ import { HomeComponent } from './home/home.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

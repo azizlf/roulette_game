@@ -1,0 +1,25 @@
+<div class="history-user">
+	
+	<div class="nav-bar">
+		<div class="return-btn" routerLink="/admin/management/users">
+			<i class="fa-solid fa-arrow-left"></i>
+		</div>
+		<div class="user-details">
+			Balance : {{balance}}
+		</div>
+	</div>
+	<div class="content-history-page">
+		<div class="history-list">
+			<div class="head-list">
+				<div class="it">Date</div>
+				<div class="it">Amount</div>
+			</div>
+			<div class="item" *ngFor="let item of history">
+				<div class="it">{{item.date}}</div>
+				<div class="it" style="color:green;" *ngIf="item.status">+ {{item.amount}}</div>
+				<div class="it" style="color:red;" *ngIf="!item.status">- {{item.amount}}</div>
+			</div>
+		</div>
+	</div>
+
+</div>

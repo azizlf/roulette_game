@@ -70,11 +70,11 @@ export class AuthComponent implements OnInit {
 
             this.router.navigate(['/admin/management/users']);
           
-        },3000)
+        },1000)
 
-      },3000)     
+      },2000)     
 
-    }else if(login.value === "super admin" && password.value === "admin"){
+    }else if(login.value === "super" && password.value === "admin"){
 
       this.users.admin = "super"
       
@@ -88,9 +88,9 @@ export class AuthComponent implements OnInit {
 
             this.router.navigate(['/admin/management/admins']);
           
-        },3000)
+        },1000)
 
-      },3000)
+      },2000)
 
     }else{
       this.openMessageBox()

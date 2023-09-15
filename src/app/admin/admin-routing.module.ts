@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ManagementComponent } from './management/management.component';
+import { ManagementComponent } from './management/management.component'
 
 const routes: Routes = [
 
@@ -19,6 +19,10 @@ const routes: Routes = [
       {
         path:"users/:adminId",
         loadChildren: () => import('./users/users.module').then(m => m.UsersModule),
+      },
+      {
+        path:"user/history/:userId",
+        loadChildren: () => import('./user-history/user-history.module').then(m => m.UserHistoryModule),
       },
       {
         path:"settings",

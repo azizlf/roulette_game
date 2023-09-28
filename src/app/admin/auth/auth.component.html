@@ -9,7 +9,7 @@
 		
 	</div>
 	
-	<div class="form">
+	<div class="form" [formGroup]="userDetails">
 
 		<img src="/assets/img/admin.png" />
 		
@@ -17,17 +17,17 @@
 		
 		<br>
 		
-		<input type="text" #loginVal placeholder="Login"/>
+		<input type="text" placeholder="Login" formControlName="login"/>
 		
 		<br>
 		
-		<input type="password" #passwordVal placeholder="Password"/>
+		<input type="password" placeholder="Password" formControlName="password"/>
 		
 		<br>
 		
 		<div class="footer-form">
 		
-			<button class="login-btn" (click)="login(loginVal,passwordVal)" >login</button>
+			<button class="login-btn" (click)="login()" >login</button>
 			<div class="loading-icon"><div></div></div>
 		
 		</div>

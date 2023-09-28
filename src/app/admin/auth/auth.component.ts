@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsersService } from '../../services/users.service'
+import { FormBuilder, FormControl, Validators, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-auth',
@@ -8,6 +9,13 @@ import { UsersService } from '../../services/users.service'
   styleUrls: ['./auth.component.css']
 })
 export class AuthComponent implements OnInit {
+
+  userDetails = new FormGroup({
+
+    login :new FormControl('',[Validators.required ]),
+    password : new FormControl('',[Validators.required ]),
+
+  })
 
   element:any
 
@@ -54,48 +62,48 @@ export class AuthComponent implements OnInit {
 
   } 
 
-  login(login:any,password:any){
+  login(){
 
-    if(login.value === "admin" && password.value === "admin"){
-      
-      this.users.admin = "simple"
-      
-      this.isLoadingForm(true)
+    const user = this.userDetails.value
 
-        setTimeout(()=>{
-          
-          this.isLoadingForm(false)
+    var loginIsSuccess = false
+
+    this.users.loginAdmin(user).subscribe((res:any)=>{
+
+      if(res.message){
+      
+        this.users.user.id = res.admin
+        this.users.user.type = res.role
+                
+        this.isLoadingForm(true)
 
           setTimeout(()=>{
+            
+            this.isLoadingForm(false)
 
-            this.router.navigate(['/admin/management/users']);
-          
-        },1000)
+            setTimeout(()=>{
 
-      },2000)     
+              if(res.role === "superAdmin"){
 
-    }else if(login.value === "super" && password.value === "admin"){
+                this.router.navigate(['/admin/management/admins']);
 
-      this.users.admin = "super"
-      
-      this.isLoadingForm(true)
+              }else{
 
-        setTimeout(()=>{
-          
-          this.isLoadingForm(false)
+                this.router.navigate(['/admin/management/users']);
 
-          setTimeout(()=>{
+              }
 
-            this.router.navigate(['/admin/management/admins']);
-          
-        },1000)
+            
+          },500)
 
-      },2000)
+        },800)     
 
-    }else{
-      this.openMessageBox()
-    }
+      }else{
+        this.openMessageBox()
+      }
 
+
+    })
   }
 
   ngOnInit(): void {

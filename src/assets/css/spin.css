@@ -1,0 +1,1207 @@
+
+
+.spin-app{
+
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: black;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	display: flex;
+	align-items: center;
+	overflow: hidden;
+	z-index: 894651230894561203562398562398562356123;
+
+}
+
+.spin-app .logos{
+
+	width: 20%;
+	height: 100%;
+
+}
+
+.spin-app .spin-section{
+
+	width: 60%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+}
+
+.spin-app .spin-section .spin-ctn{
+
+	width: 74%;
+	padding: 37% 0;
+	margin-top: -5%;
+	position: relative;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.spin-app .spin-section .spin-ctn .spin{
+
+	width: 88%;
+	position: absolute;
+	animation: rotateAni 35s;
+
+}
+
+
+@keyframes rotateAnim{
+
+	0%{
+
+		rotate: -5856deg;
+
+	}
+
+}
+
+
+.spin-app .spin-section .center-circle-pointer{
+
+	width: 43%;
+	height: 50%;
+	position: absolute;
+	background-position: center;
+	background-position-y: 185%;
+	background-repeat: no-repeat;
+	background-size: cover;
+	z-index: 5;
+	scale: .6;
+}
+
+.spin-app .spin-section .center-pointer{
+
+	width: 12%;
+	height: 20%;
+	top: -5%;
+	scale: .5;
+	position: absolute;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	z-index: 5;
+}
+
+.spin-app .spin-section .indicator-number{
+
+	position: absolute;
+	width: 23%;
+	height: 23%;
+	border-radius: 100%;
+	background-color: #2cc93b;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 4.5vw;
+	color: white;
+	z-index: 8;
+	margin-top: 3.3%;
+	transition: transform 1s , margin 1s;
+
+}
+
+
+.spin-app .dashbord{
+
+	width: 24%;
+	height: 100%;
+	background-color: #00000063;
+
+}
+
+
+
+.dashbord-app{
+
+	width: 100%;
+	height: 100%;
+	background-color: #222222;
+	top: 0;
+	left: 0;
+	position: absolute;
+	z-index: 15;
+
+}
+
+
+.dashbord-app .header-dash-app{
+
+	width: 100%;
+	height: 6%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background-color: #2e2e2e;
+
+}
+
+.dashbord-app .header-dash-app .user-details{
+
+	width: 45%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	overflow: hidden;
+
+}
+
+.dashbord-app .header-dash-app .user-details .sc{
+
+	display: flex;
+	align-items: center;
+	font-size: 1.1vw;
+	color: white;
+	white-space: nowrap;
+	width: 50%;
+	height: 100%;
+	background-color: #393939;
+	border-right: .1vw solid #313131;
+
+}
+
+
+
+.dashbord-app .header-dash-app .user-details .sc i{
+
+	width: 20%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #272727;
+	text-align: center;
+	margin-right: 5%;
+	color: white;
+	font-size: 1.7vw;
+	border-right: .1vw solid #313131;
+}
+
+.dashbord-app .header-dash-app .menu{
+
+	width: 80%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: right;
+	color: white;
+	font-size: 1.7vw;
+
+}
+
+.dashbord-app .header-dash-app .menu .item{
+
+	width: 4.5%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #3e3e3e;
+	border-left: .1vw solid #313131;
+	cursor: pointer;
+
+}
+
+.dashbord-app .header-dash-app .menu .item:active i{
+
+	scale: .9;
+
+}
+
+
+.dashbord-app .header-dash-app .menu .item img{
+
+	width: 55%;
+
+}
+
+.dashbord-app .header-dash-app .menu .item.spin-btn{
+
+	background-color: #ea9414;
+
+}
+
+
+.dashbord-app .content-dash-page{
+
+	width: 100%;
+	height: 94%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+}
+
+.dashbord-app .content-dash-page .tikets{
+
+	width: 22%;
+	height: 100%;
+	background-color: white;
+	position: relative;
+
+}
+
+.dashbord-app .content-dash-page .tikets .search-box{
+
+	width: 100%;
+	height: 6%;
+	background-color: red;
+	display: flex;
+	align-items: center;
+
+}
+
+.dashbord-app .content-dash-page .tikets .search-box input{
+
+	width: 85%;
+	height: 100%;
+	border: none;
+	background-color: white;
+	padding: 3%;
+	font-size: 1.1vw;
+
+}
+
+.dashbord-app .content-dash-page .tikets .search-box button{
+
+	width: 15%;
+	height: 100%;
+	border: none;
+	background-color: #1f9cff;
+	color: white;
+	font-size: 1.2vw;
+	cursor: pointer;
+
+}
+
+.dashbord-app .content-dash-page .tikets .search-box button:active i{
+
+	scale: .9;
+
+} 
+
+
+
+.dashbord-app .content-dash-page .tikets .user-details{
+
+	width: 100%;
+	height: 6%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.1vw;
+	background-color: #1e1e1e;
+	color: white;
+	font-weight: 600;
+
+}
+
+.dashbord-app .content-dash-page .tikets .head-list{
+
+	width: 100%;
+	height: 5%;
+	display: flex;
+	align-items: center;
+	background-color: black;
+	overflow: hidden;
+
+}
+
+.dashbord-app .content-dash-page .tikets .head-list .item{
+
+	width: 40%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #e8e8e8;
+	font-size: 1.2vw;
+}
+
+
+
+.dashbord-app .content-dash-page .tikets .list-tikets{
+
+	width: 100%;
+	height: 83%;
+	overflow: hidden;
+	overflow-y: auto;
+
+}
+
+
+.dashbord-app .content-dash-page .tikets .list-tikets .item-list{
+
+	width: 100%;
+	padding: 6% 0;
+	display: flex;
+	align-items: center;
+	border-top: .1vw solid #dedede;
+
+}
+
+.dashbord-app .content-dash-page .tikets .list-tikets .item-list .item{
+
+	width: 40%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.1vw;
+	position: relative;
+
+}
+
+.dashbord-app .content-dash-page .tikets .list-tikets .item-list .item p{
+
+	position: absolute;
+
+}
+
+.dashbord-app .content-dash-page .tikets .create-tiket{
+
+	width: 100%;
+	height: 88%;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	background-color: white;
+	overflow: hidden;
+	display: none;
+
+}
+
+.dashbord-app .content-dash-page .tikets .create-tiket .head-crt-list{
+
+	width: 100%;
+	height: 6%;
+	display: flex;
+	align-items: center;
+	background-color: black;
+	overflow: hidden;
+
+}
+
+.dashbord-app .content-dash-page .tikets .create-tiket .head-crt-list .item{
+
+	width: 40%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #e8e8e8;
+	font-size: 1.2vw;
+}
+
+.dashbord-app .content-dash-page .tikets .create-tiket .head-crt-list .item.action{
+
+	width: 13%;
+	background-color: #d1d1d1;
+
+}
+
+.dashbord-app .content-dash-page .tikets .create-tiket .list-tk{
+
+	width: 100%;
+	height: 75%;
+	background-color: white;
+	overflow: hidden;
+	overflow-y: auto;
+
+}
+
+.dashbord-app .content-dash-page .tikets .create-tiket .list-tk .it-tk{
+
+	width: 100%;
+	height: 10%;
+	display: flex;
+	align-items: center;
+
+}
+
+
+.dashbord-app .content-dash-page .tikets .create-tiket .list-tk .it-tk .item{
+
+	width: 40%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.2vw;
+	border-top: .1vw solid #dedede;
+
+}
+
+.dashbord-app .content-dash-page .tikets .create-tiket .list-tk .it-tk .item.action{
+
+	width: 13%;
+	height: auto;
+	background-color: red;
+	color: white;
+	padding: 2.5% .1%;
+	scale: .75;
+	border-radius: .3vw;
+	cursor: pointer;
+
+}
+
+
+
+
+.dashbord-app .content-dash-page .tikets .create-tiket .list-tk .it-tk .item input{
+
+	width: 80%;
+	font-size: 1.1vw;
+	text-align: center;
+	outline: none;
+
+}
+
+
+.dashbord-app .content-dash-page .tikets .create-tiket .footer-tk-crt{
+
+	width: 100%;
+	height: 21%;
+	font-size: 1vw;
+
+}
+
+
+.dashbord-app .content-dash-page .tikets .create-tiket .footer-tk-crt .banner-sc{
+
+	width: 94%;
+	height: 30%;
+	background-color: #1d1d1d;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 3%;
+	color: white;
+	border-top: .1vw solid #262626;
+
+}
+
+.dashbord-app .content-dash-page .tikets .create-tiket .footer-tk-crt .btns{
+
+	width: 100%;
+	height: 30%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background-color: white;
+	border-top: .1vw solid #dfdfdf;
+
+}
+
+.dashbord-app .content-dash-page .tikets .create-tiket .footer-tk-crt .btns .sc{
+
+	width: 45%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	color: white;
+
+}
+
+.dashbord-app .content-dash-page .tikets .create-tiket .footer-tk-crt .btns .sc.rt{
+
+	justify-content: right;
+	color: black;
+
+}
+
+
+.dashbord-app .content-dash-page .tikets .create-tiket .footer-tk-crt .btns .sc .btn{
+
+	width: 28%;
+	font-size: 1.2vw;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+
+}
+
+
+
+.dashbord-app .content-dash-page .tikets .create-tiket .footer-tk-crt .btns .sc .btn.check{
+
+	background-color: #5cb85c;
+
+}
+
+.dashbord-app .content-dash-page .tikets .create-tiket .footer-tk-crt .btns .sc .btn.remove{
+
+	background-color: #d9534f;
+
+}
+
+.dashbord-app .content-dash-page .tikets .create-tiket .footer-tk-crt .btns .sc .btn.reevent{
+
+	background-color: #337ab7;
+
+}
+
+.dashbord-app .content-dash-page .tikets .create-tiket .footer-tk-crt .btns .sc .btn.print{
+
+	background-color: orange;
+
+}
+
+
+.dashbord-app .content-dash-page .table{
+
+	width: 78%;
+	height: 100%;
+	background-color: #222222;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	overflow: hidden;
+	position: relative;
+	cursor: none;
+
+}
+
+
+.dashbord-app .content-dash-page .table .aleatoir-section{
+
+	width: 35%;
+	height: 6%;
+	display: flex;
+	align-items: center;
+	margin: 2%;
+	color: white;
+	font-weight: 600;
+	top: 15%;
+	left: 0%;
+	position: absolute;
+	z-index: 3;
+
+}
+
+.dashbord-app .content-dash-page .table .aleatoir-section .numbers{
+
+	width: 90%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-left: 3%;
+	font-weight: 100;
+
+}
+
+.dashbord-app .content-dash-page .table .aleatoir-section .numbers .number{
+
+	width: 16.1%;
+	padding: 3% 0;
+	text-align: center;
+	background-color: #242424;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white;
+	font-size: 1.2vw;
+	border-radius: .3vw;
+
+}
+
+.dashbord-app .content-dash-page .table .aleatoir-section .numbers .number:hover{
+
+	background-color: #2c2c2c;
+
+}
+
+.dashbord-app .content-dash-page .table .aleatoir-section .numbers .number:active{
+
+	scale: .9;
+
+}
+
+
+.dashbord-app .content-dash-page .table .table-nbrs{
+
+	width: 95%;
+	height: 60%;
+	margin-left: 2%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	user-select: none;
+	position: absolute;
+	top: 14%;
+
+}
+
+
+.dashbord-app .content-dash-page .table .table-nbrs .tbl{
+
+	width: 68%;
+	height: 100%;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+}
+
+.dashbord-app .content-dash-page .table .table-nbrs .tbl .nbrs{
+
+	width: 80%;
+	height: 35%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+}
+
+.dashbord-app .content-dash-page .table .table-nbrs .tbl .nbrs .ligne-nbr{
+
+	height: 100%;
+	width: 7.8%;
+
+}
+
+.dashbord-app .content-dash-page .table .table-nbrs .tbl .nbrs .nbr{
+
+	color: white;
+	width: 100%;
+	height: 31.5%;
+	border: .1vw solid white;
+	border-radius: .3vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.5vw;
+
+}
+
+.dashbord-app .content-dash-page .table .table-nbrs .tbl .nbrs .nbr.red{
+
+	background-color: #e20e18;
+
+}
+
+.dashbord-app .content-dash-page .table .table-nbrs .tbl .nbrs .nbr.black{
+
+	background-color: #161515;
+
+}
+
+.dashbord-app .content-dash-page .table .table-nbrs .tbl .top-section{
+
+	width: 80%;
+	height: 10%;
+	position: absolute;
+	top: 22%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-left: .2%;
+
+}
+
+.dashbord-app .content-dash-page .table .table-nbrs .tbl .top-section .sc{
+
+	width: 32.8%;
+	height: 99%;
+	border: .1vw solid white;
+	border-radius: .3vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.2vw;
+	color: white;
+	font-weight: 600;
+
+}
+
+.dashbord-app .content-dash-page .table .table-nbrs .tbl .bottom-section{
+
+	width: 80%;
+	height: 10%;
+	position: absolute;
+	top: 67.7%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-left: .2%;
+
+}
+
+.dashbord-app .content-dash-page .table .table-nbrs .tbl .bottom-section .sc{
+
+	width: 32.8%;
+	height: 99%;
+	border: .1vw solid white;
+	border-radius: .3vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.2vw;
+	color: white;
+	font-weight: 600;
+
+}
+
+.dashbord-app .content-dash-page .table .table-nbrs .tbl .bottom-section .sc .element{
+
+	width: 30%;
+	height: 100%;
+	background-color: #e20e18;
+	rotate: 68deg;
+	scale: 1;
+	border: .1vw solid white;
+	transform: skewY(-45deg);
+
+}
+
+.dashbord-app .content-dash-page .table .table-nbrs .tbl .bottom-section .sc .element.black{
+
+	background-color: #161515;
+
+}
+
+.dashbord-app .content-dash-page .table .table-nbrs .tbl .zero{
+
+	width: 5%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: .1vw solid white;
+	border-radius: .3vw;
+	height: 34%;
+	position: absolute;
+	background-color: green;
+	font-size: 1.5vw;
+	font-weight: 600;
+	color: white;
+	left: 4.5%;
+
+}
+
+.dashbord-app .content-dash-page .table .table-nbrs .tbl .right-section{
+
+	width: 7%;
+	height: 34%;
+	position: absolute;
+	font-size: .9vw;
+	font-weight: 600;
+	color: white;
+	right: 2.4%;
+
+}
+
+.dashbord-app .content-dash-page .table .table-nbrs .tbl .right-section div{
+
+	width: 100%;
+	height: 31%;
+	margin-bottom: 3%;
+	text-align: center;
+	border: .1vw solid white;
+	border-radius: .3vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 600;
+}
+
+
+
+
+.dashbord-app .content-dash-page .table .table-nbrs .circle{
+
+	width: 30%;
+	height: 100%;
+	position: relative;
+	display: none;
+	align-items: center;
+	justify-content: center;
+
+}
+
+
+.dashbord-app .content-dash-page .table .table-nbrs .circle .container-circle{
+
+	width: 80%;
+	padding: 40% 0;
+	border-radius: 100%;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+}
+
+.dashbord-app .content-dash-page .table .table-nbrs .circle .container-circle .btn{
+
+	position: absolute;
+	height: 50%;
+	width: 40%;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+}
+
+.dashbord-app .content-dash-page .table .table-nbrs .circle .container-circle .btn img{
+
+	rotate: 142deg;
+	width: 120%;
+
+}
+
+
+.dashbord-app .content-dash-page .table .table-nbrs .circle .container-circle .btn p{
+
+	margin-top: 3%;
+	font-size: 3vw;
+	font-weight: 600;
+	color: white;
+
+}
+
+
+.dashbord-app .content-dash-page .table .table-nbrs .circle .container-circle .btn.a{
+
+	rotate: 42deg;
+	top: 0%;
+	right: 12%;
+
+}
+
+.dashbord-app .content-dash-page .table .table-nbrs .circle .container-circle .btn.b{
+
+	rotate: 100deg;
+	top: 25%;
+	right: 5%;
+	transform: rotateY(180deg);
+}
+
+
+.dashbord-app .content-dash-page .table .table-nbrs .circle .container-circle .center-crl{
+
+	width: 60%;
+	height: 60%;
+	background-color: green;
+	border-radius: 100%;
+	position: absolute;
+
+}
+
+
+.dashbord-app .content-dash-page .table .footer-table{
+
+	width: 84%;
+	height: 35%;
+	margin-left: 8.3%;
+	position: absolute;
+	bottom: 3%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+}
+
+
+.dashbord-app .content-dash-page .table .footer-table .nbrs{
+
+	width: 62%;
+	height: 100%;
+
+}
+
+.dashbord-app .content-dash-page .table .footer-table .nbrs .top,
+.dashbord-app .content-dash-page .table .footer-table .nbrs .bottom{
+
+	width: 100%;
+	height: 40%;
+	display: flex;
+	align-items: center;
+
+}
+
+
+.dashbord-app .content-dash-page .table .footer-table .nbrs .top{
+	justify-content: space-between;
+}
+
+.dashbord-app .content-dash-page .table .footer-table .nbrs .top .sc{
+
+	width: 30%;
+	height: 100%;
+
+}
+
+.dashbord-app .content-dash-page .table .footer-table .nbrs .top .sc.right{
+
+	width: 50%;
+
+}
+
+.dashbord-app .content-dash-page .table .footer-table .nbrs .top .sc .title{
+
+	width: 100%;
+	padding: 1%;
+	font-size: 1.3vw;
+	color: #ffdf64;
+	text-transform: uppercase;
+	font-weight: 600;
+	margin-bottom: 3%;
+	text-shadow: .1vw .1vw black;
+	text-align: left;
+
+}
+
+.dashbord-app .content-dash-page .table .footer-table .nbrs .top .sc .counter-nbr{
+
+	width: 80%;
+	height: 43%;
+	color: white;
+	border-radius: .3vw;
+	font-size: 1.6vw;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	border: .15vw solid white;
+	font-weight: 600;
+
+}
+
+.dashbord-app .content-dash-page .table .footer-table .nbrs .top .sc .counter-nbr .hr{
+
+	width: 2.3%;
+	height: 60%;
+	background-color: #ffdf64;
+
+}
+
+
+.dashbord-app .content-dash-page .table .footer-table .nbrs .top .sc .flex-counter{
+
+	width: 100%;
+	height: 43%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: -1.5%;
+
+}
+
+.dashbord-app .content-dash-page .table .footer-table .nbrs .top .sc .flex-counter .counter-nbr{
+
+	width: 30%;
+	height: 100%;
+
+}
+
+
+
+.dashbord-app .content-dash-page .table .footer-table .nbrs .top .sc .flex-counter .counter-nbr .hr{
+
+	width: 3.5%;
+	height: 60%;
+	background-color: #ffdf64;
+
+}
+
+
+.dashbord-app .content-dash-page .table .footer-table .nbrs .bottom{
+
+	display: block;
+	margin-top: -1%;
+
+}
+
+
+.dashbord-app .content-dash-page .table .footer-table .nbrs .bottom .title{
+
+	width: 100%;
+	font-size: 1.3vw;
+	color: #ffdf64;
+	text-transform: uppercase;
+	font-weight: 600;
+	margin-bottom: 1%;
+	text-shadow: .1vw .1vw black;
+
+}
+
+.dashbord-app .content-dash-page .table .footer-table .nbrs .bottom .nbrs-flex-list{
+
+	width: 100%;
+	height: 45%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+}
+
+.dashbord-app .content-dash-page .table .footer-table .nbrs .bottom .nbrs-flex-list .nbr{
+
+	width: 8%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.8vw;
+	font-weight: 600;
+	color: white;
+	border: .16vw solid white;
+	border-radius: .3vw;	
+
+}
+
+.dashbord-app .content-dash-page .table .footer-table .right{
+
+	height: 100%;
+	width: 30%;
+
+}
+
+.dashbord-app .content-dash-page .table .footer-table .right .sc{
+
+	width: 100%;
+	height: 25%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+}
+
+.dashbord-app .content-dash-page .table .footer-table .right .sc div{
+
+	width: 25%;
+	height: 100%;
+	clip-path: polygon(100% 53%, 100% 100%, 0 100%, 0 56%, 50% 25%);
+	background-color: red;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	padding-bottom: 3%;
+	text-transform: uppercase;
+	color: white;
+	font-size: 1.2vw;
+	font-weight: 600;
+
+}
+
+.dashbord-app .content-dash-page .table .footer-table .right .sc.l div{
+	clip-path: polygon(100% 46%, 50% 75%, 0 46%, 0 0, 100% 0);
+	align-items: flex-start;
+	padding-bottom: 0;
+	padding-top: 3%;
+}
+
+.dashbord-app .content-dash-page .table .footer-table .right .sc div.red{
+
+	background-color: #e20e18;
+
+}
+
+.dashbord-app .content-dash-page .table .footer-table .right .sc div.black{
+
+	background-color: #161515;
+
+}
+
+
+
+.dashbord-app .content-dash-page .table .footer-table .right .title{
+
+	width: 100%;
+	font-size: 1.7vw;
+	color: #ffdf64;
+	text-transform: uppercase;
+	font-weight: 600;
+	margin-bottom: 1%;
+	text-shadow: .1vw .1vw black;
+	text-align: center;
+	padding: 5% 0;
+
+}
+
+
+
+.dashbord-app .content-dash-page .table .coins{
+
+	width: 52%;
+	height: 10%;
+	position: absolute;
+	bottom: 1%;
+	left: 7%;
+	display: flex;
+	align-items: center;
+
+}
+
+.dashbord-app .content-dash-page .table .coins .coin{
+
+	width: 12%;
+	padding: 6% 0;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	margin-right: -1.5%;
+	margin-top: -2%;
+	transition: .4s;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	scale: .8;
+	font-size: 1.3vw;
+
+}
+
+.dashbord-app .content-dash-page .table .coins .coin.active-coin{
+
+	scale: .9;
+
+}
+
+
+.dashbord-app .content-dash-page .table .coins .coin p{
+
+	position: absolute;
+	margin-right: 5%;
+
+}
+
+
+.dashbord-app .content-dash-page .table .coins .coin:hover{
+
+	scale: .9;
+
+}
+
+.dashbord-app .content-dash-page .table .coins .coin:active{
+
+	scale: .7;
+
+}
+
+
+.dashbord-app .content-dash-page .table .cursor-coin{
+
+	position: absolute;
+	width: 3%;
+	padding: 1.5% 0;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	z-index: 1256526332;
+	pointer-events: none;
+
+}

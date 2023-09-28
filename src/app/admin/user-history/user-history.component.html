@@ -11,10 +11,12 @@
 	<div class="content-history-page">
 		<div class="history-list">
 			<div class="head-list">
+				<div class="it">#</div>
 				<div class="it">Date</div>
 				<div class="it">Amount</div>
 			</div>
 			<div class="item" *ngFor="let item of history">
+				<div class="it">{{item.tiketId}}</div>
 				<div class="it">{{item.date}}</div>
 				<div class="it" style="color:green;" *ngIf="item.status">+ {{item.amount}}</div>
 				<div class="it" style="color:red;" *ngIf="!item.status">- {{item.amount}}</div>

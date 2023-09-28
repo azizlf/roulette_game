@@ -15,11 +15,11 @@ export class ManagementComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if(this.users.admin === "" || this.users.admin === null){
+    if(this.users.user.type === "" || this.users.user.type === null){
       this.router.navigate(['/admin/'])
     }
 
-    this.currentAdmin = this.users.admin
+    this.currentAdmin = this.users.user.type
 
   }
 

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UsersService } from '../../services/users.service'
+
 
 @Component({
   selector: 'app-user-history',
@@ -11,7 +14,7 @@ export class UserHistoryComponent implements OnInit {
 
   history:any = []
 
-  constructor() { }
+  constructor(private usersService:UsersService,private router: Router) { }
 
   historyUser(){
 
@@ -19,240 +22,45 @@ export class UserHistoryComponent implements OnInit {
 
       {
         date:"15-02-2023 3:15pm",
-        amount:"15,56",
+        amount:"5,56",
+        tiketId:"1248964515564",
         status:true
       },
       {
         date:"15-02-2023 3:15pm",
-        amount:"15,56",
+        amount:"10,56",
+        tiketId:"1564815223456",
         status:false
       },
       {
         date:"15-02-2023 3:15pm",
-        amount:"15,56",
+        amount:"3,5",
+        tiketId:"8978947845312",
         status:true
       },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:false
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:true
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:false
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:true
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:false
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:true
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:false
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:true
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:false
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:true
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:false
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:true
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:false
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:true
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:false
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:true
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:false
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:true
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:false
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:true
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:false
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:true
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:false
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:true
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:false
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:true
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:false
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:true
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:false
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:true
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:false
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:true
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:false
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:true
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:false
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:true
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:false
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:true
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:false
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:true
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:false
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:true
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"15,56",
-        status:false
-      }
+      
 
     ]
 
   }
 
+  returnFromPage(){
+
+    if(this.usersService.usersShowAllList){
+    
+      this.router.navigate(['/admin/management/users'])
+    
+    }else{
+
+      this.router.navigate(['/admin/management/users/'])
+
+    }
+
+
+  }
+
   ngOnInit(): void {
+    
     this.historyUser()
   }
 

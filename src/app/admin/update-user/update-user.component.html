@@ -1,0 +1,20 @@
+<div class="user-form">
+	<div class="return-btn" [routerLink]="'/admin/management/users'"><i class="fa-solid fa-arrow-left"></i></div>
+	<div class="form" [formGroup]="userDetails">
+		<input type="text" placeholder="First name" formControlName="fname" [value]="userAttrs.name"/>
+		<br>
+		<input type="text" placeholder="Last name" formControlName="lname" [value]="userAttrs.lastName"/>
+		<br>
+		<input type="text" placeholder="PseudoName" formControlName="pseudoName" [value]="userAttrs.pseudoName"/>
+		<br>
+		<input type="number" [value]="userAttrs.teleJoueur" placeholder="Telephone" formControlName="teleJoueur"/>
+		<br>
+		<input type="number" placeholder="Solde" [value]="userAttrs.solde" formControlName="solde"/>
+		<br>
+		<input type="text" placeholder="Login" formControlName="login" [value]="userAttrs.login"/>
+		<br>
+		<input type="password" placeholder="Password" formControlName="password" [value]="userAttrs.password"/>
+		<br>
+		<button (click)="update()" >create</button>
+	</div>
+</div>

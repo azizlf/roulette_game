@@ -11,9 +11,16 @@ export class SuperAdminComponent implements OnInit {
 
   constructor(private router: Router,private users:UsersService) { }
 
+  returnFromPage(){
+
+    this.users.usersShowAllList = true
+    this.router.navigate(['/admin/management/users'])
+
+  }
+
   logout(){
 
-    this.users.admin = ""
+    this.users.user.type = ""
     this.router.navigate(["/admin"])
 
   }

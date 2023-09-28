@@ -2,16 +2,16 @@
 	
 	<div class="header">
 		<div class="title">
-			<div class="return-btn" routerLink="/admin/management/admins" *ngIf="currentAdmin === 'super'">
+			<div class="return-btn" (click)="returnFromPage()" *ngIf="!currentAdmin">
 				<i class="fa-solid fa-arrow-left"></i>
 			</div>
-			<label>
-				<span *ngIf="currentAdmin === 'super'">Admin: 12345678</span>
-				<span *ngIf="currentAdmin === 'simple'">Users Management</span>
-			</label>
+			<p>
+				<label *ngIf="!currentAdmin">Admin: <a>{{adminParamId}}</a></label>
+				<span *ngIf="currentAdmin">Users Management</span>
+			</p>
 		</div>
-		<div class="btns">
-			<div class="btn"  *ngIf="currentAdmin === 'simple'">
+		<div class="btns" *ngIf="userType === 'admin'">
+			<div class="btn"  *ngIf="currentAdmin" routerLink="/admin/management/add-client">
 				<i class="fa-solid fa-circle-plus"></i>
 				<p>Add new user</p>
 			</div>
@@ -21,38 +21,28 @@
 		<div class="head-list">
 			<div class="item">#</div>
 			<div class="item">Name</div>
-			<div class="item">Date creation</div>
-			<div class="item">Status</div>
+			<div class="item">solde</div>
 			<div class="item">Action</div>
 		</div>
 		<div class="item-list" *ngFor="let user of users">
-			<div class="it id"> {{user.id}} </div>
-			<div class="it name"> {{user.name}} </div>
-			<div class="it">{{user.date_creation}}</div>
+			<div class="it id"> {{user._id}} </div>
+			<div class="it name"> {{user.lastName}} {{user.name}} </div>
+			<div class="it">{{user.solde}}</div>
 			<div class="it">
-				<div class="status-account" *ngIf="user.status === 'active'">
-					<i class="fa-solid fa-circle" style="color:#0dd20d;"></i>
-					<span>Active</span>
-				</div>
-				<div class="status-account" *ngIf="user.status === 'desactive'">
-					<i class="fa-solid fa-circle" style="color:red;"></i>
-					<span>Desactive</span>
-				</div>
-			</div>
-			<div class="it">
-				<div class="btn edit">
+				<div class="btn edit" [routerLink]="'/admin/management/update-client/'+user._id" >
 					<i class="fa-regular fa-pen-to-square"></i>
 				</div>
-				<div class="btn block" *ngIf="currentAdmin === 'simple' && user.status === 'active'">
+				<!--div class="btn block" *ngIf="userType === 'admin'">
 					<i class="fa-solid fa-lock"></i>
+				</div-->
+				<div class="btn block" (click)="removeUser(user)" *ngIf="userType === 'admin'">
+					<i class="fa-solid fa-trash-can"></i>
+					<!--i class="fa-solid fa-lock-open"></i-->
 				</div>
-				<div class="btn block" style="background-color: #32bf32;" *ngIf="currentAdmin === 'simple' && user.status === 'desactive'">
-					<i class="fa-solid fa-lock-open"></i>
-				</div>
-				<div class="btn block" *ngIf="currentAdmin === 'super' ">
+				<div class="btn block" (click)="removeUser(user)" *ngIf="userType === 'superAdmin' ">
 					<i class="fa-solid fa-trash-can"></i>
 				</div>
-				<div class="btn block" [routerLink]="'/admin/management/user/history/'+user.id" style="background-color: #3aa8ff;">
+				<div class="btn block" (click)="openUserHistory(user)" style="background-color: #3aa8ff;">
 					<i class="fa-solid fa-clock-rotate-left"></i>
 				</div>
 			</div>

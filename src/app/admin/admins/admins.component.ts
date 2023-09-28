@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UsersService } from '../../services/users.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admins',
@@ -9,267 +11,32 @@ export class AdminsComponent implements OnInit {
 
   admins:any = []
 
-  constructor() { }
+  constructor(private userService:UsersService,private router: Router) { }
+
+  openUserForAdmin(admin:any){
+
+    this.userService.usersShowAllList = false
+    this.router.navigate(['/admin/management/users/'+admin._id])
+
+  }
 
   getAdmins(){
-    this.admins = [
 
-      {
-        name:"Foulen",
-        date_creation:"15-02-2023 6:20 pm",
-        role:"admin",
-        id:"12345678",
-        users:156
-      },
-      {
-        name:"Foulen",
-        date_creation:"15-02-2023 6:20 pm",
-        role:"admin",
-        id:"12345678",
-        users:156
-      },
-      {
-        name:"Foulen",
-        date_creation:"15-02-2023 6:20 pm",
-        role:"admin",
-        id:"12345678",
-        users:156
-      }
-,
-      {
-        name:"Foulen",
-        date_creation:"15-02-2023 6:20 pm",
-        role:"admin",
-        id:"12345678",
-        users:156
-      }
-,
-      {
-        name:"Foulen",
-        date_creation:"15-02-2023 6:20 pm",
-        role:"admin",
-        id:"12345678",
-        users:156
-      }
-,
-      {
-        name:"Foulen",
-        date_creation:"15-02-2023 6:20 pm",
-        role:"admin",
-        id:"12345678",
-        users:156
-      }
-,
-      {
-        name:"Foulen",
-        date_creation:"15-02-2023 6:20 pm",
-        role:"admin",
-        id:"12345678",
-        users:156
-      }
-,
-      {
-        name:"Foulen",
-        date_creation:"15-02-2023 6:20 pm",
-        role:"admin",
-        id:"12345678",
-        users:156
-      }
-,
-      {
-        name:"Foulen",
-        date_creation:"15-02-2023 6:20 pm",
-        role:"admin",
-        id:"12345678",
-        users:156
-      }
-,
-      {
-        name:"Foulen",
-        date_creation:"15-02-2023 6:20 pm",
-        role:"admin",
-        id:"12345678",
-        users:156
-      }
-,
-      {
-        name:"Foulen",
-        date_creation:"15-02-2023 6:20 pm",
-        role:"admin",
-        id:"12345678",
-        users:156
-      }
-,
-      {
-        name:"Foulen",
-        date_creation:"15-02-2023 6:20 pm",
-        role:"admin",
-        id:"12345678",
-        users:156
-      }
-,
-      {
-        name:"Foulen",
-        date_creation:"15-02-2023 6:20 pm",
-        role:"admin",
-        id:"12345678",
-        users:156
-      }
-,
-      {
-        name:"Foulen",
-        date_creation:"15-02-2023 6:20 pm",
-        role:"admin",
-        id:"12345678",
-        users:156
-      }
-,
-      {
-        name:"Foulen",
-        date_creation:"15-02-2023 6:20 pm",
-        role:"admin",
-        id:"12345678",
-        users:156
-      }
-,
-      {
-        name:"Foulen",
-        date_creation:"15-02-2023 6:20 pm",
-        role:"admin",
-        id:"12345678",
-        users:156
-      }
-,
-      {
-        name:"Foulen",
-        date_creation:"15-02-2023 6:20 pm",
-        role:"admin",
-        id:"12345678",
-        users:156
-      }
-,
-      {
-        name:"Foulen",
-        date_creation:"15-02-2023 6:20 pm",
-        role:"admin",
-        id:"12345678",
-        users:156
-      }
-,
-      {
-        name:"Foulen",
-        date_creation:"15-02-2023 6:20 pm",
-        role:"admin",
-        id:"12345678",
-        users:156
-      }
-,
-      {
-        name:"Foulen",
-        date_creation:"15-02-2023 6:20 pm",
-        role:"admin",
-        id:"12345678",
-        users:156
-      }
-,
-      {
-        name:"Foulen",
-        date_creation:"15-02-2023 6:20 pm",
-        role:"admin",
-        id:"12345678",
-        users:156
-      }
-,
-      {
-        name:"Foulen",
-        date_creation:"15-02-2023 6:20 pm",
-        role:"admin",
-        id:"12345678",
-        users:156
-      }
-,
-      {
-        name:"Foulen",
-        date_creation:"15-02-2023 6:20 pm",
-        role:"admin",
-        id:"12345678",
-        users:156
-      }
-,
-      {
-        name:"Foulen",
-        date_creation:"15-02-2023 6:20 pm",
-        role:"admin",
-        id:"12345678",
-        users:156
-      }
-,
-      {
-        name:"Foulen",
-        date_creation:"15-02-2023 6:20 pm",
-        role:"admin",
-        id:"12345678",
-        users:156
-      }
-,
-      {
-        name:"Foulen",
-        date_creation:"15-02-2023 6:20 pm",
-        role:"admin",
-        id:"12345678",
-        users:156
-      }
-,
-      {
-        name:"Foulen",
-        date_creation:"15-02-2023 6:20 pm",
-        role:"admin",
-        id:"12345678",
-        users:156
-      }
-,
-      {
-        name:"Foulen",
-        date_creation:"15-02-2023 6:20 pm",
-        role:"admin",
-        id:"12345678",
-        users:156
-      }
-,
-      {
-        name:"Foulen",
-        date_creation:"15-02-2023 6:20 pm",
-        role:"admin",
-        id:"12345678",
-        users:156
-      }
-,
-      {
-        name:"Foulen",
-        date_creation:"15-02-2023 6:20 pm",
-        role:"admin",
-        id:"12345678",
-        users:156
-      }
-,
-      {
-        name:"Foulen",
-        date_creation:"15-02-2023 6:20 pm",
-        role:"admin",
-        id:"12345678",
-        users:156
-      }
-,
-      {
-        name:"Foulen",
-        date_creation:"15-02-2023 6:20 pm",
-        role:"admin",
-        id:"12345678",
-        users:156
-      }
+    this.userService.getAllAdmins().subscribe((res:any)=>{
+
+      this.admins = res
 
 
-    ]
+    })
+
+  }
+
+  desactiveAdmin(admin:any){
+
+    this.userService.deleteAdmin(admin._id).subscribe((res:any)=>{
+      console.log(res)
+    })
+
   }
 
 

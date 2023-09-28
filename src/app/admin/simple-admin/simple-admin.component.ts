@@ -15,7 +15,7 @@ export class SimpleAdminComponent implements OnInit {
 
   logout(){
 
-    this.users.admin = ""
+    this.users.user.type = ""
     this.router.navigate(["/admin"])
 
   }

@@ -1,11 +1,98 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import {environment} from "../../environments/environment"
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
 
-  admin = ""
+  usersShowAllList = true
 
-  constructor() { }
+  adminApi = environment.API+"/admin"
+
+  userApi = environment.API+"/joueur"
+
+  adminAuth = environment.API+"/loginAdmin"
+
+  userAuth = environment.API+"/loginJoueur"
+
+
+  user = {
+
+    type:"",
+    id:""
+
+  }
+
+  constructor(private http:HttpClient) { }
+
+  // **********************************************************
+  // **********************************************************
+  // ********************   Admin   ***************************
+  // **********************************************************
+  // **********************************************************
+
+  loginAdmin(data:any){
+    return this.http.post(this.adminAuth+"/",data)
+  }
+
+  getAllAdmins(){
+    return this.http.get(this.adminApi+"/")
+  }
+
+  findAdmin(id:any){
+    return this.http.get(this.adminApi+"/"+id)
+  }
+
+  addAdmin(data:any){
+
+    return this.http.post(this.adminApi+"/addadmin",data)
+
+  }
+
+  updateAdmin(data:any){
+
+    return this.http.put(this.adminApi+"/"+data.id,data)
+
+  }
+
+  deleteAdmin(id:any){
+
+    return this.http.delete(this.adminApi+"/"+id)
+
+  }
+
+  // **********************************************************
+  // **********************************************************
+  // ********************   client   **************************
+  // **********************************************************
+  // **********************************************************
+
+  getAllUsers(){
+    return this.http.get(this.userApi+"/")
+  }
+
+  findUser(id:any){
+    return this.http.get(this.userApi+"/"+id)
+  }
+
+
+  addUser(data:any){
+    return this.http.post(this.userApi+"/addjoueur",data)
+  }
+
+  updateUser(data:any){
+
+    return this.http.put(this.userApi+"/"+data.id,data)
+
+  }
+
+  deleteUser(data:any){
+
+    return this.http.delete(this.userApi+"/delettejoueur/"+data.id)
+
+  }
+
+
 }

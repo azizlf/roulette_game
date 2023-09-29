@@ -1,20 +1,28 @@
 <div class="user-form">
-	<div class="return-btn" [routerLink]="'/admin/management/users'"><i class="fa-solid fa-arrow-left"></i></div>
-	<div class="form" [formGroup]="userDetails">
-		<input type="text" placeholder="First name" formControlName="fname" [value]="userAttrs.name"/>
+	<div class="return-btn" (click)="returnFromPage()" ><i class="fa-solid fa-arrow-left"></i></div>
+	<div class="form" *ngIf="!isLoading">
+		<input type="text" placeholder="First name" (input)="updateUserInfos('name',$event)"  [value]="userEntries.name"/>
 		<br>
-		<input type="text" placeholder="Last name" formControlName="lname" [value]="userAttrs.lastName"/>
+		<input type="text" placeholder="Last name" (input)="updateUserInfos('lastName',$event)"  [value]="userEntries.lastName"/>
 		<br>
-		<input type="text" placeholder="PseudoName" formControlName="pseudoName" [value]="userAttrs.pseudoName"/>
+		<input type="text" placeholder="PseudoName" (input)="updateUserInfos('pseudoName',$event)"  [value]="userEntries.pseudoName"/>
 		<br>
-		<input type="number" [value]="userAttrs.teleJoueur" placeholder="Telephone" formControlName="teleJoueur"/>
+		<input type="number" [value]="userEntries.teleJoueur" (input)="updateUserInfos('teleJoueur',$event)" placeholder="Telephone"/>
 		<br>
-		<input type="number" placeholder="Solde" [value]="userAttrs.solde" formControlName="solde"/>
+		<label>Solde: {{requestUpdateInfos.solde}}</label>
 		<br>
-		<input type="text" placeholder="Login" formControlName="login" [value]="userAttrs.login"/>
 		<br>
-		<input type="password" placeholder="Password" formControlName="password" [value]="userAttrs.password"/>
+		<div class="sc">
+			<input type="number" class="amount" placeholder="amount" #amount />
+			<button class="amount" (click)="changeSolde(amount,'+')"><i class="fa-solid fa-plus"  ></i></button>
+			<button class="amount" (click)="changeSolde(amount,'-')"><i class="fa-solid fa-minus"></i></button>
+		</div>
 		<br>
 		<button (click)="update()" >create</button>
+	</div>
+	<div class="loading-ellipsis" *ngIf="isLoading">
+		<div class="r1"></div>
+		<div class="r2"></div>
+		<div class="r3"></div>
 	</div>
 </div>

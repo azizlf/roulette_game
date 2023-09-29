@@ -1,20 +1,63 @@
+<div class="error-msg-box">
+	<i class="fa-solid fa-circle-xmark"></i>
+	<div class="text">
+		<span>Error</span>
+		<p> {{errorMsg}} </p>
+	</div>
+	
+</div>
+<div class="success-msg-box">
+	<i class="fa-solid fa-circle-check"></i>
+	<div class="text">
+		<span>Success</span>
+		<p>saved successfully</p>
+	</div>
+	
+</div>
 <div class="user-form">
 	<div class="return-btn" [routerLink]="'/admin/management/users'"><i class="fa-solid fa-arrow-left"></i></div>
 	<div class="form" [formGroup]="userDetails">
-		<input type="text" placeholder="First name" formControlName="fname"/>
-		<br>
-		<input type="text" placeholder="Last name" formControlName="lname"/>
-		<br>
-		<input type="text" placeholder="PseudoName" formControlName="pseudoName"/>
-		<br>
-		<input type="number" placeholder="Telephone" formControlName="teleJoueur"/>
-		<br>
-		<input type="number" placeholder="Solde" formControlName="solde"/>
-		<br>
-		<input type="text" placeholder="Login" formControlName="login"/>
-		<br>
-		<input type="password" placeholder="Password" formControlName="password"/>
-		<br>
-		<button (click)="create()" >create</button>
+		<div *ngIf="!isLoadingForm">
+			<label class="error-msg" *ngIf="this.userDetails.controls.fname.status==='INVALID' && this.userDetails.controls.fname.touched">Field is required</label>
+			<br>
+			<input type="text" placeholder="First name" formControlName="fname"/>
+			<br>
+
+			<label class="error-msg" *ngIf="this.userDetails.controls.lname.status==='INVALID' && this.userDetails.controls.lname.touched">Field is required</label>
+			<br>
+			<input type="text" placeholder="Last name" formControlName="lname"/>
+			<br>
+
+			<label class="error-msg" *ngIf="this.userDetails.controls.pseudoName.status==='INVALID' && this.userDetails.controls.pseudoName.touched">Field is required</label>
+			<br>
+			<input type="text" placeholder="PseudoName" formControlName="pseudoName"/>
+			<br>
+
+			<label class="error-msg" *ngIf="this.userDetails.controls.teleJoueur.status==='INVALID' && this.userDetails.controls.teleJoueur.touched">Field is required</label>
+			<br>
+			<input type="number" placeholder="Telephone" formControlName="teleJoueur"/>
+			<br>
+
+			<label class="error-msg" *ngIf="this.userDetails.controls.solde.status==='INVALID' && this.userDetails.controls.solde.touched">Field is required</label>
+			<br>
+			<input type="number" placeholder="Solde" formControlName="solde"/>
+			<br>
+
+			<label class="error-msg" *ngIf="this.userDetails.controls.login.status==='INVALID' && this.userDetails.controls.login.touched">Field is required</label>
+			<br>
+			<input type="text" placeholder="Login" formControlName="login"/>
+			<br>
+
+			<label class="error-msg" *ngIf="this.userDetails.controls.password.status==='INVALID' && this.userDetails.controls.password.touched">Field is required</label>
+			<br>
+			<input type="password" placeholder="Password" formControlName="password"/>
+			<br>
+			<button (click)="create()">create</button>
+		</div>
+		<div class="loading-ellipsis" style="top: auto;left: 18%;" *ngIf="isLoadingForm">
+			<div class="r1"></div>
+			<div class="r2"></div>
+			<div class="r3"></div>
+		</div>
 	</div>
 </div>

@@ -1377,6 +1377,21 @@
 
 }
 
+.container-app .main .settings-page .form .content-form-settings .sc p{
+
+	width: 80%;
+	border: .1vw solid #b3b3b3;
+	border-left: none;
+	padding: 1.9% 2%;
+	font-size: 1.2vw;
+	color: #5f5f5f;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+}
+
+
 
 .container-app .main .settings-page .form .content-form-settings .sc .dropdown{
 
@@ -1464,6 +1479,81 @@
 
 }
 
+.loading-ellipsis{
+
+	width: 80%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	top: 50%;
+
+}
+
+
+.loading-ellipsis div{
+
+	width: 2.5%;
+	padding: 1.25% 0;
+	border-radius: 100%;
+	background-color: #b6b6b687;
+	margin: 0 .3%;
+	scale: .7;
+	animation: r1Anim .4s infinite linear alternate;
+
+}
+
+.loading-ellipsis div.r1{
+
+	animation-delay: -0.072s;
+
+}
+
+.loading-ellipsis div.r2{
+
+	animation-delay: -0.208s;
+
+}
+
+.loading-ellipsis div.r3{
+
+	animation-delay: -0.38s;
+
+}
+
+@keyframes r1Anim{
+
+	0%{
+
+		scale: .9;
+		background-color: #b6b6b6;
+
+	}
+
+}
+
+@keyframes r2Anim{
+
+	0%{
+
+		scale: .7;
+		background-color: #b6b6b6;
+
+	}
+
+}
+
+
+@keyframes r3Anim{
+
+	0%{
+
+		scale: .7;
+		background-color: #b6b6b6;
+
+	}
+
+}
 
 
 .container-app .main .admins-page{
@@ -1643,7 +1733,7 @@
 	justify-content: center;
 	cursor: pointer;
 	margin: 0 2%;
-	padding: 4% 0;
+	padding: 6% 0;
 
 }
 
@@ -1656,14 +1746,14 @@
 .container-app .main .admins-page .list .item-list .it .btn.edit{
 
 	background-color: var(--btnColor);
-	width: 17%;
+	width: 25%;
 
 }
 
 .container-app .main .admins-page .list .item-list .it .btn.block{
 
 	background-color: #f7594d;
-	width: 17%;
+	width: 25%;
 
 }
 
@@ -1686,6 +1776,17 @@
 
 }
 
+.container-app .main .user-form .form select{
+
+	width: 100%;
+	padding: 2.5% 2%;
+	font-size: 1.1vw;
+	margin-bottom: 2%;
+	border: .1vw solid gray;
+	background-color: transparent;
+	border-radius: .3vw;
+
+}
 
 .container-app .main .user-form .form input{
 
@@ -1699,6 +1800,78 @@
 
 }
 
+.container-app .main .user-form .form .sc{
+
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+}
+
+.container-app .main .user-form .form .flex-input{
+
+	width: 99%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+}
+
+.container-app .main .user-form .form .flex-input .input{
+
+	width: 45%;
+
+}
+
+.container-app .main .user-form .form .flex-input .input input{
+
+	width: 94%;
+	padding: 5% 4%;
+	font-size: 1.1vw;
+	margin: 0;
+	border: .1vw solid gray;
+	background-color: transparent;
+	border-radius: .3vw;
+
+}
+
+.container-app .main .user-form .form input.amount{
+
+	width: 75%;
+	margin: 0;
+
+}
+
+.container-app .main .user-form .form button.amount{
+
+	width: 9%;
+	padding: 2% 0;
+	margin: 0;
+
+}
+
+.container-app .main .user-form .form label{
+
+	font-size: 1.3vw;
+	font-weight: 600;
+	padding-top: 5%;
+
+}
+
+.container-app .main .user-form .form label.error-msg{
+
+	font-size: 1vw;
+	font-weight: 100;
+	padding: 0;
+	color: red;
+
+}
+
+
+.container-app .main .user-form .form i{
+	pointer-events: none;
+}
 
 .container-app .main .user-form .form button{
 
@@ -1830,7 +2003,89 @@
 
 
 
+.error-msg-box{
 
+	width: 25%;
+    padding: 1%;
+    position: absolute;
+    top: 0%;
+    left: 45%;
+    background-color: white;
+    border-left: 0.3vw solid red;
+    border-radius: 0.5vw;
+    box-shadow: 0 0 1vw 0px #00000029;
+    display: flex;
+    opacity: 0;
+    pointer-events: none;
+    align-items: center;
+    transition: .3s;
+    z-index: 81561;
+}
+
+.error-msg-box i{
+
+	font-size: 2vw;
+	color: red;
+	margin-right: 3%;
+
+}
+
+
+.error-msg-box .text{
+
+	font-size: 1vw;
+	line-height: 1.5vw;
+
+}
+
+.error-msg-box .text span{
+
+	font-weight: 600;
+	font-size: 1.2vw;
+
+}
+
+.success-msg-box{
+
+	width: 25%;
+    padding: 1%;
+    position: absolute;
+    top: 0%;
+    left: 45%;
+    background-color: white;
+    border-left: 0.3vw solid #2196F3;
+    border-radius: 0.5vw;
+    box-shadow: 0 0 1vw 0px #00000029;
+    display: flex;
+    opacity: 0;
+    pointer-events: none;
+    align-items: center;
+    transition: .3s;
+    z-index: 81561;
+}
+
+.success-msg-box i{
+
+	font-size: 2vw;
+	color: #2196F3;
+	margin-right: 3%;
+
+}
+
+
+.success-msg-box .text{
+
+	font-size: 1vw;
+	line-height: 1.5vw;
+
+}
+
+.success-msg-box .text span{
+
+	font-weight: 600;
+	font-size: 1.2vw;
+
+}
 
 
 /*********************************************************************************************************************/

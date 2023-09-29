@@ -17,10 +17,11 @@ export class UsersService {
 
   userAuth = environment.API+"/loginJoueur"
 
+  adminOpenedForCheckUsersList = ""
 
   user = {
 
-    type:"",
+    type:"admin",
     id:""
 
   }
@@ -88,9 +89,9 @@ export class UsersService {
 
   }
 
-  deleteUser(data:any){
+  deleteUser(id:any){
 
-    return this.http.delete(this.userApi+"/delettejoueur/"+data.id)
+    return this.http.delete(this.userApi+"/"+id)
 
   }
 

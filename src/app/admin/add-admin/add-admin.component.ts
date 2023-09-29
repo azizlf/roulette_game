@@ -9,6 +9,9 @@ import { FormBuilder, FormControl, Validators, FormGroup} from '@angular/forms';
 })
 export class AddAdminComponent implements OnInit {
 
+  element:any
+  isLoadingForm = false
+  errorMsg=""
   userDetails = new FormGroup({
 
     fname :new FormControl('',[Validators.required ]),
@@ -17,7 +20,8 @@ export class AddAdminComponent implements OnInit {
     teleAdmin: new FormControl('',[Validators.required ]),
     solde: new FormControl('',[Validators.required ]),
     login: new FormControl('',[Validators.required ]),
-    password: new FormControl('',[Validators.required ])
+    password: new FormControl('',[Validators.required ]),
+    prencentage: new FormControl('0',[Validators.required ])
 
   })
 
@@ -27,33 +31,90 @@ export class AddAdminComponent implements OnInit {
 
     const user = this.userDetails.value
 
-    const request = {
-      name:user.fname,
-      lastName:user.lname,
-      pseudoName:user.pseudoName,
-      login:user.login,
-      password:user.password,
-      isSuperAdmin:false,
-      teleAdmin:user.teleAdmin,
-      role:"admin",
-      solde:user.solde,
-      prencentage:20,
-      Listejoueurs: []
+
+    if(this.userDetails.status === "VALID"){
+
+      if(user.prencentage === "0"){
+        this.element = document.querySelector(".error-msg-box")
+        this.element.style.opacity = "1"
+        this.element.style.top = "4%"
+        this.errorMsg = "select one of profit list"
+        setTimeout(()=>{
+          this.element.style.opacity = "0"
+          this.element.style.top = "0%"
+        },3000)
+      }else{
+        const request = {
+          name:user.fname,
+          lastName:user.lname,
+          pseudoName:user.pseudoName,
+          login:user.login,
+          password:user.password,
+          isSuperAdmin:false,
+          teleAdmin:user.teleAdmin,
+          role:"admin",
+          solde:user.solde,
+          prencentage:user.prencentage,
+          Listejoueurs: []
+        }
+
+        this.isLoadingForm = true
+
+        this.userService.addAdmin(request).subscribe((res:any)=>{
+
+          if(res.message){
+            this.element = document.querySelector(".success-msg-box")
+            setTimeout(()=>{
+              this.element.style.opacity = "1"
+              this.element.style.top = "4%"
+              this.isLoadingForm = false
+              setTimeout(()=>{
+                this.element.style.opacity = "0"
+                this.element.style.top = "0%"
+              },3000)
+            },700)
+          }else if(!res.message){
+            this.element = document.querySelector(".error-msg-box")
+            setTimeout(()=>{
+              this.element.style.opacity = "1"
+              this.element.style.top = "4%"
+              this.isLoadingForm = false
+              this.errorMsg = "Something wrong!"
+              setTimeout(()=>{
+                this.element.style.opacity = "0"
+                this.element.style.top = "0%"
+              },3000)
+            },700)
+          }
+
+        })
+      }
+      
     }
 
-
-    this.userService.addAdmin(request).subscribe((res:any)=>{
-
-      if(res.message){
-        alert("admin created successfully")
-      }
-
-    })
+    
 
   }
 
 
   ngOnInit(): void {
+    this.element = document.querySelector(".profit-select")
+
+    var interval = setInterval(()=>{
+      if(this.element != null){
+        for (var i = 0; i < this.element.options.length; i++) {
+
+          if (this.element.options[i].value === "0") {
+            
+            this.element.options[i].selected = true;
+
+            break;
+          }
+
+        }
+        clearInterval(interval)
+      }
+    },3)
   }
 
 }

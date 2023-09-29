@@ -17,6 +17,7 @@ export class AdminsComponent implements OnInit {
 
     this.userService.usersShowAllList = false
     this.router.navigate(['/admin/management/users/'+admin._id])
+    this.userService.adminOpenedForCheckUsersList = admin._id
 
   }
 
@@ -24,17 +25,25 @@ export class AdminsComponent implements OnInit {
 
     this.userService.getAllAdmins().subscribe((res:any)=>{
 
-      this.admins = res
+      res.forEach((item:any)=>{
+
+        if(!item.isSuperAdmin){
+          this.admins.push(item)
+        }
+
+      })
+
+      console.log(res)
 
 
     })
 
   }
 
-  desactiveAdmin(admin:any){
+  desactiveAdmin(admin:any,item:any){
 
     this.userService.deleteAdmin(admin._id).subscribe((res:any)=>{
-      console.log(res)
+      item.remove(item)
     })
 
   }

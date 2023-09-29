@@ -17,16 +17,18 @@
 			</div>
 		</div>
 	</div>
-	<div class="list">
+	<div class="list" *ngIf="!isLoading">
 		<div class="head-list">
-			<div class="item">#</div>
+			<div class="item">login</div>
 			<div class="item">Name</div>
+			<div class="item">Telephone</div>
 			<div class="item">solde</div>
 			<div class="item">Action</div>
 		</div>
-		<div class="item-list" *ngFor="let user of users">
-			<div class="it id"> {{user._id}} </div>
-			<div class="it name"> {{user.lastName}} {{user.name}} </div>
+		<div class="item-list" *ngFor="let user of users" #item>
+			<div class="it id"> {{user.login}} </div>
+			<div class="it name"> {{user.name}} {{user.lastName}}</div>
+			<div class="it name"> {{user.teleJoueur}}</div>
 			<div class="it">{{user.solde}}</div>
 			<div class="it">
 				<div class="btn edit" [routerLink]="'/admin/management/update-client/'+user._id" >
@@ -35,11 +37,11 @@
 				<!--div class="btn block" *ngIf="userType === 'admin'">
 					<i class="fa-solid fa-lock"></i>
 				</div-->
-				<div class="btn block" (click)="removeUser(user)" *ngIf="userType === 'admin'">
+				<div class="btn block" (click)="removeUser(user,item)" *ngIf="userType === 'admin'">
 					<i class="fa-solid fa-trash-can"></i>
 					<!--i class="fa-solid fa-lock-open"></i-->
 				</div>
-				<div class="btn block" (click)="removeUser(user)" *ngIf="userType === 'superAdmin' ">
+				<div class="btn block" (click)="removeUser(user,item)" *ngIf="userType === 'superAdmin' ">
 					<i class="fa-solid fa-trash-can"></i>
 				</div>
 				<div class="btn block" (click)="openUserHistory(user)" style="background-color: #3aa8ff;">
@@ -47,6 +49,11 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	<div class="loading-ellipsis" *ngIf="isLoading">
+		<div class="r1"></div>
+		<div class="r2"></div>
+		<div class="r3"></div>
 	</div>
 
 </div>

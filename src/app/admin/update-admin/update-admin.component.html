@@ -1,20 +1,49 @@
+<div class="error-msg-box">
+	<i class="fa-solid fa-circle-xmark"></i>
+	<div class="text">
+		<span>Error</span>
+		<p>Something wrong!</p>
+	</div>
+	
+</div>
+<div class="success-msg-box">
+	<i class="fa-solid fa-circle-check"></i>
+	<div class="text">
+		<span>Success</span>
+		<p>saved successfully</p>
+	</div>
+	
+</div>
 <div class="user-form">
-	<div class="return-btn" [routerLink]="'/admin/management/admins'"><i class="fa-solid fa-arrow-left"></i></div>
-	<div class="form" [formGroup]="userDetails">
-		<input type="text" placeholder="First name" formControlName="fname"/>
+	<div class="return-btn" [routerLink]="'/admin/management/admins'" ><i class="fa-solid fa-arrow-left"></i></div>
+	<div class="form" *ngIf="!isLoading">
+		<input type="text" placeholder="First name" (input)="updateUserInfos('name',$event)"  [value]="adminEntries.name"/>
 		<br>
-		<input type="text" placeholder="Last name" formControlName="lname"/>
+		<input type="text" placeholder="Last name" (input)="updateUserInfos('lastName',$event)"  [value]="adminEntries.lastName"/>
 		<br>
-		<input type="text" placeholder="PseudoName" formControlName="pseudoName"/>
+		<input type="text" placeholder="PseudoName" (input)="updateUserInfos('pseudoName',$event)"  [value]="adminEntries.pseudoName"/>
 		<br>
-		<input type="number" placeholder="Telephone" formControlName="teleAdmin"/>
+		<input type="number" [value]="adminEntries.teleAdmin" (input)="updateUserInfos('teleAdmin',$event)" placeholder="Telephone"/>
 		<br>
-		<input type="number" placeholder="Solde" formControlName="solde"/>
+		<label>Solde: {{requestUpdateInfos.solde}}</label>
 		<br>
-		<input type="text" placeholder="Login" formControlName="login"/>
 		<br>
-		<input type="password" placeholder="Password" formControlName="password"/>
+		<div class="sc">
+			<input type="number" class="amount" placeholder="amount" #amount />
+			<button class="amount" (click)="changeSolde(amount,'+')"><i class="fa-solid fa-plus"  ></i></button>
+			<button class="amount" (click)="changeSolde(amount,'-')"><i class="fa-solid fa-minus"></i></button>
+		</div>
 		<br>
-		<button (click)="update()" >create</button>
+		<button (click)="update()" *ngIf="!isLoadingForm">save</button>
+		<div class="loading-ellipsis" style="top: 78%;left: 18%;" *ngIf="isLoadingForm">
+			<div class="r1"></div>
+			<div class="r2"></div>
+			<div class="r3"></div>
+		</div>
+	</div>
+	<div class="loading-ellipsis" *ngIf="isLoading">
+		<div class="r1"></div>
+		<div class="r2"></div>
+		<div class="r3"></div>
 	</div>
 </div>

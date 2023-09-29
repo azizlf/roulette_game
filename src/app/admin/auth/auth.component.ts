@@ -67,6 +67,8 @@ export class AuthComponent implements OnInit {
     const user = this.userDetails.value
 
     var loginIsSuccess = false
+    
+    this.isLoadingForm(true)
 
     this.users.loginAdmin(user).subscribe((res:any)=>{
 
@@ -74,9 +76,7 @@ export class AuthComponent implements OnInit {
       
         this.users.user.id = res.admin
         this.users.user.type = res.role
-                
-        this.isLoadingForm(true)
-
+            
           setTimeout(()=>{
             
             this.isLoadingForm(false)
@@ -94,11 +94,12 @@ export class AuthComponent implements OnInit {
               }
 
             
-          },500)
+          },650)
 
-        },800)     
+        },300)     
 
       }else{
+        this.isLoadingForm(false)
         this.openMessageBox()
       }
 

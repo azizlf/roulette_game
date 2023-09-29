@@ -15,15 +15,17 @@
 			<div class="item">Name</div>
 			<div class="item">solde</div>
 			<div class="item">Profit</div>
+			<div class="item">Telephone</div>
 			<div class="item">users</div>
 			<div class="item">Status</div>
 			<div class="item">Action</div>
 		</div>
-		<div class="item-list" *ngFor="let admin of admins">
+		<div class="item-list" *ngFor="let admin of admins" #item>
 			<div class="it name">{{admin.login}}</div>
-			<div class="it name">{{admin.name}}</div>
+			<div class="it name">{{admin.name}} {{admin.lastName}}</div>
 			<div class="it">{{admin.solde}}</div>
-			<div class="it">25%</div>
+			<div class="it">{{admin.prencentage}}%</div>
+			<div class="it">{{admin.teleAdmin}}</div>
 			<div class="it link">{{admin.users}} users<i class="fa-solid fa-eye" (click)="openUserForAdmin(admin)" ></i></div>
 			<div class="it">
 				<div class="status-account" *ngIf="admin.status">
@@ -37,7 +39,7 @@
 				<div class="btn edit" [routerLink]="'/admin/management/update-admin/'+admin._id">
 					<i class="fa-regular fa-pen-to-square"></i>
 				</div>
-				<div class="btn block" (click)="desactiveAdmin(admin)">
+				<div class="btn block" (click)="desactiveAdmin(admin,item)">
 					<i class="fa-solid fa-ban"></i>
 				</div>
 			</div>

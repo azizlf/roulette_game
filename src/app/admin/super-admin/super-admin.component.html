@@ -13,11 +13,9 @@
 		<div class="detail" *ngIf="openDetailList">
 			<p class="name"><span>{{adminDetail.name}} {{adminDetail.lastName}}</span></p>
 			<br>
-			<p><span>&nbsp;&nbsp;Solde:</span> {{adminDetail.solde}} </p>
-			<br>
 			<p><span>&nbsp;&nbsp;Players:</span> {{usersLength}} </p>
-			<br *ngIf="userType === 'superAdmin'">
-			<p *ngIf="userType === 'superAdmin'"><span>&nbsp;&nbsp;Admins:</span> {{adminsLength}} </p>
+			<br>
+			<p><span>&nbsp;&nbsp;Admins:</span> {{adminsLength}} </p>
 		</div>
 		<div class="title" (click)="openList('navigation')" >
 			<p>Navigation</p> &nbsp;&nbsp;
@@ -38,10 +36,10 @@
 					<i class="fa-solid fa-sliders"></i>
 					<span>Settings</span>
 				</div>
-				<div class="item" routerLink="/admin/management/settings">
+				<!--div class="item" routerLink="/admin/management/settings">
 					<i class="fa-solid fa-shield-halved"></i>
 					<span>Change password</span>
-				</div>
+				</div-->
 				<div class="item" (click)="logout()">
 					<i class="fa-solid fa-arrow-right-from-bracket"></i>
 					<span>logout</span>

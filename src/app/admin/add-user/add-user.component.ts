@@ -71,7 +71,7 @@ export class AddUserComponent implements OnInit {
             this.element.style.opacity = "1"
             this.element.style.top = "4%"
             this.isLoadingForm = false
-            this.errorMsg = "Something wrong!"
+            this.errorMsg = "Login already exist"
             setTimeout(()=>{
               this.element.style.opacity = "0"
               this.element.style.top = "0%"

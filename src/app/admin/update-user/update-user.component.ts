@@ -32,6 +32,8 @@ export class UpdateUserComponent implements OnInit {
   errorMsg = ""
   element:any
 
+  adminSolde:any
+
 
   constructor(private userService:UsersService,private router: Router,private route:ActivatedRoute) { }
 
@@ -102,6 +104,11 @@ export class UpdateUserComponent implements OnInit {
             this.element.style.opacity = "0"
             this.element.style.top = "0%"
           },3000)
+          const request = {
+            solde:this.adminSolde,
+            id:this.userService.user.id
+          }
+          this.userService.updateAdmin(request).subscribe()
         }
 
       })  
@@ -112,13 +119,35 @@ export class UpdateUserComponent implements OnInit {
   changeSolde(amount:any,op:any){
 
     if(op === "+"){
-      const result = parseFloat(this.requestUpdateInfos.solde)+parseFloat(amount.value)
-      this.requestUpdateInfos.solde = result.toFixed(2)+""
+
+      console.log(amount.value,this.adminSolde)
+      
+      if(this.userService.user.type === "admin"){
+        if(parseFloat(amount.value) < this.adminSolde){
+          const result = parseFloat(this.requestUpdateInfos.solde)+parseFloat(amount.value)
+          this.requestUpdateInfos.solde = result.toFixed(2)+""
+          this.adminSolde -= parseFloat(amount.value)
+        }else{
+          this.element = document.querySelector(".error-msg-box")
+          this.isLoadingForm = false
+          this.element.style.opacity = "1"
+          this.element.style.top = "4%"
+          this.errorMsg = "insufficient funds"
+          setTimeout(()=>{
+            this.element.style.opacity = "0"
+            this.element.style.top = "0%"
+          },3000)
+        }
+      }else{
+        const result = parseFloat(this.requestUpdateInfos.solde)+parseFloat(amount.value)
+        this.requestUpdateInfos.solde = result.toFixed(2)+""
+      }
     
     }else if(op === "-"){
       const result = parseFloat(this.requestUpdateInfos.solde)-parseFloat(amount.value)
       if(result>0){
         this.requestUpdateInfos.solde = result.toFixed(2)+""
+        this.adminSolde += parseFloat(amount.value)
       }else{
         this.requestUpdateInfos.solde = "0"
       }
@@ -133,16 +162,7 @@ export class UpdateUserComponent implements OnInit {
 
       this.userEntries = res
 
-      var interval = setInterval(()=>{
-
-        if(this.userEntries != ""){
-          setTimeout(()=>{
-            this.isLoading = false
-            clearInterval(interval)
-          },350)
-        }
-
-      },10)
+      this.isLoading = false
 
       this.requestUpdateInfos.name = res.name
       this.requestUpdateInfos.lastName = res.lastName
@@ -154,6 +174,12 @@ export class UpdateUserComponent implements OnInit {
 
     })
 
+    this.userService.findAdmin(this.userService.user.id).subscribe((res:any)=>{
+
+      
+      this.adminSolde = res.solde
+
+    })
   }
 
 

@@ -42,63 +42,27 @@ export class UsersComponent implements OnInit {
       this.usersService.findAdmin(this.usersService.user.id).subscribe((res:any)=>{
 
         this.users = res.Listejoueurs
-
-        if(this.users.length === 0){
-          this.users = "."
-        }
+        this.isLoading = false
 
         this.adminId = res._id
-        var interval = setInterval(()=>{
-
-          if(this.users != ""){
-            setTimeout(()=>{
-              this.isLoading = false
-              clearInterval(interval)
-            },350)
-          }
-
-        },10)
+        
 
       })
     }else if(listOf==="superAdmin"){
       this.usersService.getAllUsers().subscribe((res:any)=>{
 
         this.users = res
-        if(this.users.length === 0){
-          this.users = "."
-        }
-
-        var interval = setInterval(()=>{
-
-          if(this.users != ""){
-            setTimeout(()=>{
-              this.isLoading = false
-              clearInterval(interval)
-            },350)
-          }
-
-        },10)
+        this.isLoading = false
 
       })
     }else{
       this.usersService.findAdmin(listOf).subscribe((res:any)=>{
 
         this.users = res.Listejoueurs
-        if(this.users.length === 0){
-          this.users = "."
-        }
+        this.isLoading = false
 
         this.adminId = res._id
-        var interval = setInterval(()=>{
-
-          if(this.users != ""){
-            setTimeout(()=>{
-              this.isLoading = false
-              clearInterval(interval)
-            },350)
-          }
-
-        },10)
+        
 
       })
     }

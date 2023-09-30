@@ -124,16 +124,7 @@ export class UpdateAdminComponent implements OnInit {
 
       this.adminEntries = res
 
-      var interval = setInterval(()=>{
-
-        if(this.adminEntries != ""){
-          setTimeout(()=>{
-            this.isLoading = false
-            clearInterval(interval)
-          },350)
-        }
-
-      },10)
+      this.isLoading = false
 
       this.requestUpdateInfos.name = res.name
       this.requestUpdateInfos.lastName = res.lastName

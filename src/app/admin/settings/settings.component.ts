@@ -42,35 +42,23 @@ export class SettingsComponent implements OnInit {
       this.requestUpdateInfos.teleAdmin = res.teleAdmin
       this.requestUpdateInfos.prencentage = res.prencentage
       this.requestUpdateInfos.id = res._id
+      this.isLoading = false
+      if(this.userType === "admin"){
+        setTimeout(()=>{
+          this.element = document.querySelector(".profit-select")
+        
+          for (var i = 0; i < this.element.options.length; i++) {
 
-      var interval = setInterval(()=>{
-
-        if(this.details != "" && this.requestUpdateInfos.prencentage != ""){
-          setTimeout(()=>{
-            this.isLoading = false
-            clearInterval(interval)
-
-            if(this.userType === "admin"){
-              setTimeout(()=>{
-                this.element = document.querySelector(".profit-select")
+            if (this.element.options[i].value === this.requestUpdateInfos.prencentage+"") {
               
-                for (var i = 0; i < this.element.options.length; i++) {
+              this.element.options[i].selected = true;
 
-                  if (this.element.options[i].value === this.requestUpdateInfos.prencentage+"") {
-                    
-                    this.element.options[i].selected = true;
-
-                    break;
-                  }
-
-                }
-              },50)
+              break;
             }
 
-          },150)
-        }
-
-      },10)
+          }
+        },50)
+      }
 
     })
   }

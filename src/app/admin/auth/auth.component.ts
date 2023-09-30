@@ -108,6 +108,7 @@ export class AuthComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.users.usersShowAllList = true
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsersService } from '../../services/users.service'
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -10,58 +11,69 @@ import { UsersService } from '../../services/users.service'
 })
 export class UserHistoryComponent implements OnInit {
 
-  balance = "10,25"
+  balance = ""
 
-  history:any = []
+  history:any = "nothing"
 
-  constructor(private usersService:UsersService,private router: Router) { }
+  isLoading = true
 
-  historyUser(){
+  constructor(private usersService:UsersService,private router: Router,private route:ActivatedRoute) { }
 
-    this.history = [
+  historyUser(id:any){
 
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"5,56",
-        tiketId:"1248964515564",
-        status:true
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"10,56",
-        tiketId:"1564815223456",
-        status:false
-      },
-      {
-        date:"15-02-2023 3:15pm",
-        amount:"3,5",
-        tiketId:"8978947845312",
-        status:true
-      },
-      
+    this.usersService.findUser(id).subscribe((res:any)=>{
 
-    ]
+      this.balance = res.solde+""
+      this.history = [
+        {
+          numero:123145615234561,
+          solde:15.4,
+          gagnion:true
+        },
+        {
+          numero:978915231056556,
+          solde:25.5,
+          gagnion:false
+        }
+      ]//res.tiket
+      var interval = setInterval(()=>{
+        if(this.history != "nothing"){
+          setTimeout(()=>{
+            this.isLoading = false
+            clearInterval(interval)
+          },150)
+        }
+      },2)
+
+    })
 
   }
 
   returnFromPage(){
 
-    if(this.usersService.usersShowAllList){
-    
-      this.router.navigate(['/admin/management/users'])
-    
-    }else{
-
+    if(this.usersService.user.type === "admin"){
+      this.usersService.usersShowAllList = true
       this.router.navigate(['/admin/management/users/'])
+    }else{
+      if(this.usersService.adminOpenedForCheckUsersList === ""){
 
+        this.usersService.usersShowAllList = true
+
+      }else{
+
+        this.usersService.usersShowAllList = false
+
+      }
+      this.router.navigate(['/admin/management/users/'+this.usersService.adminOpenedForCheckUsersList])
+      
     }
-
 
   }
 
   ngOnInit(): void {
     
-    this.historyUser()
+    const DCFVGYHBUJNIK = this.route.snapshot.paramMap.get('userId')
+    this.historyUser(DCFVGYHBUJNIK)
   }
 
 }

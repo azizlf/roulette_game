@@ -33,8 +33,7 @@ export class AdminsComponent implements OnInit {
 
       })
 
-      console.log(res)
-
+      console.log(this.admins)
 
     })
 

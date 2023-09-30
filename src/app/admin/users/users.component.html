@@ -7,13 +7,13 @@
 			</div>
 			<p>
 				<label *ngIf="!currentAdmin">Admin: <a>{{adminParamId}}</a></label>
-				<span *ngIf="currentAdmin">Users Management</span>
+				<span *ngIf="currentAdmin">Players Management</span>
 			</p>
 		</div>
 		<div class="btns" *ngIf="userType === 'admin'">
 			<div class="btn"  *ngIf="currentAdmin" routerLink="/admin/management/add-client">
 				<i class="fa-solid fa-circle-plus"></i>
-				<p>Add new user</p>
+				<p>New player</p>
 			</div>
 		</div>
 	</div>
@@ -26,9 +26,9 @@
 			<div class="item">Action</div>
 		</div>
 		<div class="item-list" *ngFor="let user of users" #item>
-			<div class="it id"> {{user.login}} </div>
-			<div class="it name"> {{user.name}} {{user.lastName}}</div>
-			<div class="it name"> {{user.teleJoueur}}</div>
+			<div class="it name"> {{user.login}} </div>
+			<div class="it"> {{user.name}} {{user.lastName}}</div>
+			<div class="it "> {{user.teleJoueur}}</div>
 			<div class="it">{{user.solde}}</div>
 			<div class="it">
 				<div class="btn edit" [routerLink]="'/admin/management/update-client/'+user._id" >

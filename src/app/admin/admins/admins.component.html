@@ -5,7 +5,7 @@
 		<div class="btns">
 			<div class="btn" routerLink="/admin/management/add-admin/">
 				<i class="fa-solid fa-circle-plus"></i>
-				<p>Add new admin</p>
+				<p>New admin</p>
 			</div>
 		</div>
 	</div>
@@ -16,7 +16,7 @@
 			<div class="item">solde</div>
 			<div class="item">Profit</div>
 			<div class="item">Telephone</div>
-			<div class="item">users</div>
+			<div class="item">Players</div>
 			<div class="item">Status</div>
 			<div class="item">Action</div>
 		</div>
@@ -26,7 +26,7 @@
 			<div class="it">{{admin.solde}}</div>
 			<div class="it">{{admin.prencentage}}%</div>
 			<div class="it">{{admin.teleAdmin}}</div>
-			<div class="it link">{{admin.users}} users<i class="fa-solid fa-eye" (click)="openUserForAdmin(admin)" ></i></div>
+			<div class="it link">{{admin.Listejoueurs.length}}<i class="fa-solid fa-eye" (click)="openUserForAdmin(admin)" ></i></div>
 			<div class="it">
 				<div class="status-account" *ngIf="admin.status">
 					<i class="fa-solid fa-circle" style="color:#0dd20d;"></i>

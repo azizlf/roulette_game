@@ -25,17 +25,14 @@ export class UsersComponent implements OnInit {
   returnFromPage(){
 
     this.usersService.usersShowAllList = true
+    this.usersService.adminOpenedForCheckUsersList = ""
     this.router.navigate(['/admin/management/admins'])
 
   }
 
   openUserHistory(user:any){
 
-    if(this.usersService.usersShowAllList){
-      this.router.navigate(['/admin/management/user/history/'+user._id])
-    }else{
-      this.router.navigate(['/admin/management/user/history/'+this.adminParamId+"/"+user._id])
-    }
+    this.router.navigate(['/admin/management/user/history/'+user._id])
 
   }
 
@@ -122,7 +119,7 @@ export class UsersComponent implements OnInit {
   ngOnInit(): void {
     this.currentAdmin = this.usersService.usersShowAllList
     this.userType = this.usersService.user.type
-    this.adminParamId = this.route.snapshot.paramMap.get('adminId');
+    this.adminParamId = this.route.snapshot.paramMap.get('adminId')
     if(this.adminParamId != null){
       this.getUsers(this.adminParamId)
     }else{

@@ -21,7 +21,7 @@ export class UsersService {
 
   user = {
 
-    type:"admin",
+    type:"superAdmin",
     id:""
 
   }

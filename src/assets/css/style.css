@@ -966,6 +966,8 @@
 	width: 20%;
 	height: 100%;
 	background-color: var(--themeColor);
+	overflow: hidden;
+	overflow-y: auto;
 
 }
 
@@ -997,22 +999,62 @@
 
 }
 
+.container-app .menu .detail{
+
+	font-size: 1vw;
+	color: white;
+	padding: 4%;
+
+}
+
+.container-app .menu .detail p{
+
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+}
+
+.container-app .menu .detail p.name{
+
+	font-size: 1.2vw;
+
+}
+
+
+.container-app .menu .detail p span{
+
+	font-weight: 600;
+
+}
+
 .container-app .menu .title{
 
-	font-size: 1.1vw;
+	font-size: 1.2vw;
 	color: white;
 	font-weight: 600;
-	padding: 0 5%;
+	padding: 2% 5%;
 	height: 5%;
 	display: flex;
 	align-items: center;
+	background-color: #2d3337;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
 }
+
+.container-app .menu .title p{
+
+	text-align: left;
+	width: 90%;
+
+}
+
 
 
 .container-app .menu .list{
 
 	width: 100%;
-	height: 81%;
 	display: flex;
 	align-items: center;
 
@@ -1021,7 +1063,6 @@
 .container-app .menu .list .ctn{
 
 	width: 100%;
-	height: 100%;
 	overflow: hidden;
 	overflow-y: auto;
 
@@ -1058,30 +1099,6 @@
 	background-color: var(--hover-btn-list);
 
 }
-
-.container-app .menu .logout-btn{
-
-	background-color: #1c1f21;
-	width: 100%;
-	height: 7%;
-	font-weight: 600;
-	color: white;
-	display: flex;
-	align-items: center;
-	justify-content: space-around;
-	cursor: pointer;
-	font-size: 1.3vw;
-
-}
-
-.container-app .menu .logout-btn p{
-
-	position: relative;
-	margin: 0;
-	width: 70%;
-
-}
-
 
 .container-app .main{
 
@@ -1237,7 +1254,6 @@
 
 .container-app .main .users-page .list .item-list .it.name{
 
-	color: #495c7e;
 	font-weight: 600;
 	display: -webkit-box;
 	-webkit-line-clamp: 2;
@@ -1338,6 +1354,7 @@
 .container-app .main .settings-page .form .content-form-settings{
 
 	width: 50%;
+	position: relative;
 
 }
 
@@ -1683,7 +1700,6 @@
 
 .container-app .main .admins-page .list .item-list .it.name{
 
-	color: #495c7e;
 	font-weight: 600;
 	display: -webkit-box;
 	-webkit-line-clamp: 2;
@@ -1773,6 +1789,7 @@
 .container-app .main .user-form .form{
 
 	width: 50%;
+	position: relative;
 
 }
 

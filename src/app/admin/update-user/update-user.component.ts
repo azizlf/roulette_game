@@ -27,6 +27,12 @@ export class UpdateUserComponent implements OnInit {
 
   }
 
+  successMsg = ""
+  isLoadingForm = false
+  errorMsg = ""
+  element:any
+
+
   constructor(private userService:UsersService,private router: Router,private route:ActivatedRoute) { }
 
   returnFromPage(){
@@ -35,8 +41,17 @@ export class UpdateUserComponent implements OnInit {
       this.userService.usersShowAllList = true
       this.router.navigate(['/admin/management/users/'])
     }else{
-      this.userService.usersShowAllList = false
+      if(this.userService.adminOpenedForCheckUsersList === ""){
+
+        this.userService.usersShowAllList = true
+
+      }else{
+
+        this.userService.usersShowAllList = false
+
+      }
       this.router.navigate(['/admin/management/users/'+this.userService.adminOpenedForCheckUsersList])
+      
     }
 
   }
@@ -51,21 +66,42 @@ export class UpdateUserComponent implements OnInit {
       this.requestUpdateInfos["pseudoName"] = value.target.value
     }else if(key==="solde"){
       this.requestUpdateInfos["solde"] = value.target.value
+    }else if(key==="teleJoueur"){
+      this.requestUpdateInfos["teleJoueur"] = value.target.value
     }
 
   }
 
   update(){
 
+    this.isLoadingForm = true
+
+
     if(this.requestUpdateInfos.name==="" || this.requestUpdateInfos.lastName==="" || this.requestUpdateInfos.pseudoName===""
       || this.requestUpdateInfos.teleJoueur==="" || this.requestUpdateInfos.solde===""
       ){
-      alert("All fields are required")
+      this.element = document.querySelector(".error-msg-box")
+      this.isLoadingForm = false
+      this.element.style.opacity = "1"
+      this.element.style.top = "4%"
+      this.errorMsg = "All fields are required"
+      setTimeout(()=>{
+        this.element.style.opacity = "0"
+        this.element.style.top = "0%"
+      },3000)
     }else{
       this.userService.updateUser(this.requestUpdateInfos).subscribe((res:any)=>{
 
         if(res.message){
-          alert("user created successfully")
+          this.element = document.querySelector(".success-msg-box")
+          this.isLoadingForm = false
+          this.element.style.opacity = "1"
+          this.element.style.top = "4%"
+          this.successMsg = "saved succussfully"
+          setTimeout(()=>{
+            this.element.style.opacity = "0"
+            this.element.style.top = "0%"
+          },3000)
         }
 
       })  

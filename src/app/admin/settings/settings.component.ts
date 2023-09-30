@@ -11,7 +11,8 @@ export class SettingsComponent implements OnInit {
 
   details:any = ""
   isLoading = true
-
+  isLoadingForm = false
+  errorMsg=""
   userType:any
 
   requestUpdateInfos = {
@@ -92,16 +93,34 @@ export class SettingsComponent implements OnInit {
 
   update(){
 
+
     if(this.requestUpdateInfos.name==="" || this.requestUpdateInfos.lastName==="" || this.requestUpdateInfos.pseudoName===""
       || this.requestUpdateInfos.teleAdmin===""
       )
     {
-      alert("All fields are required")
+      this.element = document.querySelector(".error-msg-box")
+      this.element.style.opacity = "1"
+      this.element.style.top = "4%"
+      this.errorMsg = "All fields are required"
+      setTimeout(()=>{
+        this.element.style.opacity = "0"
+        this.element.style.top = "0%"
+      },3000)
     }else{
+      
+      this.isLoadingForm = true
+
       this.usersService.updateAdmin(this.requestUpdateInfos).subscribe((res:any)=>{
 
         if(res.message){
-          alert("saved successfully")
+          this.element = document.querySelector(".success-msg-box")
+          this.element.style.opacity = "1"
+          this.element.style.top = "4%"
+          this.isLoadingForm = false
+          setTimeout(()=>{
+            this.element.style.opacity = "0"
+            this.element.style.top = "0%"
+          },3000)
         }
 
       })  

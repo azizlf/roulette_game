@@ -8,20 +8,25 @@
 			Balance : {{balance}}
 		</div>
 	</div>
-	<div class="content-history-page">
+	<div class="content-history-page" *ngIf="!isLoading">
 		<div class="history-list">
 			<div class="head-list">
 				<div class="it">#</div>
-				<div class="it">Date</div>
 				<div class="it">Amount</div>
+				<div class="it">Status</div>
 			</div>
 			<div class="item" *ngFor="let item of history">
-				<div class="it">{{item.tiketId}}</div>
-				<div class="it">{{item.date}}</div>
-				<div class="it" style="color:green;" *ngIf="item.status">+ {{item.amount}}</div>
-				<div class="it" style="color:red;" *ngIf="!item.status">- {{item.amount}}</div>
+				<div class="it">{{item.numero}}</div>
+				<div class="it">{{item.solde}}</div>
+				<div class="it" style="color:green;" *ngIf="item.gagnion">WIN</div>
+				<div class="it" style="color:red;" *ngIf="!item.gagnion">LOSE</div>
 			</div>
 		</div>
+	</div>
+	<div class="loading-ellipsis" *ngIf="isLoading">
+		<div class="r1"></div>
+		<div class="r2"></div>
+		<div class="r3"></div>
 	</div>
 
 </div>

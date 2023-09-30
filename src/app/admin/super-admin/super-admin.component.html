@@ -5,8 +5,26 @@
 		<div class="header">
 			<div class="logo"></div>
 		</div>
-		<div class="title">Navigation</div>
-		<div class="list">
+		<div class="title" (click)="openList('detail')" >
+			<p>Profile</p>&nbsp;&nbsp; 
+			<i class="fa-solid fa-caret-right" *ngIf="!openDetailList"></i>
+			<i class="fa-solid fa-caret-down" *ngIf="openDetailList"></i>
+		</div>
+		<div class="detail" *ngIf="openDetailList">
+			<p class="name"><span>{{adminDetail.name}} {{adminDetail.lastName}}</span></p>
+			<br>
+			<p><span>&nbsp;&nbsp;Solde:</span> {{adminDetail.solde}} </p>
+			<br>
+			<p><span>&nbsp;&nbsp;Players:</span> {{usersLength}} </p>
+			<br *ngIf="userType === 'superAdmin'">
+			<p *ngIf="userType === 'superAdmin'"><span>&nbsp;&nbsp;Admins:</span> {{adminsLength}} </p>
+		</div>
+		<div class="title" (click)="openList('navigation')" >
+			<p>Navigation</p> &nbsp;&nbsp;
+			<i class="fa-solid fa-caret-right" *ngIf="!openNavigationList"></i>
+			<i class="fa-solid fa-caret-down" *ngIf="openNavigationList"></i>
+		</div>
+		<div class="list" *ngIf="openNavigationList">
 			<div class="ctn">
 				<div class="item" routerLink="/admin/management/admins">
 					<i class="fa-solid fa-user-tie"></i>
@@ -14,7 +32,7 @@
 				</div>
 				<div class="item" (click)="returnFromPage()" >
 					<i class="fa-solid fa-users"></i>
-					<span>Users</span>
+					<span>Players</span>
 				</div>
 				<div class="item" routerLink="/admin/management/settings">
 					<i class="fa-solid fa-sliders"></i>
@@ -24,11 +42,11 @@
 					<i class="fa-solid fa-shield-halved"></i>
 					<span>Change password</span>
 				</div>
+				<div class="item" (click)="logout()">
+					<i class="fa-solid fa-arrow-right-from-bracket"></i>
+					<span>logout</span>
+				</div>
 			</div>
-		</div>
-		<div class="logout-btn" (click)="logout()">
-			<p>Logout</p>
-			<i class="fa-solid fa-arrow-right-from-bracket"></i>
 		</div>
 
 	</div>

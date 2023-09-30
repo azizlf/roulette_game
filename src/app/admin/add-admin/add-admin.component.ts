@@ -91,6 +91,16 @@ export class AddAdminComponent implements OnInit {
       }
       
     }
+    else{
+      this.element = document.querySelector(".error-msg-box")
+      this.errorMsg = "All fields are required"
+      this.element.style.opacity = "1"
+      this.element.style.top = "4%"
+      setTimeout(()=>{
+        this.element.style.opacity = "0"
+        this.element.style.top = "0%"
+      },3000)
+    }
 
     
 

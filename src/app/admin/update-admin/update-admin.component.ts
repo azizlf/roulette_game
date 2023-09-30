@@ -24,8 +24,8 @@ export class UpdateAdminComponent implements OnInit {
 
   }
   element:any
-  formHasConnectionProblem = false
-  formIsValidate = false
+  errorMsg:any
+  successMsg:any
 
   constructor(private userService:UsersService,private route: ActivatedRoute) { }
   
@@ -70,30 +70,49 @@ export class UpdateAdminComponent implements OnInit {
 
     this.userService.updateAdmin(this.requestUpdateInfos).subscribe((res:any)=>{
       
-
-      if(res.message){
-        this.element = document.querySelector(".success-msg-box")
-        setTimeout(()=>{
-          this.element.style.opacity = "1"
-          this.element.style.top = "4%"
-          this.isLoadingForm = false
-          setTimeout(()=>{
-            this.element.style.opacity = "0"
-            this.element.style.top = "0%"
-          },3000)
-        },700)
-      }else{
+      if(this.requestUpdateInfos.name==="" || this.requestUpdateInfos.lastName==="" || this.requestUpdateInfos.pseudoName===""
+      || this.requestUpdateInfos.teleAdmin==="" || this.requestUpdateInfos.solde===""
+      ){
         this.element = document.querySelector(".error-msg-box")
+        this.isLoadingForm = false
+        this.element.style.opacity = "1"
+        this.element.style.top = "4%"
+        this.errorMsg = "All fields are required"
         setTimeout(()=>{
-          this.element.style.opacity = "1"
-          this.element.style.top = "4%"
-          this.isLoadingForm = false
+          this.element.style.opacity = "0"
+          this.element.style.top = "0%"
+        },3000)
+
+      }else{
+
+        if(res.message){
+          this.element = document.querySelector(".success-msg-box")
           setTimeout(()=>{
-            this.element.style.opacity = "0"
-            this.element.style.top = "0%"
-          },3000)
-        },700)
+            this.element.style.opacity = "1"
+            this.element.style.top = "4%"
+            this.successMsg = "saved succussfully"
+            this.isLoadingForm = false
+            setTimeout(()=>{
+              this.element.style.opacity = "0"
+              this.element.style.top = "0%"
+            },3000)
+          },700)
+        }else{
+          this.element = document.querySelector(".error-msg-box")
+          setTimeout(()=>{
+            this.element.style.opacity = "1"
+            this.element.style.top = "4%"
+            this.errorMsg = "Something wrong!"
+            this.isLoadingForm = false
+            setTimeout(()=>{
+              this.element.style.opacity = "0"
+              this.element.style.top = "0%"
+            },3000)
+          },700)
+        }
+
       }
+      
 
     })
 

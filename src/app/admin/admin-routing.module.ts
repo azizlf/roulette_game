@@ -25,10 +25,6 @@ const routes: Routes = [
         loadChildren: () => import('./user-history/user-history.module').then(m => m.UserHistoryModule),
       },
       {
-        path:"user/history/:adminId/:userId",
-        loadChildren: () => import('./user-history/user-history.module').then(m => m.UserHistoryModule),
-      },
-      {
         path:"settings",
         loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule),
       },

@@ -22,7 +22,8 @@ export class UsersService {
   user = {
 
     type:"",
-    id:""
+    id:"",
+    token:""
 
   }
 
@@ -93,6 +94,10 @@ export class UsersService {
 
     return this.http.delete(this.userApi+"/"+id)
 
+  }
+
+  loginUser(data:any){
+    return this.http.post(this.userAuth+"/",data)
   }
 
 

@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthComponent } from './auth.component';
+import { PlayerAuthComponent } from './player-auth.component';
 
 const routes: Routes = [
 
   {
     path:"",
-    component:AuthComponent
+    component:PlayerAuthComponent
   }
 
 ];
@@ -15,4 +15,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AuthRoutingModule { }
+export class PlayerAuthRoutingModule { }

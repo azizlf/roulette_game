@@ -1,0 +1,14 @@
+<div class="login-page-player">
+	<div class="form">
+		<div class="content" [formGroup]="userDetails">
+			<div class="title">login</div>
+			<div class="sb">Please enter your login and password!</div>
+			<input type="text" placeholder="Login" formControlName="login"/>
+			<br>
+			<input type="password" placeholder="Password" formControlName="password">
+			<br>
+			<button (click)="login()">Login</button>
+			<br>
+		</div>
+	</div>
+</div>

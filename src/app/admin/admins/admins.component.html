@@ -26,7 +26,8 @@
 			<div class="it">{{admin.solde}}</div>
 			<div class="it">{{admin.prencentage}}%</div>
 			<div class="it">{{admin.teleAdmin}}</div>
-			<div class="it link">{{admin.Listejoueurs.length}}<i class="fa-solid fa-eye" (click)="openUserForAdmin(admin)" ></i></div>
+			<div class="it link">
+				<i class="fa-solid fa-eye" style="padding: 6% 5%;" (click)="openUserForAdmin(admin)" ></i></div>
 			<div class="it">
 				<div class="status-account" *ngIf="admin.status">
 					<i class="fa-solid fa-circle" style="color:#0dd20d;"></i>

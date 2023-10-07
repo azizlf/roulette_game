@@ -19,9 +19,20 @@ export class PlayerHistoryComponent implements OnInit {
 
     this.usersService.findUser(id).subscribe((res:any)=>{
 
-      this.history = res.tikets
+      this.history = []
 
-      console.log(res)
+
+      res.tikets.forEach((tiket:any)=>{
+
+        if(!tiket.realTime){
+          
+          this.history.push(tiket)
+
+        }
+
+
+      })
+
 
       var interval = setInterval(()=>{
         if(this.history != "nothing"){

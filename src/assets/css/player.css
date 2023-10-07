@@ -1472,7 +1472,7 @@
 
 }
 
-.container-app .main .history-user{
+.history-player{
 
 	width: 100%;
 	height: 100%;
@@ -1482,7 +1482,7 @@
 
 }
 
-.container-app .main .history-user .nav-bar{
+.history-player .nav-bar{
 
 	width: 100%;
 	height: 7%;
@@ -1495,7 +1495,7 @@
 	z-index: 5262565926;
 }
 
-.container-app .main .history-user .nav-bar .return-btn{
+.history-player .return-btn{
 
 	margin-right: 5%;
 	cursor: pointer;
@@ -1507,22 +1507,6 @@
 
 }
 
-.container-app .main .history-user .nav-bar .user-details{
-
-	font-weight: 600;
-	font-size: 1.3vw;
-	margin-right: 2%;
-
-}
-
-.history-player{
-
-	width: 100%;
-	height: 93%;
-	overflow: hidden;
-	overflow-y: auto;
-
-}
 
 .history-player .history-list{
 

@@ -24,26 +24,33 @@ export class UserHistoryComponent implements OnInit {
     this.usersService.findUser(id).subscribe((res:any)=>{
 
       this.balance = res.solde+""
-      this.history = [
-        {
-          numero:123145615234561,
-          solde:15.4,
-          gagnion:true
-        },
-        {
-          numero:978915231056556,
-          solde:25.5,
-          gagnion:false
-        }
-      ]//res.tiket
-      var interval = setInterval(()=>{
-        if(this.history != "nothing"){
-          setTimeout(()=>{
-            this.isLoading = false
-            clearInterval(interval)
-          },150)
-        }
-      },2)
+      
+      this.usersService.findUser(id).subscribe((res:any)=>{
+
+        this.history = []
+
+
+        res.tikets.forEach((tiket:any)=>{
+
+          if(!tiket.realTime){
+            
+            this.history.push(tiket)
+
+          }
+
+
+        })
+
+        var interval = setInterval(()=>{
+          if(this.history != "nothing"){
+            setTimeout(()=>{
+              this.isLoading = false
+              clearInterval(interval)
+            },150)
+          }
+        },2)
+
+      })
 
     })
 

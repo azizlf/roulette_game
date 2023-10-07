@@ -204,7 +204,7 @@ export class SpinWheelComponent implements OnInit {
   choosedAngle = 0
 
   totalRotations = 0
-  rotationsToStop = 60
+  rotationsToStop = 30
   isSpinning = true
 
   wheel:any
@@ -213,7 +213,7 @@ export class SpinWheelComponent implements OnInit {
 
   spinStartTime = 0
 
-  time = 100
+  time = 120
 
   element:any
 
@@ -293,9 +293,16 @@ export class SpinWheelComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    var rotation = 0
+
     setTimeout(()=>{
       SpinWheelEvents()
       this.spinToAngle(7)
+      setInterval(()=>{
+        rotation++
+        console.log("rotation : "+rotation)
+      },1000)
     },5000)
   }
 

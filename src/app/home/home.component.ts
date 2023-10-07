@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , NgZone} from '@angular/core';
+import { interval } from 'rxjs';
+import { takeWhile } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { TiketService } from '../services/tiket.service'
 import { UsersService } from '../services/users.service'
@@ -13,7 +15,7 @@ declare function initFnHome():void
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router: Router,private tiketService:TiketService,private rouletteService:RouletteService,private users:UsersService) { }
+  constructor(private router: Router,private ngZone: NgZone,private tiketService:TiketService,private rouletteService:RouletteService,private users:UsersService) { }
 
   userDetails = {
 
@@ -22,7 +24,7 @@ export class HomeComponent implements OnInit {
     login:""
 
   }
-
+  isLooping = false
   userSolde = 0
 
   tikets:any = []
@@ -469,6 +471,32 @@ export class HomeComponent implements OnInit {
   }
 
 
+  startCheck() {
+    
+    this.isLooping = true
+    
+    this.ngZone.runOutsideAngular(() => {
+    
+      interval(1000) 
+    
+        .pipe(
+    
+          takeWhile(() => this.isLooping)
+    
+        )
+     
+        .subscribe(() => {
+    
+          console.log("hh")
+     
+          this.ngZone.run(() => {});
+   
+        });
+   
+    });
+
+  }
+
   ngOnInit(): void {
 
     if(this.users.user.id === ""){
@@ -479,20 +507,21 @@ export class HomeComponent implements OnInit {
 
       this.spinStart = this.rouletteService.spinOpen
 
-      setTimeout(()=>{
-        
-        this.spinStart = true
+      setInterval(()=>{
+        if(this.rouletteService.spinOpen){
+          
+          this.spinStart = true
 
-        this.rouletteService.spinOpen = true
+          var interval = setInterval(()=>{
+            if(!this.rouletteService.spinOpen){
+              this.spinStart = false
+              clearInterval(interval)
+            }
+          })
+        }
+      },1000)
 
-        var interval = setInterval(()=>{
-          if(!this.rouletteService.spinOpen){
-            //this.spinStart = false
-            clearInterval(interval)
-          }
-        })
-
-      },1500000000000)
+      //this.startCheck()
 
       this.getUser()
 

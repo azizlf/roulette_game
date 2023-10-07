@@ -55,6 +55,9 @@ export class AddUserComponent implements OnInit {
 
 
         if(res.message){
+
+          this.updateAdminSolde(this.userService.user.id,request.solde)
+
           this.element = document.querySelector(".success-msg-box")
           setTimeout(()=>{
             this.element.style.opacity = "1"
@@ -95,7 +98,22 @@ export class AddUserComponent implements OnInit {
 
   }
 
+  updateAdminSolde(id:any,solde:any){
 
+    this.userService.findAdmin(id).subscribe((res:any)=>{
+
+
+      var result = res.solde - solde
+
+      const req = {
+        solde: result,
+        id:this.userService.user.id
+      }
+      this.userService.updateAdmin(req).subscribe()
+      
+    })
+
+  }
 
   ngOnInit(): void {
   }

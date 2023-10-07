@@ -16,6 +16,10 @@ const routes: Routes = [
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
   },
   {
+    path:"history",
+    loadChildren: () => import('./player-history/player-history.module').then(m => m.PlayerHistoryModule),
+  },
+  {
     path:"**",
     loadChildren: () => import('./notfoundpage/notfoundpage.module').then(m => m.NotfoundpageModule),
   }

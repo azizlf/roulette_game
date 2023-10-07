@@ -1,0 +1,29 @@
+<div class="history-player">
+	
+	<div class="nav-bar">
+		<div class="return-btn" routerLink="/admin/management/users">
+			<i class="fa-solid fa-arrow-left"></i>
+		</div>
+	</div>
+	<div class="content-history-page" *ngIf="!isLoading">
+		<div class="history-list">
+			<div class="head-list">
+				<div class="it">#</div>
+				<div class="it">Amount</div>
+				<div class="it">Status</div>
+			</div>
+			<div class="item" *ngFor="let item of history">
+				<div class="it">{{item._id}}</div>
+				<div class="it">{{item.solde}}</div>
+				<div class="it" style="color:green;" *ngIf="item.gagnion">WIN</div>
+				<div class="it" style="color:red;" *ngIf="!item.gagnion">LOSE</div>
+			</div>
+		</div>
+	</div>
+	<div class="loading-ellipsis" *ngIf="isLoading">
+		<div class="r1"></div>
+		<div class="r2"></div>
+		<div class="r3"></div>
+	</div>
+
+</div>

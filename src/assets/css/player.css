@@ -231,6 +231,7 @@
 	display: flex;
 	align-items: center;
 	border-top: .1vw solid #dedede;
+	position: relative;
 
 }
 
@@ -241,7 +242,6 @@
 	align-items: center;
 	justify-content: center;
 	font-size: 1.1vw;
-	position: relative;
 
 }
 
@@ -255,14 +255,15 @@
 .dashbord-app .content-dash-page .tikets .list-tikets .item-list .item .hint{
 
 	background-color: #272626d1;
-	position: fixed;
-	top: 28%;
+	position: absolute;
+	margin-top: 17%;
 	color: white;
-	padding: .5%;
+	padding: 1.5%;
 	letter-spacing: .2vw;
-	right: 2%;
+	right: 1.5%;
 	opacity: 0;
 	pointer-events: none;
+	z-index: 1564565;
 
 }
 
@@ -1468,5 +1469,107 @@
 	background-position: center;
 	z-index: 1256526332;
 	pointer-events: none;
+
+}
+
+.container-app .main .history-user{
+
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background-color: white;
+
+}
+
+.container-app .main .history-user .nav-bar{
+
+	width: 100%;
+	height: 7%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background-color: white;
+	box-shadow: 0 0 .5vw 0 #00000033;
+	position: relative;
+	z-index: 5262565926;
+}
+
+.container-app .main .history-user .nav-bar .return-btn{
+
+	margin-right: 5%;
+	cursor: pointer;
+	padding: .7% 1%;
+	border-radius: 100%;
+	color: #4c4c4c;
+	font-size: 1.5vw;
+	margin-left: 1%;
+
+}
+
+.container-app .main .history-user .nav-bar .user-details{
+
+	font-weight: 600;
+	font-size: 1.3vw;
+	margin-right: 2%;
+
+}
+
+.history-player{
+
+	width: 100%;
+	height: 93%;
+	overflow: hidden;
+	overflow-y: auto;
+
+}
+
+.history-player .history-list{
+
+	background-color: white;
+	box-shadow: 0 0 0.5vw 0 #0000002b;
+	margin: 1% 3%;
+	padding: 2%;
+
+}
+
+
+.history-player .head-list{
+
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	padding: 1% 0;
+
+}
+
+.history-player .head-list .it{
+
+	width: 50%;
+	font-size: 1.2vw;
+	text-align: center;
+	font-weight: 600;
+
+}
+
+
+
+.history-player .item{
+
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	padding: 1% 0;
+	border-top: .1vw solid #d4d4d4;
+
+}
+
+.history-player .item .it{
+
+	width: 50%;
+	font-size: 1.2vw;
+	text-align: center;
 
 }

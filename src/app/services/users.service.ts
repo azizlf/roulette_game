@@ -23,7 +23,8 @@ export class UsersService {
 
     type:"",
     id:"",
-    token:""
+    token:"",
+    solde:0
 
   }
 

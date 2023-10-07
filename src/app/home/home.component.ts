@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TiketService } from '../services/tiket.service'
 import { UsersService } from '../services/users.service'
+import { RouletteService } from '../services/roulette.service'
+
+declare function initFnHome():void
 
 @Component({
   selector: 'app-home',
@@ -10,7 +13,17 @@ import { UsersService } from '../services/users.service'
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router: Router,private tiketService:TiketService,private users:UsersService) { }
+  constructor(private router: Router,private tiketService:TiketService,private rouletteService:RouletteService,private users:UsersService) { }
+
+  userDetails = {
+
+    name:"",
+    solde:0,
+    login:""
+
+  }
+
+  userSolde = 0
 
   tikets:any = []
   conditions:any = []
@@ -24,6 +37,8 @@ export class HomeComponent implements OnInit {
 
   currentCoinSelected = this.coins[0]
 
+  spinStart:any
+
   initTikets(){
 
     this.element = document.querySelector(".list-tikets")
@@ -31,19 +46,41 @@ export class HomeComponent implements OnInit {
     this.element.innerHTML = ""
 
     this.tikets.forEach((tiket:any)=>{
+      
+      var container = document.createElement("div")
+      var number = document.createElement("div")
+      var hint = document.createElement("div")
+      var solde = document.createElement("div")
+      var coefficient = document.createElement("div")
 
-      var html = `<div class="item-list">
-              <div class="item number">
-                <div class="hint">${tiket.number}</div>
-                <p>${tiket.number}</p>
-              </div>
-              <div class="item"><p>${tiket.solde}</p></div>
-              <div class="item"><p>x${tiket.coefficient}</p></div>
-            </div>`
+      container.setAttribute("class","item-list")
+      number.setAttribute("class","item number")
+      hint.setAttribute("class","hint")
+      solde.setAttribute("class","item")
+      coefficient.setAttribute("class","item")
+
+
+      hint.innerHTML = tiket._id
+      solde.innerHTML = `<p>${tiket.solde}</p>`
+      coefficient.innerHTML = `<p>x${tiket.coefficient}</p>`
+
+      number.innerHTML = `<p>${tiket._id}</p>`
+      number.appendChild(hint)
+
+      number.addEventListener("mouseover",()=>{
+        this.showHint(hint)
+      })
+      number.addEventListener("mouseleave",()=>{
+        this.hideHint(hint)
+      })
+
+      container.appendChild(number)
+      container.appendChild(solde)
+      container.appendChild(coefficient)
 
       
 
-      this.element.innerHTML += html
+      this.element.appendChild(container)
 
     })
 
@@ -235,44 +272,52 @@ export class HomeComponent implements OnInit {
       if(soldeList[i] < soldeMin){
         
         soldeMin = soldeList[i]
+
       }
       if(soldeList[i] > soldeMax){
         
         soldeMax = soldeList[i]
+
       }
     }
 
+    var newSolde = this.userDetails.solde - solde
+
     var request = {
-      conditions:this.conditions,
-      solde:solde,
-      coefficient:36,
-      gagnion:false,
-      realTime:true,
-      soldeMax:soldeMax,
-      SoldeMin:soldeMin,
-      joueur:this.users.user.id
+      ticket:{
+        condition:this.conditions,
+        solde:solde,
+        coefficient:36,
+        gagnion:false,
+        realTime:true,
+        soldeMax:soldeMax,
+        SoldeMin:soldeMin,
+        joueur:this.users.user.id
+      },
+      joueur:{    
+        solde:newSolde,
+        id:this.users.user.id
+      }
     }
 
-    if(solde > 0){
 
-      
+    if(solde > 0){
       
       this.tiketService.create(request).subscribe((res:any)=>{
 
         if(res.message){
 
-          this.tikets.push({
-            conditions:this.conditions,
-            solde:solde,
-            coefficient:36,
-            number:res.joueur
-          })
+          this.conditions = []
 
           this.element = document.querySelector(".create-tiket")
 
           this.element.style.display = "none"
 
-          this.initTikets()
+          this.getUser()
+
+          this.userSolde = newSolde
+
+          this.cancelEventFromBtns()
 
         }
 
@@ -292,29 +337,7 @@ export class HomeComponent implements OnInit {
     
     this.conditions = []
 
-    this.element = document.querySelectorAll(".clicked-btn")
-
-    if(this.element != null){
-      
-      for (var i = 0; i < this.element.length; i++) {
-
-        this.element[i].classList.remove("clicked-btn")
-
-      }
-      
-    }
-
-    this.element = document.querySelector(".clicked")
-
-    if(this.element != null){
-      
-      for (var i = 0; i < this.element.length; i++) {
-
-        this.element[i].classList.remove("clicked")
-
-      }
-
-    }
+    this.cancelEventFromBtns()
     
     this.element = document.querySelector(".create-tiket")
 
@@ -335,7 +358,7 @@ export class HomeComponent implements OnInit {
 
       if(item.condition_id === elet.id){
         item.btn.target.classList.remove("clicked-btn")
-        item.btn.target.style.backgroundColor = "transparent"
+        item.btn.target.classList.remove("clicked")
 
         item.btn.target.onmouseover = ()=>{
 
@@ -377,60 +400,113 @@ export class HomeComponent implements OnInit {
 
   }
 
+  getUser(){
 
-  exitFullscreen() {
+    this.tikets = []
 
-    this.doc = document.documentElement
-
-    if (this.doc.exitFullscreen) {
-      this.doc.exitFullscreen()
-    } else if (this.doc.mozCancelFullScreen) {
-      this.doc.mozCancelFullScreen()
-    } else if (this.doc.webkitExitFullscreen) {
-      this.doc.webkitExitFullscreen()
-    } else if (this.doc.msExitFullscreen) {
-      this.doc.msExitFullscreen()
-    }
-  }
-
-  requestFullscreen() {
+    this.users.findUser(this.users.user.id).subscribe((res:any)=>{
       
-    this.element = document.querySelector(".application")
-    this.doc = document.documentElement
+      this.userDetails.name = res.name+""+res.lastName
+      this.userDetails.login = res.login
+      this.userDetails.solde = parseFloat(res.solde)
+      this.userSolde = parseFloat(res.solde)
 
-    if (this.doc.requestFullscreen) {
-      this.element.requestFullscreen()
-    } else if (this.doc.mozRequestFullScreen) {
-      this.element.mozRequestFullScreen()
-    } else if (this.doc.webkitRequestFullscreen) {
-      this.element.webkitRequestFullscreen()
-    } else if (this.doc.msRequestFullscreen) {
-      this.element.msRequestFullscreen()
-    }
+      for (var i = res.tikets.length - 1 ; i >= 0; i--) {
+        if(res.tikets[i].realTime){
+          this.tikets.push(res.tikets[i])
+        }
+
+      }
+
+      this.initTikets()
+
+    })
+
+  }
+
+  logout(){
+
+    this.users.user.id = ""
+    this.router.navigate(['/'])
 
   }
 
-  fullScreen(){
+  cancelEventFromBtns(){
 
-    this.doc = document.documentElement
+    this.element = document.querySelectorAll(".clicked-btn")
 
-    if (this.doc.fullscreenElement || this.doc.webkitFullscreenElement || this.doc.mozFullScreenElement || this.doc.msFullscreenElement) {
-      this.exitFullscreen()
-    } else {
-      this.requestFullscreen()
+    if(this.element != null){
+      
+      for (var i = 0; i < this.element.length; i++) {
+
+        this.element[i].classList.remove("clicked-btn")
+
+      }
+      
     }
 
+    this.element = document.querySelector(".clicked")
+
+    if(this.element != null){
+      
+      for (var i = 0; i < this.element.length; i++) {
+
+        this.element[i].classList.remove("clicked")
+
+      }
+
+    }
+
+
   }
+
+  showHint(hint:any){
+    hint.style.opacity = "1"
+  }
+
+  hideHint(hint:any){
+    hint.style.opacity = "0"
+  }
+
 
   ngOnInit(): void {
 
-    setTimeout(()=>{
+    if(this.users.user.id === ""){
 
-      this.element = document.querySelector(".coin-"+this.currentCoinSelected)
+      this.router.navigate(['/'])
 
-      this.element.style.scale = "1.2"
+    }else{
 
-    },100)
+      this.spinStart = this.rouletteService.spinOpen
+
+      setTimeout(()=>{
+        
+        this.spinStart = true
+
+        this.rouletteService.spinOpen = true
+
+        var interval = setInterval(()=>{
+          if(!this.rouletteService.spinOpen){
+            //this.spinStart = false
+            clearInterval(interval)
+          }
+        })
+
+      },1500000000000)
+
+      this.getUser()
+
+      setTimeout(()=>{
+
+        this.element = document.querySelector(".coin-"+this.currentCoinSelected)
+
+        this.element.style.scale = "1.2"
+
+      },100)
+
+      initFnHome()
+
+    }
 
   }
 

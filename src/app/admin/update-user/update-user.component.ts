@@ -119,8 +119,6 @@ export class UpdateUserComponent implements OnInit {
   changeSolde(amount:any,op:any){
 
     if(op === "+"){
-
-      console.log(amount.value,this.adminSolde)
       
       if(this.userService.user.type === "admin"){
         if(parseFloat(amount.value) < this.adminSolde){

@@ -1,0 +1,551 @@
+.spin-app{
+
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: black;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	display: flex;
+	align-items: center;
+	overflow: hidden;
+
+}
+
+.spin-app .logos{
+
+	width: 20%;
+	height: 100%;
+
+}
+
+.spin-app .fullScreenBtnSpin{
+	
+    position: absolute;
+    top: 5%;
+    left: 3%;
+    font-size: 3vw;
+    color: white;
+    cursor: pointer;
+
+}
+
+.spin-app .spin-section{
+
+	width: 60%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+}
+
+.spin-app .spin-section .spin-ctn{
+
+	width: 74%;
+	padding: 37% 0;
+	margin-top: -5%;
+	position: relative;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.spin-app .spin-section .spin-ctn .spin{
+
+	width: 88%;
+	position: absolute;
+	animation: rotateAni 35s;
+
+}
+
+
+@keyframes rotateAnim{
+
+	0%{
+
+		rotate: -5856deg;
+
+	}
+
+}
+
+
+.spin-app .spin-section .center-circle-pointer{
+
+	width: 43%;
+	height: 50%;
+	position: absolute;
+	background-position: center;
+	background-position-y: 185%;
+	background-repeat: no-repeat;
+	background-size: cover;
+	z-index: 5;
+	scale: .6;
+}
+
+.spin-app .spin-section .center-pointer{
+
+	width: 12%;
+	height: 20%;
+	top: -5%;
+	scale: .5;
+	position: absolute;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	z-index: 5;
+}
+
+.spin-app .spin-section .indicator-number{
+
+	position: absolute;
+	width: 23%;
+	height: 23%;
+	border-radius: 100%;
+	background-color: #2cc93b;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 4.5vw;
+	color: white;
+	z-index: 8;
+	margin-top: 3.3%;
+	transition: transform 1s , margin 1s;
+
+}
+
+
+.spin-app .dashbord{
+
+	width: 24%;
+	height: 100%;
+	background-color: #00000063;
+
+}
+
+
+.spin-app .dashbord .flex-tables{
+
+	width: 100%;
+	height: 30%;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+
+}
+
+.spin-app .dashbord .flex-tables .section{
+
+	width: 45%;
+
+}
+
+.spin-app .dashbord .flex-tables .section .title{
+
+	text-align: center;
+	font-size: 1vw;
+	color: white;
+	font-weight: 600;
+	text-transform: uppercase;
+	margin-top: 2%;
+
+}
+
+.spin-app .dashbord .flex-tables .section .table{
+
+	width: 100%;
+	margin-top: 3%;
+	border: .1vw solid white;
+	border-radius: .3vw;
+	overflow: hidden;
+}
+
+.spin-app .dashbord .flex-tables .section .table .ligne{
+
+	width: 100%;
+	display: flex;
+	align-items: center;
+	color: white;
+	border-bottom: .1vw solid white;
+
+}
+
+
+
+.spin-app .dashbord .flex-tables .section .table .ligne .ttl{
+
+	width: 75%;
+	padding-left: 8%;
+	text-transform: uppercase;
+	font-weight: 600;
+	font-size: .9vw;
+
+}
+
+.spin-app .dashbord .flex-tables .section .table .ligne .numbers{
+
+	width: 25%;
+	text-align: center;
+
+}
+
+.spin-app .dashbord .flex-tables .section .table .ligne .numbers .nbr{
+
+	padding: 14% 0;
+	background-color: #545a5f;
+	border: .1vw solid white;
+	border-right: none;
+	border-top: none;
+	font-size: 1vw;
+	position: relative;
+
+}
+
+
+
+.spin-app .dashbord .flex-tables .section .table .ligne .numbers .nbr.red{
+	background-color: #d90b24;
+}
+
+.spin-app .dashbord .flex-tables .section .table .ligne .numbers .nbr.black{
+	background-color: #181818;
+}
+
+.spin-app .dashbord .flex-tables .section .table .ligne .numbers .nbr.green{
+	background-color: #4b9f13;
+}
+
+.spin-app .dashbord .flex-tables .section .table .ligne .numbers .nbr.end{
+
+	border-bottom: none;
+
+}
+
+.spin-app .dashbord .flex-tables .section .table .ligne.grd .nbr{
+
+	padding: 22% 0;
+
+}
+
+.spin-app .dashbord .flex-tables .section.hist .table .ligne .numbers .nbr{
+
+	padding: 7%;
+
+}
+
+.spin-app .dashbord .flex-tables .section.hist .table .ligne .ttl{
+
+	font-size: .8vw;
+
+}
+
+.spin-app .dashbord .statistics{
+
+	width: 94%;
+	height: 68%;
+	margin: 0 3%;
+	margin-top: 1%;
+
+}
+
+.spin-app .dashbord .statistics .title{
+
+	text-align: center;
+	font-size: 1vw;
+	color: white;
+	font-weight: 600;
+	text-transform: uppercase;
+
+}
+
+.spin-app .dashbord .statistics .table{
+
+	width: 100%;
+	height: 96%;
+	margin-top: 1%;
+	border: .1vw solid white;
+	border-radius: .3vw;
+	overflow: hidden;
+	position: relative;
+}
+
+.spin-app .dashbord .statistics .table .content-table{
+
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+
+}
+
+
+.spin-app .dashbord .statistics .table .ttl{
+
+	font-size: .8vw;
+	font-weight: 600;
+	color: white;
+	padding: 3%;
+	padding-bottom: 0;
+	text-transform: uppercase;
+
+}
+
+.spin-app .dashbord .statistics .table .content-table .lignes-container{
+
+	border: .1vw solid white;
+	border-radius: .2vw;
+	width: 93%;
+	height: 49%;
+	margin: 0 3%;
+	margin-top: 2%;
+	overflow: hidden;
+
+}
+
+.spin-app .dashbord .statistics .table .content-table .ligne-nbrs{
+
+	width: 100%;
+	height: 7.9%;
+	display: flex;
+	align-items: center;
+	overflow: hidden;
+	color: white;
+	font-size: .8vw;
+	border-top: .1vw solid white;
+
+}
+
+.spin-app .dashbord .statistics .table .content-table .ligne-nbrs.start{
+
+	border: none;
+
+}
+
+
+.spin-app .dashbord .statistics .table .content-table .ligne-nbrs .key{
+
+	width: 10%;
+	height: 100%;
+	text-align: center;
+	background-color: red;
+	border-left: .1vw solid white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+}
+
+.spin-app .dashbord .statistics .table .content-table .ligne-nbrs .key.red{
+
+	background-color: #d90b24;
+
+}
+
+.spin-app .dashbord .statistics .table .content-table .ligne-nbrs .key.black{
+
+	background-color: #181818;
+
+}
+
+
+.spin-app .dashbord .statistics .table .content-table .ligne-nbrs .value{
+
+	width: 24%;
+	height: 100%;
+	text-align: center;
+	border-left: .1vw solid white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+}
+
+.spin-app .dashbord .statistics .table .content-table .ligne{
+
+	color: white;
+	width: 93%;
+	height: 6%;
+	margin: 0 3%;
+	display: flex;
+	align-items: center;
+	border: .1vw solid white;
+	margin-top: 1%;
+	font-size: 1vw;
+	border-radius: .3vw;
+	overflow: hidden;
+
+}
+
+.spin-app .dashbord .statistics .table .content-table .ligne .key{
+
+	width: 17%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #5c5f63;
+	border-left: .1vw solid white;
+
+
+}
+
+.spin-app .dashbord .statistics .table .content-table .ligne .value{
+
+	width: 20%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-left: .1vw solid white;
+
+}
+
+.spin-app .dashbord .statistics .table .content-table .ligne.tg .key{
+
+	width: 34%;
+	border-left: .1vw solid white;
+
+}
+
+.spin-app .dashbord .statistics .table .content-table .ligne .key.red{
+
+	background-color: #d90b24;
+
+}
+
+.spin-app .dashbord .statistics .table .content-table .ligne .key.black{
+
+	background-color: #181818;
+
+}
+
+.spin-app .dashbord .statistics .table .content-table .ligne .key.green{
+
+	background-color: #4b9f13;
+
+}
+
+.spin-app .dashbord .statistics .table .content-table .ligne.hc{
+
+	border-radius: .2vw;
+
+}
+
+.spin-app .dashbord .statistics .table .content-table .ligne.hc .key{
+
+	width: 15%;
+	border-left: .1vw solid white;
+
+
+}
+
+.spin-app .dashbord .statistics .table .content-table .ligne.hc .tl{
+
+	width: 20%;
+	font-weight: 600;
+	text-transform: uppercase;
+	justify-content: left;
+	padding-left: 5%;
+
+}
+
+.spin-app .total-bets{
+
+	width: 10%;
+	color: white;
+	text-align: center;
+	border-radius: .5vw;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	scale: 1;
+	padding: 1% 0;
+	padding-bottom: .6%;
+	display: flex;
+	justify-content: center;
+	background-color: #00000082;
+	position: absolute;
+	top: 0;
+	right: 25%;
+
+}
+
+.spin-app .total-bets .content{
+
+	width: 90%;
+	padding: 5% 0;
+	height: 30%;
+	font-size: 1vw;
+	font-weight: 600;
+	border-radius: .3vw;
+	background-color: #00000061;
+
+}
+
+.spin-app .user-details{
+
+	width: 30%;
+	color: white;
+	position: absolute;
+	bottom: 5%;
+	left: 3%;
+	font-weight: 600;
+	font-size: 1.2vw;
+
+}
+
+.spin-app .user-details img{
+
+	width: 30%;
+	margin-bottom: 2%;
+
+}
+
+.spin-app .jackpot-section{
+
+	width: 16%;
+	padding: .5% 0;
+	text-align: center;
+	background: green;
+	position: absolute;
+	border: .4vw solid #e1c463;
+	border-radius: .6vw;
+	font-size: 1.1vw;
+	line-height: 1.8vw;
+	text-transform: uppercase;
+	left: 3%;
+	color: white;
+
+}
+
+.spin-app .jackpot-section span{
+
+	font-size: 1.5vw;
+	font-weight: 600;
+	color: white;
+
+}
+
+.spin-app .jackpot-section.blue{
+
+	background-color: #195f99;
+	top: 30%;
+}
+
+.spin-app .jackpot-section.red{
+
+	background-color: #b3090a;
+}
+
+@media screen and (max-width:950px){
+	.spin-app .dashbord .statistics .table .content-table .ligne-nbrs{
+		height: 7.9%;
+	}
+}

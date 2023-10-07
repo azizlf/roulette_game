@@ -13,7 +13,7 @@ export class TiketService {
 
   create(data:any){
 
-    return this.http.post(this.api+"/addTicket",data)
+    return this.http.post(this.api+"/addTicket/"+data.joueur.id,data)
 
   }
 

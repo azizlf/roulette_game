@@ -638,7 +638,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if(this.users.user.id === ""){
+    if(this.users.user.id != ""){
 
       this.router.navigate(['/'])
 

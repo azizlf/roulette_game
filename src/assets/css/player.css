@@ -635,6 +635,12 @@
 
 }
 
+.dashbord-app .content-dash-page .table .table-nbrs .tbl .multi-selection-container.msc3{
+
+	left: 36.7%;
+
+}
+
 .dashbord-app .content-dash-page .table .table-nbrs .tbl .multi-selection-container.msc{
 
 	left: 16.7%;
@@ -649,8 +655,24 @@
 	position: absolute;
 	z-index: 4561453;
 	background-color: yellow;
-	opacity: 0;
+	opacity: 1;
+
+}
+
+.dashbord-app .content-dash-page .table .table-nbrs .tbl .multiselect img{
+
+	position: absolute;
+	width: 70%;
 	pointer-events: none;
+	opacity: 0;
+	left: 15%;
+	top: -380%;
+
+}
+
+.dashbord-app .content-dash-page .table .table-nbrs .tbl .multiselect.clicked-btn img{
+
+	opacity: 1;
 
 }
 
@@ -658,6 +680,12 @@
 
 	left: 29%;
 	rotate: 90deg;
+}
+
+.dashbord-app .content-dash-page .table .table-nbrs .tbl .multiselect.middle-nbr.left-right.left{
+
+	left: -20%;
+
 }
 
 .dashbord-app .content-dash-page .table .table-nbrs .tbl .multiselect.middle-nbr.left-right.bottom{
@@ -681,7 +709,8 @@
 
 .dashbord-app .content-dash-page .table .table-nbrs .tbl .multiselect.middle-nbr.top-bottom{
 
-	width: 35%;
+	width: 40%;
+	padding: 2% 0;
 
 }
 
@@ -699,13 +728,13 @@
 
 .dashbord-app .content-dash-page .table .table-nbrs .tbl .multiselect.middle-nbr.top-bottom.left{
 
-	left: 7%;
+	left: 5%;
 
 }
 
 .dashbord-app .content-dash-page .table .table-nbrs .tbl .multiselect.middle-nbr.top-bottom.right{
 
-	right: 7%;
+	right: 5%;
 
 }
 
@@ -719,69 +748,12 @@
 
 }
 
-.dashbord-app .content-dash-page .table .table-nbrs .tbl .multiselect.rounded.middle-bottom-right{
+.dashbord-app .content-dash-page .table .table-nbrs .tbl .multiselect.rounded img{
 
-	bottom: 27%;
-	left: 40%;
-
-}
-
-.dashbord-app .content-dash-page .table .table-nbrs .tbl .multiselect.rounded.bottom-middle-left{
-
-	bottom: 35%;
-	left: 40%;
+	width: 400%;
 
 }
 
-.dashbord-app .content-dash-page .table .table-nbrs .tbl .multiselect.rounded.left-middle-bottom{
-
-	bottom: 35%;
-	left: 51%;
-
-}
-
-.dashbord-app .content-dash-page .table .table-nbrs .tbl .multiselect.rounded.middle-bottom-left{
-
-	bottom: 27%;
-	left: 51%;
-
-}
-
-.dashbord-app .content-dash-page .table .table-nbrs .tbl .multiselect.rounded.top-bottom-right{
-
-	top: 35%;
-	left: 40%;
-
-}
-
-.dashbord-app .content-dash-page .table .table-nbrs .tbl .multiselect.rounded.bottom-top-left{
-
-	top: 35%;
-	left: 51%;
-
-}
-
-.dashbord-app .content-dash-page .table .table-nbrs .tbl .multiselect.rounded.bottom-top-right{
-
-	top: 26%;
-	left: 51%;
-
-}
-
-.dashbord-app .content-dash-page .table .table-nbrs .tbl .multiselect.rounded.bottom-top-right{
-
-	top: 26%;
-	left: 40%;
-
-}
-
-
-.dashbord-app .content-dash-page .table .table-nbrs .tbl .multiselect.rounded.left-top-bottom{
-
-	top: 26%;
-	left: 51%;
-
-}
 
 
 .dashbord-app .content-dash-page .table .table-nbrs .tbl .multiselect.rounded.center{
@@ -802,6 +774,11 @@
 
 }
 
+.dashbord-app .content-dash-page .table .table-nbrs .tbl .multiselect.rounded.center.left{
+
+	left: -4%;
+
+}
 
 .dashbord-app .content-dash-page .table .table-nbrs .tbl .nbrs{
 

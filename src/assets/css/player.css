@@ -573,6 +573,7 @@
 	color: white;
 	font-size: 1.2vw;
 	border-radius: .3vw;
+	cursor: pointer;
 
 }
 
@@ -673,7 +674,7 @@
 	position: absolute;
 	z-index: 4561453;
 	background-color: yellow;
-	opacity: 1;
+	opacity: 0;
 	cursor: pointer;
 
 }
@@ -829,6 +830,7 @@
 	font-size: 1.5vw;
 	position: relative;
 	overflow: hidden;
+	cursor: pointer;
 
 }
 .dashbord-app .content-dash-page .table .table-nbrs .tbl .nbrs .nbr img{
@@ -909,6 +911,7 @@
 	color: white;
 	font-weight: 600;
 	overflow: hidden;
+	cursor: pointer;
 
 }
 
@@ -958,6 +961,7 @@
 	font-size: 1.2vw;
 	color: white;
 	font-weight: 600;
+	cursor: pointer;
 
 }
 
@@ -1017,6 +1021,7 @@
 	font-weight: 600;
 	color: white;
 	left: 4.5%;
+	cursor: pointer;
 
 }
 .dashbord-app .content-dash-page .table .table-nbrs .tbl .zero img{
@@ -1083,6 +1088,8 @@
 	align-items: center;
 	justify-content: center;
 	font-weight: 600;
+	cursor: pointer;
+	
 }
 
 .dashbord-app .content-dash-page .table .table-nbrs .tbl .right-section div img{
@@ -1134,6 +1141,7 @@
 	border-radius: 1vw;
 	z-index: 15;
 	scale: .9;
+	cursor: pointer;
 
 }
 
@@ -1282,6 +1290,7 @@
 	border: .15vw solid white;
 	font-weight: 600;
 	position: relative;
+	cursor: pointer;
 
 }
 
@@ -1388,6 +1397,7 @@
 	color: white;
 	border: .16vw solid white;
 	border-radius: .3vw;	
+	cursor: pointer;
 
 }
 .dashbord-app .content-dash-page .table .footer-table .nbrs .bottom .nbrs-flex-list .nbr img{
@@ -1442,6 +1452,7 @@
 	color: white;
 	font-size: 1.2vw;
 	font-weight: 600;
+	cursor: pointer;
 
 }
 

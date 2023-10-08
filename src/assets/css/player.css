@@ -1,3 +1,9 @@
+:root{
+
+	--nbr-color:#f03030;
+
+}
+
 .dashbord-app{
 
 	width: 100%;
@@ -870,7 +876,7 @@
 
 .dashbord-app .content-dash-page .table .table-nbrs .tbl .nbrs .nbr.red{
 
-	background-color: #e20e18;
+	background-color: var(--nbr-color);
 
 }
 
@@ -984,7 +990,7 @@
 
 	width: 30%;
 	height: 100%;
-	background-color: #e20e18;
+	background-color: var(--nbr-color);
 	rotate: 68deg;
 	scale: 1;
 	border: .1vw solid white;
@@ -1387,7 +1393,20 @@
 	border-radius: .3vw;	
 
 }
+.dashbord-app .content-dash-page .table .footer-table .nbrs .bottom .nbrs-flex-list .nbr img{
 
+	position: absolute;
+	width: 3%;
+	pointer-events: none;
+	opacity: 0;
+
+}
+
+.dashbord-app .content-dash-page .table .footer-table .nbrs .bottom .nbrs-flex-list .nbr.clicked-btn img{
+
+	opacity: 1;
+
+}
 .dashbord-app .content-dash-page .table .footer-table .nbrs .bottom .nbrs-flex-list .nbr:hover{
 
 	background-color: #ffffff42;
@@ -1429,6 +1448,21 @@
 
 }
 
+.dashbord-app .content-dash-page .table .footer-table .right .sc div img{
+
+	position: absolute;
+	width: 3%;
+	pointer-events: none;
+	opacity: 0;
+
+}
+
+.dashbord-app .content-dash-page .table .footer-table .right .sc div.clicked-btn img{
+
+	opacity: 1;
+
+}
+
 .dashbord-app .content-dash-page .table .footer-table .right .sc.l div{
 	clip-path: polygon(100% 46%, 50% 75%, 0 46%, 0 0, 100% 0);
 	align-items: flex-start;
@@ -1438,7 +1472,7 @@
 
 .dashbord-app .content-dash-page .table .footer-table .right .sc div.red{
 
-	background-color: #e20e18;
+	background-color: var(--nbr-color);
 
 }
 

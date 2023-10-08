@@ -12,7 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     ManagementComponent,
     SuperAdminComponent,
-    SimpleAdminComponent,
+    SimpleAdminComponent
   ],
   imports: [
     BrowserModule,

@@ -204,7 +204,7 @@ export class SpinWheelComponent implements OnInit {
   choosedAngle = 0
 
   totalRotations = 0
-  rotationsToStop = 30
+  rotationsToStop = 70
   isSpinning = true
 
   wheel:any
@@ -213,7 +213,7 @@ export class SpinWheelComponent implements OnInit {
 
   spinStartTime = 0
 
-  time = 120
+  time = 150
 
   element:any
 
@@ -255,7 +255,7 @@ export class SpinWheelComponent implements OnInit {
 
       this.indicator.style.backgroundColor = this.angles[index].color
 
-      this.time += .8
+      this.time += .9
 
       if (index !== this.choosedAngle) {
         this.requestAnimationFrame(this.animateSpin)
@@ -294,16 +294,14 @@ export class SpinWheelComponent implements OnInit {
 
   ngOnInit(): void {
 
-    var rotation = 0
-
     setTimeout(()=>{
+
       SpinWheelEvents()
-      this.spinToAngle(7)
-      setInterval(()=>{
-        rotation++
-        console.log("rotation : "+rotation)
-      },1000)
+
+      this.spinToAngle(13)
+
     },5000)
+
   }
 
 }

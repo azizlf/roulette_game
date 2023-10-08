@@ -1,0 +1,97 @@
+<div class="error-msg-box">
+	<i class="fa-solid fa-circle-xmark"></i>
+	<div class="text">
+		<span>Error</span>
+		<p> {{errorMsg}} </p>
+	</div>
+	
+</div>
+<div class="success-msg-box">
+	<i class="fa-solid fa-circle-check"></i>
+	<div class="text">
+		<span>Success</span>
+		<p>{{successMsg}}</p>
+	</div>
+	
+</div>
+<div class="player-settings">
+	
+	<div class="nav-bar">
+		<div class="return-btn" routerLink="/home">
+			<i class="fa-solid fa-arrow-left"></i>
+		</div>
+	</div>
+
+	<div class="form" *ngIf="!isLoading">
+		
+		<div class="content-form-settings">
+			
+			<div class="sc">
+				<div class="label">
+					Login
+				</div>
+				<p>{{requestUpdateInfos.login}}</p>
+			</div>
+			<div class="sc">
+				<div class="label">
+					First name
+				</div>
+				<input type="text" (input)="updateUserInfos('name',$event)" [value]="requestUpdateInfos.name" placeholder="Full name" />
+			</div>
+			<div class="sc">
+				<div class="label">
+					Last name
+				</div>
+				<input type="text" (input)="updateUserInfos('lastName',$event)" [value]="requestUpdateInfos.lastName" placeholder="Last name" />
+			</div>
+			<div class="sc">
+				<div class="label">
+					PseudoName
+				</div>
+				<input type="text" (input)="updateUserInfos('pseudoName',$event)" [value]="requestUpdateInfos.pseudoName" placeholder="PseudoName" />
+			</div>
+			<div class="sc">
+				<div class="label">
+					Telephone
+				</div>
+				<input type="number" (input)="updateUserInfos('teleJoueur',$event)" [value]="requestUpdateInfos.teleJoueur" placeholder="Telephone" />
+			</div>
+
+			<button (click)="update()" *ngIf="!isLoadingForm">save</button>
+
+			<div class="loading-ellipsis" style="
+				    top:auto;
+				    bottom:-5%;left: 10%;" *ngIf="isLoadingForm">
+				<div class="r1" style="
+					width: 2.5%;
+				    padding: 1.25% 0;
+				    border-radius: 100%;
+				    background-color: #b6b6b687;
+				    margin: 0 2%;
+				    scale: 2;"></div>
+				<div class="r2" style="
+					width: 2.5%;
+				    padding: 1.25% 0;
+				    border-radius: 100%;
+				    background-color: #b6b6b687;
+				    margin: 0 2%;
+				    scale: 2;"></div>
+				<div class="r3" style="
+					width: 2.5%;
+				    padding: 1.25% 0;
+				    border-radius: 100%;
+				    background-color: #b6b6b687;
+				    margin: 0 2%;
+				    scale: 2;"></div>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="loading-ellipsis" *ngIf="isLoading">
+		<div class="r1"></div>
+		<div class="r2"></div>
+		<div class="r3"></div>
+	</div>
+
+</div>

@@ -17,4 +17,10 @@ export class TiketService {
 
   }
 
+  getNumSpinSelected(id:any){
+
+    return this.http.post(this.api+"/numeroGanyon/"+id,{})
+
+  }
+
 }

@@ -38,6 +38,27 @@ function initFnHome(){
 	    }
 
 	})
+
+	function handleOrientationChange(event) {
+		console.log(event.matches)
+		if (event.matches) {
+			document.querySelector(".alert-orient").style.display = "none"
+		} else {
+			document.querySelector(".alert-orient").style.display = "flex"
+		}
+	}
+
+	if(window.innerWidth < 950){
+
+		setInterval(()=>{
+			const landscapeOrientation = window.matchMedia("(orientation: landscape)")
+
+			handleOrientationChange(landscapeOrientation)
+			
+			landscapeOrientation.addListener(handleOrientationChange)
+		},2000)
+
+	}
 }
 
 function SpinWheelEvents(){

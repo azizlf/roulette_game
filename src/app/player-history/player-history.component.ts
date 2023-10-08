@@ -21,18 +21,15 @@ export class PlayerHistoryComponent implements OnInit {
 
       this.history = []
 
+      for (var i = res.tikets.length - 1 ; i >= 0; i--) {
 
-      res.tikets.forEach((tiket:any)=>{
+        if(res.tikets[i].realTime){
 
-        if(!tiket.realTime){
-          
-          this.history.push(tiket)
+          this.history.push(res.tikets[i])
 
         }
 
-
-      })
-
+      }
 
       var interval = setInterval(()=>{
         if(this.history != "nothing"){

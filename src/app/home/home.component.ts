@@ -1,6 +1,4 @@
-import { Component, OnInit , NgZone} from '@angular/core';
-import { interval } from 'rxjs';
-import { takeWhile } from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TiketService } from '../services/tiket.service'
 import { UsersService } from '../services/users.service'
@@ -15,7 +13,7 @@ declare function initFnHome():void
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router: Router,private ngZone: NgZone,private tiketService:TiketService,private rouletteService:RouletteService,private users:UsersService) { }
+  constructor(private router: Router,private tiketService:TiketService,private rouletteService:RouletteService,private users:UsersService) { }
 
   userDetails = {
 
@@ -176,8 +174,6 @@ export class HomeComponent implements OnInit {
 
     var solde = this.currentCoinSelected
 
-    console.log(solde)
-
     var itemIsSelected = false
 
     if(ele.target.classList.contains("clicked-btn") || ele.target.classList.contains("clicked")){
@@ -185,6 +181,20 @@ export class HomeComponent implements OnInit {
     }
 
     if(!itemIsSelected){
+      console.log(ele)
+      if(ele.target.childElementCount === 1){
+
+        ele.target.children[0].src = "/assets/img/"+this.currentCoinSelected+".png"
+        
+      }else if(ele.target.childElementCount === 3){
+
+        ele.target.children[2].src = "/assets/img/"+this.currentCoinSelected+".png"
+        
+      }else{
+        
+        ele.target.children[1].src = "/assets/img/"+this.currentCoinSelected+".png"
+
+      }
 
       ele.target.classList.add("clicked-btn")
 
@@ -216,7 +226,20 @@ export class HomeComponent implements OnInit {
       
     }
     else{
-      console.log(ele.target.classList)
+      if(ele.target.childElementCount === 1){
+
+        ele.target.children[0].src = "/assets/img/"+this.currentCoinSelected+".png"
+        
+      }else if(ele.target.childElementCount === 3){
+
+        ele.target.children[2].src = "/assets/img/"+this.currentCoinSelected+".png"
+        
+      }else{
+        
+        ele.target.children[1].src = "/assets/img/"+this.currentCoinSelected+".png"
+
+      }
+
       this.conditions.forEach((condition:any)=>{
         const list = condition.condition
         
@@ -471,32 +494,6 @@ export class HomeComponent implements OnInit {
   }
 
 
-  startCheck() {
-    
-    this.isLooping = true
-    
-    this.ngZone.runOutsideAngular(() => {
-    
-      interval(1000) 
-    
-        .pipe(
-    
-          takeWhile(() => this.isLooping)
-    
-        )
-     
-        .subscribe(() => {
-    
-          console.log("hh")
-     
-          this.ngZone.run(() => {});
-   
-        });
-   
-    });
-
-  }
-
   ngOnInit(): void {
 
     if(this.users.user.id === ""){
@@ -521,8 +518,6 @@ export class HomeComponent implements OnInit {
         }
       },1000)
 
-      //this.startCheck()
-
       this.getUser()
 
       setTimeout(()=>{
@@ -530,10 +525,11 @@ export class HomeComponent implements OnInit {
         this.element = document.querySelector(".coin-"+this.currentCoinSelected)
 
         this.element.style.scale = "1.2"
+        
+        initFnHome()
 
       },100)
 
-      initFnHome()
 
     }
 

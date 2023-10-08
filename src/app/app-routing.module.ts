@@ -20,6 +20,10 @@ const routes: Routes = [
     loadChildren: () => import('./player-history/player-history.module').then(m => m.PlayerHistoryModule),
   },
   {
+    path:"settings",
+    loadChildren: () => import('./player-settings/player-settings.module').then(m => m.PlayerSettingsModule),
+  },
+  {
     path:"**",
     loadChildren: () => import('./notfoundpage/notfoundpage.module').then(m => m.NotfoundpageModule),
   }

@@ -15,8 +15,9 @@
 			<div class="item" *ngFor="let item of history">
 				<div class="it">{{item._id}}</div>
 				<div class="it">{{item.solde}}</div>
-				<div class="it" style="color:green;" *ngIf="item.gagnion">WIN</div>
-				<div class="it" style="color:red;" *ngIf="!item.gagnion">LOSE</div>
+				<div class="it" style="color:green;" *ngIf="item.gagnion && !item.realTime">win</div>
+				<div class="it" style="color:red;" *ngIf="!item.gagnion && !item.realTime">lose</div>
+				<div class="it" style="color:orange;" *ngIf="item.realTime">pending</div>
 			</div>
 		</div>
 	</div>

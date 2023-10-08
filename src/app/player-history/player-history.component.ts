@@ -23,7 +23,7 @@ export class PlayerHistoryComponent implements OnInit {
 
       for (var i = res.tikets.length - 1 ; i >= 0; i--) {
 
-        if(res.tikets[i].realTime){
+        if(!res.tikets[i].realTime){
 
           this.history.push(res.tikets[i])
 

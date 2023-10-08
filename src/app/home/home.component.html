@@ -461,9 +461,9 @@
 				</div>
 				<div class="btns-flex">
 					<div class="content-btns">
-						<div class="btn"><div><p>2x</p></div></div>
+						<div class="btn" (click)="multipleSoldeCondition()" ><div><p>2x</p></div></div>
 						<div class="btn"><div><i class="fa-solid fa-rotate"></i></div></div>
-						<div class="btn"><div><i class="fa-solid fa-xmark"></i></div></div>
+						<!--div class="btn"><div><i class="fa-solid fa-xmark"></i></div></div-->
 					</div>
 				</div>
 
@@ -507,11 +507,11 @@
 							</div>
 						</div>
 						<div class="banner-sc">
-							<p>Total: 10.00</p>
+							<p>Total: {{totalConditionsSolde}}</p>
 							<p>Max win : 360.00</p>
 						</div>
 						<div class="banner-sc">
-							<p>Solde: 10.00</p>
+							<p>Solde: {{currentRestSolde}}</p>
 							<p>Bets: 0.00</p>
 						</div>
 					</div>

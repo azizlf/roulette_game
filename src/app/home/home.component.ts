@@ -42,7 +42,8 @@ export class HomeComponent implements OnInit {
 
   numbers:any = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]
 
-  totalConditionsSolde= 0.0
+  totalConditionsSolde = 0.0
+  currentRestSolde = 0.0
 
   adminId:any
 
@@ -134,7 +135,7 @@ export class HomeComponent implements OnInit {
 
       coef.innerText = condition.coefficient
 
-      solde.innerText = condition.soldeJouer
+      solde.innerHTML = '<input type="text" value="'+condition.soldeJouer+'" placeholder="solde">'
 
       removeBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>'
 
@@ -157,6 +158,28 @@ export class HomeComponent implements OnInit {
   alertSolde(){
 
     alert("insufficient funds!")
+
+  }
+
+  multipleSoldeCondition(){
+
+    var solde = 0.0
+
+    if(this.conditions.length > 0){
+
+      this.conditions.forEach((condition:any)=>{
+
+        condition.soldeJouer *= 2
+
+        solde += condition.soldeJouer
+
+      })
+
+      this.totalConditionsSolde = solde
+
+      this.initConditions()
+
+    }
 
   }
 
@@ -186,60 +209,59 @@ export class HomeComponent implements OnInit {
         solde = 0.5
       }
 
-      if(this.totalConditionsSolde + parseFloat(solde) > this.userSolde){
-        this.alertSolde()
+      this.totalConditionsSolde += parseFloat(solde)
+
+      if(this.userSolde - parseFloat(solde) > 0){
+        this.currentRestSolde = this.userSolde - parseFloat(solde)
       }
-      else{
 
-        this.totalConditionsSolde += parseFloat(solde)
 
-        var conditionId = this.generateTiketCode(5)
+      var conditionId = this.generateTiketCode(5)
 
-        this.selectedItems.push({
+      this.selectedItems.push({
 
-          condition_id: conditionId,
-          btn:null,
-          numbers:result
+        condition_id: conditionId,
+        btn:null,
+        numbers:result
 
-        })
-        
-        this.conditions.push({
-          condition_id: conditionId,
-          condition:result,
-          soldeJouer:parseFloat(solde),
-          soldeGagner:parseFloat(solde)*36,
-          coefficient:36
-        })
+      })
+      
+      this.conditions.push({
+        condition_id: conditionId,
+        condition:result,
+        soldeJouer:parseFloat(solde),
+        soldeGagner:parseFloat(solde)*36,
+        coefficient:36
+      })
 
-        result.forEach((res:any)=>{
+      result.forEach((res:any)=>{
 
-          this.element = document.querySelector(".n"+res)
+        this.element = document.querySelector(".n"+res)
 
-          this.element.classList.add("clicked-btn")
+        this.element.classList.add("clicked-btn")
 
-          if(this.element.childElementCount === 1){
+        if(this.element.childElementCount === 1){
 
-            this.element.children[0].src = "/assets/img/"+this.currentCoinSelected+".png"
-            
-          }else if(this.element.childElementCount === 3){
+          this.element.children[0].src = "/assets/img/"+this.currentCoinSelected+".png"
+          
+        }else if(this.element.childElementCount === 3){
 
-            this.element.children[2].src = "/assets/img/"+this.currentCoinSelected+".png"
-            
-          }else{
-            
-            this.element.children[1].src = "/assets/img/"+this.currentCoinSelected+".png"
+          this.element.children[2].src = "/assets/img/"+this.currentCoinSelected+".png"
+          
+        }else{
+          
+          this.element.children[1].src = "/assets/img/"+this.currentCoinSelected+".png"
 
-          }
+        }
 
-        })
+      })
 
-        this.element = document.querySelector(".create-tiket")
+      this.element = document.querySelector(".create-tiket")
 
-        this.element.style.display = "block" 
+      this.element.style.display = "block" 
 
-        this.initConditions()
+      this.initConditions()
 
-      }
 
     }
 
@@ -285,50 +307,51 @@ export class HomeComponent implements OnInit {
         solde = 0.5
       }
 
-      if(this.totalConditionsSolde + parseFloat(solde) > this.userSolde){
-        this.alertSolde()
-      }else{
-        var conditionId = this.generateTiketCode(5)
+      var conditionId = this.generateTiketCode(5)
 
-        this.selectedItems.push({
+      this.selectedItems.push({
 
-          condition_id: conditionId,
+        condition_id: conditionId,
 
-          btn:ele,
-          numbers:choice
+        btn:ele,
+        numbers:choice
 
-        })
+      })
+      
+      this.conditions.push({
+        condition_id: conditionId,
+        condition:choice,
+        soldeJouer:parseFloat(solde),
+        soldeGagner:parseFloat(solde)*36,
+        coefficient:36
+      })
+
+      if(ele.target.childElementCount === 1){
+
+        ele.target.children[0].src = "/assets/img/"+this.currentCoinSelected+".png"
         
-        this.conditions.push({
-          condition_id: conditionId,
-          condition:choice,
-          soldeJouer:parseFloat(solde),
-          soldeGagner:parseFloat(solde)*36,
-          coefficient:36
-        })
+      }else if(ele.target.childElementCount === 3){
 
-        if(ele.target.childElementCount === 1){
+        ele.target.children[2].src = "/assets/img/"+this.currentCoinSelected+".png"
+        
+      }else{
+        
+        ele.target.children[1].src = "/assets/img/"+this.currentCoinSelected+".png"
 
-          ele.target.children[0].src = "/assets/img/"+this.currentCoinSelected+".png"
-          
-        }else if(ele.target.childElementCount === 3){
-
-          ele.target.children[2].src = "/assets/img/"+this.currentCoinSelected+".png"
-          
-        }else{
-          
-          ele.target.children[1].src = "/assets/img/"+this.currentCoinSelected+".png"
-
-        }
-
-        ele.target.classList.add("clicked-btn")
-
-        this.element = document.querySelector(".create-tiket")
-
-        this.element.style.display = "block" 
-
-        this.totalConditionsSolde += parseFloat(solde)
       }
+
+      ele.target.classList.add("clicked-btn")
+
+      this.element = document.querySelector(".create-tiket")
+
+      this.element.style.display = "block" 
+
+      this.totalConditionsSolde += parseFloat(solde)
+
+      if(this.userSolde - parseFloat(solde) > 0){
+        this.currentRestSolde = this.userSolde - parseFloat(solde)
+      }
+
       
       
     }
@@ -355,7 +378,13 @@ export class HomeComponent implements OnInit {
 
             this.totalConditionsSolde -= condition.soldeJouer
 
+            this.currentRestSolde += condition.soldeJouer
+
             this.totalConditionsSolde += parseFloat(solde)
+
+            if(this.userSolde - parseFloat(solde) > 0){
+              this.currentRestSolde = this.userSolde - parseFloat(solde)
+            }
 
             condition.soldeJouer = parseFloat(solde)
 
@@ -367,7 +396,13 @@ export class HomeComponent implements OnInit {
 
             this.totalConditionsSolde -= condition.soldeJouer
 
+            this.currentRestSolde += condition.soldeJouer
+
             this.totalConditionsSolde += parseFloat(solde)
+
+            if(this.userSolde - parseFloat(solde) > 0){
+              this.currentRestSolde = this.userSolde - parseFloat(solde)
+            }
 
             condition.soldeJouer = parseFloat(solde)
           }

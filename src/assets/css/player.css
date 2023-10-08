@@ -673,8 +673,7 @@
 	padding: 1.5% 0;
 	position: absolute;
 	z-index: 4561453;
-	background-color: yellow;
-	opacity: 0;
+	background-color: transparent;
 	cursor: pointer;
 
 }

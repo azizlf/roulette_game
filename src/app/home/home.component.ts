@@ -70,7 +70,7 @@ export class HomeComponent implements OnInit {
 
       hint.innerHTML = tiket._id
       solde.innerHTML = `<p>${tiket.solde}</p>`
-      coefficient.innerHTML = `<p>x${tiket.coefficient}</p>`
+      coefficient.innerHTML = `<p>x36</p>`
 
       number.innerHTML = `<p>${tiket._id}</p>`
       number.appendChild(hint)

@@ -14,7 +14,7 @@ export class AppComponent implements OnInit{
 
   ngOnInit(): void {
 
-    var timer = 5
+    var timer = 60
     var timeout = 0
 
     var interval = setInterval(()=>{
@@ -27,17 +27,12 @@ export class AppComponent implements OnInit{
             if(timer > 0 && timeout === 0){
               timer--
             }else{
-              timer = 5
+              timer = 60
               if(timeout>0){
                 timeout--
               }else{
-                timeout = 35
-                //this.rouletteService.spinOpen = true
-                this.tiketService.getNumSpinSelected(res.admin).subscribe((res:any)=>{
-
-                  console.log(res)
-
-                })
+                timeout = 45
+                this.rouletteService.spinOpen = true
               }
             }
 

@@ -39,6 +39,8 @@ export class HomeComponent implements OnInit {
 
   spinStart:any
 
+  numbers:any = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]
+
   initTikets(){
 
     this.element = document.querySelector(".list-tikets")
@@ -96,7 +98,7 @@ export class HomeComponent implements OnInit {
 
       var arrayNumbers = ""
 
-      if(condition.condition.length > 7){
+      if(condition.condition.length > 10){
 
         arrayNumbers = condition.condition[0]+"-"+condition.condition[condition.condition.length-1]
 
@@ -144,6 +146,86 @@ export class HomeComponent implements OnInit {
       this.element.appendChild(container)
 
     })
+
+  }
+
+  generateClickArray(length:any){
+
+    var result = []
+
+    for (var i = 0 ;i < length; i++) {
+
+      var index = Math.floor(Math.random() * this.numbers.length)
+
+      if(!( this.numbers[index] === undefined || this.numbers[index] === null ) ){
+        result.push(this.numbers[index])
+      }
+      
+
+      this.numbers.splice(index,1)
+
+
+
+    }
+    
+
+    if(result.length > 0){
+
+      result.forEach((res:any)=>{
+
+        this.element = document.querySelector(".n"+res)
+
+        this.element.classList.add("clicked-btn")
+
+        if(this.element.childElementCount === 1){
+
+          this.element.children[0].src = "/assets/img/"+this.currentCoinSelected+".png"
+          
+        }else if(this.element.childElementCount === 3){
+
+          this.element.children[2].src = "/assets/img/"+this.currentCoinSelected+".png"
+          
+        }else{
+          
+          this.element.children[1].src = "/assets/img/"+this.currentCoinSelected+".png"
+
+        }
+
+      })
+
+      var solde = this.currentCoinSelected
+
+      if(solde === "05"){
+        solde = 0.5
+      }
+
+      var conditionId = this.generateTiketCode(5)
+
+      this.selectedItems.push({
+
+        condition_id: conditionId,
+        btn:null,
+        numbers:result
+
+      })
+      
+      this.conditions.push({
+        condition_id: conditionId,
+        condition:result,
+        soldeJouer:parseFloat(solde),
+        soldeGagner:parseFloat(solde)*36,
+        coefficient:36
+      })
+      
+      this.element = document.querySelector(".create-tiket")
+
+      this.element.style.display = "block" 
+
+      this.initConditions()
+
+    }
+
+    
 
   }
 
@@ -344,6 +426,8 @@ export class HomeComponent implements OnInit {
 
           this.cancelEventFromBtns()
 
+          this.numbers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]
+
         }
 
       })
@@ -367,6 +451,8 @@ export class HomeComponent implements OnInit {
     this.element = document.querySelector(".create-tiket")
 
     this.element.style.display = "none"
+    
+    this.numbers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]
   
   }
   

@@ -545,6 +545,7 @@
 	position: absolute;
 	z-index: 3;
 	font-size: 1.3vw;
+	user-select: none;
 
 }
 

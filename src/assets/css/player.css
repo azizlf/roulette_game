@@ -641,6 +641,24 @@
 
 }
 
+.dashbord-app .content-dash-page .table .table-nbrs .tbl .multi-selection-container.msc4{
+
+	left: 50.3%;
+
+}
+
+.dashbord-app .content-dash-page .table .table-nbrs .tbl .multi-selection-container.msc5{
+
+	left: 63.6%;
+
+}
+
+.dashbord-app .content-dash-page .table .table-nbrs .tbl .multi-selection-container.msc6{
+
+	left: 77%;
+
+}
+
 .dashbord-app .content-dash-page .table .table-nbrs .tbl .multi-selection-container.msc{
 
 	left: 16.7%;
@@ -656,6 +674,7 @@
 	z-index: 4561453;
 	background-color: yellow;
 	opacity: 1;
+	cursor: pointer;
 
 }
 

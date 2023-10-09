@@ -32,7 +32,7 @@ export class AppComponent implements OnInit{
                 timeout--
               }else{
                 timeout = 45
-                this.rouletteService.spinOpen = true
+                //this.rouletteService.spinOpen = true
               }
             }
 

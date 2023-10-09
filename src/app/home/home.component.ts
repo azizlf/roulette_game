@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
 
   }
   isLooping = false
-  userSolde = 0
+  userSolde = 0.0
 
   tikets:any = []
   conditions:any = []
@@ -41,6 +41,156 @@ export class HomeComponent implements OnInit {
   spinStart:any
 
   numbers:any = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]
+
+  dashbordAttrsCoef:any = [
+
+    {
+      list:[12,21],
+      coef:18
+    },
+    {
+      list:[13,31],
+      coef:18
+    },
+    {
+      list:[23,32],
+      coef:18
+    },
+    {
+      list:[11,22,33],
+      coef:12
+    },
+    {
+      list:[19,21,23,25,27,29,31,33,35],
+      coef:4
+    },
+    {
+      list:[20,22,24,26,28,30,32,34,36],
+      coef:4
+    },
+    {
+      list:[1,3,5,7,9,11,13,15,17],
+      coef:4
+    },
+    {
+      list:[2,4,6,8,10,12,14,16,18],
+      coef:4
+    },
+    {
+      list:[1,2,3,4,5,6,7,8,9,10,11,12],
+      coef:3
+    },
+    {
+      list:[13,14,15,16,17,18,19,20,21,22,23,24],
+      coef:3
+    },
+    {
+      list:[25,26,27,28,29,30,31,32,33,34,35,36],
+      coef:3
+    },
+    {
+      list:[3,6,9,12,15,18,21,24,27,30,33,36],
+      coef:3
+    },
+    {
+      list:[2,5,8,11,14,17,20,23,26,29,32,35],
+      coef:3
+    },
+    {
+      list:[1,4,7,10,13,16,19,22,25,28,31,34],
+      coef:3
+    },
+
+    {
+      list:[0,10,20,30],
+      coef:9
+    },
+    {
+      list:[1,11,21,31],
+      coef:9
+    },
+    {
+      list:[2,12,22,32],
+      coef:9
+    },
+    {
+      list:[3,13,23,33],
+      coef:9
+    },
+    {
+      list:[4,14,24,34],
+      coef:9
+    },
+    {
+      list:[5,15,25,35],
+      coef:9
+    },
+    {
+      list:[6,16,26,36],
+      coef:9
+    },
+    {
+      list:[7,17,27],
+      coef:12
+    },
+    {
+      list:[8,18,28],
+      coef:12
+    },
+    {
+      list:[9,19,29],
+      coef:12
+    },
+    {
+      list:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],
+      coef:2
+    },
+    {
+      list:[2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36],
+      coef:2
+    },
+    {
+      list:[1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35],
+      coef:2
+    },
+    {
+      list:[2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36],
+      coef:2
+    },
+    {
+      list:[1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35],
+      coef:2
+    },
+    {
+      list:[19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36],
+      coef:2
+    },
+    {
+      list:[2,4,15,19,21,32],
+      coef:6
+    },
+    {
+      list:[6,13,17,25,27,34],
+      coef:6
+    },
+    {
+      list:[8,11,10,23,30,36],
+      coef:6
+    },
+    {
+      list:[1,5,16,20,24,33],
+      coef:6
+    },
+    {
+      list:[9,14,18,22,29,31],
+      coef:6
+    },
+    {
+      list:[3,7,12,26,28,35],
+      coef:6
+    }
+
+  ]
 
   totalConditionsSolde = 0.0
   currentRestSolde = 0.0
@@ -169,13 +319,25 @@ export class HomeComponent implements OnInit {
 
       this.conditions.forEach((condition:any)=>{
 
-        condition.soldeJouer *= 2
-
-        solde += condition.soldeJouer
+        solde += (condition.soldeJouer * 2)
 
       })
 
-      this.totalConditionsSolde = solde
+      if(this.userSolde - solde >= 0){
+
+        this.conditions.forEach((condition:any)=>{
+
+          condition.soldeJouer *= 2
+
+        })
+
+        this.totalConditionsSolde = solde
+
+        this.currentRestSolde = this.userSolde - this.totalConditionsSolde
+
+      }else{
+        alert("insufficient funds!")
+      }
 
       this.initConditions()
 
@@ -209,51 +371,55 @@ export class HomeComponent implements OnInit {
         solde = 0.5
       }
 
-      this.totalConditionsSolde += parseFloat(solde)
-
-      if(this.userSolde - parseFloat(solde) > 0){
-        this.currentRestSolde = this.userSolde - parseFloat(solde)
-      }
-
-
-      var conditionId = this.generateTiketCode(5)
-
-      this.selectedItems.push({
-
-        condition_id: conditionId,
-        btn:null,
-        numbers:result
-
-      })
-      
-      this.conditions.push({
-        condition_id: conditionId,
-        condition:result,
-        soldeJouer:parseFloat(solde),
-        soldeGagner:parseFloat(solde)*36,
-        coefficient:36
-      })
-
       result.forEach((res:any)=>{
 
-        this.element = document.querySelector(".n"+res)
+        var conditionId = this.generateTiketCode(5)
 
-        this.element.classList.add("clicked-btn")
+        this.totalConditionsSolde += parseFloat(solde)
 
-        if(this.element.childElementCount === 1){
-
-          this.element.children[0].src = "/assets/img/"+this.currentCoinSelected+".png"
-          
-        }else if(this.element.childElementCount === 3){
-
-          this.element.children[2].src = "/assets/img/"+this.currentCoinSelected+".png"
-          
+        if(this.userSolde-this.totalConditionsSolde <= 0){
+          alert("insufficient funds!")
         }else{
+
+          this.currentRestSolde = this.userSolde-this.totalConditionsSolde
+
+          this.selectedItems.push({
+
+            condition_id: conditionId,
+            btn:null,
+            numbers:[res]
+
+          })
           
-          this.element.children[1].src = "/assets/img/"+this.currentCoinSelected+".png"
+          this.conditions.push({
+            condition_id: conditionId,
+            condition:[res],
+            soldeJouer:parseFloat(solde),
+            soldeGagner:parseFloat(solde)*36,
+            coefficient:36
+          })
+
+          this.element = document.querySelector(".n"+res)
+
+          this.element.classList.add("clicked-btn")
+
+          if(this.element.childElementCount === 1){
+
+            this.element.children[0].src = "/assets/img/"+this.currentCoinSelected+".png"
+            
+          }else if(this.element.childElementCount === 3){
+
+            this.element.children[2].src = "/assets/img/"+this.currentCoinSelected+".png"
+            
+          }else{
+            
+            this.element.children[1].src = "/assets/img/"+this.currentCoinSelected+".png"
+
+          }
 
         }
 
+        
       })
 
       this.element = document.querySelector(".create-tiket")
@@ -290,103 +456,160 @@ export class HomeComponent implements OnInit {
 
   }
 
+  arraysIsEqual(arr1:any,arr2:any){
+    if (arr1.length !== arr2.length) {
+
+      return false;
+    }
+
+    for (let i = 0; i < arr1.length; i++) {
+      if (arr1[i] !== arr2[i]) {
+        
+          return false;
+      }
+    }
+
+    return true;
+  }
+
   addCondition(type:any,ele:any,choice:any){
 
     var solde = this.currentCoinSelected
 
     var itemIsSelected = false
 
+    var coef = 0
+
     if(ele.target.classList.contains("clicked-btn") || ele.target.classList.contains("clicked")){
       itemIsSelected = true
     }
 
+    this.dashbordAttrsCoef.forEach((item:any)=>{
+
+      if(this.arraysIsEqual(choice,item.list)){
+        coef = item.coef
+      }
+
+    })
+
+    if(coef === 0){
+
+      if(choice.length === 2){
+        coef = 18
+      }else if(choice.length === 3){
+        coef = 12
+      }else if(choice.length === 4){
+        coef = 9
+      }else if(choice.length === 1){
+        coef = 36
+      }
+
+    }
+    if(solde === "05"){
+      solde = 0.5
+    }
     
     if(!itemIsSelected){
 
-      if(solde === "05"){
-        solde = 0.5
-      }
-
-      var conditionId = this.generateTiketCode(5)
-
-      this.selectedItems.push({
-
-        condition_id: conditionId,
-
-        btn:ele,
-        numbers:choice
-
-      })
       
-      this.conditions.push({
-        condition_id: conditionId,
-        condition:choice,
-        soldeJouer:parseFloat(solde),
-        soldeGagner:parseFloat(solde)*36,
-        coefficient:36
-      })
 
-      if(ele.target.childElementCount === 1){
-
-        ele.target.children[0].src = "/assets/img/"+this.currentCoinSelected+".png"
-        
-      }else if(ele.target.childElementCount === 3){
-
-        ele.target.children[2].src = "/assets/img/"+this.currentCoinSelected+".png"
-        
+      if(this.totalConditionsSolde + parseFloat(solde) >this.userSolde){
+        alert("insufficient funds!")
       }else{
+
+        this.currentRestSolde = this.userSolde-this.totalConditionsSolde
+
+        var conditionId = this.generateTiketCode(5)
+
+        this.selectedItems.push({
+
+          condition_id: conditionId,
+          btn:ele,
+          numbers:choice
+
+        })
         
-        ele.target.children[1].src = "/assets/img/"+this.currentCoinSelected+".png"
+        this.conditions.push({
+          condition_id: conditionId,
+          condition:choice,
+          soldeJouer:parseFloat(solde),
+          soldeGagner:parseFloat(solde)*coef,
+          coefficient:coef
+        })
 
+        if(ele.target.childElementCount === 1){
+
+          ele.target.children[0].src = "/assets/img/"+this.currentCoinSelected+".png"
+          
+        }else if(ele.target.childElementCount === 3){
+
+          ele.target.children[2].src = "/assets/img/"+this.currentCoinSelected+".png"
+          
+        }else{
+          
+          ele.target.children[1].src = "/assets/img/"+this.currentCoinSelected+".png"
+
+        }
+
+        ele.target.classList.add("clicked-btn")
+
+        this.element = document.querySelector(".create-tiket")
+
+        this.element.style.display = "block" 
+
+        this.totalConditionsSolde += parseFloat(solde)
+
+        this.currentRestSolde = this.userSolde-this.totalConditionsSolde
       }
-
-      ele.target.classList.add("clicked-btn")
-
-      this.element = document.querySelector(".create-tiket")
-
-      this.element.style.display = "block" 
-
-      this.totalConditionsSolde += parseFloat(solde)
-
-      if(this.userSolde - parseFloat(solde) > 0){
-        this.currentRestSolde = this.userSolde - parseFloat(solde)
-      }
-
-      
       
     }
     else{
-      if(ele.target.childElementCount === 1){
-
-        ele.target.children[0].src = "/assets/img/"+this.currentCoinSelected+".png"
-        
-      }else if(ele.target.childElementCount === 3){
-
-        ele.target.children[2].src = "/assets/img/"+this.currentCoinSelected+".png"
-        
-      }else{
-        
-        ele.target.children[1].src = "/assets/img/"+this.currentCoinSelected+".png"
-
-      }
-
       this.conditions.forEach((condition:any)=>{
         const list = condition.condition
         
         if(choice.length > 1){
           if(list[list.length-1] === choice[choice.length-1] && list[0] === choice[0]){
 
-            this.totalConditionsSolde -= condition.soldeJouer
+            var newSolde = 0
 
-            this.currentRestSolde += condition.soldeJouer
-
-            this.totalConditionsSolde += parseFloat(solde)
-
-            if(this.userSolde - parseFloat(solde) > 0){
-              this.currentRestSolde = this.userSolde - parseFloat(solde)
+            if(parseFloat(solde)!=condition.soldeJouer){
+              newSolde = this.totalConditionsSolde - condition.soldeJouer
+              newSolde += parseFloat(solde)
             }
 
-            condition.soldeJouer = parseFloat(solde)
+            if(newSolde <= this.userSolde && newSolde != 0){
+
+              this.totalConditionsSolde -= condition.soldeJouer
+
+              this.currentRestSolde += condition.soldeJouer
+
+              this.totalConditionsSolde += parseFloat(solde)
+
+              if(this.currentRestSolde - parseFloat(solde) >= 0){
+                this.currentRestSolde -= parseFloat(solde)
+              }
+
+
+              if(ele.target.childElementCount === 1){
+
+                ele.target.children[0].src = "/assets/img/"+this.currentCoinSelected+".png"
+                
+              }else if(ele.target.childElementCount === 3){
+
+                ele.target.children[2].src = "/assets/img/"+this.currentCoinSelected+".png"
+                
+              }else{
+                
+                ele.target.children[1].src = "/assets/img/"+this.currentCoinSelected+".png"
+
+              }
+              
+              condition.soldeJouer = parseFloat(solde)
+
+            }else{
+              alert("insufficient funds!")
+            }
+
 
 
 
@@ -394,17 +617,45 @@ export class HomeComponent implements OnInit {
         }else{
           if(list[0] === choice[0]){
 
-            this.totalConditionsSolde -= condition.soldeJouer
+            var newSolde = 0
 
-            this.currentRestSolde += condition.soldeJouer
-
-            this.totalConditionsSolde += parseFloat(solde)
-
-            if(this.userSolde - parseFloat(solde) > 0){
-              this.currentRestSolde = this.userSolde - parseFloat(solde)
+            if(parseFloat(solde)!=condition.soldeJouer){
+              newSolde = this.totalConditionsSolde - condition.soldeJouer
+              newSolde += parseFloat(solde)
             }
 
-            condition.soldeJouer = parseFloat(solde)
+            if(newSolde <= this.userSolde && newSolde != 0){
+
+              this.totalConditionsSolde -= condition.soldeJouer
+
+              this.currentRestSolde += condition.soldeJouer
+
+              this.totalConditionsSolde += parseFloat(solde)
+
+              if(this.currentRestSolde - parseFloat(solde) >= 0){
+                this.currentRestSolde -= parseFloat(solde)
+              }
+              
+
+              if(ele.target.childElementCount === 1){
+
+                ele.target.children[0].src = "/assets/img/"+this.currentCoinSelected+".png"
+                
+              }else if(ele.target.childElementCount === 3){
+
+                ele.target.children[2].src = "/assets/img/"+this.currentCoinSelected+".png"
+                
+              }else{
+                
+                ele.target.children[1].src = "/assets/img/"+this.currentCoinSelected+".png"
+
+              }
+              
+              condition.soldeJouer = parseFloat(solde)
+
+            }else{
+              alert("insufficient funds!")
+            }
           }
         }
 
@@ -542,11 +793,21 @@ export class HomeComponent implements OnInit {
       if(this.conditions[i].condition_id === elet.id){
 
         this.totalConditionsSolde -= this.conditions[i].soldeJouer
+
+        this.currentRestSolde += this.conditions[i].soldeJouer
+
+        this.conditions[i].condition.forEach((con:any)=>{
+
+          this.element = document.querySelector(".n"+con)
+
+          this.element.classList.remove("clicked-btn")
+
+        })
         this.conditions.splice(i,1)
       }
     }
 
-    this.selectedItems.forEach((item:any)=>{
+    /*this.selectedItems.forEach((item:any)=>{
 
       if(item.condition_id === elet.id && item.btn != null){
         item.btn.target.classList.remove("clicked-btn")
@@ -575,7 +836,7 @@ export class HomeComponent implements OnInit {
         }
       }
 
-    })
+    })*/
 
     elet.remove()
 

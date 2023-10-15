@@ -299,13 +299,35 @@ export class SpinWheelComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.element = document.querySelector(".spin-ctn")
+
+    this.element.style.backgroundImage = "url('/assets/img/"+this.rouletteService.rouletteDesign.background+".png')"
+
+    this.element = document.querySelector(".center-pointer")
+
+    this.element.style.backgroundImage = "url('/assets/img/"+this.rouletteService.rouletteDesign.pointer+".png')"
+
+    this.element = document.querySelector(".spin")
+
+    this.element.src = "/assets/img/"+this.rouletteService.rouletteDesign.numbers+".png"
+
+    this.element.style.transform = "rotate(" + this.rouletteService.angleStoped + "deg)"
+
+    this.element = document.querySelector(".indicator-number")
+
+    this.element.innerText = this.rouletteService.selectedNumberWin
+
+    this.element.style.backgroundColor = this.rouletteService.selectedColorNumberWin
+
+
+
     setTimeout(()=>{
 
       SpinWheelEvents()
 
-      this.spinToAngle(34)
+      this.spinToAngle(this.rouletteService.winNumberSelected)
 
-    },5000)
+    },3000)
 
   }
 

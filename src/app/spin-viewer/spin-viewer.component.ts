@@ -15,19 +15,15 @@ export class SpinViewerComponent implements OnInit {
 
   ngOnInit(): void {
 
-    setInterval(()=>{
-      
-      this.element = document.querySelector(".spin-viewer")
+    this.element = document.querySelector(".spin-viewer")
 
-      this.element.style.transform = this.rouletteService.angleStoped
+    this.element.style.transform = this.rouletteService.angleStoped
 
-      this.element = document.querySelector(".index-viewer")
+    this.element = document.querySelector(".index-viewer")
 
-      this.element.innerText = this.rouletteService.selectedNumberWin
+    this.element.innerText = this.rouletteService.selectedNumberWin
 
-      this.element.style.backgroundColor = this.rouletteService.selectedColorNumberWin
-
-    },1000)
+    this.element.style.backgroundColor = this.rouletteService.selectedColorNumberWin
 
 
   }

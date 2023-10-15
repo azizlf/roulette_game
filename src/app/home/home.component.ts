@@ -249,9 +249,9 @@ export class HomeComponent implements OnInit {
               alert(result)
             }
 
-          },7000)
+          },10000)
 
-        },5000)
+        },1000)
 
       },3000)
     }

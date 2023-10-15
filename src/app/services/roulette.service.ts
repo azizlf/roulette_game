@@ -10,6 +10,15 @@ export class RouletteService {
   selectedNumberWin = 0
   selectedColorNumberWin = "#2cc93b"
 
+
+  winNumberSelected = 0
+
+  rouletteDesign = {
+    background:"",
+    numbers:"",
+    pointer:""
+  }
+
   constructor() { }
 
 }

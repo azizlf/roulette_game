@@ -1029,14 +1029,13 @@ export class HomeComponent implements OnInit {
     hint.style.opacity = "0"
   }
 
-
   chronoConfig(){
 
     this.tiketService.chrono().subscribe((res:any)=>{
 
       if(res.temp >= 28){
 
-        //this.noEventUser = true
+        this.noEventUser = true
         this.timeIsUpSpin = true
 
       }else{
@@ -1134,6 +1133,8 @@ export class HomeComponent implements OnInit {
 
     this.element.innerHTML += qrCode
 
+    this.validateTiket()
+
 
   }
 
@@ -1143,6 +1144,8 @@ export class HomeComponent implements OnInit {
 
     setTimeout(()=>{
       this.element = document.querySelector(".tiket-print-area");
+
+      this.openMsgBox = false
 
       this.doc = window.open('', '', 'width="100%",height="100%"');
       
@@ -1336,7 +1339,9 @@ export class HomeComponent implements OnInit {
   }
 
   openPrint(){
-    this.openMsgBox = true
+    if(!this.timeIsUpSpin){
+      this.openMsgBox = true
+    }
   }
 
   cancelPrint(){

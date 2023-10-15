@@ -389,123 +389,129 @@ export class HomeComponent implements OnInit {
 
   multipleSoldeCondition(){
 
-    var solde = 0.0
+    if(!this.timeIsUpSpin){
+      var solde = 0.0
 
-    if(this.conditions.length > 0){
-
-      this.conditions.forEach((condition:any)=>{
-
-        solde += (condition.soldeJouer * 2)
-
-      })
-
-      if(this.userSolde - solde >= 0){
+      if(this.conditions.length > 0){
 
         this.conditions.forEach((condition:any)=>{
 
-          condition.soldeJouer *= 2
-          condition.soldeGagner = condition.soldeJouer * condition.coefficient
+          solde += (condition.soldeJouer * 2)
 
         })
 
-        this.totalConditionsSolde = solde
+        if(this.userSolde - solde >= 0){
 
-        this.currentRestSolde = this.userSolde - this.totalConditionsSolde
+          this.conditions.forEach((condition:any)=>{
 
-      }else{
-        alert("insufficient funds!")
+            condition.soldeJouer *= 2
+            condition.soldeGagner = condition.soldeJouer * condition.coefficient
+
+          })
+
+          this.totalConditionsSolde = solde
+
+          this.currentRestSolde = this.userSolde - this.totalConditionsSolde
+
+        }else{
+          alert("insufficient funds!")
+        }
+
+        this.initConditions()
+
       }
 
-      this.initConditions()
-
     }
+    
 
   }
 
   generateClickArray(length:any){
 
-    var result = []
+    if(!this.timeIsUpSpin){
+      var result = []
 
-    for (var i = 0 ;i < length; i++) {
+      for (var i = 0 ;i < length; i++) {
 
-      var index = Math.floor(Math.random() * this.numbers.length)
+        var index = Math.floor(Math.random() * this.numbers.length)
 
-      if(!( this.numbers[index] === undefined || this.numbers[index] === null ) ){
-        result.push(this.numbers[index])
+        if(!( this.numbers[index] === undefined || this.numbers[index] === null ) ){
+          result.push(this.numbers[index])
+        }
+        
+
+        this.numbers.splice(index,1)
+
       }
       
 
-      this.numbers.splice(index,1)
+      if(result.length > 0){
 
-    }
-    
+        var solde = this.currentCoinSelected
 
-    if(result.length > 0){
+        if(solde === "05"){
+          solde = 0.5
+        }
 
-      var solde = this.currentCoinSelected
+        result.forEach((res:any)=>{
 
-      if(solde === "05"){
-        solde = 0.5
-      }
+          var conditionId = this.generateTiketCode(5)
 
-      result.forEach((res:any)=>{
+          this.totalConditionsSolde += parseFloat(solde)
 
-        var conditionId = this.generateTiketCode(5)
-
-        this.totalConditionsSolde += parseFloat(solde)
-
-        if(this.userSolde-this.totalConditionsSolde <= 0){
-          alert("insufficient funds!")
-        }else{
-
-          this.currentRestSolde = this.userSolde-this.totalConditionsSolde
-
-          this.selectedItems.push({
-
-            condition_id: conditionId,
-            btn:null,
-            numbers:[res]
-
-          })
-          
-          this.conditions.push({
-            condition_id: conditionId,
-            condition:[res],
-            soldeJouer:parseFloat(solde),
-            soldeGagner:parseFloat(solde)*36,
-            coefficient:36
-          })
-
-          this.element = document.querySelector(".n"+res)
-
-          this.element.classList.add("clicked-btn")
-
-          if(this.element.childElementCount === 1){
-
-            this.element.children[0].src = "/assets/img/"+this.currentCoinSelected+".png"
-            
-          }else if(this.element.childElementCount === 3){
-
-            this.element.children[2].src = "/assets/img/"+this.currentCoinSelected+".png"
-            
+          if(this.userSolde-this.totalConditionsSolde <= 0){
+            alert("insufficient funds!")
           }else{
+
+            this.currentRestSolde = this.userSolde-this.totalConditionsSolde
+
+            this.selectedItems.push({
+
+              condition_id: conditionId,
+              btn:null,
+              numbers:[res]
+
+            })
             
-            this.element.children[1].src = "/assets/img/"+this.currentCoinSelected+".png"
+            this.conditions.push({
+              condition_id: conditionId,
+              condition:[res],
+              soldeJouer:parseFloat(solde),
+              soldeGagner:parseFloat(solde)*36,
+              coefficient:36
+            })
+
+            this.element = document.querySelector(".n"+res)
+
+            this.element.classList.add("clicked-btn")
+
+            if(this.element.childElementCount === 1){
+
+              this.element.children[0].src = "/assets/img/"+this.currentCoinSelected+".png"
+              
+            }else if(this.element.childElementCount === 3){
+
+              this.element.children[2].src = "/assets/img/"+this.currentCoinSelected+".png"
+              
+            }else{
+              
+              this.element.children[1].src = "/assets/img/"+this.currentCoinSelected+".png"
+
+            }
 
           }
 
-        }
+          
+        })
 
-        
-      })
+        this.element = document.querySelector(".create-tiket")
 
-      this.element = document.querySelector(".create-tiket")
+        this.element.style.display = "block" 
 
-      this.element.style.display = "block" 
+        this.initConditions()
 
-      this.initConditions()
-
-
+      }
+    
     }
 
   }
@@ -674,38 +680,43 @@ export class HomeComponent implements OnInit {
                 newSolde += parseFloat(solde)
               }
 
-              if(newSolde <= this.userSolde && newSolde != 0){
+              if(newSolde != 0){
+                if(newSolde <= this.userSolde){
 
-                this.totalConditionsSolde -= condition.soldeJouer
+                  this.totalConditionsSolde -= condition.soldeJouer
 
-                this.currentRestSolde += condition.soldeJouer
+                  this.currentRestSolde += condition.soldeJouer
 
-                this.totalConditionsSolde += parseFloat(solde)
+                  this.totalConditionsSolde += parseFloat(solde)
 
-                if(this.currentRestSolde - parseFloat(solde) >= 0){
-                  this.currentRestSolde -= parseFloat(solde)
+                  if(this.currentRestSolde - parseFloat(solde) >= 0){
+                    this.currentRestSolde -= parseFloat(solde)
+                  }
+
+
+                  if(ele.target.childElementCount === 1){
+
+                    ele.target.children[0].src = "/assets/img/"+this.currentCoinSelected+".png"
+                    
+                  }else if(ele.target.childElementCount === 3){
+
+                    ele.target.children[2].src = "/assets/img/"+this.currentCoinSelected+".png"
+                    
+                  }else{
+                    
+                    ele.target.children[1].src = "/assets/img/"+this.currentCoinSelected+".png"
+
+                  }
+                  
+                  condition.soldeJouer = parseFloat(solde)
+
                 }
-
-
-                if(ele.target.childElementCount === 1){
-
-                  ele.target.children[0].src = "/assets/img/"+this.currentCoinSelected+".png"
-                  
-                }else if(ele.target.childElementCount === 3){
-
-                  ele.target.children[2].src = "/assets/img/"+this.currentCoinSelected+".png"
-                  
-                }else{
-                  
-                  ele.target.children[1].src = "/assets/img/"+this.currentCoinSelected+".png"
-
+                else{
+                  alert("insufficient funds!")
                 }
-                
-                condition.soldeJouer = parseFloat(solde)
-
-              }else{
-                alert("insufficient funds!")
               }
+
+              
 
 
 
@@ -721,38 +732,43 @@ export class HomeComponent implements OnInit {
                 newSolde += parseFloat(solde)
               }
 
-              if(newSolde <= this.userSolde && newSolde != 0){
+              if(newSolde != 0){
+                if(newSolde <= this.userSolde){
 
-                this.totalConditionsSolde -= condition.soldeJouer
+                  this.totalConditionsSolde -= condition.soldeJouer
 
-                this.currentRestSolde += condition.soldeJouer
+                  this.currentRestSolde += condition.soldeJouer
 
-                this.totalConditionsSolde += parseFloat(solde)
+                  this.totalConditionsSolde += parseFloat(solde)
 
-                if(this.currentRestSolde - parseFloat(solde) >= 0){
-                  this.currentRestSolde -= parseFloat(solde)
+                  if(this.currentRestSolde - parseFloat(solde) >= 0){
+                    this.currentRestSolde -= parseFloat(solde)
+                  }
+                  
+
+                  if(ele.target.childElementCount === 1){
+
+                    ele.target.children[0].src = "/assets/img/"+this.currentCoinSelected+".png"
+                    
+                  }else if(ele.target.childElementCount === 3){
+
+                    ele.target.children[2].src = "/assets/img/"+this.currentCoinSelected+".png"
+                    
+                  }else{
+                    
+                    ele.target.children[1].src = "/assets/img/"+this.currentCoinSelected+".png"
+
+                  }
+                  
+                  condition.soldeJouer = parseFloat(solde)
+
                 }
-                
-
-                if(ele.target.childElementCount === 1){
-
-                  ele.target.children[0].src = "/assets/img/"+this.currentCoinSelected+".png"
-                  
-                }else if(ele.target.childElementCount === 3){
-
-                  ele.target.children[2].src = "/assets/img/"+this.currentCoinSelected+".png"
-                  
-                }else{
-                  
-                  ele.target.children[1].src = "/assets/img/"+this.currentCoinSelected+".png"
-
+                else{
+                  alert("insufficient funds!")
                 }
-                
-                condition.soldeJouer = parseFloat(solde)
-
-              }else{
-                alert("insufficient funds!")
               }
+
+
             }
           }
 

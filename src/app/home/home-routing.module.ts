@@ -6,8 +6,17 @@ const routes: Routes = [
 
   {
     path:"",
-    component:HomeComponent
-  }
+    component:HomeComponent,
+    children:[
+
+      {
+        path:"history",
+        loadChildren: () => import('../player-history/player-history.module').then(m => m.PlayerHistoryModule),
+      }
+
+    ]
+  },
+  
 
 ];
 

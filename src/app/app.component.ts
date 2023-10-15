@@ -14,32 +14,23 @@ export class AppComponent implements OnInit{
 
   ngOnInit(): void {
 
-    var timer = 60
+    var timer = 5
     var timeout = 0
 
-    var interval = setInterval(()=>{
-      if(this.users.user.id != ""){
-        clearInterval(interval)
-        this.users.findUser(this.users.user.id).subscribe((res:any)=>{
-          console.log(res)
-          setInterval(()=>{
+    setInterval(()=>{
 
-            if(timer > 0 && timeout === 0){
-              timer--
-            }else{
-              timer = 60
-              if(timeout>0){
-                timeout--
-              }else{
-                timeout = 45
-                this.rouletteService.spinOpen = true
-              }
-            }
-
-          },1000)
-        })
+      if(timer > 0 && timeout === 0){
+        timer--
+      }else{
+        timer = 5
+        if(timeout>0){
+          timeout--
+        }else{
+          timeout = 60
+        }
       }
-    },10)
+
+    },1000)
 
   }
 }

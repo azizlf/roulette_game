@@ -19,6 +19,7 @@ export class PlayerAuthComponent implements OnInit {
 
   constructor(private router: Router,private users:UsersService) { }
 
+ 
   login(){
 
     const user = this.userDetails.value
@@ -29,6 +30,7 @@ export class PlayerAuthComponent implements OnInit {
         this.users.user.id = res.joueur
         this.users.user.token = res.token
         this.router.navigate(['/home'])
+
       }
 
     })  

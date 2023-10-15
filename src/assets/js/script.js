@@ -40,7 +40,6 @@ function initFnHome(){
 	})
 
 	function handleOrientationChange(event) {
-		console.log(event.matches)
 		if (event.matches) {
 			document.querySelector(".alert-orient").style.display = "none"
 		} else {
@@ -102,4 +101,60 @@ function SpinWheelEvents(){
 
 	})
 
+}
+
+var mediaStream
+
+function scanQrTiket() {
+    const video = document.querySelector('.stream-scan');
+    const canvas = document.querySelector('.canvas-qr');
+    const ctx = canvas.getContext('2d');
+
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true })
+        .then((stream) => {
+
+        	mediaStream = stream
+
+            video.srcObject = stream
+
+            video.play()
+
+        	localStorage.setItem("access-to-camera","1")
+
+            function scan() {
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+                const code = jsQR(imageData.data, imageData.width, imageData.height)
+
+                if (code) {
+                    localStorage.setItem("qr-data",code.data)
+                } else {
+                    localStorage.setItem("qr-data","false")
+                }
+
+                requestAnimationFrame(scan)
+            }
+
+            scan()
+        })
+        .catch((error) => {
+            localStorage.setItem("access-to-camera","0")
+        });
+    }
+}
+
+function stopCamera() {
+    if (mediaStream) {
+        const tracks = mediaStream.getTracks()
+
+        tracks.forEach((track) => {
+            track.stop()
+        });
+
+        mediaStream = null
+
+        const video = document.querySelector('.stream-scan')
+        video.srcObject = null
+    }
 }

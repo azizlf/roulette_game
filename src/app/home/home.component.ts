@@ -3,8 +3,11 @@ import { Router } from '@angular/router';
 import { TiketService } from '../services/tiket.service'
 import { UsersService } from '../services/users.service'
 import { RouletteService } from '../services/roulette.service'
+import * as QRCode from 'qrcode-generator'
 
 declare function initFnHome():void
+declare function scanQrTiket():void
+declare function stopCamera():void
 
 @Component({
   selector: 'app-home',
@@ -22,7 +25,15 @@ export class HomeComponent implements OnInit {
     login:""
 
   }
+
+  noEventUser = false
+
+  timeIsUpSpin = false
+
+  openMsgBox = false
+
   isLooping = false
+
   userSolde = 0.0
 
   tikets:any = []
@@ -32,13 +43,14 @@ export class HomeComponent implements OnInit {
 
   element:any
 
+  soldeMaxWin = 0
+
   doc:any
 
   coins:any = ["05","1","5","10","20"]
 
   currentCoinSelected = this.coins[0]
 
-  spinStart:any
 
   numbers:any = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]
 
@@ -197,6 +209,70 @@ export class HomeComponent implements OnInit {
 
   adminId:any
 
+  openScanQrCode = false
+
+  scanInterval:any
+
+  scanQrImage(){
+
+    if(!this.openScanQrCode){
+      scanQrTiket()
+
+      setTimeout(()=>{
+
+        if(localStorage.getItem("access-to-camera") === "1"){
+
+          this.element = document.querySelector(".read-qr-sanc")
+          this.element.style.opacity = "1"
+          this.element.style.pointerEvents = "all"
+          this.openScanQrCode = true
+
+        }else{
+
+          alert("access denied to camera")
+
+        }
+
+        setTimeout(()=>{
+
+          this.scanInterval =  setInterval(()=>{
+
+            scanQrTiket()
+
+            var result = localStorage.getItem("qr-data")
+
+            if(result === "false"){
+              
+              alert("No qr code detected")
+
+            }else{
+              alert(result)
+            }
+
+          },7000)
+
+        },5000)
+
+      },3000)
+    }
+    else{
+      stopCamera()
+      clearInterval(this.scanInterval)
+      this.element = document.querySelector(".read-qr-sanc")
+      this.element.style.opacity = "0"
+      this.element.style.pointerEvents = "none"
+      this.openScanQrCode = false
+    }
+
+  }
+
+  openSpinwheel(){
+    const url = window.location.href.split("/")[2]
+    window.open("http://"+url+"/spin/desktop")
+    localStorage.setItem("#FSDJIOSFDEZ",this.adminId)
+
+  }
+
   initTikets(){
 
     this.element = document.querySelector(".list-tikets")
@@ -328,6 +404,7 @@ export class HomeComponent implements OnInit {
         this.conditions.forEach((condition:any)=>{
 
           condition.soldeJouer *= 2
+          condition.soldeGagner = condition.soldeJouer * condition.coefficient
 
         })
 
@@ -474,195 +551,216 @@ export class HomeComponent implements OnInit {
 
   addCondition(type:any,ele:any,choice:any){
 
-    var solde = this.currentCoinSelected
+    if(!this.timeIsUpSpin){
+      var solde = this.currentCoinSelected
 
-    var itemIsSelected = false
+      var itemIsSelected = false
 
-    var coef = 0
+      var coef = 0
 
-    if(ele.target.classList.contains("clicked-btn") || ele.target.classList.contains("clicked")){
-      itemIsSelected = true
-    }
-
-    this.dashbordAttrsCoef.forEach((item:any)=>{
-
-      if(this.arraysIsEqual(choice,item.list)){
-        coef = item.coef
+      if(ele.target.classList.contains("clicked-btn") || ele.target.classList.contains("clicked")){
+        itemIsSelected = true
       }
 
-    })
+      this.dashbordAttrsCoef.forEach((item:any)=>{
 
-    if(coef === 0){
-
-      if(choice.length === 2){
-        coef = 18
-      }else if(choice.length === 3){
-        coef = 12
-      }else if(choice.length === 4){
-        coef = 9
-      }else if(choice.length === 1){
-        coef = 36
-      }
-
-    }
-    if(solde === "05"){
-      solde = 0.5
-    }
-    
-    if(!itemIsSelected){
-
-      
-
-      if(this.totalConditionsSolde + parseFloat(solde) >this.userSolde){
-        alert("insufficient funds!")
-      }else{
-
-        this.currentRestSolde = this.userSolde-this.totalConditionsSolde
-
-        var conditionId = this.generateTiketCode(5)
-
-        this.selectedItems.push({
-
-          condition_id: conditionId,
-          btn:ele,
-          numbers:choice
-
-        })
-        
-        this.conditions.push({
-          condition_id: conditionId,
-          condition:choice,
-          soldeJouer:parseFloat(solde),
-          soldeGagner:parseFloat(solde)*coef,
-          coefficient:coef
-        })
-
-        if(ele.target.childElementCount === 1){
-
-          ele.target.children[0].src = "/assets/img/"+this.currentCoinSelected+".png"
-          
-        }else if(ele.target.childElementCount === 3){
-
-          ele.target.children[2].src = "/assets/img/"+this.currentCoinSelected+".png"
-          
-        }else{
-          
-          ele.target.children[1].src = "/assets/img/"+this.currentCoinSelected+".png"
-
-        }
-
-        ele.target.classList.add("clicked-btn")
-
-        this.element = document.querySelector(".create-tiket")
-
-        this.element.style.display = "block" 
-
-        this.totalConditionsSolde += parseFloat(solde)
-
-        this.currentRestSolde = this.userSolde-this.totalConditionsSolde
-      }
-      
-    }
-    else{
-      this.conditions.forEach((condition:any)=>{
-        const list = condition.condition
-        
-        if(choice.length > 1){
-          if(list[list.length-1] === choice[choice.length-1] && list[0] === choice[0]){
-
-            var newSolde = 0
-
-            if(parseFloat(solde)!=condition.soldeJouer){
-              newSolde = this.totalConditionsSolde - condition.soldeJouer
-              newSolde += parseFloat(solde)
-            }
-
-            if(newSolde <= this.userSolde && newSolde != 0){
-
-              this.totalConditionsSolde -= condition.soldeJouer
-
-              this.currentRestSolde += condition.soldeJouer
-
-              this.totalConditionsSolde += parseFloat(solde)
-
-              if(this.currentRestSolde - parseFloat(solde) >= 0){
-                this.currentRestSolde -= parseFloat(solde)
-              }
-
-
-              if(ele.target.childElementCount === 1){
-
-                ele.target.children[0].src = "/assets/img/"+this.currentCoinSelected+".png"
-                
-              }else if(ele.target.childElementCount === 3){
-
-                ele.target.children[2].src = "/assets/img/"+this.currentCoinSelected+".png"
-                
-              }else{
-                
-                ele.target.children[1].src = "/assets/img/"+this.currentCoinSelected+".png"
-
-              }
-              
-              condition.soldeJouer = parseFloat(solde)
-
-            }else{
-              alert("insufficient funds!")
-            }
-
-
-
-
-          }
-        }else{
-          if(list[0] === choice[0]){
-
-            var newSolde = 0
-
-            if(parseFloat(solde)!=condition.soldeJouer){
-              newSolde = this.totalConditionsSolde - condition.soldeJouer
-              newSolde += parseFloat(solde)
-            }
-
-            if(newSolde <= this.userSolde && newSolde != 0){
-
-              this.totalConditionsSolde -= condition.soldeJouer
-
-              this.currentRestSolde += condition.soldeJouer
-
-              this.totalConditionsSolde += parseFloat(solde)
-
-              if(this.currentRestSolde - parseFloat(solde) >= 0){
-                this.currentRestSolde -= parseFloat(solde)
-              }
-              
-
-              if(ele.target.childElementCount === 1){
-
-                ele.target.children[0].src = "/assets/img/"+this.currentCoinSelected+".png"
-                
-              }else if(ele.target.childElementCount === 3){
-
-                ele.target.children[2].src = "/assets/img/"+this.currentCoinSelected+".png"
-                
-              }else{
-                
-                ele.target.children[1].src = "/assets/img/"+this.currentCoinSelected+".png"
-
-              }
-              
-              condition.soldeJouer = parseFloat(solde)
-
-            }else{
-              alert("insufficient funds!")
-            }
-          }
+        if(this.arraysIsEqual(choice,item.list)){
+          coef = item.coef
         }
 
       })
-    }    
 
-    this.initConditions()
+      if(coef === 0){
+
+        if(choice.length === 2){
+          coef = 18
+        }else if(choice.length === 3){
+          coef = 12
+        }else if(choice.length === 4){
+          coef = 9
+        }else if(choice.length === 1){
+          coef = 36
+        }
+
+      }
+      if(solde === "05"){
+        solde = 0.5
+      }
+
+      if(!itemIsSelected){
+
+        
+
+        if(this.totalConditionsSolde + parseFloat(solde) >this.userSolde){
+          alert("insufficient funds!")
+        }else{
+
+          this.currentRestSolde = this.userSolde-this.totalConditionsSolde
+
+          var conditionId = this.generateTiketCode(5)
+
+          this.selectedItems.push({
+
+            condition_id: conditionId,
+            btn:ele,
+            numbers:choice
+
+          })
+          
+          this.conditions.push({
+            condition_id: conditionId,
+            condition:choice,
+            soldeJouer:parseFloat(solde),
+            soldeGagner:parseFloat(solde)*coef,
+            coefficient:coef
+          })
+
+          if(ele.target.childElementCount === 1){
+
+            ele.target.children[0].src = "/assets/img/"+this.currentCoinSelected+".png"
+            
+          }else if(ele.target.childElementCount === 3){
+
+            ele.target.children[2].src = "/assets/img/"+this.currentCoinSelected+".png"
+            
+          }else{
+            
+            ele.target.children[1].src = "/assets/img/"+this.currentCoinSelected+".png"
+
+          }
+
+          ele.target.classList.add("clicked-btn")
+
+          this.element = document.querySelector(".create-tiket")
+
+          this.element.style.display = "block" 
+
+          this.totalConditionsSolde += parseFloat(solde)
+
+          this.currentRestSolde = this.userSolde-this.totalConditionsSolde
+
+          var soldeList:any = []
+
+          this.conditions.forEach((condition:any)=>{
+
+            soldeList.push(condition.soldeGagner)
+
+          })
+
+          this.soldeMaxWin = soldeList[0]
+
+          for (var i = 0; i < soldeList.length; i++) {
+            
+            if(soldeList[i] > this.soldeMaxWin){
+              
+              this.soldeMaxWin = soldeList[i]
+
+            }
+          }
+        }
+        
+      }
+      else{
+        this.conditions.forEach((condition:any)=>{
+          const list = condition.condition
+          
+          if(choice.length > 1){
+            if(list[list.length-1] === choice[choice.length-1] && list[0] === choice[0]){
+
+              var newSolde = 0
+
+              if(parseFloat(solde)!=condition.soldeJouer){
+                newSolde = this.totalConditionsSolde - condition.soldeJouer
+                newSolde += parseFloat(solde)
+              }
+
+              if(newSolde <= this.userSolde && newSolde != 0){
+
+                this.totalConditionsSolde -= condition.soldeJouer
+
+                this.currentRestSolde += condition.soldeJouer
+
+                this.totalConditionsSolde += parseFloat(solde)
+
+                if(this.currentRestSolde - parseFloat(solde) >= 0){
+                  this.currentRestSolde -= parseFloat(solde)
+                }
+
+
+                if(ele.target.childElementCount === 1){
+
+                  ele.target.children[0].src = "/assets/img/"+this.currentCoinSelected+".png"
+                  
+                }else if(ele.target.childElementCount === 3){
+
+                  ele.target.children[2].src = "/assets/img/"+this.currentCoinSelected+".png"
+                  
+                }else{
+                  
+                  ele.target.children[1].src = "/assets/img/"+this.currentCoinSelected+".png"
+
+                }
+                
+                condition.soldeJouer = parseFloat(solde)
+
+              }else{
+                alert("insufficient funds!")
+              }
+
+
+
+
+            }
+          }else{
+            if(list[0] === choice[0]){
+
+              var newSolde = 0
+
+              if(parseFloat(solde)!=condition.soldeJouer){
+                newSolde = this.totalConditionsSolde - condition.soldeJouer
+                newSolde += parseFloat(solde)
+              }
+
+              if(newSolde <= this.userSolde && newSolde != 0){
+
+                this.totalConditionsSolde -= condition.soldeJouer
+
+                this.currentRestSolde += condition.soldeJouer
+
+                this.totalConditionsSolde += parseFloat(solde)
+
+                if(this.currentRestSolde - parseFloat(solde) >= 0){
+                  this.currentRestSolde -= parseFloat(solde)
+                }
+                
+
+                if(ele.target.childElementCount === 1){
+
+                  ele.target.children[0].src = "/assets/img/"+this.currentCoinSelected+".png"
+                  
+                }else if(ele.target.childElementCount === 3){
+
+                  ele.target.children[2].src = "/assets/img/"+this.currentCoinSelected+".png"
+                  
+                }else{
+                  
+                  ele.target.children[1].src = "/assets/img/"+this.currentCoinSelected+".png"
+
+                }
+                
+                condition.soldeJouer = parseFloat(solde)
+
+              }else{
+                alert("insufficient funds!")
+              }
+            }
+          }
+
+        })
+      }    
+
+      this.initConditions()
+    }
 
   }
 
@@ -932,6 +1030,330 @@ export class HomeComponent implements OnInit {
   }
 
 
+  chronoConfig(){
+
+    this.tiketService.chrono().subscribe((res:any)=>{
+
+      if(res.temp >= 28){
+
+        //this.noEventUser = true
+        this.timeIsUpSpin = true
+
+      }else{
+        this.noEventUser = false
+        this.timeIsUpSpin = false
+      }
+
+    })
+
+    setTimeout(this.chronoConfig.bind(this),1000)
+
+  }
+
+  initTiketToPrint(){
+
+    this.element = document.querySelector(".tiket-area-print-content")
+
+    this.element.innerHTML = `<div class="title">N° g56fg4ds56g56fds4g8fds46</div>
+    <div class="titles-list">
+      <div class="item">Selection</div>
+      <div class="item center">Odd</div>
+      <div class="item right">Solde</div>
+    </div>
+    <div class="conditions-list"></div>`
+
+    var solde = 0, soldeMin = 0, soldeMax = 0 , soldeList:any = []
+
+    this.conditions.forEach((condition:any)=>{
+
+      solde += condition.soldeJouer
+      soldeList.push(condition.soldeGagner)
+
+    })
+
+    soldeMax = soldeList[0]
+
+    for (var i = 0; i < soldeList.length; i++) {
+
+      if(soldeList[i] > soldeMax){
+        
+        soldeMax = soldeList[i]
+
+      }
+    }
+
+    this.element = document.querySelector(".conditions-list")
+
+    this.conditions.forEach((condition:any)=>{
+
+      var arrayNumbers = ""
+
+      if(condition.condition.length > 10){
+
+        arrayNumbers = condition.condition[0]+"-"+condition.condition[condition.condition.length-1]
+
+      }else{
+        for (var i = 0 ;i < condition.condition.length; i++) {
+          if(i>0 && i<condition.condition.length){
+            arrayNumbers += " , "
+          }
+          arrayNumbers += condition.condition[i]
+        }
+      }
+
+      var conditionItemHtml =  `<div class="item">
+                                <div class="it">${arrayNumbers}</div>
+                                <div class="it center">x${condition.coefficient}</div>
+                                <div class="it right">${condition.soldeJouer} dt</div>
+                              </div>`
+      
+      this.element.innerHTML += conditionItemHtml
+
+    })
+
+
+    var totalHtml = `<div class="total-tiket">
+                      <div class="item">
+                        <p class="ttl">Total</p>
+                        <p class="right">${solde} dt</p>
+                      </div>
+                      <div class="item">
+                        <p class="ttl">Max win</p>
+                        <p class="right">${soldeMax} dt</p>
+                      </div>
+                    </div>`
+
+    this.element = document.querySelector(".tiket-area-print-content")
+
+
+    var src = this.generateQRCode("aaaa")
+
+    var qrCode = `<img class="qr-image-tiket-print" src="${src}" alt"qrCode/>`
+
+    this.element.innerHTML += totalHtml
+
+    this.element.innerHTML += qrCode
+
+
+  }
+
+  printTiket(){
+
+    this.initTiketToPrint()
+
+    setTimeout(()=>{
+      this.element = document.querySelector(".tiket-print-area");
+
+      this.doc = window.open('', '', 'width="100%",height="100%"');
+      
+      this.doc.document.open();
+      
+      this.doc.document.write(`
+        
+        <html>
+
+          <head>
+
+            <title>Print Ticket</title>
+
+          <style>
+
+            .tiket-print-area{
+
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              display: flex;
+              justify-content: center;
+              background-color: white;
+              z-index: 956456445698689897489751;
+
+            }
+
+            .tiket-print-area .content-container{
+
+              width: 90%;
+              text-align: center;
+
+            }
+
+            .tiket-print-area .content-container img{
+
+              margin-top: 3%;
+
+            }
+
+
+            .tiket-print-area .content-container .title{
+
+              width: 100%;
+              text-align: center;
+              padding: 13% 0;
+              font-size: 40px;
+
+            }
+
+            .tiket-print-area .content-container img{
+
+              width: 17%;
+
+            }
+
+            .tiket-print-area .content-container .titles-list{
+
+              width: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+
+            }
+
+            .tiket-print-area .content-container .titles-list .item{
+
+              width: 34%;
+              font-size: 17px;
+              font-weight: bold;
+              display: flex;
+              align-items: center;
+
+            }
+
+            .tiket-print-area .content-container .titles-list .item.center{
+
+              justify-content: center;
+
+            }
+
+            .tiket-print-area .content-container .titles-list .item.right{
+
+              justify-content: right;
+
+            }
+
+
+            .tiket-print-area .content-container .conditions-list{
+
+              width: 100%;
+              border-bottom: .1vw dashed gray;
+              padding: 1% 0;
+
+            }
+
+            .tiket-print-area .content-container .conditions-list .item{
+
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              padding: .5% 0;
+              width: 100%;
+              font-size: 16px;
+
+            }
+
+
+            .tiket-print-area .content-container .conditions-list .item .it{
+
+              width: 34%;
+              display: flex;
+              align-items: center;
+
+            }
+
+
+            .tiket-print-area .content-container .conditions-list .item .it.center{
+
+              justify-content: center;
+
+
+            }
+
+            .tiket-print-area .content-container .conditions-list .item .it.right{
+
+              justify-content: right;
+
+
+            }
+
+            .tiket-print-area .content-container .total-tiket{
+
+              width: 100%;
+
+            }
+
+            .tiket-print-area .content-container .total-tiket .item{
+
+              width: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              padding: .1% 0;
+              font-size: 16px;
+
+            }
+
+            .tiket-print-area .content-container .total-tiket .item p{
+
+              width: 34%;
+              display: flex;
+              align-items: center;
+            }
+
+            .tiket-print-area .content-container .total-tiket .item p.center{
+
+              justify-content: center;
+
+
+            }
+
+
+            .tiket-print-area .content-container .total-tiket .item p.right{
+
+              justify-content: right;
+
+
+            }
+
+            .tiket-print-area .content-container .total-tiket .item .ttl{
+
+              font-weight: bold;
+
+            }
+
+
+          </style>
+
+          </head>
+        <body>`);
+      this.doc.document.write(this.element.outerHTML);
+      this.doc.document.write('</body></html>');
+      this.doc.document.close();
+      this.doc.print();
+      this.doc.close();
+    },1000)
+
+  }
+
+  openPrint(){
+    this.openMsgBox = true
+  }
+
+  cancelPrint(){
+    this.openMsgBox = false
+  }
+
+  generateQRCode(data:any) {
+
+    const qr = QRCode(0, 'L')
+
+    qr.addData(data)
+
+    qr.make()
+
+    return qr.createDataURL(4, 0)
+  }
+
   ngOnInit(): void {
 
     if(this.users.user.id === ""){
@@ -940,22 +1362,8 @@ export class HomeComponent implements OnInit {
 
     }else{
 
-      this.spinStart = this.rouletteService.spinOpen
-
-      setInterval(()=>{
-        if(this.rouletteService.spinOpen){
-          
-          this.spinStart = true
-
-          var interval = setInterval(()=>{
-            if(!this.rouletteService.spinOpen){
-              this.spinStart = false
-              clearInterval(interval)
-            }
-          })
-        }
-      },1000)
-
+      this.chronoConfig()
+      
       this.getUser()
 
       setTimeout(()=>{
@@ -967,6 +1375,16 @@ export class HomeComponent implements OnInit {
         initFnHome()
 
       },100)
+
+      setInterval(()=>{
+        this.element = document.querySelector(".read-qr-sanc")
+        
+        if(!this.openScanQrCode){
+          this.element.style.opacity = "0"
+          this.element.style.pointerEvents = "none"
+        }
+
+      },3000)
 
 
     }

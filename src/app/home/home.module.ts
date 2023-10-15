@@ -2,13 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from './home-routing.module';
-import { SpinWheelComponent } from '../spin-wheel/spin-wheel.component';
 
 
 @NgModule({
   declarations: [
-    HomeComponent,
-    SpinWheelComponent
+    HomeComponent
   ],
   imports: [
     CommonModule,

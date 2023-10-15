@@ -12,12 +12,12 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
   },
   {
-    path:"admin",
-    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
+    path:"spin/desktop",
+    loadChildren: () => import('./spin-desktop/spin-desktop.module').then(m => m.SpinDesktopModule)
   },
   {
-    path:"history",
-    loadChildren: () => import('./player-history/player-history.module').then(m => m.PlayerHistoryModule),
+    path:"admin",
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
   },
   {
     path:"settings",

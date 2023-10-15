@@ -204,7 +204,7 @@ export class SpinWheelComponent implements OnInit {
   choosedAngle = 0
 
   totalRotations = 0
-  rotationsToStop = 70
+  rotationsToStop = 67
   isSpinning = true
 
   wheel:any
@@ -213,9 +213,10 @@ export class SpinWheelComponent implements OnInit {
 
   spinStartTime = 0
 
-  time = 150
+  time = 90
 
   element:any
+
 
   constructor(private rouletteService:RouletteService) { }
 
@@ -276,7 +277,11 @@ export class SpinWheelComponent implements OnInit {
                 this.indicator.style.transform = "scale(1)"
                 this.indicator.style.marginTop = "3.3%"
                 setTimeout(()=>{
+                  
                   this.rouletteService.spinOpen = false
+                  this.rouletteService.angleStoped = this.wheel.style.transform
+                  this.rouletteService.selectedNumberWin = this.angles[this.choosedAngle].val
+                  this.rouletteService.selectedColorNumberWin = this.angles[this.choosedAngle].color
                 },5000)
               },4000)
           },550) 
@@ -298,7 +303,7 @@ export class SpinWheelComponent implements OnInit {
 
       SpinWheelEvents()
 
-      this.spinToAngle(13)
+      this.spinToAngle(34)
 
     },5000)
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../services/users.service'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-player-settings',
@@ -24,7 +25,7 @@ export class PlayerSettingsComponent implements OnInit {
   successMsg:any
   element:any
 
-  constructor(private usersService:UsersService) { }
+  constructor(private usersService:UsersService,private router: Router) { }
 
   updateUserInfos(key:any,value:any){
 
@@ -93,7 +94,15 @@ export class PlayerSettingsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getUser()
+    if(this.usersService.user.id === ""){
+
+      this.router.navigate(['/'])
+
+    }else{
+      
+      this.getUser()
+
+    }
   }
 
 }

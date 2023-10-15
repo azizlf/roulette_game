@@ -2,7 +2,7 @@
 	
 	<div class="nav-bar">
 		<div class="return-btn" routerLink="/home">
-			<i class="fa-solid fa-arrow-left"></i>
+			<i class="fa-solid fa-xmark"></i>
 		</div>
 	</div>
 	<div class="content-history-page" *ngIf="!isLoading">
@@ -21,7 +21,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="loading-ellipsis" *ngIf="isLoading">
+	<div class="loading-ellipsis" style="width: 100%;" *ngIf="isLoading">
 		<div class="r1"></div>
 		<div class="r2"></div>
 		<div class="r3"></div>

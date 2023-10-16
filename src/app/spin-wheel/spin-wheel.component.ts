@@ -256,7 +256,7 @@ export class SpinWheelComponent implements OnInit {
 
       this.indicator.style.backgroundColor = this.angles[index].color
 
-      this.time += .9
+      this.time += .8
 
       if (index !== this.choosedAngle) {
         this.requestAnimationFrame(this.animateSpin)
@@ -299,7 +299,7 @@ export class SpinWheelComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.element = document.querySelector(".spin-ctn")
+    /*this.element = document.querySelector(".spin-ctn")
 
     this.element.style.backgroundImage = "url('/assets/img/"+this.rouletteService.rouletteDesign.background+".png')"
 
@@ -310,6 +310,10 @@ export class SpinWheelComponent implements OnInit {
     this.element = document.querySelector(".spin")
 
     this.element.src = "/assets/img/"+this.rouletteService.rouletteDesign.numbers+".png"
+
+    */
+
+    this.element = document.querySelector(".spin")
 
     this.element.style.transform = "rotate(" + this.rouletteService.angleStoped + "deg)"
 
@@ -324,6 +328,8 @@ export class SpinWheelComponent implements OnInit {
     setTimeout(()=>{
 
       SpinWheelEvents()
+
+      console.log(this.rouletteService.winNumberSelected)
 
       this.spinToAngle(this.rouletteService.winNumberSelected)
 

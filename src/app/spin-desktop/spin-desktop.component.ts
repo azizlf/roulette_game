@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RouletteService } from '../services/roulette.service'
 import { TiketService } from '../services/tiket.service'
+import { UsersService } from '../services/users.service'
 
 @Component({
   selector: 'app-spin-desktop',
@@ -37,71 +38,30 @@ export class SpinDesktopComponent implements OnInit {
   ]
 
 
-  constructor(private rouletteService:RouletteService,private tiketService:TiketService) { }
+  constructor(private rouletteService:RouletteService,private users:UsersService,private tiketService:TiketService) { }
 
 
   chronoConfig(){
-    /*
+
     this.tiketService.chrono().subscribe((res:any)=>{
 
-      if(res.temp >= 28){
+      if(res.temp >= 75){
 
-        this.rouletteService.spinOpen = true
+        this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
 
-      }
-
-    })*/
-
-    this.rouletteService.rouletteDesign = this.deisgn[0]
-
-    if(this.timer > 0 && this.timeout === 0){
-      this.timer--
-    }else{
-      this.timer = 5
-
-      if(this.timeout>0){
-        this.timeout--
-      }else{
-        this.timeout = 60
-        if(this.totalRotations <= 1){
-
-          this.totalRotations++
-
-        }else{
-
-          this.totalRotations = 0
-
-          this.changingCounter++
-
-          if(this.changingCounter < this.deisgn.length){
-
-            console.log(this.deisgn[this.changingCounter])
-
-            this.rouletteService.spinOpen = true
-
-            this.rouletteService.rouletteDesign = this.deisgn[this.changingCounter]
-
-          }else{
-
-            this.changingCounter = 0
-
-          }
-
-        }
-      }
-    }
-
-    window.addEventListener("visibilitychange", () =>{
-
-      if (document.visibilityState === "visible") {
-
-        setTimeout(()=>{
+          this.rouletteService.winNumberSelected = res.resultatRoulette
           this.rouletteService.spinOpen = true
           this.spinStart = this.rouletteService.spinOpen
-        },500)
 
+        })
+
+      }else{
+        this.rouletteService.spinOpen = false
       }
+
     })
+
+    this.rouletteService.rouletteDesign = this.deisgn[0]
 
 
     setTimeout(this.chronoConfig.bind(this),1000)

@@ -36,6 +36,10 @@ export class HomeComponent implements OnInit {
 
   userSolde = 0.0
 
+  openTimerAlert = false 
+
+  timerAlert:any
+
   tikets:any = []
   conditions:any = []
   soldeTiket = 0
@@ -203,6 +207,8 @@ export class HomeComponent implements OnInit {
     }
 
   ]
+
+  openWaitAlert = false
 
   totalConditionsSolde = 0.0
   currentRestSolde = 0.0
@@ -853,6 +859,8 @@ export class HomeComponent implements OnInit {
 
         if(res.message){
 
+          this.tiketService.createdTiketIdForPrint = res.ticket
+
           this.conditions = []
 
           this.element = document.querySelector(".create-tiket")
@@ -988,6 +996,8 @@ export class HomeComponent implements OnInit {
       this.userSolde = parseFloat(res.solde)
       this.adminId = res.admin
 
+      localStorage.setItem("#FSDJIOSFDEZ",res.adminId)
+
       for (var i = res.tikets.length - 1 ; i >= 0; i--) {
         if(res.tikets[i].realTime){
           this.tikets.push(res.tikets[i])
@@ -999,6 +1009,19 @@ export class HomeComponent implements OnInit {
 
     })
 
+  }
+
+  autoUpdateSolde(){
+
+    this.users.findUser(this.users.user.id).subscribe((res:any)=>{
+      
+      this.userSolde = parseFloat(res.solde)
+
+
+    })
+
+
+    setTimeout(this.autoUpdateSolde.bind(this),1000)
   }
 
   logout(){
@@ -1049,14 +1072,27 @@ export class HomeComponent implements OnInit {
 
     this.tiketService.chrono().subscribe((res:any)=>{
 
-      if(res.temp >= 28){
+      if(res.temp >= 40){
 
-        this.noEventUser = true
-        this.timeIsUpSpin = true
+        this.timerAlert = 75 - res.temp
+
+
+
+        this.openTimerAlert = true
+
+        if(this.timerAlert <= 0){
+
+          this.openTimerAlert = false
+          this.noEventUser = true
+          this.timeIsUpSpin = true
+
+        }
 
       }else{
+
         this.noEventUser = false
         this.timeIsUpSpin = false
+
       }
 
     })
@@ -1140,8 +1176,11 @@ export class HomeComponent implements OnInit {
 
     this.element = document.querySelector(".tiket-area-print-content")
 
+    this.validateTiket()
 
-    var src = this.generateQRCode("aaaa")
+    console.log(this.tiketService.createdTiketIdForPrint)
+
+    var src = this.generateQRCode(this.tiketService.createdTiketIdForPrint)
 
     var qrCode = `<img class="qr-image-tiket-print" src="${src}" alt"qrCode/>`
 
@@ -1149,7 +1188,7 @@ export class HomeComponent implements OnInit {
 
     this.element.innerHTML += qrCode
 
-    this.validateTiket()
+    
 
 
   }
@@ -1383,7 +1422,35 @@ export class HomeComponent implements OnInit {
 
     }else{
 
-      this.chronoConfig()
+      this.autoUpdateSolde()
+
+      this.tiketService.chrono().subscribe((res:any)=>{
+        
+        var waitSc = 120 - res.temp
+
+
+        if(waitSc <= 67){
+
+          this.openWaitAlert = true
+          var inter = setInterval(()=>{
+            if(waitSc>0){
+              waitSc--
+              this.timeIsUpSpin = true
+            }else{
+              this.openWaitAlert = false
+              this.chronoConfig()
+              clearInterval(inter)
+            }
+
+          },1000)
+
+        }else{
+
+          this.chronoConfig()
+
+        }
+
+      })
       
       this.getUser()
 
@@ -1395,17 +1462,19 @@ export class HomeComponent implements OnInit {
         
         initFnHome()
 
+        setInterval(()=>{
+          this.element = document.querySelector(".read-qr-sanc")
+          
+          if(!this.openScanQrCode){
+            this.element.style.opacity = "0"
+            this.element.style.pointerEvents = "none"
+          }
+
+        },3000)
+
       },100)
 
-      setInterval(()=>{
-        this.element = document.querySelector(".read-qr-sanc")
-        
-        if(!this.openScanQrCode){
-          this.element.style.opacity = "0"
-          this.element.style.pointerEvents = "none"
-        }
-
-      },3000)
+     
 
 
     }

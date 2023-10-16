@@ -29,7 +29,11 @@ export class PlayerAuthComponent implements OnInit {
       if(res.message){
         this.users.user.id = res.joueur
         this.users.user.token = res.token
-        this.router.navigate(['/home'])
+        if(window.innerWidth <= 900){
+          this.router.navigate(['/home-mobile'],{skipLocationChange:true})
+        }else{
+          this.router.navigate(['/home'])
+        }
 
       }
 

@@ -997,8 +997,7 @@ export class HomeMobileComponent implements OnInit {
       this.userDetails.solde = parseFloat(res.solde)
       this.userSolde = parseFloat(res.solde)
       this.adminId = res.admin
-
-      localStorage.setItem("#FSDJIOSFDEZ",res.adminId)
+      this.users.user.adminId = res.admin
 
       for (var i = res.tikets.length - 1 ; i >= 0; i--) {
         if(res.tikets[i].realTime){
@@ -1443,7 +1442,7 @@ export class HomeMobileComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if(this.users.user.id != ""){
+    if(this.users.user.id === ""){
 
       this.router.navigate(['/'])
 

@@ -307,6 +307,12 @@ export class SpinMobileComponent implements OnInit {
 
   rotateAnim(choosedNum:any){
 
+    this.element = document.querySelector(".spin-app")
+
+    this.element.style.scale = "2.3"
+    this.element.style.top = "14%"
+    this.element.style.left = "4%"
+
     this.isSpinning = true
 
     this.spinFinish = false
@@ -336,8 +342,14 @@ export class SpinMobileComponent implements OnInit {
         this.indicator.style.marginTop = "3.3%"
         setTimeout(()=>{
           this.spinFinish = false
+          this.element = document.querySelector(".spin")
           this.element.style.transition = "transform 10s ease-in-out"
           this.element.style.transform = "rotate(0deg)"
+          this.element = document.querySelector(".spin-app")
+          this.element.style.scale = "1"
+          this.element.style.top = "0%"
+          this.element.style.left = "0%"
+
         },5000)
       },4000)
     },21000)
@@ -351,8 +363,7 @@ export class SpinMobileComponent implements OnInit {
 
       if(res.temp >= 90 && res.temp < 120 && !this.isSpinning){
 
-
-        this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
+        this.users.findAdmin(this.users.user.adminId).subscribe((res:any)=>{
 
           this.isSpinning = true
           this.rotateAnim(res.resultatRoulette)
@@ -375,21 +386,6 @@ export class SpinMobileComponent implements OnInit {
       SpinWheelEvents()
 
       this.chronoConfig()
-      //this.rotateAnim(235)
-
-      
-
-      setTimeout(()=>{
-
-        this.element = document.querySelector(".spin-app")
-
-        this.element.style.scale = "2.3"
-        this.element.style.top = "14%"
-        this.element.style.left = "4%"
-
-        this.rotateAnim(21)
-
-      },5000)
 
     },2000)
 

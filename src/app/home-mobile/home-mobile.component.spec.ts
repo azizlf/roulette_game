@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SpinDesktopComponent } from './spin-desktop.component';
+import { HomeMobileComponent } from './home-mobile.component';
 
-describe('SpinDesktopComponent', () => {
-  let component: SpinDesktopComponent;
-  let fixture: ComponentFixture<SpinDesktopComponent>;
+describe('HomeMobileComponent', () => {
+  let component: HomeMobileComponent;
+  let fixture: ComponentFixture<HomeMobileComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SpinDesktopComponent ]
+      declarations: [ HomeMobileComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SpinDesktopComponent);
+    fixture = TestBed.createComponent(HomeMobileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

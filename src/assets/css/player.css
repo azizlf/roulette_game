@@ -2127,3 +2127,59 @@
 	font-size: 9vw;
 
 }
+
+
+@media screen and (max-width: 900px){
+
+	.dashbord-app{
+
+		width: 100%;
+		height: 40%;
+		background-color: #222222;
+		top: 60%;
+		left: 0;
+		position: absolute;
+		z-index: 15;
+		overflow: hidden;
+
+	}
+
+	.dashbord-app .content-dash-page .table{
+		width: 100%;
+	}
+
+	.dashbord-app .header-dash-app{
+		height: 13%;
+	}
+
+	.dashbord-app .header-dash-app .menu .item{
+		width: 12%;
+		font-size: 3vw;
+	}
+	.dashbord-app .header-dash-app .menu{
+		width: 100%;
+		font-size: 3vw;
+	}
+	.dashbord-app .header-dash-app .user-details{
+		width: 63%;
+		font-size: 3vw;
+	}
+	.dashbord-app .header-dash-app .user-details .sc i{
+		font-size: 3vw;
+	}
+
+	.dashbord-app .header-dash-app .user-details .sc{
+		font-size: 3vw;
+	}
+
+	.dashbord-app .header-dash-app .user-details .sc p{
+		width: 62%;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	.dashbord-app .content-dash-page{
+		height: 87%;
+	}
+
+}

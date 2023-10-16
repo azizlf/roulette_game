@@ -10,11 +10,11 @@ declare function scanQrTiket():void
 declare function stopCamera():void
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-home-mobile',
+  templateUrl: './home-mobile.component.html',
+  styleUrls: ['./home-mobile.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeMobileComponent implements OnInit {
 
   constructor(private router: Router,private tiketService:TiketService,private rouletteService:RouletteService,private users:UsersService) { }
 
@@ -1443,7 +1443,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if(this.users.user.id === ""){
+    if(this.users.user.id != ""){
 
       this.router.navigate(['/'])
 

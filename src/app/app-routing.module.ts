@@ -12,8 +12,12 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
   },
   {
+    path:"mobile",
+    loadChildren: () => import('./home-mobile/home-mobile.module').then(m => m.HomeMobileModule)
+  },
+  {
     path:"spin/desktop",
-    loadChildren: () => import('./spin-desktop/spin-desktop.module').then(m => m.SpinDesktopModule)
+    loadChildren: () => import('./spin-wheel/spin-wheel.module').then(m => m.SpinWheelModule)
   },
   {
     path:"admin",

@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SpinDesktopComponent } from './spin-desktop.component';
+import { HomeMobileComponent } from './home-mobile.component';
 
 const routes: Routes = [
 
   {
     path:"",
-    component:SpinDesktopComponent
+    component:HomeMobileComponent
   }
 
 ];
@@ -15,4 +15,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class SpinDesktopRoutingModule { }
+export class HomeMobileRoutingModule { }

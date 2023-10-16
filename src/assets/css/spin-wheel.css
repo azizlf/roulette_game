@@ -12,6 +12,8 @@
 	display: flex;
 	align-items: center;
 	overflow: hidden;
+	z-index: 1256489413121564896748;
+	transition: .9s;
 
 }
 
@@ -540,8 +542,12 @@
 	background-color: #b3090a;
 }
 
-@media screen and (max-width:950px){
+@media screen and (max-width:900px){
 	.spin-app .dashbord .statistics .table .content-table .ligne-nbrs{
 		height: 7.9%;
+	}
+
+	.spin-app{
+		height: 30%;
 	}
 }

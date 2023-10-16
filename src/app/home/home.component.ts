@@ -1074,9 +1074,7 @@ export class HomeComponent implements OnInit {
 
       if(res.temp >= 40){
 
-        this.timerAlert = 75 - res.temp
-
-
+        this.timerAlert = 90 - res.temp
 
         this.openTimerAlert = true
 
@@ -1429,7 +1427,7 @@ export class HomeComponent implements OnInit {
         var waitSc = 120 - res.temp
 
 
-        if(waitSc <= 67){
+        if(waitSc <= 30){
 
           this.openWaitAlert = true
           var inter = setInterval(()=>{

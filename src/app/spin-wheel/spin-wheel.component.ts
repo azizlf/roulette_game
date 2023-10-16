@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RouletteService } from '../services/roulette.service'
+import { TiketService } from '../services/tiket.service'
+import { UsersService } from '../services/users.service'
 
 declare function SpinWheelEvents():void
 
@@ -205,7 +207,7 @@ export class SpinWheelComponent implements OnInit {
 
   totalRotations = 0
   rotationsToStop = 67
-  isSpinning = true
+  isSpinning = false
 
   wheel:any
 
@@ -217,8 +219,12 @@ export class SpinWheelComponent implements OnInit {
 
   element:any
 
+  spinFinish = false
 
-  constructor(private rouletteService:RouletteService) { }
+  currentAngle = 0
+
+
+  constructor(private rouletteService:RouletteService,private users:UsersService,private tiketService:TiketService) { }
 
   spinToAngle(desiredAngle:any) {
     const index = this.angles.findIndex(item => item.val === desiredAngle)
@@ -297,43 +303,80 @@ export class SpinWheelComponent implements OnInit {
     window.requestAnimationFrame(callback.bind(this));
   }
 
+
+  rotateAnim(choosedNum:any){
+
+    this.isSpinning = true
+
+    this.spinFinish = false
+
+    this.indicator = document.querySelector(".indicator-number")
+
+    this.element = document.querySelector(".spin")
+
+    this.element.style.transition = "transform 20s ease-in-out"
+
+    var angle = this.angles[this.angles.findIndex(item => item.val === choosedNum)].ang + (360 * 19)
+
+    this.element.style.transform = "rotate("+(angle + 2)+"deg)"
+
+    this.indicator.innerText = choosedNum
+
+    this.indicator.style.backgroundColor = this.angles[this.angles.findIndex(item => item.val === choosedNum)].color
+
+
+    setTimeout(()=>{
+      this.spinFinish = true
+      this.indicator.style.transform = "scale(2)"
+      this.indicator.style.margin = "0"
+      setTimeout(()=>{
+        this.isSpinning = false
+        this.indicator.style.transform = "scale(1)"
+        this.indicator.style.marginTop = "3.3%"
+        setTimeout(()=>{
+          this.spinFinish = false
+          this.element.style.transition = "transform 10s ease-in-out"
+          this.element.style.transform = "rotate(0deg)"
+        },5000)
+      },4000)
+    },21000)
+
+  }
+
+
+  chronoConfig(){
+
+    this.tiketService.chrono().subscribe((res:any)=>{
+
+      if(res.temp >= 90 && res.temp < 120 && !this.isSpinning){
+
+
+        this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
+
+          this.isSpinning = true
+          this.rotateAnim(res.resultatRoulette)
+
+        })
+
+      }
+
+    })
+
+    setTimeout(this.chronoConfig.bind(this),1000)
+
+  }
+
   ngOnInit(): void {
-
-    /*this.element = document.querySelector(".spin-ctn")
-
-    this.element.style.backgroundImage = "url('/assets/img/"+this.rouletteService.rouletteDesign.background+".png')"
-
-    this.element = document.querySelector(".center-pointer")
-
-    this.element.style.backgroundImage = "url('/assets/img/"+this.rouletteService.rouletteDesign.pointer+".png')"
-
-    this.element = document.querySelector(".spin")
-
-    this.element.src = "/assets/img/"+this.rouletteService.rouletteDesign.numbers+".png"
-
-    */
-
-    this.element = document.querySelector(".spin")
-
-    this.element.style.transform = "rotate(" + this.rouletteService.angleStoped + "deg)"
-
-    this.element = document.querySelector(".indicator-number")
-
-    this.element.innerText = this.rouletteService.selectedNumberWin
-
-    this.element.style.backgroundColor = this.rouletteService.selectedColorNumberWin
-
 
 
     setTimeout(()=>{
 
       SpinWheelEvents()
 
-      console.log(this.rouletteService.winNumberSelected)
+      this.chronoConfig()
+      //this.rotateAnim(235)
 
-      this.spinToAngle(this.rouletteService.winNumberSelected)
-
-    },3000)
+    },2000)
 
   }
 

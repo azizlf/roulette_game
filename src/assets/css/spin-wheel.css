@@ -61,18 +61,6 @@
 
 	width: 88%;
 	position: absolute;
-	animation: rotateAni 35s;
-
-}
-
-
-@keyframes rotateAnim{
-
-	0%{
-
-		rotate: -5856deg;
-
-	}
 
 }
 
@@ -121,6 +109,14 @@
 
 }
 
+.spin-app .spin-section .lodoSpin{
+
+	position: absolute;
+	width: 30.9%;
+	margin-top: 3.3%;
+	z-index: 500;
+
+}
 
 .spin-app .dashbord{
 

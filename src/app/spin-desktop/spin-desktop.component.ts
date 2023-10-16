@@ -63,6 +63,7 @@ export class SpinDesktopComponent implements OnInit {
 
     this.rouletteService.rouletteDesign = this.deisgn[0]
 
+    this.spinStart = true
 
     setTimeout(this.chronoConfig.bind(this),1000)
 

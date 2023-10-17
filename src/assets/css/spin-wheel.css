@@ -548,6 +548,8 @@
 	}
 
 	.spin-app{
-		height: 30%;
+		height: 34%;
+		position: relative;
+		z-index: 950;
 	}
 }

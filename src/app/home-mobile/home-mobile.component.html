@@ -1,10 +1,86 @@
 <div class="application app-game-main">
+
+	<app-spin-mobile ></app-spin-mobile>
+
 	<router-outlet></router-outlet>
 
 	<div class="read-qr-sanc">
 		<video class="stream-scan"></video>
 		<canvas class="canvas-qr" style="display: none;"></canvas>
 		<div class="scan-bar"></div>
+	</div>
+
+	<div class="timer-alert" *ngIf="openNoEventAlert">
+			
+		<i class="fa-solid fa-lock"></i>
+
+	</div>
+
+	<div class="tikets-List-container-mobile">
+		
+		<div class="tikets" *ngIf="!conditionsIn">
+			<div class="header">
+				<div class="item">Code</div>
+				<div class="item">Stake</div>
+				<div class="item">Win</div>
+			</div>
+			<div class="item">
+				<div class="it">12335</div>
+				<div class="it">5</div>
+				<div class="it">x36</div>
+			</div>
+		</div>
+
+		<div class="conditions" *ngIf="conditionsIn">
+			<div class="header">
+				<div class="item">Selection</div>
+				<div class="item">Odd</div>
+				<div class="item">Stake</div>
+				<div class="item action"></div>
+			</div>
+			<div class="item">
+				<div class="it">12335</div>
+				<div class="it">5</div>
+				<div class="it">x36</div>
+				<div class="it action"><i class="fa-solid fa-trash-can"></i></div>
+			</div>
+			<div class="item">
+				<div class="it">12335</div>
+				<div class="it">5</div>
+				<div class="it">x36</div>
+				<div class="it action"><i class="fa-solid fa-trash-can"></i></div>
+			</div>
+			<div class="item">
+				<div class="it">12335</div>
+				<div class="it">5</div>
+				<div class="it">x36</div>
+				<div class="it action"><i class="fa-solid fa-trash-can"></i></div>
+			</div>
+			<div class="item">
+				<div class="it">12335</div>
+				<div class="it">5</div>
+				<div class="it">x36</div>
+				<div class="it action"><i class="fa-solid fa-trash-can"></i></div>
+			</div>
+			<div class="item">
+				<div class="it">12335</div>
+				<div class="it">5</div>
+				<div class="it">x36</div>
+				<div class="it action"><i class="fa-solid fa-trash-can"></i></div>
+			</div>
+			<div class="item">
+				<div class="it">12335</div>
+				<div class="it">5</div>
+				<div class="it">x36</div>
+				<div class="it action"><i class="fa-solid fa-trash-can"></i></div>
+			</div>
+		</div>
+		<div class="menu">
+			<div class="btn check"><i class="fa-solid fa-check"></i></div>
+			<div class="btn remove"><i class="fa-solid fa-xmark"></i></div>
+			<div class="btn print"><i class="fa-solid fa-print"></i></div>
+		</div>
+
 	</div>
 
 	<div class="dashbord-app">
@@ -23,7 +99,7 @@
 					</div>
 				</div>
 				<div class="item" (click)="scanQrImage()"><i class="fa-solid fa-qrcode"></i></div>
-				<div class="item" routerLink="/home/history"><i class="fa-solid fa-clock-rotate-left"></i></div>
+				<div class="item" routerLink="/home-mobile/history"><i class="fa-solid fa-clock-rotate-left"></i></div>
 				<div class="item" routerLink="/settings"><i class="fa-solid fa-gears"></i></div>
 				<div class="item" (click)="logout()" ><i class="fa-solid fa-power-off"></i></div>
 			</div>
@@ -470,4 +546,3 @@
 	</div>
 </div>
 
-<app-spin-mobile ></app-spin-mobile>

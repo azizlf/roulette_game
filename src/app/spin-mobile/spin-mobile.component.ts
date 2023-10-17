@@ -223,6 +223,7 @@ export class SpinMobileComponent implements OnInit {
   spinFinish = false
 
   currentAngle = 0
+  waitSecondes:any
 
 
   constructor(private rouletteService:RouletteService,private users:UsersService,private tiketService:TiketService) { }
@@ -350,7 +351,7 @@ export class SpinMobileComponent implements OnInit {
           this.element.style.top = "0%"
           this.element.style.left = "0%"
 
-        },5000)
+        },2000)
       },4000)
     },21000)
 
@@ -361,15 +362,22 @@ export class SpinMobileComponent implements OnInit {
 
     this.tiketService.chrono().subscribe((res:any)=>{
 
-      if(res.temp >= 90 && res.temp < 120 && !this.isSpinning){
+      if(this.waitSecondes >= 30){
 
-        this.users.findAdmin(this.users.user.adminId).subscribe((res:any)=>{
+        if(res.temp >= 97 && res.temp < 120 && !this.isSpinning){
 
           this.isSpinning = true
-          this.rotateAnim(res.resultatRoulette)
+          this.rotateAnim(this.rouletteService.selectedNumberWin)
 
-        })
+        }else if(res.temp >= 90 && res.temp < 97){
 
+          this.users.findAdmin(this.users.user.adminId).subscribe((res:any)=>{
+
+            this.rouletteService.selectedNumberWin = res.resultatRoulette
+
+          })
+
+        }
       }
 
     })
@@ -385,7 +393,13 @@ export class SpinMobileComponent implements OnInit {
 
       SpinWheelEvents()
 
-      this.chronoConfig()
+      this.tiketService.chrono().subscribe((res:any)=>{
+
+        this.waitSecondes = 120 - res.temp
+
+        this.chronoConfig()  
+
+      })
 
     },2000)
 

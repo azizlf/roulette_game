@@ -4,6 +4,17 @@
 
 }
 
+.app-game-main{
+
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+
+}
+
 .dashbord-app{
 
 	width: 100%;
@@ -2129,6 +2140,182 @@
 }
 
 
+
+.tikets-List-container-mobile{
+
+	width: 100%;
+	height: 26%;
+    position: relative;
+    top: 0%;
+    right: 0;
+    background-color: white;
+    z-index: 150;
+
+}
+
+.tikets-List-container-mobile .tikets{
+
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+	overflow-y: auto;
+
+}
+
+
+.tikets-List-container-mobile .tikets .header{
+
+	width: 100%;
+	display: flex;
+	align-items: center;
+
+}
+
+.tikets-List-container-mobile .tikets .header .item{
+
+	width: 33.3%;
+	padding: 2% 0;
+	background-color: #eaeaea;
+	text-align: center;
+	font-size: 4vw;
+	display: block;
+}
+
+.tikets-List-container-mobile .tikets .item{
+
+	width: 100%;
+	display: flex;
+	align-items: center;
+
+}
+
+.tikets-List-container-mobile .tikets .item .it{
+
+	width: 33.3%;
+	padding: 4% 0;
+	text-align: center;
+	font-size: 4vw;
+	border-top: .1vw solid gray;
+
+}
+
+
+
+
+
+.tikets-List-container-mobile .conditions{
+
+	width: 100%;
+	height: 85%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+	overflow-y: auto;
+
+}
+
+
+.tikets-List-container-mobile .conditions .header{
+
+	width: 100%;
+	height: 20%;
+	display: flex;
+	align-items: center;
+
+}
+
+.tikets-List-container-mobile .conditions .header .item{
+
+	width: 33.3%;
+	height: 100%;
+	background-color: #eaeaea;
+	font-size: 4vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+}
+
+.tikets-List-container-mobile .conditions .header .item.action{
+
+	width: 10%;
+
+}
+
+
+.tikets-List-container-mobile .conditions .item{
+
+	width: 100%;
+	display: flex;
+	height: 24%;
+	align-items: center;
+
+}
+
+.tikets-List-container-mobile .conditions .item .it{
+
+	width: 33.3%;
+	height: 100%;
+	font-size: 4vw;
+	border-top: .1vw solid gray;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+
+.tikets-List-container-mobile .conditions .item .it.action{
+
+	width: 10%;
+	font-size: 5vw;
+	color: red;
+
+}
+
+
+.tikets-List-container-mobile .menu{
+
+	width: 100%;
+	height: 15%;
+	display: flex;
+	align-items: center;
+	position: absolute;
+	bottom: 0;
+}
+
+.tikets-List-container-mobile .menu .btn{
+
+	width: 33.3%;
+	height: 100%;
+	background-color: green;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white;
+
+
+}
+
+
+.tikets-List-container-mobile .menu .btn.check{
+	background-color: #5cb85c;
+}
+
+.tikets-List-container-mobile .menu .btn.remove{
+	background-color: #d9534f;
+}
+
+.tikets-List-container-mobile .menu .btn.print{
+	background-color: orange;
+	color: black;
+}
+
+
+
 @media screen and (max-width: 900px){
 
 	.dashbord-app{
@@ -2136,9 +2323,9 @@
 		width: 100%;
 		height: 40%;
 		background-color: #222222;
-		top: 60%;
+		top: 0%;
 		left: 0;
-		position: absolute;
+		position: relative;
 		z-index: 15;
 		overflow: hidden;
 
@@ -2180,6 +2367,25 @@
 	}
 	.dashbord-app .content-dash-page{
 		height: 87%;
+	}
+
+	.read-qr-sanc{
+		width: 100%;
+	    padding: 33% 0;
+	    position: absolute;
+	    top: 30%;
+	    right: 0;
+	}
+
+	.timer-alert{
+
+		font-size: 9vw;
+		top: 65%;
+	    left: 0;
+	    width: 100%;
+	    height: 36%;
+	    z-index: 500;
+
 	}
 
 }

@@ -26,6 +26,10 @@ export class HomeMobileComponent implements OnInit {
 
   }
 
+  conditionsIn = false
+
+  openNoEventAlert = false
+
   openSpinMobile = false
 
   noEventUser = false
@@ -1006,7 +1010,7 @@ export class HomeMobileComponent implements OnInit {
 
       }
 
-      this.initTikets()
+      //this.initTikets()
 
     })
 
@@ -1073,23 +1077,23 @@ export class HomeMobileComponent implements OnInit {
 
     this.tiketService.chrono().subscribe((res:any)=>{
 
-      if(res.temp >= 40){
+
+      if(res.temp >= 40 && res.temp < 120){
+
+        this.timeIsUpSpin = true
 
         this.timerAlert = 90 - res.temp
 
-        this.openTimerAlert = true
+        this.openNoEventAlert = true
 
         if(this.timerAlert <= 0){
 
-          this.openTimerAlert = false
-          this.noEventUser = true
-          this.timeIsUpSpin = true
-
+          //this.openNoEventAlert = false
         }
 
       }else{
 
-        this.noEventUser = false
+        this.openNoEventAlert = false
         this.timeIsUpSpin = false
 
       }
@@ -1413,32 +1417,6 @@ export class HomeMobileComponent implements OnInit {
     return qr.createDataURL(4, 0)
   }
 
-  chronoConfigSpinMobile(){
-
-    if(!this.rouletteService.spinOpen){
-      this.openSpinMobile = false
-    }
-
-    this.tiketService.chrono().subscribe((res:any)=>{
-
-      if(res.temp >= 90 && res.temp < 120){
-
-
-        this.users.findAdmin(this.adminId).subscribe((res:any)=>{
-
-          this.rouletteService.selectedNumberWin = res.resultatRoulette
-          this.rouletteService.spinOpen = true
-          this.openSpinMobile = true
-
-        })
-
-      }
-
-    })
-
-    setTimeout(this.chronoConfigSpinMobile.bind(this),1000)
-
-  }
 
   ngOnInit(): void {
 
@@ -1459,31 +1437,13 @@ export class HomeMobileComponent implements OnInit {
 
         if(waitSc <= 30){
 
-          this.openWaitAlert = true
-          var inter = setInterval(()=>{
-            if(waitSc>0){
-              waitSc--
-              this.timeIsUpSpin = true
-            }else{
-              this.openWaitAlert = false
-              if(window.innerWidth <= 900){
-                this.chronoConfigSpinMobile()
-              }else{
-                this.chronoConfig()
-              }
-              
-              clearInterval(inter)
-            }
-
-          },1000)
+          setTimeout(()=>{
+            this.chronoConfig()
+          },(waitSc * 1000))
 
         }else{
 
-          if(window.innerWidth <= 900){
-            this.chronoConfigSpinMobile()
-          }else{
-            this.chronoConfig()
-          }
+          this.chronoConfig()
 
         }
 
@@ -1496,8 +1456,6 @@ export class HomeMobileComponent implements OnInit {
         this.element = document.querySelector(".coin-"+this.currentCoinSelected)
 
         this.element.style.scale = "1.2"
-        
-        initFnHome()
 
         setInterval(()=>{
           this.element = document.querySelector(".read-qr-sanc")

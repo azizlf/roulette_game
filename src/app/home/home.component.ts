@@ -328,7 +328,7 @@ export class HomeComponent implements OnInit {
 
   }
 
-  initConditions(){
+  initConditions(btnEvent:any){
 
     this.element = document.querySelector(".list-tk")
 
@@ -374,7 +374,7 @@ export class HomeComponent implements OnInit {
       removeBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>'
 
       removeBtn.addEventListener("click",()=>{
-        this.removeItem(container,this.selectedItems)
+        this.removeItem(container,this.selectedItems,btnEvent)
       })
 
 
@@ -425,7 +425,7 @@ export class HomeComponent implements OnInit {
           alert("insufficient funds!")
         }
 
-        this.initConditions()
+        this.initConditions(null)
 
       }
 
@@ -516,7 +516,7 @@ export class HomeComponent implements OnInit {
 
         this.element.style.display = "block" 
 
-        this.initConditions()
+        this.initConditions(null)
 
       }
     
@@ -783,7 +783,7 @@ export class HomeComponent implements OnInit {
         })
       }    
 
-      this.initConditions()
+      this.initConditions(ele)
     }
 
   }
@@ -910,7 +910,7 @@ export class HomeComponent implements OnInit {
 
   }
   
-  removeItem(elet:any,selectedFromTab:any){
+  removeItem(elet:any,selectedFromTab:any,btnEvent:any){
 
     for (var i = 0; i < this.conditions.length; i++) {
 
@@ -927,8 +927,13 @@ export class HomeComponent implements OnInit {
           this.element.classList.remove("clicked-btn")
 
         })
+
         this.conditions.splice(i,1)
       }
+    }
+    
+    if(btnEvent != null){
+      btnEvent.target.classList.remove("clicked-btn")
     }
 
     /*this.selectedItems.forEach((item:any)=>{

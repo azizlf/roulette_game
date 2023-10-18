@@ -24,11 +24,7 @@
 				<div class="item">Stake</div>
 				<div class="item">Win</div>
 			</div>
-			<div class="item">
-				<div class="it">12335</div>
-				<div class="it">5</div>
-				<div class="it">x36</div>
-			</div>
+			<div class="tikets-List-mobile"></div>
 		</div>
 
 		<div class="conditions" *ngIf="conditionsIn">
@@ -38,47 +34,12 @@
 				<div class="item">Stake</div>
 				<div class="item action"></div>
 			</div>
-			<div class="item">
-				<div class="it">12335</div>
-				<div class="it">5</div>
-				<div class="it">x36</div>
-				<div class="it action"><i class="fa-solid fa-trash-can"></i></div>
-			</div>
-			<div class="item">
-				<div class="it">12335</div>
-				<div class="it">5</div>
-				<div class="it">x36</div>
-				<div class="it action"><i class="fa-solid fa-trash-can"></i></div>
-			</div>
-			<div class="item">
-				<div class="it">12335</div>
-				<div class="it">5</div>
-				<div class="it">x36</div>
-				<div class="it action"><i class="fa-solid fa-trash-can"></i></div>
-			</div>
-			<div class="item">
-				<div class="it">12335</div>
-				<div class="it">5</div>
-				<div class="it">x36</div>
-				<div class="it action"><i class="fa-solid fa-trash-can"></i></div>
-			</div>
-			<div class="item">
-				<div class="it">12335</div>
-				<div class="it">5</div>
-				<div class="it">x36</div>
-				<div class="it action"><i class="fa-solid fa-trash-can"></i></div>
-			</div>
-			<div class="item">
-				<div class="it">12335</div>
-				<div class="it">5</div>
-				<div class="it">x36</div>
-				<div class="it action"><i class="fa-solid fa-trash-can"></i></div>
-			</div>
+			<div class="conditions-mobile-list"></div>
 		</div>
-		<div class="menu">
-			<div class="btn check"><i class="fa-solid fa-check"></i></div>
-			<div class="btn remove"><i class="fa-solid fa-xmark"></i></div>
-			<div class="btn print"><i class="fa-solid fa-print"></i></div>
+		<div class="menu" *ngIf="conditionsIn">
+			<div class="btn check" (click)="validateTiket()"><i class="fa-solid fa-check"></i></div>
+			<div class="btn remove" (click)="cancelTiket()"><i class="fa-solid fa-xmark"></i></div>
+			<div class="btn print" (click)="openPrint()"><i class="fa-solid fa-print"></i></div>
 		</div>
 
 	</div>

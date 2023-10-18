@@ -2184,24 +2184,51 @@
 	display: block;
 }
 
+.tikets-List-container-mobile .tikets .tikets-List-mobile{
+	width: 100%;
+}
+
 .tikets-List-container-mobile .tikets .item{
 
 	width: 100%;
-	display: flex;
-	align-items: center;
+	padding: 5% 0;
+	position: relative;
 
 }
+
+.tikets-List-container-mobile .tikets .item .ctn-it{
+
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	display: flex;
+	align-items: center;
+	top: 0;
+	left: 0;
+
+}
+
 
 .tikets-List-container-mobile .tikets .item .it{
 
 	width: 33.3%;
-	padding: 4% 0;
-	text-align: center;
+	height: 100%;
 	font-size: 4vw;
 	border-top: .1vw solid gray;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 
 }
 
+.tikets-List-container-mobile .tikets .item .it p{
+
+	width: 90%;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+
+}
 
 
 
@@ -2250,11 +2277,23 @@
 .tikets-List-container-mobile .conditions .item{
 
 	width: 100%;
-	display: flex;
-	height: 24%;
-	align-items: center;
+	padding: 5% 0;
+	position: relative;
 
 }
+
+.tikets-List-container-mobile .conditions .item .ctn-it{
+
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: flex;
+	align-items: center;
+	background-color: white;
+}
+
 
 .tikets-List-container-mobile .conditions .item .it{
 
@@ -2265,13 +2304,28 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	position: relative;
+
 }
+
+.tikets-List-container-mobile .conditions .item .it p{
+
+	position: absolute;
+	width: 90%;
+	height: 90%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 2.7vw;
+
+}
+
 
 
 .tikets-List-container-mobile .conditions .item .it.action{
 
 	width: 10%;
-	font-size: 5vw;
+	font-size: 4.5vw;
 	color: red;
 
 }
@@ -2296,7 +2350,7 @@
 	align-items: center;
 	justify-content: center;
 	color: white;
-
+	cursor: pointer;
 
 }
 

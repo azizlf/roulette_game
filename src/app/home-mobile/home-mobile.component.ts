@@ -287,7 +287,7 @@ export class HomeMobileComponent implements OnInit {
 
   initTikets(){
 
-    this.element = document.querySelector(".list-tikets")
+    this.element = document.querySelector(".tikets-List-mobile")
 
     this.element.innerHTML = ""
 
@@ -295,34 +295,29 @@ export class HomeMobileComponent implements OnInit {
       
       var container = document.createElement("div")
       var number = document.createElement("div")
-      var hint = document.createElement("div")
       var solde = document.createElement("div")
       var coefficient = document.createElement("div")
-
-      container.setAttribute("class","item-list")
-      number.setAttribute("class","item number")
-      hint.setAttribute("class","hint")
-      solde.setAttribute("class","item")
-      coefficient.setAttribute("class","item")
+      var ctnIt = document.createElement("ctn-it")
 
 
-      hint.innerHTML = tiket._id
-      solde.innerHTML = `<p>${tiket.solde}</p>`
-      coefficient.innerHTML = `<p>x36</p>`
+
+      container.setAttribute("class","item")
+      number.setAttribute("class","it")
+      solde.setAttribute("class","it")
+      coefficient.setAttribute("class","it")
+      ctnIt.setAttribute("class","ctn-it")
+
+
+      solde.innerHTML = tiket.solde
+      coefficient.innerHTML = `x36`
 
       number.innerHTML = `<p>${tiket._id}</p>`
-      number.appendChild(hint)
 
-      number.addEventListener("mouseover",()=>{
-        this.showHint(hint)
-      })
-      number.addEventListener("mouseleave",()=>{
-        this.hideHint(hint)
-      })
+      ctnIt.appendChild(number)
+      ctnIt.appendChild(solde)
+      ctnIt.appendChild(coefficient)
 
-      container.appendChild(number)
-      container.appendChild(solde)
-      container.appendChild(coefficient)
+      container.appendChild(ctnIt)
 
       
 
@@ -332,11 +327,12 @@ export class HomeMobileComponent implements OnInit {
 
   }
 
-  initConditions(){
+  initConditions(btnEvent:any){
 
-    this.element = document.querySelector(".list-tk")
+    this.element = document.querySelector(".conditions-mobile-list")
 
     this.element.innerHTML = ""
+
 
     this.conditions.forEach((condition:any)=>{
 
@@ -355,37 +351,44 @@ export class HomeMobileComponent implements OnInit {
         }
       }
 
+
+
       var container = document.createElement("div")
       var selection = document.createElement("div")
       var solde = document.createElement("div")
       var removeBtn = document.createElement("div")
       var coef = document.createElement("div")
+      var ctnIt = document.createElement("div")
 
-      container.setAttribute("class","it-tk")
-      selection.setAttribute("class","item nbrs-select")
-      solde.setAttribute("class","item solde")
-      coef.setAttribute("class","item coef")
-      removeBtn.setAttribute("class","item action")
+      container.setAttribute("class","item")
+      selection.setAttribute("class","it")
+      solde.setAttribute("class","it")
+      coef.setAttribute("class","it")
+      removeBtn.setAttribute("class","it action")
+      ctnIt.setAttribute("class","ctn-it")
+
 
       container.id = condition.condition_id
 
-      selection.innerHTML = "<p>"+arrayNumbers+"</p>"
+      selection.innerHTML = '<p>'+arrayNumbers+'</p>'
 
-      coef.innerText = condition.coefficient
+      coef.innerText = "x"+condition.coefficient
 
-      solde.innerHTML = '<input type="text" value="'+condition.soldeJouer+'" placeholder="solde">'
+      solde.innerHTML = condition.soldeJouer
 
       removeBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>'
 
       removeBtn.addEventListener("click",()=>{
-        this.removeItem(container,this.selectedItems)
+        this.removeItem(container,this.selectedItems,btnEvent)
       })
 
 
-      container.appendChild(selection)
-      container.appendChild(coef)
-      container.appendChild(solde)
-      container.appendChild(removeBtn)
+      ctnIt.appendChild(selection)
+      ctnIt.appendChild(coef)
+      ctnIt.appendChild(solde)
+      ctnIt.appendChild(removeBtn)
+
+      container.appendChild(ctnIt)
 
       this.element.appendChild(container)
 
@@ -429,7 +432,7 @@ export class HomeMobileComponent implements OnInit {
           alert("insufficient funds!")
         }
 
-        this.initConditions()
+        this.initConditions(null)
 
       }
 
@@ -520,7 +523,7 @@ export class HomeMobileComponent implements OnInit {
 
         this.element.style.display = "block" 
 
-        this.initConditions()
+        this.initConditions(null)
 
       }
     
@@ -649,9 +652,6 @@ export class HomeMobileComponent implements OnInit {
 
           ele.target.classList.add("clicked-btn")
 
-          this.element = document.querySelector(".create-tiket")
-
-          this.element.style.display = "block" 
 
           this.totalConditionsSolde += parseFloat(solde)
 
@@ -728,11 +728,6 @@ export class HomeMobileComponent implements OnInit {
                 }
               }
 
-              
-
-
-
-
             }
           }else{
             if(list[0] === choice[0]){
@@ -787,7 +782,11 @@ export class HomeMobileComponent implements OnInit {
         })
       }    
 
-      this.initConditions()
+      this.conditionsIn = true
+
+      setTimeout(()=>{
+        this.initConditions(ele)
+      },400)
     }
 
   }
@@ -869,9 +868,7 @@ export class HomeMobileComponent implements OnInit {
 
           this.conditions = []
 
-          this.element = document.querySelector(".create-tiket")
-
-          this.element.style.display = "none"
+          this.conditionsIn = false
 
           this.getUser()
 
@@ -914,7 +911,7 @@ export class HomeMobileComponent implements OnInit {
 
   }
   
-  removeItem(elet:any,selectedFromTab:any){
+  removeItem(elet:any,selectedFromTab:any,btnEvent:any){
 
     for (var i = 0; i < this.conditions.length; i++) {
 
@@ -931,8 +928,13 @@ export class HomeMobileComponent implements OnInit {
           this.element.classList.remove("clicked-btn")
 
         })
+
         this.conditions.splice(i,1)
       }
+    }
+
+    if(btnEvent != null){
+      btnEvent.target.classList.remove("clicked-btn")
     }
 
     /*this.selectedItems.forEach((item:any)=>{
@@ -1010,7 +1012,7 @@ export class HomeMobileComponent implements OnInit {
 
       }
 
-      //this.initTikets()
+      this.initTikets()
 
     })
 

@@ -519,9 +519,7 @@ export class HomeMobileComponent implements OnInit {
           
         })
 
-        this.element = document.querySelector(".create-tiket")
-
-        this.element.style.display = "block" 
+        this.conditionsIn = true
 
         this.initConditions(null)
 
@@ -533,24 +531,13 @@ export class HomeMobileComponent implements OnInit {
 
   hoverSeq(type:any,choice:any){
 
-    for (var i = 0 ;i < choice.length; i++) {
-
-      this.element = document.querySelector(".n"+choice[i])
-      this.element.classList.add("active-nbr-choice")
-    
-    }
+    //null
 
   }
 
   leaveHoverSeq(type:any,choice:any){
 
-    for (var i = 0 ;i < choice.length; i++) {
-      this.element = document.querySelector(".n"+choice[i])
-      if(!this.element.classList.contains("clicked")){
-        this.element.classList.remove("active-nbr-choice")
-      }
-    
-    }
+    //null
 
   }
 
@@ -901,9 +888,7 @@ export class HomeMobileComponent implements OnInit {
 
     this.cancelEventFromBtns()
     
-    this.element = document.querySelector(".create-tiket")
-
-    this.element.style.display = "none"
+    this.conditionsIn = false
     
     this.numbers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]
       
@@ -1104,308 +1089,6 @@ export class HomeMobileComponent implements OnInit {
 
     setTimeout(this.chronoConfig.bind(this),1000)
 
-  }
-
-  initTiketToPrint(){
-
-    this.element = document.querySelector(".tiket-area-print-content")
-
-    this.element.innerHTML = `<div class="title">N° g56fg4ds56g56fds4g8fds46</div>
-    <div class="titles-list">
-      <div class="item">Selection</div>
-      <div class="item center">Odd</div>
-      <div class="item right">Solde</div>
-    </div>
-    <div class="conditions-list"></div>`
-
-    var solde = 0, soldeMin = 0, soldeMax = 0 , soldeList:any = []
-
-    this.conditions.forEach((condition:any)=>{
-
-      solde += condition.soldeJouer
-      soldeList.push(condition.soldeGagner)
-
-    })
-
-    soldeMax = soldeList[0]
-
-    for (var i = 0; i < soldeList.length; i++) {
-
-      if(soldeList[i] > soldeMax){
-        
-        soldeMax = soldeList[i]
-
-      }
-    }
-
-    this.element = document.querySelector(".conditions-list")
-
-    this.conditions.forEach((condition:any)=>{
-
-      var arrayNumbers = ""
-
-      if(condition.condition.length > 10){
-
-        arrayNumbers = condition.condition[0]+"-"+condition.condition[condition.condition.length-1]
-
-      }else{
-        for (var i = 0 ;i < condition.condition.length; i++) {
-          if(i>0 && i<condition.condition.length){
-            arrayNumbers += " , "
-          }
-          arrayNumbers += condition.condition[i]
-        }
-      }
-
-      var conditionItemHtml =  `<div class="item">
-                                <div class="it">${arrayNumbers}</div>
-                                <div class="it center">x${condition.coefficient}</div>
-                                <div class="it right">${condition.soldeJouer} dt</div>
-                              </div>`
-      
-      this.element.innerHTML += conditionItemHtml
-
-    })
-
-
-    var totalHtml = `<div class="total-tiket">
-                      <div class="item">
-                        <p class="ttl">Total</p>
-                        <p class="right">${solde} dt</p>
-                      </div>
-                      <div class="item">
-                        <p class="ttl">Max win</p>
-                        <p class="right">${soldeMax} dt</p>
-                      </div>
-                    </div>`
-
-    this.element = document.querySelector(".tiket-area-print-content")
-
-    this.validateTiket()
-
-    console.log(this.tiketService.createdTiketIdForPrint)
-
-    var src = this.generateQRCode(this.tiketService.createdTiketIdForPrint)
-
-    var qrCode = `<img class="qr-image-tiket-print" src="${src}" alt"qrCode/>`
-
-    this.element.innerHTML += totalHtml
-
-    this.element.innerHTML += qrCode
-
-    
-
-
-  }
-
-  printTiket(){
-
-    this.initTiketToPrint()
-
-    setTimeout(()=>{
-      this.element = document.querySelector(".tiket-print-area");
-
-      this.openMsgBox = false
-
-      this.doc = window.open('', '', 'width="100%",height="100%"');
-      
-      this.doc.document.open();
-      
-      this.doc.document.write(`
-        
-        <html>
-
-          <head>
-
-            <title>Print Ticket</title>
-
-          <style>
-
-            .tiket-print-area{
-
-              position: absolute;
-              top: 0;
-              left: 0;
-              width: 100%;
-              height: 100%;
-              display: flex;
-              justify-content: center;
-              background-color: white;
-              z-index: 956456445698689897489751;
-
-            }
-
-            .tiket-print-area .content-container{
-
-              width: 90%;
-              text-align: center;
-
-            }
-
-            .tiket-print-area .content-container img{
-
-              margin-top: 3%;
-
-            }
-
-
-            .tiket-print-area .content-container .title{
-
-              width: 100%;
-              text-align: center;
-              padding: 13% 0;
-              font-size: 40px;
-
-            }
-
-            .tiket-print-area .content-container img{
-
-              width: 17%;
-
-            }
-
-            .tiket-print-area .content-container .titles-list{
-
-              width: 100%;
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
-
-            }
-
-            .tiket-print-area .content-container .titles-list .item{
-
-              width: 34%;
-              font-size: 17px;
-              font-weight: bold;
-              display: flex;
-              align-items: center;
-
-            }
-
-            .tiket-print-area .content-container .titles-list .item.center{
-
-              justify-content: center;
-
-            }
-
-            .tiket-print-area .content-container .titles-list .item.right{
-
-              justify-content: right;
-
-            }
-
-
-            .tiket-print-area .content-container .conditions-list{
-
-              width: 100%;
-              border-bottom: .1vw dashed gray;
-              padding: 1% 0;
-
-            }
-
-            .tiket-print-area .content-container .conditions-list .item{
-
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
-              padding: .5% 0;
-              width: 100%;
-              font-size: 16px;
-
-            }
-
-
-            .tiket-print-area .content-container .conditions-list .item .it{
-
-              width: 34%;
-              display: flex;
-              align-items: center;
-
-            }
-
-
-            .tiket-print-area .content-container .conditions-list .item .it.center{
-
-              justify-content: center;
-
-
-            }
-
-            .tiket-print-area .content-container .conditions-list .item .it.right{
-
-              justify-content: right;
-
-
-            }
-
-            .tiket-print-area .content-container .total-tiket{
-
-              width: 100%;
-
-            }
-
-            .tiket-print-area .content-container .total-tiket .item{
-
-              width: 100%;
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
-              padding: .1% 0;
-              font-size: 16px;
-
-            }
-
-            .tiket-print-area .content-container .total-tiket .item p{
-
-              width: 34%;
-              display: flex;
-              align-items: center;
-            }
-
-            .tiket-print-area .content-container .total-tiket .item p.center{
-
-              justify-content: center;
-
-
-            }
-
-
-            .tiket-print-area .content-container .total-tiket .item p.right{
-
-              justify-content: right;
-
-
-            }
-
-            .tiket-print-area .content-container .total-tiket .item .ttl{
-
-              font-weight: bold;
-
-            }
-
-
-          </style>
-
-          </head>
-        <body>`);
-      this.doc.document.write(this.element.outerHTML);
-      this.doc.document.write('</body></html>');
-      this.doc.document.close();
-      this.doc.print();
-      this.doc.close();
-    },1000)
-
-  }
-
-  openPrint(){
-    if(!this.timeIsUpSpin){
-      this.openMsgBox = true
-    }
-  }
-
-  cancelPrint(){
-    this.openMsgBox = false
   }
 
   generateQRCode(data:any) {

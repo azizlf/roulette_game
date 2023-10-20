@@ -24,6 +24,31 @@
 
 }
 
+.spin-app .timer-bar{
+
+	position: absolute;
+	right: 24%;
+	bottom: 1%;
+	width: .8%;
+	height: 87%;
+	background-color: #0000008a;
+	z-index: 1235;
+	overflow: hidden;
+	border-radius: 3vw;
+
+}
+
+.spin-app .timer-bar div{
+
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	background-color: #f0b171;
+	transition: .3s;
+
+}
+
+
 .spin-app .fullScreenBtnSpin{
 	
     position: absolute;
@@ -42,6 +67,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	transition: .5s;
 
 }
 

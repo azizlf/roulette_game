@@ -203,6 +203,8 @@ export class SpinMobileComponent implements OnInit {
 
   ] 
 
+  timerChrono = "100%"
+
 
   choosedAngle = 0
 
@@ -228,93 +230,19 @@ export class SpinMobileComponent implements OnInit {
 
   constructor(private rouletteService:RouletteService,private users:UsersService,private tiketService:TiketService) { }
 
-  spinToAngle(desiredAngle:any) {
-    const index = this.angles.findIndex(item => item.val === desiredAngle)
-
-    if (index !== -1) {
-        this.choosedAngle = index
-        this.totalRotations = 0
-        this.isSpinning = true 
-        this.spinStartTime = performance.now()
-        this.requestAnimationFrame(this.animateSpin)
-    } else {
-        console.error("Desired angle not found in the angles array.")
-    }
-  }
-
-  animateSpin(timestamp:any) {
-
-    this.wheel = document.querySelector(".spin")
-
-    this.indicator = document.querySelector(".indicator-number")
-
-    if(this.isSpinning) {
-        
-      const elapsedTime = timestamp - this.spinStartTime;
- 
-      const progress = (elapsedTime % this.time) / this.time;
-
-      let angle = progress * 360
-
-      this.wheel.style.transform = "rotate(" + (angle-4) + "deg"
-        
-      const index = (Math.floor((this.angles.length * angle) / 360) + this.angles.length) % this.angles.length;
-
-      this.indicator.innerText = this.angles[index].val
-
-      this.indicator.style.backgroundColor = this.angles[index].color
-
-      this.time += .8
-
-      if (index !== this.choosedAngle) {
-        this.requestAnimationFrame(this.animateSpin)
-      } 
-      else {
-
-        this.totalRotations++
-
-        if (this.totalRotations < this.rotationsToStop) {
-          this.requestAnimationFrame(this.animateSpin)
-        } 
-        else if(this.totalRotations === this.rotationsToStop){
-    
-          setTimeout(()=>{
-            this.indicator.style.transform = "scale(2)"
-              this.indicator.style.margin = "0"
-              setTimeout(()=>{
-                this.indicator.style.transform = "scale(1)"
-                this.indicator.style.marginTop = "3.3%"
-                setTimeout(()=>{
-                  
-                  this.rouletteService.spinOpen = false
-                  this.rouletteService.angleStoped = this.wheel.style.transform
-                  this.rouletteService.selectedNumberWin = this.angles[this.choosedAngle].val
-                  this.rouletteService.selectedColorNumberWin = this.angles[this.choosedAngle].color
-                },5000)
-              },4000)
-          },550) 
-
-          this.isSpinning = false
-
-        }
-      }
-    }
-  }
-
-  requestAnimationFrame(callback: any) {
-    window.requestAnimationFrame(callback.bind(this));
-  }
-
-
   rotateAnim(choosedNum:any){
 
     this.element = document.querySelector(".spin-app")
 
-    this.element.style.scale = "2.3"
-    this.element.style.top = "14%"
-    this.element.style.left = "4%"
+    this.element.style.scale = "4.2"
+    this.element.style.top = "38%"
+    this.element.style.left = "8%"
 
-    this.isSpinning = true
+    this.element = document.querySelector(".spin-section")
+
+    this.element.style.scale = ".5"
+
+
 
     this.spinFinish = false
 
@@ -338,22 +266,60 @@ export class SpinMobileComponent implements OnInit {
       this.indicator.style.transform = "scale(2)"
       this.indicator.style.margin = "0"
       setTimeout(()=>{
-        this.isSpinning = false
         this.indicator.style.transform = "scale(1)"
         this.indicator.style.marginTop = "3.3%"
         setTimeout(()=>{
-          this.spinFinish = false
-          this.element = document.querySelector(".spin")
-          this.element.style.transition = "transform 10s ease-in-out"
-          this.element.style.transform = "rotate(0deg)"
           this.element = document.querySelector(".spin-app")
           this.element.style.scale = "1"
           this.element.style.top = "0%"
           this.element.style.left = "0%"
-
+          setTimeout(()=>{
+            this.element = document.querySelector(".spin-section")
+            this.element.style.scale = "1"
+          },100)
+          this.element = document.querySelector(".spin")
+          this.element.style.transition = "transform 0s"
+          this.element.style.transform = "rotate(0deg)"
+          this.element.style.transform = "rotate("+(this.angles[this.angles.findIndex(item => item.val === choosedNum)].ang + 2)+"deg)"
         },2000)
       },4000)
     },21000)
+
+  }
+
+  initSpin(number:any){
+
+    var choosedNum = number
+
+    var interval = setInterval(()=>{
+
+      var index = Math.floor(Math.random() * this.angles.length)
+
+      choosedNum = this.angles[index].val
+
+      if(choosedNum != number){
+
+        console.log("finded")
+        this.spinFinish = true
+
+        this.indicator = document.querySelector(".indicator-number")
+
+        this.element = document.querySelector(".spin")
+
+        this.element.style.transition = "transform 0s"
+
+        var angle = this.angles[this.angles.findIndex(item => item.val === choosedNum)].ang
+
+        this.element.style.transform = "rotate("+(angle + 2)+"deg)"
+
+        this.indicator.innerText = choosedNum
+
+        this.indicator.style.backgroundColor = this.angles[this.angles.findIndex(item => item.val === choosedNum)].color
+
+        clearInterval(interval)
+      }
+
+    },15)
 
   }
 
@@ -362,22 +328,21 @@ export class SpinMobileComponent implements OnInit {
 
     this.tiketService.chrono().subscribe((res:any)=>{
 
-      if(this.waitSecondes >= 30){
+      this.timerChrono = (((90 - res.temp)/90)*100) +"%"
 
-        if(res.temp >= 97 && res.temp < 120 && !this.isSpinning){
+      if(res.temp >= 90 && res.temp < 120 && !this.isSpinning){
 
-          this.isSpinning = true
-          this.rotateAnim(this.rouletteService.selectedNumberWin)
+        this.isSpinning = true
 
-        }else if(res.temp >= 90 && res.temp < 97){
 
-          this.users.findAdmin(this.users.user.adminId).subscribe((res:any)=>{
+        this.users.findAdmin(this.users.user.adminId).subscribe((res:any)=>{
 
-            this.rouletteService.selectedNumberWin = res.resultatRoulette
+          this.rotateAnim(res.resultatRoulette)
 
-          })
+        })
 
-        }
+      }else if(res.temp < 90){
+        this.isSpinning = false
       }
 
     })
@@ -388,20 +353,26 @@ export class SpinMobileComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.tiketService.chrono().subscribe((res:any)=>{
+ 
+      this.users.findAdmin(this.users.user.adminId).subscribe((res:any)=>{
+        this.initSpin(res.resultatRoulette)
+        setTimeout(()=>{
 
-    setTimeout(()=>{
+          SpinWheelEvents()
 
-      SpinWheelEvents()
+          this.tiketService.chrono().subscribe((res:any)=>{
 
-      this.tiketService.chrono().subscribe((res:any)=>{
+            this.waitSecondes = 120 - res.temp
 
-        this.waitSecondes = 120 - res.temp
+            this.chronoConfig()  
 
-        this.chronoConfig()  
+          })
 
+        },2000)
       })
 
-    },2000)
+    })
 
   }
 

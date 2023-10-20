@@ -1081,17 +1081,8 @@ export class HomeComponent implements OnInit {
 
       if(res.temp >= 40){
 
-        this.timerAlert = 90 - res.temp
-
-        this.openTimerAlert = true
-
-        if(this.timerAlert <= 0){
-
-          this.openTimerAlert = false
-          this.noEventUser = true
-          this.timeIsUpSpin = true
-
-        }
+        this.noEventUser = true
+        this.timeIsUpSpin = true
 
       }else{
 

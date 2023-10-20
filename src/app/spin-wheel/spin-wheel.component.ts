@@ -202,6 +202,8 @@ export class SpinWheelComponent implements OnInit {
 
   ] 
 
+  timerChrono = "100%"
+
 
   choosedAngle = 0
 
@@ -225,6 +227,191 @@ export class SpinWheelComponent implements OnInit {
 
 
   constructor(private rouletteService:RouletteService,private users:UsersService,private tiketService:TiketService) { }
+
+  rotateAnim(choosedNum:any){
+
+    this.spinFinish = false
+
+    this.indicator = document.querySelector(".indicator-number")
+
+    this.element = document.querySelector(".spin")
+
+    this.element.style.transition = "transform 20s ease-in-out"
+
+    var angle = this.angles[this.angles.findIndex(item => item.val === choosedNum)].ang + (360 * 20)
+
+    this.currentAngle = this.angles[this.angles.findIndex(item => item.val === choosedNum)].ang
+
+    this.element.style.transform = "rotate("+(angle + 2)+"deg)"
+
+    this.indicator.innerText = choosedNum
+
+    this.indicator.style.backgroundColor = this.angles[this.angles.findIndex(item => item.val === choosedNum)].color
+
+  }
+
+  initSpin(number:any){
+
+    var choosedNum = number
+
+    var interval = setInterval(()=>{
+
+      var index = Math.floor(Math.random() * this.angles.length)
+
+      choosedNum = this.angles[index].val
+
+      if(choosedNum != number){
+
+        console.log("finded")
+        this.spinFinish = true
+
+        this.indicator = document.querySelector(".indicator-number")
+
+        this.element = document.querySelector(".spin")
+
+        this.element.style.transition = "transform 0s"
+
+        var angle = this.angles[this.angles.findIndex(item => item.val === choosedNum)].ang
+
+        this.element.style.transform = "rotate("+(angle + 2)+"deg)"
+
+        this.indicator.innerText = choosedNum
+
+        this.indicator.style.backgroundColor = this.angles[this.angles.findIndex(item => item.val === choosedNum)].color
+
+        clearInterval(interval)
+      }
+
+    },15)
+
+  }
+
+
+  chronoConfig(){
+
+    this.tiketService.chrono().subscribe((res:any)=>{
+
+      this.timerChrono = (((90 - res.temp)/90)*100) +"%"
+      
+      if(res.temp >= 90 && res.temp < 120 && !this.isSpinning){
+
+        this.isSpinning = true
+
+        this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
+
+          this.rotateAnim(res.resultatRoulette)
+
+        })
+
+      }else if(res.temp < 90){
+        this.isSpinning = false
+      }
+
+    })
+
+    setTimeout(this.chronoConfig.bind(this),1000)
+
+  }
+
+  ngOnInit(): void {
+
+    this.tiketService.chrono().subscribe((res:any)=>{
+ 
+      this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
+        this.initSpin(res.resultatRoulette)
+        setTimeout(()=>{
+
+          this.element = document.querySelector(".spin")
+
+          this.element.addEventListener("transitionend", ()=>{
+              
+            this.indicator = document.querySelector(".indicator-number")
+
+            this.spinFinish = true
+
+            this.indicator.style.transform = "scale(2)"
+
+            this.indicator.style.margin = "0"
+
+            setTimeout(()=>{
+              this.indicator.style.transform = "scale(1)"
+              this.indicator.style.marginTop = "3.3%"
+              this.element.style.transition = "transform 0s"
+              this.element.style.transform = "rotate(0deg)"
+              this.element.style.transform = "rotate("+(this.currentAngle + 2)+"deg)"
+            },4000)
+
+          });
+
+          SpinWheelEvents()
+
+          this.chronoConfig()
+
+        },2000)
+      })
+
+    })
+
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 
   spinToAngle(desiredAngle:any) {
     const index = this.angles.findIndex(item => item.val === desiredAngle)
@@ -303,122 +490,4 @@ export class SpinWheelComponent implements OnInit {
     window.requestAnimationFrame(callback.bind(this));
   }
 
-  rotateAnim(choosedNum:any){
-
-    this.spinFinish = false
-
-    this.indicator = document.querySelector(".indicator-number")
-
-    this.element = document.querySelector(".spin")
-
-    this.element.style.transition = "transform 20s ease-in-out"
-
-    var angle = this.angles[this.angles.findIndex(item => item.val === choosedNum)].ang + (360 * 20)
-
-    this.element.style.transform = "rotate("+(angle + 2)+"deg)"
-
-    this.indicator.innerText = choosedNum
-
-    this.indicator.style.backgroundColor = this.angles[this.angles.findIndex(item => item.val === choosedNum)].color
-
-    setTimeout(()=>{
-      this.spinFinish = true
-      this.indicator.style.transform = "scale(2)"
-      this.indicator.style.margin = "0"
-      setTimeout(()=>{
-        this.indicator.style.transform = "scale(1)"
-        this.indicator.style.marginTop = "3.3%"
-        this.element.style.transition = "transform 0s"
-        this.element.style.transform = "rotate(0deg)"
-        this.element.style.transform = "rotate("+(this.angles[this.angles.findIndex(item => item.val === choosedNum)].ang + 2)+"deg)"
-      },4000)
-    },21700)
-
-  }
-
-  initSpin(number:any){
-
-    var choosedNum = number
-
-    var interval = setInterval(()=>{
-
-      var index = Math.floor(Math.random() * this.angles.length)
-
-      choosedNum = this.angles[index].val
-
-      if(choosedNum != number){
-
-        console.log("finded")
-        this.spinFinish = true
-
-        this.indicator = document.querySelector(".indicator-number")
-
-        this.element = document.querySelector(".spin")
-
-        this.element.style.transition = "transform 0s"
-
-        var angle = this.angles[this.angles.findIndex(item => item.val === choosedNum)].ang
-
-        this.element.style.transform = "rotate("+(angle + 2)+"deg)"
-
-        this.indicator.innerText = choosedNum
-
-        this.indicator.style.backgroundColor = this.angles[this.angles.findIndex(item => item.val === choosedNum)].color
-
-        clearInterval(interval)
-      }
-
-    },15)
-
-  }
-
-
-  chronoConfig(){
-
-    this.tiketService.chrono().subscribe((res:any)=>{
-
-      if(res.temp >= 90 && res.temp < 120 && !this.isSpinning){
-
-        this.isSpinning = true
-
-
-        this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
-
-          this.rotateAnim(res.resultatRoulette)
-
-        })
-
-      }else if(res.temp < 90){
-        this.isSpinning = false
-      }
-
-    })
-
-    setTimeout(this.chronoConfig.bind(this),1000)
-
-  }
-
-  ngOnInit(): void {
-
-    this.tiketService.chrono().subscribe((res:any)=>{
-
-      
-      this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
-        this.initSpin(res.resultatRoulette)
-        setTimeout(()=>{
-
-          SpinWheelEvents()
-
-          this.chronoConfig()
-
-        },2000)
-      })
-
-
-    })
-
-    
-
-  }
-
-}
+  */

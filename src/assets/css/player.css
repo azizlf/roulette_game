@@ -2249,7 +2249,7 @@
 .tikets-List-container-mobile .conditions .header{
 
 	width: 100%;
-	height: 20%;
+	height: 18%;
 	display: flex;
 	align-items: center;
 
@@ -2260,7 +2260,7 @@
 	width: 33.3%;
 	height: 100%;
 	background-color: #eaeaea;
-	font-size: 4vw;
+	font-size: 3vw;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -2277,7 +2277,7 @@
 .tikets-List-container-mobile .conditions .item{
 
 	width: 100%;
-	padding: 5% 0;
+	padding: 4% 0;
 	position: relative;
 
 }
@@ -2299,7 +2299,7 @@
 
 	width: 33.3%;
 	height: 100%;
-	font-size: 4vw;
+	font-size: 3vw;
 	border-top: .1vw solid gray;
 	display: flex;
 	align-items: center;
@@ -2334,16 +2334,17 @@
 .tikets-List-container-mobile .menu{
 
 	width: 100%;
-	height: 15%;
+	height: 13%;
 	display: flex;
 	align-items: center;
+	justify-content: space-around;
 	position: absolute;
 	bottom: 0;
 }
 
 .tikets-List-container-mobile .menu .btn{
 
-	width: 33.3%;
+	width: 50%;
 	height: 100%;
 	background-color: green;
 	display: flex;
@@ -2351,6 +2352,7 @@
 	justify-content: center;
 	color: white;
 	cursor: pointer;
+	font-size: 3vw;
 
 }
 

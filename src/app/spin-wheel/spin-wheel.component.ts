@@ -293,29 +293,29 @@ export class SpinWheelComponent implements OnInit {
 
   chronoConfig(){
 
-    console.log(this.currentTime)
+    this.tiketService.chrono().subscribe((res:any)=>{
 
-    this.timerChrono = ((((this.timeChrono-32) - this.currentTime)/(this.timeChrono-32))*100) +"%"
+      console.log(res.temp)
+
+      this.currentTime = res.temp
+
+      this.timerChrono = ((((this.timeChrono-32) - this.currentTime)/(this.timeChrono-32))*100) +"%"
     
-    if(this.currentTime >= (this.timeChrono-32) && this.currentTime < this.timeChrono && !this.isSpinning){
+      if(this.currentTime >= (this.timeChrono-32) && this.currentTime < this.timeChrono && !this.isSpinning){
 
-      this.isSpinning = true
+        this.isSpinning = true
 
-      this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
+        this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
 
-        this.rotateAnim(res.resultatRoulette)
+          this.rotateAnim(res.resultatRoulette)
 
-      })
+        })
 
-    }else if(this.currentTime < (this.timeChrono-32)){
-      this.isSpinning = false
-    }
+      }else if(this.currentTime < (this.timeChrono-32)){
+        this.isSpinning = false
+      }
 
-    if(this.currentTime < this.timeChrono){
-      this.currentTime++
-    }else{
-      this.currentTime = 0
-    }
+    })
 
     setTimeout(this.chronoConfig.bind(this),1000)
 
@@ -324,8 +324,6 @@ export class SpinWheelComponent implements OnInit {
   ngOnInit(): void {
 
     this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
-
-      console.log(res.historique)
       
       this.initSpin(res.resultatRoulette)
       setTimeout(()=>{

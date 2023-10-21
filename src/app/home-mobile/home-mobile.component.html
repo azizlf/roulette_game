@@ -43,6 +43,36 @@
 
 	</div>
 
+	<div class="message-box-info" *ngIf="openResultScan">
+			
+		<div class="ctn-ctnr">
+			<div class="title">
+				<i class="fa-solid fa-ticket"></i>
+				{{scanTiket.id}}
+			</div>
+			<br>
+			<p>
+				<strong>Solde:</strong> {{scanTiket.solde}} DT
+				<br><br>
+				<strong>Status:</strong> 
+				<span *ngIf="scanTiket.status" style="background-color: green;
+				    color: white;
+				    padding: 1% 2%;
+				    border-radius: 0.3vw;
+				    margin-left: 4%;">win</span>
+				<span *ngIf="!scanTiket.status" style="background-color: red;
+				    color: white;
+				    padding: 1% 2%;
+				    border-radius: 0.3vw;
+				    margin-left: 4%;">lost</span>
+			</p>
+			<div class="buttons">
+				<button class="cfrm" (click)="closeResultScan()">ok</button>
+			</div>
+		</div>
+
+	</div>
+
 	<div class="dashbord-app">
 		
 		<div class="header-dash-app">

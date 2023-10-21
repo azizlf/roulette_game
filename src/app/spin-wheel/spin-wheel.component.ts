@@ -225,6 +225,10 @@ export class SpinWheelComponent implements OnInit {
 
   currentAngle = 0
 
+  timeChrono = 120
+
+  currentTime = 0
+
 
   constructor(private rouletteService:RouletteService,private users:UsersService,private tiketService:TiketService) { }
 
@@ -289,25 +293,29 @@ export class SpinWheelComponent implements OnInit {
 
   chronoConfig(){
 
-    this.tiketService.chrono().subscribe((res:any)=>{
+    console.log(this.currentTime)
 
-      this.timerChrono = (((90 - res.temp)/90)*100) +"%"
-      
-      if(res.temp >= 90 && res.temp < 120 && !this.isSpinning){
+    this.timerChrono = ((((this.timeChrono-32) - this.currentTime)/(this.timeChrono-32))*100) +"%"
+    
+    if(this.currentTime >= (this.timeChrono-32) && this.currentTime < this.timeChrono && !this.isSpinning){
 
-        this.isSpinning = true
+      this.isSpinning = true
 
-        this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
+      this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
 
-          this.rotateAnim(res.resultatRoulette)
+        this.rotateAnim(res.resultatRoulette)
 
-        })
+      })
 
-      }else if(res.temp < 90){
-        this.isSpinning = false
-      }
+    }else if(this.currentTime < (this.timeChrono-32)){
+      this.isSpinning = false
+    }
 
-    })
+    if(this.currentTime < this.timeChrono){
+      this.currentTime++
+    }else{
+      this.currentTime = 0
+    }
 
     setTimeout(this.chronoConfig.bind(this),1000)
 
@@ -315,41 +323,46 @@ export class SpinWheelComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.tiketService.chrono().subscribe((res:any)=>{
- 
-      this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
-        this.initSpin(res.resultatRoulette)
-        setTimeout(()=>{
+    this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
 
-          this.element = document.querySelector(".spin")
+      console.log(res.historique)
+      
+      this.initSpin(res.resultatRoulette)
+      setTimeout(()=>{
 
-          this.element.addEventListener("transitionend", ()=>{
-              
-            this.indicator = document.querySelector(".indicator-number")
+        this.element = document.querySelector(".spin")
 
-            this.spinFinish = true
+        this.element.addEventListener("transitionend", ()=>{
+            
+          this.indicator = document.querySelector(".indicator-number")
 
-            this.indicator.style.transform = "scale(2)"
+          this.spinFinish = true
 
-            this.indicator.style.margin = "0"
+          this.indicator.style.transform = "scale(2)"
 
-            setTimeout(()=>{
-              this.indicator.style.transform = "scale(1)"
-              this.indicator.style.marginTop = "3.3%"
-              this.element.style.transition = "transform 0s"
-              this.element.style.transform = "rotate(0deg)"
-              this.element.style.transform = "rotate("+(this.currentAngle + 2)+"deg)"
-            },4000)
+          this.indicator.style.margin = "0"
 
-          });
+          setTimeout(()=>{
+            this.indicator.style.transform = "scale(1)"
+            this.indicator.style.marginTop = "3.3%"
+            this.element.style.transition = "transform 0s"
+            this.element.style.transform = "rotate(0deg)"
+            this.element.style.transform = "rotate("+(this.currentAngle + 2)+"deg)"
+          },4000)
 
-          SpinWheelEvents()
+        });
+
+        SpinWheelEvents()
+
+        this.tiketService.chrono().subscribe((res:any)=>{
+
+          this.currentTime = res.temp
 
           this.chronoConfig()
 
-        },2000)
-      })
+        })
 
+      },2000)
     })
 
   }

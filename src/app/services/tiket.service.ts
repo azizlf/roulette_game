@@ -25,6 +25,10 @@ export class TiketService {
 
   }
 
+  findTiket(id:any){
+    return this.http.get(this.api+"/"+id)
+  }
+
   chrono(){
 
     return this.http.get(this.api+"/temp/")

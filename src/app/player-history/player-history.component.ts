@@ -15,6 +15,16 @@ export class PlayerHistoryComponent implements OnInit {
 
   constructor(private usersService:UsersService,private router:Router) { }
 
+  returnFromPage(){
+
+    if(window.innerWidth <= 950){
+      this.router.navigate(['/home-mobile'],{skipLocationChange:true})
+    }else{
+      this.router.navigate(['/home'])
+    }
+
+  }
+
   historyUser(id:any){
 
     this.usersService.findUser(id).subscribe((res:any)=>{

@@ -7,13 +7,6 @@
 		<div class="scan-bar"></div>
 	</div>
 
-	<div class="alert-orient">
-		<div style="text-align: center">
-			<i class="fa-solid fa-rotate-right"></i>
-			<br>
-			Rotate screen
-		</div>
-	</div>
 	<div class="timeout-no-event-click" *ngIf="noEventUser">
 			
 		<div class="ctn-ctnr">
@@ -51,6 +44,37 @@
 		</div>
 
 	</div>
+
+	<div class="message-box-info" *ngIf="openResultScan">
+			
+		<div class="ctn-ctnr">
+			<div class="title">
+				<i class="fa-solid fa-ticket"></i>
+				{{scanTiket.id}}
+			</div>
+			<br>
+			<p>
+				<strong>Solde:</strong> {{scanTiket.solde}} DT
+				<br><br>
+				<strong>Status:</strong> 
+				<span *ngIf="scanTiket.status" style="background-color: green;
+				    color: white;
+				    padding: 1% 2%;
+				    border-radius: 0.3vw;
+				    margin-left: 4%;">win</span>
+				<span *ngIf="!scanTiket.status" style="background-color: red;
+				    color: white;
+				    padding: 1% 2%;
+				    border-radius: 0.3vw;
+				    margin-left: 4%;">lost</span>
+			</p>
+			<div class="buttons">
+				<button class="cfrm" (click)="closeResultScan()">ok</button>
+			</div>
+		</div>
+
+	</div>
+
 	<div class="timer-alert" *ngIf="openTimerAlert">
 			
 		<p>{{timerAlert}}</p>
@@ -556,9 +580,6 @@
 								<div class="btn check"  (click)="validateTiket()"><i class="fa-solid fa-check"></i></div>
 								<div class="btn remove" (click)="cancelTiket()"><i class="fa-solid fa-xmark"></i></div>
 								<!--div class="btn reevent"><i class="fa-solid fa-rotate-left"></i></div-->
-							</div>
-							<div class="sc rt">
-								<div class="btn print" (click)="openPrint()"><i class="fa-solid fa-print"></i></div>
 							</div>
 						</div>
 						<div class="banner-sc">

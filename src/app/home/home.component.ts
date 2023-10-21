@@ -221,6 +221,20 @@ export class HomeComponent implements OnInit {
 
   scanInterval:any
 
+  tiketNumberScanned = ""
+
+  openResultScan = false
+
+  scanTiket = {
+    id:"",
+    solde:0,
+    status:false
+  }
+
+  closeResultScan(){
+    this.openResultScan = false
+  }
+
   scanQrImage(){
 
     if(!this.openScanQrCode){
@@ -249,12 +263,18 @@ export class HomeComponent implements OnInit {
 
             var result = localStorage.getItem("qr-data")
 
-            if(result === "false"){
+            if(result != "false"){
               
-              alert("No qr code detected")
+              this.tiketService.findTiket(result).subscribe((res:any)=>{
 
-            }else{
-              alert(result)
+                this.scanTiket.id = result+""
+                this.scanTiket.solde = res.solde
+                this.scanTiket.status = res.gagnion
+
+                this.openResultScan = true
+
+              })
+
             }
 
           },10000)
@@ -275,8 +295,11 @@ export class HomeComponent implements OnInit {
   }
 
   openSpinwheel(){
+
     const url = window.location.href.split("/")[2]
+
     window.open("http://"+url+"/spin/desktop")
+    
     localStorage.setItem("#FSDJIOSFDEZ",this.adminId)
 
   }
@@ -863,8 +886,6 @@ export class HomeComponent implements OnInit {
 
           this.tiketService.createdTiketIdForPrint = res.ticket
 
-          this.conditions = []
-
           this.element = document.querySelector(".create-tiket")
 
           this.element.style.display = "none"
@@ -873,23 +894,12 @@ export class HomeComponent implements OnInit {
 
           this.userSolde = newSolde
 
-          this.cancelEventFromBtns()
-
-          this.numbers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]
-
-          this.totalConditionsSolde = 0
-
+          this.openPrint()
 
         }
 
       })
       
-    }
-
-    else{
-
-      alert("select condition")
-
     }
 
   }
@@ -991,6 +1001,7 @@ export class HomeComponent implements OnInit {
 
   }
 
+  
   getUser(){
 
     this.tikets = []
@@ -1009,7 +1020,6 @@ export class HomeComponent implements OnInit {
         if(res.tikets[i].realTime){
           this.tikets.push(res.tikets[i])
         }
-
       }
 
       this.initTikets()
@@ -1101,7 +1111,7 @@ export class HomeComponent implements OnInit {
 
     this.element = document.querySelector(".tiket-area-print-content")
 
-    this.element.innerHTML = `<div class="title">N° g56fg4ds56g56fds4g8fds46</div>
+    this.element.innerHTML = `<div class="title">N° ${this.tiketService.createdTiketIdForPrint}</div>
     <div class="titles-list">
       <div class="item">Selection</div>
       <div class="item center">Odd</div>
@@ -1172,10 +1182,6 @@ export class HomeComponent implements OnInit {
 
     this.element = document.querySelector(".tiket-area-print-content")
 
-    this.validateTiket()
-
-    console.log(this.tiketService.createdTiketIdForPrint)
-
     var src = this.generateQRCode(this.tiketService.createdTiketIdForPrint)
 
     var qrCode = `<img class="qr-image-tiket-print" src="${src}" alt"qrCode/>`
@@ -1194,6 +1200,13 @@ export class HomeComponent implements OnInit {
     this.initTiketToPrint()
 
     setTimeout(()=>{
+
+      this.cancelEventFromBtns()
+
+      this.numbers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]
+
+      this.totalConditionsSolde = 0
+
       this.element = document.querySelector(".tiket-print-area");
 
       this.openMsgBox = false
@@ -1396,7 +1409,14 @@ export class HomeComponent implements OnInit {
   }
 
   cancelPrint(){
+
     this.openMsgBox = false
+
+    this.cancelEventFromBtns()
+
+    this.numbers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]
+
+    this.totalConditionsSolde = 0
   }
 
   generateQRCode(data:any) {
@@ -1410,32 +1430,6 @@ export class HomeComponent implements OnInit {
     return qr.createDataURL(4, 0)
   }
 
-  chronoConfigSpinMobile(){
-
-    if(!this.rouletteService.spinOpen){
-      this.openSpinMobile = false
-    }
-
-    this.tiketService.chrono().subscribe((res:any)=>{
-
-      if(res.temp >= 90 && res.temp < 120){
-
-
-        this.users.findAdmin(this.adminId).subscribe((res:any)=>{
-
-          this.rouletteService.selectedNumberWin = res.resultatRoulette
-          this.rouletteService.spinOpen = true
-          this.openSpinMobile = true
-
-        })
-
-      }
-
-    })
-
-    setTimeout(this.chronoConfigSpinMobile.bind(this),1000)
-
-  }
 
   ngOnInit(): void {
 
@@ -1445,14 +1439,11 @@ export class HomeComponent implements OnInit {
 
     }else{
 
-      
-
       this.autoUpdateSolde()
 
       this.tiketService.chrono().subscribe((res:any)=>{
         
         var waitSc = 120 - res.temp
-
 
         if(waitSc <= 30){
 
@@ -1462,12 +1453,7 @@ export class HomeComponent implements OnInit {
               waitSc--
               this.timeIsUpSpin = true
             }else{
-              this.openWaitAlert = false
-              if(window.innerWidth <= 900){
-                this.chronoConfigSpinMobile()
-              }else{
-                this.chronoConfig()
-              }
+              this.chronoConfig()
               
               clearInterval(inter)
             }
@@ -1476,12 +1462,7 @@ export class HomeComponent implements OnInit {
 
         }else{
 
-          if(window.innerWidth <= 900){
-            this.chronoConfigSpinMobile()
-          }else{
-            this.chronoConfig()
-          }
-
+          this.chronoConfig()
         }
 
       })

@@ -93,6 +93,16 @@ export class PlayerSettingsComponent implements OnInit {
     })
   }
 
+  returnFromPage(){
+
+    if(window.innerWidth <= 950){
+      this.router.navigate(['/home-mobile'],{skipLocationChange:true})
+    }else{
+      this.router.navigate(['/home'])
+    }
+
+  }
+
   ngOnInit(): void {
     if(this.usersService.user.id === ""){
 

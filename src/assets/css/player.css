@@ -2429,7 +2429,7 @@
 		width: 100%;
 	    padding: 33% 0;
 	    position: absolute;
-	    top: 30%;
+	    top: 31%;
 	    right: 0;
 	}
 
@@ -2442,6 +2442,86 @@
 	    height: 36%;
 	    z-index: 500;
 
+	}
+	.history-player .item .it {
+	    width: 50%;
+	    font-size: 2.5vw;
+	    text-align: center;
+	    overflow: hidden;
+	    white-space: nowrap;
+	    text-overflow: ellipsis;
+	}
+	.history-player .return-btn {
+	    margin: 2% 0;
+	    margin-right: 5%;
+	    cursor: pointer;
+	    padding: .7% 1%;
+	    border-radius: 100%;
+	    color: white;
+	    font-size: 9vw;
+	}
+	.history-player .head-list .it {
+
+	    font-size: 4vw;
+
+	}
+
+	.history-player .history-list {
+	    background-color: white;
+	    box-shadow: 0 0 0.5vw 0 #0000002b;
+	    margin: 1% 3%;
+	    padding: 2%;
+	    width: 90%;
+	}
+
+	.player-settings .return-btn{
+
+		font-size: 7vw;
+		margin-left: 4%;
+
+	}
+
+	.player-settings .form .content-form-settings{
+
+		width: 90%;
+
+	}
+
+	.player-settings .form .content-form-settings .sc .label{
+		font-size: 3vw;
+	}
+
+	.player-settings .form .content-form-settings .sc p{
+		font-size: 3vw;
+	}
+
+	.player-settings .form .content-form-settings .sc input{
+		font-size: 3vw;
+	}
+
+	.player-settings .form .content-form-settings button{
+		padding: 3%;
+		font-size: 3vw;
+	}
+
+	.player-settings .form .content-form-settings .sc{
+		margin: 9% 0;
+	}
+
+	.message-box-info .ctn-ctnr{
+		width: 90%;
+    	padding: 5% 2%;
+	}
+	.message-box-info .ctn-ctnr .title{
+		font-size: 5vw;
+	}
+	.message-box-info .ctn-ctnr p{
+		font-size: 3.5vw;
+		line-height: 6vw;
+	}
+
+	.message-box-info .ctn-ctnr .buttons button{
+		font-size: 4vw;
 	}
 
 }

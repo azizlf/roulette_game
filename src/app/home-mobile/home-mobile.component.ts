@@ -5,7 +5,6 @@ import { UsersService } from '../services/users.service'
 import { RouletteService } from '../services/roulette.service'
 import * as QRCode from 'qrcode-generator'
 
-declare function initFnHome():void
 declare function scanQrTiket():void
 declare function stopCamera():void
 
@@ -225,6 +224,18 @@ export class HomeMobileComponent implements OnInit {
 
   scanInterval:any
 
+  openResultScan = false
+
+  scanTiket = {
+    id:"fgdsqgfdsqgdsqgfdsq",
+    solde:0,
+    status:false
+  }
+
+  closeResultScan(){
+    this.openResultScan = false
+  }
+
   scanQrImage(){
 
     if(!this.openScanQrCode){
@@ -253,12 +264,18 @@ export class HomeMobileComponent implements OnInit {
 
             var result = localStorage.getItem("qr-data")
 
-            if(result === "false"){
+            if(result != "false"){
               
-              alert("No qr code detected")
+              this.tiketService.findTiket(result).subscribe((res:any)=>{
 
-            }else{
-              alert(result)
+                this.scanTiket.id = result+""
+                this.scanTiket.solde = res.solde
+                this.scanTiket.status = res.gagnion
+
+                this.openResultScan = true
+
+              })
+
             }
 
           },10000)
@@ -1142,15 +1159,17 @@ export class HomeMobileComponent implements OnInit {
 
         this.element.style.scale = "1.2"
 
-        setInterval(()=>{
-          this.element = document.querySelector(".read-qr-sanc")
-          
-          if(!this.openScanQrCode){
-            this.element.style.opacity = "0"
-            this.element.style.pointerEvents = "none"
-          }
+        setTimeout(()=>{
+          setInterval(()=>{
+            this.element = document.querySelector(".read-qr-sanc")
+            
+            if(!this.openScanQrCode){
+              this.element.style.opacity = "0"
+              this.element.style.pointerEvents = "none"
+            }
 
-        },3000)
+          },3000)
+        },2000)
 
       },100)
 

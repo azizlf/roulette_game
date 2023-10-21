@@ -51,35 +51,53 @@ export class AddUserComponent implements OnInit {
       this.isLoadingForm = true
 
 
-      this.userService.addUser(request).subscribe((res:any)=>{
+      this.userService.findAdmin(this.userService.user.id).subscribe((res:any)=>{
+        var sld = parseFloat(request.solde+"")
+        if(sld < res.solde){
+
+          this.userService.addUser(request).subscribe((res:any)=>{
 
 
-        if(res.message){
+            if(res.message){
 
-          this.updateAdminSolde(this.userService.user.id,request.solde)
+              this.updateAdminSolde(this.userService.user.id,request.solde)
 
-          this.element = document.querySelector(".success-msg-box")
-          setTimeout(()=>{
-            this.element.style.opacity = "1"
-            this.element.style.top = "4%"
-            this.isLoadingForm = false
-            setTimeout(()=>{
-              this.element.style.opacity = "0"
-              this.element.style.top = "0%"
-            },3000)
-          },700)
-        }else{
+              this.element = document.querySelector(".success-msg-box")
+              setTimeout(()=>{
+                this.element.style.opacity = "1"
+                this.element.style.top = "4%"
+                this.isLoadingForm = false
+                setTimeout(()=>{
+                  this.element.style.opacity = "0"
+                  this.element.style.top = "0%"
+                },3000)
+              },700)
+            }else{
+              this.element = document.querySelector(".error-msg-box")
+              setTimeout(()=>{
+                this.element.style.opacity = "1"
+                this.element.style.top = "4%"
+                this.isLoadingForm = false
+                this.errorMsg = "Login already exist"
+                setTimeout(()=>{
+                  this.element.style.opacity = "0"
+                  this.element.style.top = "0%"
+                },3000)
+              },700)
+            }
+
+          })
+        }
+        else{
           this.element = document.querySelector(".error-msg-box")
+          this.errorMsg = "insufficient funds"
+          this.element.style.opacity = "1"
+          this.element.style.top = "4%"
+          this.isLoadingForm = false
           setTimeout(()=>{
-            this.element.style.opacity = "1"
-            this.element.style.top = "4%"
-            this.isLoadingForm = false
-            this.errorMsg = "Login already exist"
-            setTimeout(()=>{
-              this.element.style.opacity = "0"
-              this.element.style.top = "0%"
-            },3000)
-          },700)
+            this.element.style.opacity = "0"
+            this.element.style.top = "0%"
+          },3000)
         }
 
       })
@@ -102,13 +120,13 @@ export class AddUserComponent implements OnInit {
 
     this.userService.findAdmin(id).subscribe((res:any)=>{
 
-
       var result = res.solde - solde
 
       const req = {
         solde: result,
         id:this.userService.user.id
       }
+
       this.userService.updateAdmin(req).subscribe()
       
     })

@@ -14,21 +14,21 @@
 			<div class="item">login</div>
 			<div class="item">Name</div>
 			<div class="item">solde</div>
-			<div class="item">Profit</div>
+			<div class="item" *ngIf="userType != 'start_admin'">Profit</div>
 			<div class="item">Telephone</div>
-			<div class="item">Players</div>
-			<div class="item">Status</div>
+			<div class="item" *ngIf="userType != 'start_admin'">Players</div>
+			<div class="item" *ngIf="userType != 'start_admin'">Status</div>
 			<div class="item">Action</div>
 		</div>
 		<div class="item-list" *ngFor="let admin of admins" #item>
 			<div class="it name">{{admin.login}}</div>
 			<div class="it name">{{admin.name}} {{admin.lastName}}</div>
 			<div class="it">{{admin.solde}}</div>
-			<div class="it">{{admin.prencentage}}%</div>
+			<div class="it" *ngIf="userType != 'start_admin'">{{admin.prencentage}}%</div>
 			<div class="it">{{admin.teleAdmin}}</div>
-			<div class="it link">
+			<div class="it link" *ngIf="userType != 'start_admin'">
 				<i class="fa-solid fa-eye" style="padding: 6% 5%;" (click)="openUserForAdmin(admin)" ></i></div>
-			<div class="it">
+			<div class="it" *ngIf="userType != 'start_admin'">
 				<div class="status-account" *ngIf="admin.status">
 					<i class="fa-solid fa-circle" style="color:#0dd20d;"></i>
 				</div>
@@ -36,11 +36,21 @@
 					<i class="fa-solid fa-circle" style="color:red;"></i>
 				</div>
 			</div>
-			<div class="it">
+
+			<div class="it" *ngIf="userType != 'start_admin'">
 				<div class="btn edit" [routerLink]="'/admin/management/update-admin/'+admin._id">
 					<i class="fa-regular fa-pen-to-square"></i>
 				</div>
 				<div class="btn block" (click)="desactiveAdmin(admin,item)">
+					<i class="fa-solid fa-ban"></i>
+				</div>
+			</div>
+
+			<div class="it" *ngIf="userType === 'start_admin'">
+				<div class="btn edit" style="width: 18%;padding: 5% 0;" [routerLink]="'/admin/management/update-admin/'+admin._id">
+					<i class="fa-regular fa-pen-to-square"></i>
+				</div>
+				<div class="btn block" style="width: 18%;padding: 5% 0;" (click)="desactiveAdmin(admin,item)">
 					<i class="fa-solid fa-ban"></i>
 				</div>
 			</div>

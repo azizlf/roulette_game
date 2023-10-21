@@ -2,12 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsersService } from '../../services/users.service'
 
+
 @Component({
-  selector: 'app-super-admin',
-  templateUrl: './super-admin.component.html',
-  styleUrls: ['./super-admin.component.css']
+  selector: 'app-s-admin',
+  templateUrl: './s-admin.component.html',
+  styleUrls: ['./s-admin.component.css']
 })
-export class SuperAdminComponent implements OnInit {
+export class SAdminComponent implements OnInit {
+
 
   constructor(private router: Router,private users:UsersService) { }
 
@@ -20,8 +22,6 @@ export class SuperAdminComponent implements OnInit {
   adminsLength = 0
 
   userType:any
-
-  userSolde:any
 
   returnFromPage(){
 
@@ -46,12 +46,25 @@ export class SuperAdminComponent implements OnInit {
           })
 
           this.adminsLength = admins.length
-
-          this.userSolde = r.solde
         })
         this.users.getAllUsers().subscribe((r:any)=>{
           this.usersLength = r.length
         })
+      }else if(this.userType === "start_admin"){
+
+        this.users.getAllAdmins().subscribe((r:any)=>{
+          var admins:any = []
+
+          r.forEach((item:any)=>{
+            if(item.isSuperAdmin){
+              admins.push(item)
+            }
+          })
+
+          this.adminsLength = admins.length
+        })
+
+
       }else{
         this.users.findAdmin(this.users.user.id).subscribe((r:any)=>{
 

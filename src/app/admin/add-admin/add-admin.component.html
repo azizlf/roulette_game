@@ -43,7 +43,7 @@
 			<label class="error-msg" *ngIf="this.userDetails.controls.solde.status==='INVALID' && this.userDetails.controls.solde.touched">Field is required</label>
 			<input type="number" placeholder="Solde" formControlName="solde"/>
 			<br>
-			<select class="profit-select" formControlName="prencentage">
+			<select class="profit-select" formControlName="prencentage" *ngIf="userType != 'start_admin'">
 				<option value="0">Profit ( % )</option>
 				<option value="20">20%</option>
 				<option value="30">30%</option>

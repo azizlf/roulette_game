@@ -74,7 +74,6 @@ export class UsersComponent implements OnInit {
   removeUser(user:any,item:any){
 
     this.usersService.deleteUser(user._id).subscribe((res:any)=>{
-      console.log(res)
       item.remove()
     })
 

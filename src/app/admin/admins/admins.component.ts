@@ -11,6 +11,8 @@ export class AdminsComponent implements OnInit {
 
   admins:any = []
 
+  userType:any
+
   constructor(private userService:UsersService,private router: Router) { }
 
   openUserForAdmin(admin:any){
@@ -27,13 +29,17 @@ export class AdminsComponent implements OnInit {
 
       res.forEach((item:any)=>{
 
-        if(!item.isSuperAdmin){
-          this.admins.push(item)
+        if(this.userService.user.type === "superAdmin"){
+          if(item.role === "admin"){
+            this.admins.push(item)
+          }
+        }else if(this.userService.user.type === "start_admin"){
+          if(item.role === "superAdmin"){
+            this.admins.push(item)
+          }
         }
 
       })
-
-      console.log(this.admins)
 
     })
 
@@ -49,6 +55,7 @@ export class AdminsComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.userType = this.userService.user.type
     this.getAdmins()
   }
 

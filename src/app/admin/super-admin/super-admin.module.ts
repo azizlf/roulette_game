@@ -5,9 +5,7 @@ import { SuperAdminComponent } from './super-admin.component';
 
 
 @NgModule({
-  declarations: [
-    SuperAdminComponent
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     SuperAdminRoutingModule

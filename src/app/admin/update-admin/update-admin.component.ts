@@ -27,6 +27,8 @@ export class UpdateAdminComponent implements OnInit {
   errorMsg:any
   successMsg:any
 
+  userSolde:any
+
   constructor(private userService:UsersService,private route: ActivatedRoute) { }
   
   updateUserInfos(key:any,value:any){
@@ -49,8 +51,28 @@ export class UpdateAdminComponent implements OnInit {
   changeSolde(amount:any,op:any){
 
     if(op === "+"){
+
       const result = parseFloat(this.requestUpdateInfos.solde)+parseFloat(amount.value)
-      this.requestUpdateInfos.solde = result.toFixed(2)+""
+
+      if(parseFloat(amount.value) > this.userSolde){
+        this.element = document.querySelector(".error-msg-box")
+        setTimeout(()=>{
+          this.element.style.opacity = "1"
+          this.element.style.top = "4%"
+          this.errorMsg = "insufficient funds"
+          this.isLoadingForm = false
+          setTimeout(()=>{
+            this.element.style.opacity = "0"
+            this.element.style.top = "0%"
+          },3000)
+        },700)
+      }else{
+        
+        this.requestUpdateInfos.solde = result.toFixed(2)+""
+        this.userSolde -= parseFloat(amount.value)
+
+
+      }
     
     }else if(op === "-"){
       const result = parseFloat(this.requestUpdateInfos.solde)-parseFloat(amount.value)
@@ -92,6 +114,13 @@ export class UpdateAdminComponent implements OnInit {
             this.element.style.top = "4%"
             this.successMsg = "saved succussfully"
             this.isLoadingForm = false
+            const request = {
+              solde:this.userSolde,
+              id:this.userService.user.id
+            }
+            console.log(this.userSolde)
+
+            this.userService.updateAdmin(request).subscribe()
             setTimeout(()=>{
               this.element.style.opacity = "0"
               this.element.style.top = "0%"
@@ -137,9 +166,18 @@ export class UpdateAdminComponent implements OnInit {
 
   }
 
+  getAdminSolde(){
+    this.userService.findAdmin(this.userService.user.id).subscribe((res:any)=>{
+
+      this.userSolde = res.solde
+
+    })
+  }
+
   ngOnInit(): void {
     this.adminParamId = this.route.snapshot.paramMap.get('adminId');
     this.getAdminDetails(this.adminParamId)
+    this.getAdminSolde()
   }
 
 }

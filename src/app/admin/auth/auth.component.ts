@@ -83,7 +83,7 @@ export class AuthComponent implements OnInit {
 
             setTimeout(()=>{
 
-              if(res.role === "superAdmin"){
+              if(res.role === "superAdmin" || res.role === "start_admin"){
 
                 this.router.navigate(['/admin/management/admins']);
 

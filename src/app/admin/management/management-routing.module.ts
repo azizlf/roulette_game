@@ -43,6 +43,14 @@ const routes: Routes = [
       {
         path:"update-admin/:adminId",
         loadChildren: () => import('../update-admin/update-admin.module').then(m => m.UpdateAdminModule),
+      },
+      {
+        path:"template",
+        loadChildren: () => import('../update-template/update-template.module').then(m => m.UpdateTemplateModule),
+      },
+      {
+        path:"update-template/:title",
+        loadChildren: () => import('../form-update-template/form-update-template.module').then(m => m.FormUpdateTemplateModule),
       }
     ]
   }

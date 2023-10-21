@@ -337,19 +337,30 @@
 .spin-app .dashbord .statistics .table .content-table .ligne-nbrs{
 
 	width: 100%;
-	height: 7.9%;
+	height: 7.2%;
 	display: flex;
 	align-items: center;
 	overflow: hidden;
 	color: white;
 	font-size: .8vw;
-	border-top: .1vw solid white;
+	border: .1vw solid white;
+	border-top: none;
+	border-left: none;
+	border-right: none;
 
 }
 
-.spin-app .dashbord .statistics .table .content-table .ligne-nbrs.start{
+.spin-app .dashbord .statistics .table .content-table .ligne-nbrs.end{
 
 	border: none;
+
+}
+
+
+.spin-app .dashbord .statistics .table .content-table .ligne-nbrs.end .key,
+.spin-app .dashbord .statistics .table .content-table .ligne-nbrs.end .value{
+
+	width: 50%;
 
 }
 
@@ -378,7 +389,9 @@
 	background-color: #181818;
 
 }
-
+.spin-app .dashbord .statistics .table .content-table .ligne-nbrs .key.green{
+	background-color: #4b9f13;
+}
 
 .spin-app .dashbord .statistics .table .content-table .ligne-nbrs .value{
 

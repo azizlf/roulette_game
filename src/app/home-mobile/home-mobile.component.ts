@@ -224,12 +224,13 @@ export class HomeMobileComponent implements OnInit {
 
   scanInterval:any
 
-  openResultScan = false
+  openResultScan = true
 
   scanTiket = {
-    id:"fgdsqgfdsqgdsqgfdsq",
+    id:"",
     solde:0,
-    status:false
+    status:false,
+    realTime:true
   }
 
   closeResultScan(){
@@ -271,6 +272,7 @@ export class HomeMobileComponent implements OnInit {
                 this.scanTiket.id = result+""
                 this.scanTiket.solde = res.solde
                 this.scanTiket.status = res.gagnion
+                this.scanTiket.realTime = res.realTime
 
                 this.openResultScan = true
 

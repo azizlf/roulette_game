@@ -53,20 +53,30 @@
 				{{scanTiket.id}}
 			</div>
 			<br>
-			<p>
+			<p *ngIf="!scanTiket.realTime">
 				<strong>Solde:</strong> {{scanTiket.solde}} DT
 				<br><br>
 				<strong>Status:</strong> 
 				<span *ngIf="scanTiket.status" style="background-color: green;
 				    color: white;
-				    padding: 1% 2%;
+				    padding: 1.3% 2%;
 				    border-radius: 0.3vw;
 				    margin-left: 4%;">win</span>
 				<span *ngIf="!scanTiket.status" style="background-color: red;
 				    color: white;
-				    padding: 1% 2%;
+				    padding: 1.3% 2%;
 				    border-radius: 0.3vw;
 				    margin-left: 4%;">lost</span>
+			</p>
+			<p *ngIf="scanTiket.realTime">
+				<strong>Solde:</strong> {{scanTiket.solde}} DT
+				<br><br>
+				<strong>Status:</strong> 
+				<span style="background-color: #ff3d00;
+				    color: white;
+				    padding: 1.3% 2%;
+				    border-radius: 0.3vw;
+				    margin-left: 4%;">pending</span>
 			</p>
 			<div class="buttons">
 				<button class="cfrm" (click)="closeResultScan()">ok</button>

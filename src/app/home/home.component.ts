@@ -228,7 +228,8 @@ export class HomeComponent implements OnInit {
   scanTiket = {
     id:"",
     solde:0,
-    status:false
+    status:false,
+    realTime:true
   }
 
   closeResultScan(){
@@ -270,6 +271,7 @@ export class HomeComponent implements OnInit {
                 this.scanTiket.id = result+""
                 this.scanTiket.solde = res.solde
                 this.scanTiket.status = res.gagnion
+                this.scanTiket.realTime = res.realTime
 
                 this.openResultScan = true
 
@@ -299,7 +301,7 @@ export class HomeComponent implements OnInit {
     const url = window.location.href.split("/")[2]
 
     window.open("http://"+url+"/spin/desktop")
-    
+
     localStorage.setItem("#FSDJIOSFDEZ",this.adminId)
 
   }

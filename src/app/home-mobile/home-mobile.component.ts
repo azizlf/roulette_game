@@ -1022,19 +1022,6 @@ export class HomeMobileComponent implements OnInit {
 
   }
 
-  autoUpdateSolde(){
-
-    this.users.findUser(this.users.user.id).subscribe((res:any)=>{
-      
-      this.userSolde = parseFloat(res.solde)
-
-
-    })
-
-
-    setTimeout(this.autoUpdateSolde.bind(this),1000)
-  }
-
   logout(){
 
     this.users.user.id = ""
@@ -1092,15 +1079,11 @@ export class HomeMobileComponent implements OnInit {
 
         this.openNoEventAlert = true
 
-        if(this.timerAlert <= 0){
-
-          //this.openNoEventAlert = false
-        }
-
       }else{
 
         this.openNoEventAlert = false
         this.timeIsUpSpin = false
+        this.getUser()
 
       }
 
@@ -1129,10 +1112,6 @@ export class HomeMobileComponent implements OnInit {
       this.router.navigate(['/'])
 
     }else{
-
-      
-
-      this.autoUpdateSolde()
 
       this.tiketService.chrono().subscribe((res:any)=>{
         

@@ -4,6 +4,7 @@ import { TiketService } from '../services/tiket.service'
 import { UsersService } from '../services/users.service'
 import { RouletteService } from '../services/roulette.service'
 import * as QRCode from 'qrcode-generator'
+import * as JsBarcode from 'jsbarcode';
 
 declare function initFnHome():void
 declare function scanQrTiket():void
@@ -56,6 +57,9 @@ export class HomeComponent implements OnInit {
   coins:any = ["05","1","5","10","20"]
 
   currentCoinSelected = this.coins[0]
+
+  appBarcodeData:any
+  appBarcodeFormat:any
 
 
   numbers:any = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]
@@ -300,7 +304,11 @@ export class HomeComponent implements OnInit {
 
     const url = window.location.href.split("/")[2]
 
+    const token = this.generateTiketCode(12)
+
     window.open("http://"+url+"/spin/desktop")
+    
+    localStorage.setItem("#TKPOLMGFM",token)
 
     localStorage.setItem("#FSDJIOSFDEZ",this.adminId)
 
@@ -1016,7 +1024,7 @@ export class HomeComponent implements OnInit {
       this.userSolde = parseFloat(res.solde)
       this.adminId = res.admin
 
-      localStorage.setItem("#FSDJIOSFDEZ",res.adminId)
+      localStorage.setItem("#LOAEREUHDFS",res.login)
 
       for (var i = res.tikets.length - 1 ; i >= 0; i--) {
         if(res.tikets[i].realTime){
@@ -1029,20 +1037,7 @@ export class HomeComponent implements OnInit {
     })
 
   }
-
-  autoUpdateSolde(){
-
-    this.users.findUser(this.users.user.id).subscribe((res:any)=>{
-      
-      this.userSolde = parseFloat(res.solde)
-
-
-    })
-
-
-    setTimeout(this.autoUpdateSolde.bind(this),1000)
-  }
-
+  
   logout(){
 
     this.users.user.id = ""
@@ -1100,6 +1095,7 @@ export class HomeComponent implements OnInit {
 
         this.noEventUser = false
         this.timeIsUpSpin = false
+        this.getUser()
 
       }
 
@@ -1184,13 +1180,16 @@ export class HomeComponent implements OnInit {
 
     this.element = document.querySelector(".tiket-area-print-content")
 
-    var src = this.generateQRCode(this.tiketService.createdTiketIdForPrint)
-
-    var qrCode = `<img class="qr-image-tiket-print" src="${src}" alt"qrCode/>`
-
     this.element.innerHTML += totalHtml
 
-    this.element.innerHTML += qrCode
+    this.element.innerHTML += "<svg class='bar-code-svg'></svg>"
+
+    var src = this.generateBarCode(this.tiketService.createdTiketIdForPrint)
+
+    //var qrCode = `<img class="qr-image-tiket-print" src="${src}" alt"qrCode/>`
+
+
+    //this.element.innerHTML += qrCode
 
     
 
@@ -1203,11 +1202,7 @@ export class HomeComponent implements OnInit {
 
     setTimeout(()=>{
 
-      this.cancelEventFromBtns()
-
-      this.numbers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]
-
-      this.totalConditionsSolde = 0
+      this.cancelTiket()
 
       this.element = document.querySelector(".tiket-print-area");
 
@@ -1390,6 +1385,12 @@ export class HomeComponent implements OnInit {
 
             }
 
+            .tiket-print-area svg{
+              scale: .7;
+              margin-top: 3%;
+              opacity: .9;
+            }
+
 
           </style>
 
@@ -1414,11 +1415,7 @@ export class HomeComponent implements OnInit {
 
     this.openMsgBox = false
 
-    this.cancelEventFromBtns()
-
-    this.numbers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]
-
-    this.totalConditionsSolde = 0
+    this.cancelTiket()
   }
 
   generateQRCode(data:any) {
@@ -1432,6 +1429,17 @@ export class HomeComponent implements OnInit {
     return qr.createDataURL(4, 0)
   }
 
+  generateBarCode(data:any){
+
+    this.appBarcodeData = data
+    this.appBarcodeFormat = 'CODE128'
+
+    this.element = document.querySelector(".bar-code-svg")
+
+    JsBarcode(this.element, this.appBarcodeData, {format: this.appBarcodeFormat});
+
+  }
+
 
   ngOnInit(): void {
 
@@ -1441,8 +1449,6 @@ export class HomeComponent implements OnInit {
 
     }else{
 
-      this.autoUpdateSolde()
-
       this.tiketService.chrono().subscribe((res:any)=>{
         
         var waitSc = 120 - res.temp
@@ -1450,17 +1456,14 @@ export class HomeComponent implements OnInit {
         if(waitSc <= 30){
 
           this.openWaitAlert = true
-          var inter = setInterval(()=>{
-            if(waitSc>0){
-              waitSc--
-              this.timeIsUpSpin = true
-            }else{
-              this.chronoConfig()
-              
-              clearInterval(inter)
-            }
+          this.timeIsUpSpin = true
 
-          },1000)
+          setTimeout(()=>{
+
+            this.openWaitAlert = false
+            this.chronoConfig()
+
+          },(waitSc * 1000))
 
         }else{
 

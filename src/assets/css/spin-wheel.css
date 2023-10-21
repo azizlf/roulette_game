@@ -532,19 +532,28 @@
 
 }
 
+.spin-app .left-section-itm{
+
+	position: absolute;
+	width: 16%;
+	left: 3%;
+	margin-top: -5%;
+
+}
+
+
 .spin-app .jackpot-section{
 
-	width: 16%;
-	padding: .5% 0;
+	width: 100%;
+	padding: 5% 0;
 	text-align: center;
 	background: green;
-	position: absolute;
 	border: .4vw solid #e1c463;
 	border-radius: .6vw;
 	font-size: 1.1vw;
 	line-height: 1.8vw;
 	text-transform: uppercase;
-	left: 3%;
+	margin: 7% 0;
 	color: white;
 
 }
@@ -566,6 +575,11 @@
 .spin-app .jackpot-section.red{
 
 	background-color: #b3090a;
+}
+
+.spin-app .jackpot-section.orange{
+
+	background-color: #d93a08;
 }
 
 @media screen and (max-width:900px){

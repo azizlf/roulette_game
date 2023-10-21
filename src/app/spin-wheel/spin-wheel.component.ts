@@ -229,6 +229,10 @@ export class SpinWheelComponent implements OnInit {
 
   currentTime = 0
 
+  currentToken:any
+
+  user_login = ""
+
 
   constructor(private rouletteService:RouletteService,private users:UsersService,private tiketService:TiketService) { }
 
@@ -254,39 +258,23 @@ export class SpinWheelComponent implements OnInit {
 
   }
 
-  initSpin(number:any){
+  initSpin(choosedNum:any){
 
-    var choosedNum = number
+    this.spinFinish = true
 
-    var interval = setInterval(()=>{
+    this.indicator = document.querySelector(".indicator-number")
 
-      var index = Math.floor(Math.random() * this.angles.length)
+    this.element = document.querySelector(".spin")
 
-      choosedNum = this.angles[index].val
+    this.element.style.transition = "transform 0s"
 
-      if(choosedNum != number){
+    var angle = this.angles[this.angles.findIndex(item => item.val === choosedNum)].ang
 
-        console.log("finded")
-        this.spinFinish = true
+    this.element.style.transform = "rotate("+(angle + 2)+"deg)"
 
-        this.indicator = document.querySelector(".indicator-number")
+    this.indicator.innerText = choosedNum
 
-        this.element = document.querySelector(".spin")
-
-        this.element.style.transition = "transform 0s"
-
-        var angle = this.angles[this.angles.findIndex(item => item.val === choosedNum)].ang
-
-        this.element.style.transform = "rotate("+(angle + 2)+"deg)"
-
-        this.indicator.innerText = choosedNum
-
-        this.indicator.style.backgroundColor = this.angles[this.angles.findIndex(item => item.val === choosedNum)].color
-
-        clearInterval(interval)
-      }
-
-    },15)
+    this.indicator.style.backgroundColor = this.angles[this.angles.findIndex(item => item.val === choosedNum)].color
 
   }
 
@@ -294,8 +282,6 @@ export class SpinWheelComponent implements OnInit {
   chronoConfig(){
 
     this.tiketService.chrono().subscribe((res:any)=>{
-
-      console.log(res.temp)
 
       this.currentTime = res.temp
 
@@ -317,15 +303,24 @@ export class SpinWheelComponent implements OnInit {
 
     })
 
+    if(localStorage.getItem("#TKPOLMGFM") != this.currentToken){
+      window.close()
+    }
+
     setTimeout(this.chronoConfig.bind(this),1000)
 
   }
 
   ngOnInit(): void {
 
+    this.user_login = localStorage.getItem("#LOAEREUHDFS")+""
+
+    this.currentToken = localStorage.getItem("#TKPOLMGFM")
+
     this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
-      
-      this.initSpin(res.resultatRoulette)
+
+      console.log(res.hist[0])
+
       setTimeout(()=>{
 
         this.element = document.querySelector(".spin")
@@ -352,9 +347,15 @@ export class SpinWheelComponent implements OnInit {
 
         SpinWheelEvents()
 
-        this.tiketService.chrono().subscribe((res:any)=>{
+        this.tiketService.chrono().subscribe((r:any)=>{
 
-          this.currentTime = res.temp
+          this.currentTime = r.temp
+
+          if(r.temp < 90 ){
+            this.initSpin(res.hist[0])
+          }else{
+            this.initSpin(res.hist[1])
+          }
 
           this.chronoConfig()
 

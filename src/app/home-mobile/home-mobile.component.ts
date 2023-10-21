@@ -224,7 +224,7 @@ export class HomeMobileComponent implements OnInit {
 
   scanInterval:any
 
-  openResultScan = true
+  openResultScan = false
 
   scanTiket = {
     id:"",

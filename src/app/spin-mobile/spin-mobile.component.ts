@@ -339,7 +339,7 @@ export class SpinMobileComponent implements OnInit {
 
       this.isSpinning = true
 
-      this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
+      this.users.findAdmin(this.users.user.adminId).subscribe((res:any)=>{
 
         this.rotateAnim(res.resultatRoulette)
 
@@ -460,6 +460,8 @@ export class SpinMobileComponent implements OnInit {
 
 
   historyMng(history:any){
+
+    console.log(history)
 
     this.zeroOccur = 0
 
@@ -636,8 +638,8 @@ export class SpinMobileComponent implements OnInit {
 
     this.getJackpots()
 
-    this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
-      this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
+    this.users.findAdmin(this.users.user.adminId).subscribe((res:any)=>{
+      this.users.findAdmin(this.users.user.adminId).subscribe((res:any)=>{
 
         this.historyMng(res.hist)
 
@@ -667,7 +669,7 @@ export class SpinMobileComponent implements OnInit {
               setTimeout(()=>{
                 this.element = document.querySelector(".spin-section")
                 this.element.style.scale = "1"
-                this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
+                this.users.findAdmin(this.users.user.adminId).subscribe((res:any)=>{
 
                   this.historyMng(res.hist)
 

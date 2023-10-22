@@ -317,27 +317,27 @@ export class SpinMobileComponent implements OnInit {
 
   chronoConfig(){
 
-    this.timerChrono = ((((this.timeChrono-32) - this.currentTime)/(this.timeChrono-32))*100) +"%"
+    this.tiketService.chrono().subscribe((res:any)=>{
+
+      this.currentTime = res.temp
+
+      this.timerChrono = ((((this.timeChrono-32) - this.currentTime)/(this.timeChrono-32))*100) +"%"
     
-    if(this.currentTime >= (this.timeChrono-32) && this.currentTime < this.timeChrono && !this.isSpinning && this.rouletteService.openSpin){
+      if(this.currentTime >= (this.timeChrono-32) && this.currentTime < this.timeChrono && !this.isSpinning){
 
-      this.isSpinning = true
+        this.isSpinning = true
 
-      this.users.findAdmin(this.users.user.adminId).subscribe((res:any)=>{
+        this.users.findAdmin(this.users.user.adminId).subscribe((res:any)=>{
 
-        this.rotateAnim(res.resultatRoulette)
+          this.rotateAnim(res.resultatRoulette)
 
-      })
+        })
 
-    }else if(this.currentTime < (this.timeChrono-32)){
-      this.isSpinning = false
-    }
+      }else if(this.currentTime < (this.timeChrono-32)){
+        this.isSpinning = false
+      }
 
-    if(this.currentTime < this.timeChrono){
-      this.currentTime++
-    }else{
-      this.currentTime = 0
-    }
+    })
 
     setTimeout(this.chronoConfig.bind(this),1000)
 

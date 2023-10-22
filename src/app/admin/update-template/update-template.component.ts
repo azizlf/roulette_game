@@ -22,6 +22,18 @@ export class UpdateTemplateComponent implements OnInit {
       this.tempList.push(res.text2)
       this.tempList.push(res.text3)
 
+      this.tempList.forEach((temp:any)=>{
+
+        if(temp.value.includes("img/")){
+          temp.type = "image"
+          temp.value = temp.value.replace("img/","")
+
+        }else{
+          temp.type = "text"
+        }
+
+      })
+
     })
 
   }

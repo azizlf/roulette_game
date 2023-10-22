@@ -20,6 +20,8 @@ export class FormUpdateTemplateComponent implements OnInit {
   }
 
   textSelected = 0
+  typeIsImage = false
+  imgaeSelected:any
 
   element:any
   errorMsg:any
@@ -99,27 +101,98 @@ export class FormUpdateTemplateComponent implements OnInit {
 
   }
 
+  selectImage(e:any) {
 
+    const fileInput = e.target
+
+
+    if (fileInput.files && fileInput.files[0]) {
+
+      const file = fileInput.files[0]
+
+      const fileReader = new FileReader()
+
+      fileReader.onload = (e:any)=>{
+        this.imgaeSelected = e.target.result
+        this.requestInfos.value = "img/"+this.imgaeSelected
+      }
+
+      fileReader.readAsDataURL(file)
+    }
+  }
+
+
+  changeFormType(type:any){
+
+    if(type === "image"){
+      this.typeIsImage = true
+    }else if(type === "text"){
+      this.typeIsImage = false
+    }
+
+  }
+
+  getBorderColor(type:any){
+    var result = ""
+    if(type === "image"){
+      if(this.typeIsImage){
+        result = ".2vw solid #FF9800"
+      }else{
+        result = ".2vw solid transparent"
+      }
+    }else if(type === "text"){
+      if(!this.typeIsImage){
+        result = ".2vw solid #FF9800"
+      }else{
+        result = ".2vw solid transparent"
+      }
+    }
+    return result
+
+  }
 
   getTempDetail(title:any){
+
+    this.isLoading = true
 
     this.userService.findAdmin(this.userService.user.id).subscribe((res:any)=>{
 
       this.requestInfos.title = title
       
       if(res.text1.title === title){
-        this.requestInfos.value = res.text1.value
         this.textSelected = 1
+        if(res.text1.value.includes("img/")){
+          this.typeIsImage = true
+          this.imgaeSelected = res.text1.value.replace("img/","")
+        }else{
+          this.requestInfos.value = res.text1.value
+
+        }
       }
       else if(res.text2.title === title){
-        this.requestInfos.value = res.text2.value
+        
         this.textSelected = 2
+        if(res.text2.value.includes("img/")){
+          this.typeIsImage = true
+          this.imgaeSelected = res.text2.value.replace("img/","")
+        }else{
+          this.requestInfos.value = res.text2.value
+
+        }
+
       }
       else if(res.text3.title === title){
-        this.requestInfos.value = res.text3.value
+        
         this.textSelected = 3
+        if(res.text3.value.includes("img/")){
+          this.typeIsImage = true
+          this.imgaeSelected = res.text3.value.replace("img/","")
+        }else{
+          this.requestInfos.value = res.text3.value
+
+        }
       }
-      this.isLoadingForm = false
+      this.isLoading = false
 
     })
 

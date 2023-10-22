@@ -17,9 +17,19 @@
 <div class="user-form">
 	<div class="return-btn" [routerLink]="'/admin/management/template'" ><i class="fa-solid fa-arrow-left"></i></div>
 	<div class="form" *ngIf="!isLoading">
+		<div style="width: 100%;margin-bottom: 3%;font-size: 1.4vw;display: flex;align-items: center;justify-content: center;">
+			<p (click)="changeFormType('text')" [ngStyle]="{'cursor':'pointer', 'width':'50%','text-align':'center', 'border-bottom': getBorderColor('text'),'padding': '3% 0'}">change text</p>
+			<p (click)="changeFormType('image')" [ngStyle]="{'cursor':'pointer', 'width':'50%','text-align':'center', 'border-bottom': getBorderColor('image'),'padding': '3% 0'}">change image</p>
+
+		</div>
 		<input type="text" placeholder="Title" (input)="updateInfos('title',$event)"  [value]="requestInfos.title"/>
 		<br>
-		<input type="text" placeholder="Value" (input)="updateInfos('value',$event)"  [value]="requestInfos.value"/>
+		<input type="text" placeholder="Value" *ngIf="!typeIsImage" (input)="updateInfos('value',$event)"  [value]="requestInfos.value"/>
+
+
+		<img style="width: 30%;" [src]="imgaeSelected" alt="image_viewer" *ngIf="typeIsImage">
+		
+		<input type="file" accept=".png,.jpg" (change)="selectImage($event)" *ngIf="typeIsImage"/>
 		<br>
 		<button (click)="update()" *ngIf="!isLoadingForm">save</button>
 		<div class="loading-ellipsis" style="
@@ -48,7 +58,7 @@
 				    scale: 2;"></div>
 			</div>
 	</div>
-	<div class="loading-ellipsis" *ngIf="isLoading">
+	<div class="loading-ellipsis" style="bottom: 43%;" *ngIf="isLoading">
 		<div class="r1"></div>
 		<div class="r2"></div>
 		<div class="r3"></div>

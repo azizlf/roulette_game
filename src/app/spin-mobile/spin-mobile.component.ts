@@ -601,11 +601,12 @@ export class SpinMobileComponent implements OnInit {
         }
 
       })
+
       var html = `<div class="jackpot-section blue">
                       <div class="ctn">
                         ${this.tempList[0].title}
                         <br>
-                        <span${this.tempList[0].value}</span>
+                        <span>${this.tempList[0].value}</span>
                       </div>
                     </div>
                     <div class="jackpot-section red">

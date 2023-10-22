@@ -1132,7 +1132,7 @@ export class HomeComponent implements OnInit {
 
     this.tiketService.chrono().subscribe((res:any)=>{
       
-      if(res.temp >= 110){
+      if(res.temp >= 117){
         this.getUser()
       }
       

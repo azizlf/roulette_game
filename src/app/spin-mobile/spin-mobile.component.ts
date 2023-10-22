@@ -15,6 +15,8 @@ export class SpinMobileComponent implements OnInit {
 
   tempList:any = []
 
+  showJackpots = false
+
   angles = [
 
     {
@@ -596,7 +598,34 @@ export class SpinMobileComponent implements OnInit {
 
         }
 
-      })    
+      })
+      var html = `<div class="jackpot-section blue">
+                      <div class="ctn">
+                        ${this.tempList[0].title}
+                        <br>
+                        <span${this.tempList[0].value}</span>
+                      </div>
+                    </div>
+                    <div class="jackpot-section red">
+                      <div class="ctn">
+                        ${this.tempList[1].title}
+                        <br>
+                        <span>${this.tempList[1].value}</span>
+                      </div>
+                    </div>
+                    <div class="jackpot-section orange">
+                      <div class="ctn">
+                        ${this.tempList[2].title}
+                        <br>
+                        <span>${this.tempList[2].value}</span>
+                      </div>
+                    </div>`
+
+      this.element = document.querySelector(".left-section-itm")
+
+      this.element.innerHTML = html
+
+       
 
     })
 

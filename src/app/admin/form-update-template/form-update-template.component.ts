@@ -10,15 +10,16 @@ import { ActivatedRoute } from '@angular/router';
 export class FormUpdateTemplateComponent implements OnInit {
 
   entries:any = ""
-  isLoading = true
+  isLoading = false
   isLoadingForm = false
   requestInfos = {
 
     value:"",
-    title:"",
-    id:""
+    title:""
 
   }
+
+  textSelected = 0
 
   element:any
   errorMsg:any
@@ -41,7 +42,6 @@ export class FormUpdateTemplateComponent implements OnInit {
 
     this.isLoadingForm = true
 
-
     if(this.requestInfos.title==="" || this.requestInfos.value===""){
       this.element = document.querySelector(".error-msg-box")
       this.isLoadingForm = false
@@ -53,7 +53,34 @@ export class FormUpdateTemplateComponent implements OnInit {
         this.element.style.top = "0%"
       },3000)
     }else{
-      this.userService.updateAdmin(this.requestInfos).subscribe((res:any)=>{
+      var request = {}
+      if(this.textSelected === 1){
+        request = {
+          id : this.userService.user.id,
+          text1:{
+            title:this.requestInfos.title,
+            value:this.requestInfos.value
+          }
+        }
+      }else if(this.textSelected === 2){
+        request = {
+          id : this.userService.user.id,
+          text2:{
+            title:this.requestInfos.title,
+            value:this.requestInfos.value
+          }
+        }
+      }else if(this.textSelected === 3){
+        request = {
+          id : this.userService.user.id,
+          text3:{
+            title:this.requestInfos.title,
+            value:this.requestInfos.value
+          }
+        }
+      }
+
+      this.userService.updateAdmin(request).subscribe((res:any)=>{
 
         if(res.message){
           this.element = document.querySelector(".success-msg-box")
@@ -79,17 +106,20 @@ export class FormUpdateTemplateComponent implements OnInit {
     this.userService.findAdmin(this.userService.user.id).subscribe((res:any)=>{
 
       this.requestInfos.title = title
-      this.requestInfos.id = res._id
       
       if(res.text1.title === title){
         this.requestInfos.value = res.text1.value
+        this.textSelected = 1
       }
       else if(res.text2.title === title){
         this.requestInfos.value = res.text2.value
+        this.textSelected = 2
       }
       else if(res.text3.title === title){
         this.requestInfos.value = res.text3.value
+        this.textSelected = 3
       }
+      this.isLoadingForm = false
 
     })
 

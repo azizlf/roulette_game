@@ -15,18 +15,16 @@
 	
 </div>
 <div class="user-form">
-	<div class="return-btn" [routerLink]="'/admin/management/admins'" ><i class="fa-solid fa-arrow-left"></i></div>
+	<div class="return-btn" [routerLink]="'/admin/management/template'" ><i class="fa-solid fa-arrow-left"></i></div>
 	<div class="form" *ngIf="!isLoading">
-		<input type="text" placeholder="Title" (input)="updateInfos('title',$event)"  [value]="entries.name"/>
+		<input type="text" placeholder="Title" (input)="updateInfos('title',$event)"  [value]="requestInfos.title"/>
 		<br>
-		<input type="text" placeholder="Value" (input)="updateInfos('value',$event)"  [value]="entries.lastName"/>
-		<br>
-		<input type="text" placeholder="PseudoName" (input)="updateInfos('pseudoName',$event)"  [value]="entries.pseudoName"/>
+		<input type="text" placeholder="Value" (input)="updateInfos('value',$event)"  [value]="requestInfos.value"/>
 		<br>
 		<button (click)="update()" *ngIf="!isLoadingForm">save</button>
 		<div class="loading-ellipsis" style="
 				    top:auto;
-				    bottom:-5%;left: 10%;" *ngIf="isLoadingForm">
+				    bottom:-10%;left: 10%;" *ngIf="isLoadingForm">
 				<div class="r1" style="
 					width: 2.5%;
 				    padding: 1.25% 0;

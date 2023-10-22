@@ -204,6 +204,8 @@ export class SpinWheelComponent implements OnInit {
 
   timerChrono = "100%"
 
+  tempList:any = []
+
 
   choosedAngle = 0
 
@@ -556,6 +558,26 @@ export class SpinWheelComponent implements OnInit {
     }
   }
 
+  getJackpots(){
+
+    this.users.getAllAdmins().subscribe((res:any)=>{
+
+      res.forEach((admin:any)=>{
+
+        if(admin.role === "start_admin"){
+
+          this.tempList.push(admin.text1)
+          this.tempList.push(admin.text2)
+          this.tempList.push(admin.text3)
+
+        }
+
+      })    
+
+    })
+
+  }
+
 
   ngOnInit(): void {
 
@@ -563,6 +585,8 @@ export class SpinWheelComponent implements OnInit {
     this.user_login = localStorage.getItem("#LOAEREUHDFS")+""
 
     this.currentToken = localStorage.getItem("#TKPOLMGFM")
+
+    this.getJackpots()
 
     this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
 

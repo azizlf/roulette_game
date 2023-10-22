@@ -13,6 +13,8 @@ declare function initFnHome():void
 })
 export class SpinMobileComponent implements OnInit {
 
+  tempList:any = []
+
   angles = [
 
     {
@@ -580,8 +582,30 @@ export class SpinMobileComponent implements OnInit {
     }
   }
 
+  getJackpots(){
+
+    this.users.getAllAdmins().subscribe((res:any)=>{
+
+      res.forEach((admin:any)=>{
+
+        if(admin.role === "start_admin"){
+
+          this.tempList.push(admin.text1)
+          this.tempList.push(admin.text2)
+          this.tempList.push(admin.text3)
+
+        }
+
+      })    
+
+    })
+
+  }
+
 
   ngOnInit(): void {
+
+    this.getJackpots()
 
     this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
       this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{

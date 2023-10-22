@@ -22,8 +22,6 @@ export class UpdateTemplateComponent implements OnInit {
       this.tempList.push(res.text2)
       this.tempList.push(res.text3)
 
-      console.log(res)
-
     })
 
   }

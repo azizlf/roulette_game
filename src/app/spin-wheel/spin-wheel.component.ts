@@ -210,7 +210,7 @@ export class SpinWheelComponent implements OnInit {
   choosedAngle = 0
 
   totalRotations = 0
-  rotationsToStop = 67
+  rotationsToStop = 50
   isSpinning = false
 
   wheel:any
@@ -223,7 +223,7 @@ export class SpinWheelComponent implements OnInit {
 
   element:any
 
-  spinFinish = false
+  spinFinish = true
 
   currentAngle = 0
 
@@ -258,48 +258,87 @@ export class SpinWheelComponent implements OnInit {
 
   constructor(private rouletteService:RouletteService,private users:UsersService,private tiketService:TiketService) { }
 
-  rotateAnim(choosedNum:any){
+  spinToAngle(desiredAngle:any) {
+    const index = this.angles.findIndex(item => item.val === desiredAngle)
 
-    this.spinFinish = false
+    if (index !== -1) {
+        this.choosedAngle = index
+        this.totalRotations = 0
+        this.isSpinning = true 
+        this.spinStartTime = performance.now()
+        this.requestAnimationFrame(this.animateSpin)
+    } else {
+        console.error("Desired angle not found in the angles array.")
+    }
+  }
+
+  animateSpin(timestamp:any) {
+
+    this.wheel = document.querySelector(".spin")
 
     this.indicator = document.querySelector(".indicator-number")
 
-    this.element = document.querySelector(".spin")
+    const elapsedTime = timestamp - this.spinStartTime;
 
-    this.element.style.transition = "transform 20s ease-in-out"
+    const progress = (elapsedTime % this.time) / this.time;
 
-    var angle = this.angles[this.angles.findIndex(item => item.val === choosedNum)].ang + (360 * 20)
+    let angle = progress * 360
 
-    this.currentAngle = this.angles[this.angles.findIndex(item => item.val === choosedNum)].ang
+    this.wheel.style.transform = "rotate(" + (angle-4) + "deg"
+      
+    const index = (Math.floor((this.angles.length * angle) / 360) + this.angles.length) % this.angles.length;
 
-    this.element.style.transform = "rotate("+(angle + 2)+"deg)"
+    this.indicator.innerText = this.angles[index].val
 
-    this.indicator.innerText = choosedNum
+    this.indicator.style.backgroundColor = this.angles[index].color
 
-    this.indicator.style.backgroundColor = this.angles[this.angles.findIndex(item => item.val === choosedNum)].color
+    this.time += 1
 
+    if (index !== this.choosedAngle) {
+      this.requestAnimationFrame(this.animateSpin)
+    } 
+    else {
+
+      this.totalRotations++
+
+      if (this.totalRotations < this.rotationsToStop) {
+        this.requestAnimationFrame(this.animateSpin)
+      } 
+      else if(this.totalRotations === this.rotationsToStop){
+  
+        setTimeout(()=>{
+          this.indicator.style.transform = "scale(2)"
+          this.indicator.style.margin = "0"
+          setTimeout(()=>{
+            this.indicator.style.transform = "scale(1)"
+            this.indicator.style.marginTop = "3.3%"
+            this.indicator = document.querySelector(".indicator-number")
+
+            this.spinFinish = true
+
+            this.indicator.style.transform = "scale(2)"
+
+            this.indicator.style.margin = "0"
+
+            setTimeout(()=>{
+              this.indicator.style.transform = "scale(1)"
+              this.indicator.style.marginTop = "3.3%"
+              this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
+
+                this.historyMng(res.hist)
+
+              })
+            },4000)
+          },4000)
+        },550)
+
+      }
+    }
   }
 
-  initSpin(choosedNum:any){
-
-    this.spinFinish = true
-
-    this.indicator = document.querySelector(".indicator-number")
-
-    this.element = document.querySelector(".spin")
-
-    this.element.style.transition = "transform 0s"
-
-    var angle = this.angles[this.angles.findIndex(item => item.val === choosedNum)].ang
-
-    this.element.style.transform = "rotate("+(angle + 2)+"deg)"
-
-    this.indicator.innerText = choosedNum
-
-    this.indicator.style.backgroundColor = this.angles[this.angles.findIndex(item => item.val === choosedNum)].color
-
+  requestAnimationFrame(callback: any) {
+    window.requestAnimationFrame(callback.bind(this));
   }
-
 
   chronoConfig(){
 
@@ -307,19 +346,22 @@ export class SpinWheelComponent implements OnInit {
 
       this.currentTime = res.temp
 
-      this.timerChrono = ((((this.timeChrono-32) - this.currentTime)/(this.timeChrono-32))*100) +"%"
+      this.timerChrono = ((((this.timeChrono-35) - this.currentTime)/(this.timeChrono-35))*100) +"%"
     
-      if(this.currentTime >= (this.timeChrono-32) && this.currentTime < this.timeChrono && !this.isSpinning){
+      if(this.currentTime >= (this.timeChrono-35) && this.currentTime < this.timeChrono && !this.isSpinning){
 
         this.isSpinning = true
 
+        this.time = 90
+        this.totalRotations = 0
+
         this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
 
-          this.rotateAnim(res.resultatRoulette)
+          this.spinToAngle(res.resultatRoulette)
 
         })
 
-      }else if(this.currentTime < (this.timeChrono-32)){
+      }else if(this.currentTime < (this.timeChrono-35)){
         this.isSpinning = false
       }
 
@@ -600,6 +642,24 @@ export class SpinWheelComponent implements OnInit {
 
   }
 
+  initSpin(choosedNum:any){
+
+    this.indicator = document.querySelector(".indicator-number")
+
+    this.element = document.querySelector(".spin")
+
+    this.element.style.transition = "transform 0s"
+
+    var angle = this.angles[this.angles.findIndex(item => item.val === choosedNum)].ang
+
+    this.element.style.transform = "rotate("+(angle + 2)+"deg)"
+
+    this.indicator.innerText = choosedNum
+
+    this.indicator.style.backgroundColor = this.angles[this.angles.findIndex(item => item.val === choosedNum)].color
+
+  }
+
 
   ngOnInit(): void {
 
@@ -611,38 +671,12 @@ export class SpinWheelComponent implements OnInit {
     this.getJackpots()
 
     this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
+      console.log(res)
 
       this.generateSection()
       this.historyMng(res.hist)
 
       setTimeout(()=>{
-
-        this.element = document.querySelector(".spin")
-
-        this.element.addEventListener("transitionend", ()=>{
-            
-          this.indicator = document.querySelector(".indicator-number")
-
-          this.spinFinish = true
-
-          this.indicator.style.transform = "scale(2)"
-
-          this.indicator.style.margin = "0"
-
-          setTimeout(()=>{
-            this.indicator.style.transform = "scale(1)"
-            this.indicator.style.marginTop = "3.3%"
-            this.element.style.transition = "transform 0s"
-            this.element.style.transform = "rotate(0deg)"
-            this.element.style.transform = "rotate("+(this.currentAngle + 2)+"deg)"
-            this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
-
-              this.historyMng(res.hist)
-
-            })
-          },4000)
-
-        });
 
         SpinWheelEvents()
 
@@ -724,81 +758,46 @@ export class SpinWheelComponent implements OnInit {
 
 /*
 
-  spinToAngle(desiredAngle:any) {
-    const index = this.angles.findIndex(item => item.val === desiredAngle)
+  rotateAnim(choosedNum:any){
 
-    if (index !== -1) {
-        this.choosedAngle = index
-        this.totalRotations = 0
-        this.isSpinning = true 
-        this.spinStartTime = performance.now()
-        this.requestAnimationFrame(this.animateSpin)
-    } else {
-        console.error("Desired angle not found in the angles array.")
-    }
-  }
-
-  animateSpin(timestamp:any) {
-
-    this.wheel = document.querySelector(".spin")
+    this.spinFinish = false
 
     this.indicator = document.querySelector(".indicator-number")
 
-    if(this.isSpinning) {
-        
-      const elapsedTime = timestamp - this.spinStartTime;
- 
-      const progress = (elapsedTime % this.time) / this.time;
+    this.element = document.querySelector(".spin")
 
-      let angle = progress * 360
+    this.element.style.transition = "transform 20s ease-in-out"
 
-      this.wheel.style.transform = "rotate(" + (angle-4) + "deg"
-        
-      const index = (Math.floor((this.angles.length * angle) / 360) + this.angles.length) % this.angles.length;
+    var angle = this.angles[this.angles.findIndex(item => item.val === choosedNum)].ang + (360 * 20)
 
-      this.indicator.innerText = this.angles[index].val
+    this.currentAngle = this.angles[this.angles.findIndex(item => item.val === choosedNum)].ang
 
-      this.indicator.style.backgroundColor = this.angles[index].color
+    this.element.style.transform = "rotate("+(angle + 2)+"deg)"
 
-      this.time += .8
+    this.indicator.innerText = choosedNum
 
-      if (index !== this.choosedAngle) {
-        this.requestAnimationFrame(this.animateSpin)
-      } 
-      else {
+    this.indicator.style.backgroundColor = this.angles[this.angles.findIndex(item => item.val === choosedNum)].color
 
-        this.totalRotations++
-
-        if (this.totalRotations < this.rotationsToStop) {
-          this.requestAnimationFrame(this.animateSpin)
-        } 
-        else if(this.totalRotations === this.rotationsToStop){
-    
-          setTimeout(()=>{
-            this.indicator.style.transform = "scale(2)"
-              this.indicator.style.margin = "0"
-              setTimeout(()=>{
-                this.indicator.style.transform = "scale(1)"
-                this.indicator.style.marginTop = "3.3%"
-                setTimeout(()=>{
-                  
-                  this.rouletteService.spinOpen = false
-                  this.rouletteService.angleStoped = this.wheel.style.transform
-                  this.rouletteService.selectedNumberWin = this.angles[this.choosedAngle].val
-                  this.rouletteService.selectedColorNumberWin = this.angles[this.choosedAngle].color
-                },5000)
-              },4000)
-          },550) 
-
-          this.isSpinning = false
-
-        }
-      }
-    }
   }
 
-  requestAnimationFrame(callback: any) {
-    window.requestAnimationFrame(callback.bind(this));
+  initSpin(choosedNum:any){
+
+    this.spinFinish = true
+
+    this.indicator = document.querySelector(".indicator-number")
+
+    this.element = document.querySelector(".spin")
+
+    this.element.style.transition = "transform 0s"
+
+    var angle = this.angles[this.angles.findIndex(item => item.val === choosedNum)].ang
+
+    this.element.style.transform = "rotate("+(angle + 2)+"deg)"
+
+    this.indicator.innerText = choosedNum
+
+    this.indicator.style.backgroundColor = this.angles[this.angles.findIndex(item => item.val === choosedNum)].color
+
   }
 
   */

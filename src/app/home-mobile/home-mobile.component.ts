@@ -1122,8 +1122,6 @@ export class HomeMobileComponent implements OnInit {
 
         this.timeIsUpSpin = true
 
-        this.timerAlert = 90 - res.temp
-
         this.openNoEventAlert = true
 
       }else{
@@ -1164,7 +1162,7 @@ export class HomeMobileComponent implements OnInit {
         
         var waitSc = 120 - res.temp
 
-        if(waitSc <= 30){
+        if(waitSc <= 50){
 
           this.openWaitAlert = true
           this.timeIsUpSpin = true

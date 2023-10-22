@@ -213,7 +213,7 @@ export class SpinMobileComponent implements OnInit {
   choosedAngle = 0
 
   totalRotations = 0
-  rotationsToStop = 65
+  rotationsToStop = 67
   isSpinning = false
 
   wheel:any
@@ -226,7 +226,7 @@ export class SpinMobileComponent implements OnInit {
 
   element:any
 
-  spinFinish = true
+  spinFinish = false
 
   currentAngle = 0
   waitSecondes:any
@@ -260,89 +260,43 @@ export class SpinMobileComponent implements OnInit {
 
   constructor(private rouletteService:RouletteService,private users:UsersService,private tiketService:TiketService) { }
 
+  rotateAnim(choosedNum:any){
 
-  spinToAngle(desiredAngle:any) {
-    const index = this.angles.findIndex(item => item.val === desiredAngle)
+    this.element = document.querySelector(".spin-app")
 
-    if (index !== -1) {
-        this.choosedAngle = index
-        this.totalRotations = 0
-        this.isSpinning = true 
-        this.spinStartTime = performance.now()
-        this.requestAnimationFrame(this.animateSpin)
-    } else {
-        console.error("Desired angle not found in the angles array.")
-    }
-  }
+    this.element.style.scale = "4.2"
+    this.element.style.top = "38%"
+    this.element.style.left = "8%"
 
-  animateSpin(timestamp:any) {
+    this.element = document.querySelector(".spin-section")
 
-    this.wheel = document.querySelector(".spin")
+    this.element.style.scale = ".4"
+
+
+
+    this.spinFinish = false
 
     this.indicator = document.querySelector(".indicator-number")
 
-    const elapsedTime = timestamp - this.spinStartTime;
+    this.element = document.querySelector(".spin")
 
-    const progress = (elapsedTime % this.time) / this.time;
+    this.element.style.transition = "transform 20s ease-in-out"
 
-    let angle = progress * 360
+    var angle = this.angles[this.angles.findIndex(item => item.val === choosedNum)].ang + (360 * 19)
 
-    this.wheel.style.transform = "rotate(" + angle + "deg"
-      
-    const index = (Math.floor((this.angles.length * angle) / 360) + this.angles.length) % this.angles.length;
+    this.currentAngle = this.angles[this.angles.findIndex(item => item.val === choosedNum)].ang
 
-    this.indicator.innerText = this.angles[index].val
+    this.element.style.transform = "rotate("+(angle + 2)+"deg)"
 
-    this.indicator.style.backgroundColor = this.angles[index].color
+    this.indicator.innerText = choosedNum
 
-    this.time += .5
+    this.indicator.style.backgroundColor = this.angles[this.angles.findIndex(item => item.val === choosedNum)].color
 
-    if (index !== this.choosedAngle) {
-      this.requestAnimationFrame(this.animateSpin)
-    } 
-    else {
-
-      this.totalRotations++
-
-      if (this.totalRotations < this.rotationsToStop) {
-        this.requestAnimationFrame(this.animateSpin)
-      } 
-      else if(this.totalRotations === this.rotationsToStop){
-  
-        setTimeout(()=>{
-          this.indicator.style.transform = "scale(2)"
-          this.indicator.style.margin = "0"
-          setTimeout(()=>{
-            this.indicator.style.transform = "scale(1)"
-            this.indicator.style.marginTop = "3.3%"
-            setTimeout(()=>{
-              this.element = document.querySelector(".spin-app")
-              this.element.style.scale = "1"
-              this.element.style.top = "0%"
-              this.element.style.left = "0%"
-              setTimeout(()=>{
-                this.element = document.querySelector(".spin-section")
-                this.element.style.scale = "1"
-                this.users.findAdmin(this.users.user.adminId).subscribe((res:any)=>{
-
-                  this.historyMng(res.hist)
-
-                })
-              },100)
-            },2000)
-          },4000)
-        },550)
-
-      }
-    }
   }
-
-  requestAnimationFrame(callback: any) {
-    window.requestAnimationFrame(callback.bind(this));
-  }
- 
 
   initSpin(choosedNum:any){
+
+    this.spinFinish = true
 
     this.indicator = document.querySelector(".indicator-number")
 
@@ -363,50 +317,27 @@ export class SpinMobileComponent implements OnInit {
 
   chronoConfig(){
 
-    this.tiketService.chrono().subscribe((res:any)=>{
-
-      this.currentTime = res.temp
-
-      console.log(res.temp)
-      
-
-      this.timerChrono = ((((this.timeChrono-48) - this.currentTime)/(this.timeChrono-48))*100) +"%"
+    this.timerChrono = ((((this.timeChrono-32) - this.currentTime)/(this.timeChrono-32))*100) +"%"
     
-      if(this.currentTime >= (this.timeChrono-48) && this.currentTime < this.timeChrono && !this.isSpinning){
+    if(this.currentTime >= (this.timeChrono-32) && this.currentTime < this.timeChrono && !this.isSpinning && this.rouletteService.openSpin){
 
-        if(this.rouletteService.openSpin){
-          this.isSpinning = true
+      this.isSpinning = true
 
-          this.time = 90
-          this.totalRotations = 0
+      this.users.findAdmin(this.users.user.adminId).subscribe((res:any)=>{
 
-          this.element = document.querySelector(".spin-app")
+        this.rotateAnim(res.resultatRoulette)
 
-          this.element.style.scale = "4.2"
-          this.element.style.top = "38%"
-          this.element.style.left = "8%"
+      })
 
-          this.element = document.querySelector(".spin-section")
+    }else if(this.currentTime < (this.timeChrono-32)){
+      this.isSpinning = false
+    }
 
-          this.element.style.scale = ".4"
-
-          this.users.findUser(this.users.user.id).subscribe((r:any)=>{
-
-            this.users.findAdmin(r.admin).subscribe((res:any)=>{
-
-              this.spinToAngle(res.resultatRoulette)
-
-            })
-
-          })
-        }
-
-      }else if(this.currentTime < (this.timeChrono-48)){
-        this.rouletteService.openSpin
-        this.isSpinning = false
-      }
-
-    })
+    if(this.currentTime < this.timeChrono){
+      this.currentTime++
+    }else{
+      this.currentTime = 0
+    }
 
     setTimeout(this.chronoConfig.bind(this),1000)
 
@@ -684,74 +615,67 @@ export class SpinMobileComponent implements OnInit {
   ngOnInit(): void {
 
     this.getJackpots()
-    
-    this.users.findUser(this.users.user.id).subscribe((r:any)=>{
 
-      this.users.findAdmin(r.admin).subscribe((res:any)=>{
-        
+    this.users.findAdmin(this.users.user.adminId).subscribe((res:any)=>{
+      this.users.findAdmin(this.users.user.adminId).subscribe((res:any)=>{
+
         this.historyMng(res.hist)
-        
-        this.tiketService.chrono().subscribe((r:any)=>{
 
+      })
+      
+      this.initSpin(res.resultatRoulette)
+
+      setTimeout(()=>{
+
+        this.element = document.querySelector(".spin")
+
+        this.element.addEventListener("transitionend", ()=>{
+            
+          this.indicator = document.querySelector(".indicator-number")
+
+          this.spinFinish = true
+          this.indicator.style.transform = "scale(2)"
+          this.indicator.style.margin = "0"
+          setTimeout(()=>{
+            this.indicator.style.transform = "scale(1)"
+            this.indicator.style.marginTop = "3.3%"
+            setTimeout(()=>{
+              this.element = document.querySelector(".spin-app")
+              this.element.style.scale = "1"
+              this.element.style.top = "0%"
+              this.element.style.left = "0%"
+              setTimeout(()=>{
+                this.element = document.querySelector(".spin-section")
+                this.element.style.scale = "1"
+                this.users.findAdmin(this.users.user.adminId).subscribe((res:any)=>{
+
+                  this.historyMng(res.hist)
+
+                })
+              },100)
+              this.element = document.querySelector(".spin")
+              this.element.style.transition = "transform 0s"
+              this.element.style.transform = "rotate(0deg)"
+              this.element.style.transform = "rotate("+(this.currentAngle + 2)+"deg)"
+            },2000)
+          },4000)
+
+        });
+
+        initFnHome()
+
+        this.tiketService.chrono().subscribe((res:any)=>{
+          
           this.currentTime = res.temp
-
-          if(r.temp < 90 ){
-            this.initSpin(res.hist[0])
-          }else{
-            this.initSpin(res.hist[1])
-          }
 
           this.chronoConfig()
 
         })
 
-        setTimeout(()=>{
-
-          initFnHome()
-
-        },2000)
-      })
-
+      },2000)
     })
 
   }
 
 
 }
-
-/*
- rotateAnim(choosedNum:any){
-
-    this.element = document.querySelector(".spin-app")
-
-    this.element.style.scale = "4.2"
-    this.element.style.top = "38%"
-    this.element.style.left = "8%"
-
-    this.element = document.querySelector(".spin-section")
-
-    this.element.style.scale = ".4"
-
-
-
-    this.spinFinish = false
-
-    this.indicator = document.querySelector(".indicator-number")
-
-    this.element = document.querySelector(".spin")
-
-    this.element.style.transition = "transform 20s ease-in-out"
-
-    var angle = this.angles[this.angles.findIndex(item => item.val === choosedNum)].ang + (360 * 19)
-
-    this.currentAngle = this.angles[this.angles.findIndex(item => item.val === choosedNum)].ang
-
-    this.element.style.transform = "rotate("+(angle + 2)+"deg)"
-
-    this.indicator.innerText = choosedNum
-
-    this.indicator.style.backgroundColor = this.angles[this.angles.findIndex(item => item.val === choosedNum)].color
-
-  }
-
-*/

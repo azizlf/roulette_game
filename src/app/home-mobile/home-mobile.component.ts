@@ -582,9 +582,11 @@ export class HomeMobileComponent implements OnInit {
           
         })
 
+        this.initConditions(null)
+        
+
         this.conditionsIn = true
 
-        this.initConditions(null)
 
       }
     
@@ -664,7 +666,8 @@ export class HomeMobileComponent implements OnInit {
 
         if(this.totalConditionsSolde + parseFloat(solde) >this.userSolde){
           alert("insufficient funds!")
-        }else{
+        }
+        else{
 
           this.currentRestSolde = this.userSolde-this.totalConditionsSolde
 
@@ -725,6 +728,8 @@ export class HomeMobileComponent implements OnInit {
 
             }
           }
+
+          this.conditionsIn = true
         }
         
       }
@@ -779,7 +784,8 @@ export class HomeMobileComponent implements OnInit {
               }
 
             }
-          }else{
+          }
+          else{
             if(list[0] === choice[0]){
 
               var newSolde = 0
@@ -832,7 +838,7 @@ export class HomeMobileComponent implements OnInit {
         })
       }    
 
-      this.conditionsIn = true
+      
 
       setTimeout(()=>{
         this.initConditions(ele)
@@ -1162,7 +1168,7 @@ export class HomeMobileComponent implements OnInit {
         
         var waitSc = 120 - res.temp
 
-        if(waitSc <= 50){
+        if(waitSc <= 32){
 
           this.openWaitAlert = true
           this.timeIsUpSpin = true

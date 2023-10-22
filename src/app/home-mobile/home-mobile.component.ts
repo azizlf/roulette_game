@@ -1114,6 +1114,9 @@ export class HomeMobileComponent implements OnInit {
 
     this.tiketService.chrono().subscribe((res:any)=>{
 
+      if(res.temp >= 110){
+        this.getUser()
+      }
 
       if(res.temp >= 40 && res.temp < 120){
 
@@ -1127,7 +1130,7 @@ export class HomeMobileComponent implements OnInit {
 
         this.openNoEventAlert = false
         this.timeIsUpSpin = false
-        this.getUser()
+        
 
       }
 
@@ -1161,17 +1164,23 @@ export class HomeMobileComponent implements OnInit {
         
         var waitSc = 120 - res.temp
 
-
         if(waitSc <= 30){
 
+          this.openWaitAlert = true
+          this.timeIsUpSpin = true
+          this.rouletteService.openSpin = false
           setTimeout(()=>{
+            
+            this.rouletteService.openSpin = true
+
+            this.openWaitAlert = false
             this.chronoConfig()
-          },(waitSc * 1000))
+
+          },((waitSc) * 1000))
 
         }else{
 
           this.chronoConfig()
-
         }
 
       })

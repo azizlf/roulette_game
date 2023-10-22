@@ -331,7 +331,7 @@ export class SpinMobileComponent implements OnInit {
 
     this.timerChrono = ((((this.timeChrono-32) - this.currentTime)/(this.timeChrono-32))*100) +"%"
     
-    if(this.currentTime >= (this.timeChrono-32) && this.currentTime < this.timeChrono && !this.isSpinning){
+    if(this.currentTime >= (this.timeChrono-32) && this.currentTime < this.timeChrono && !this.isSpinning && this.rouletteService.openSpin){
 
       this.isSpinning = true
 
@@ -584,8 +584,14 @@ export class SpinMobileComponent implements OnInit {
   ngOnInit(): void {
 
     this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
+      this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
+
+        this.historyMng(res.hist)
+
+      })
       
       this.initSpin(res.resultatRoulette)
+
       setTimeout(()=>{
 
         this.element = document.querySelector(".spin")
@@ -626,7 +632,7 @@ export class SpinMobileComponent implements OnInit {
         initFnHome()
 
         this.tiketService.chrono().subscribe((res:any)=>{
-
+          
           this.currentTime = res.temp
 
           this.chronoConfig()

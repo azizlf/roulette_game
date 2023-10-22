@@ -9,7 +9,7 @@ import {environment} from "../../environments/environment"
 })
 export class RouletteService {
 
-  spinOpen = false
+  openSpin = true
   angleStoped = "rotate(0deg)"
   selectedNumberWin = 0
   selectedColorNumberWin = "#2cc93b"

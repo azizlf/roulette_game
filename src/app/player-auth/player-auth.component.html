@@ -1,3 +1,12 @@
+<div class="error-msg-box">
+	<i class="fa-solid fa-circle-xmark"></i>
+	<div class="text">
+		<span>Error</span>
+		<p>{{errorMsg}}</p>
+	</div>
+	
+</div>
+
 <div class="login-page-player">
 	<div class="form">
 		<div class="content" [formGroup]="userDetails">
@@ -8,6 +17,30 @@
 			<input type="password" placeholder="Password" formControlName="password">
 			<br>
 			<button (click)="login()">Login</button>
+			<div class="loading-ellipsis" style="
+				    top:auto;left: 10%;" *ngIf="isLoadingForm">
+				<div class="r1" style="
+					width: 2.5%;
+				    padding: 1.25% 0;
+				    border-radius: 100%;
+				    background-color: #b6b6b687;
+				    margin: 0 2%;
+				    scale: 2;"></div>
+				<div class="r2" style="
+					width: 2.5%;
+				    padding: 1.25% 0;
+				    border-radius: 100%;
+				    background-color: #b6b6b687;
+				    margin: 0 2%;
+				    scale: 2;"></div>
+				<div class="r3" style="
+					width: 2.5%;
+				    padding: 1.25% 0;
+				    border-radius: 100%;
+				    background-color: #b6b6b687;
+				    margin: 0 2%;
+				    scale: 2;"></div>
+			</div>
 			<br>
 		</div>
 	</div>

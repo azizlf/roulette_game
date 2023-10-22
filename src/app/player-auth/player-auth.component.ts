@@ -17,10 +17,18 @@ export class PlayerAuthComponent implements OnInit {
 
   })
 
+  errorMsg:any
+
+  element:any
+  isLoading = true
+  isLoadingForm = false
+
   constructor(private router: Router,private users:UsersService) { }
 
  
   login(){
+
+    this.isLoadingForm = true
 
     const user = this.userDetails.value
     
@@ -29,6 +37,7 @@ export class PlayerAuthComponent implements OnInit {
       if(res.message){
         this.users.user.id = res.joueur
         this.users.user.token = res.token
+        this.isLoadingForm = true
         if(window.innerWidth <= 950){
           this.router.navigate(['/home-mobile'],{skipLocationChange:true})
 
@@ -36,6 +45,16 @@ export class PlayerAuthComponent implements OnInit {
           this.router.navigate(['/home'])
         }
 
+      }else{
+        this.element = document.querySelector(".error-msg-box")
+        this.isLoadingForm = false
+        this.element.style.opacity = "1"
+        this.element.style.top = "4%"
+        this.errorMsg = "Login or password incorrect"
+        setTimeout(()=>{
+          this.element.style.opacity = "0"
+          this.element.style.top = "0%"
+        },3000)
       }
 
     })  

@@ -82,52 +82,10 @@
 			<div class="section hist">
 				<div class="title">Last games</div>
 				<div class="table">
-					<div class="ligne grd">
-						<div class="ttl">#f5dkhr4475</div>
+					<div class="ligne grd" *ngFor="let lastNbr of lastTikets">
+						<div class="ttl"> {{lastNbr.code}} </div>
 						<div class="numbers">
-							<div class="nbr end black">26</div>
-						</div>
-					</div>
-					<div class="ligne grd">
-						<div class="ttl">#f5dkhr4475</div>
-						<div class="numbers">
-							<div class="nbr end red">3</div>
-						</div>
-					</div>
-					<div class="ligne grd end">
-						<div class="ttl">#f5dkhr4475</div>
-						<div class="numbers">
-							<div class="nbr end red">7</div>
-						</div>
-					</div>
-					<div class="ligne grd">
-						<div class="ttl">#f5dkhr4475</div>
-						<div class="numbers">
-							<div class="nbr end black">17</div>
-						</div>
-					</div>
-					<div class="ligne grd">
-						<div class="ttl">#f5dkhr4475</div>
-						<div class="numbers">
-							<div class="nbr end red">18</div>
-						</div>
-					</div>
-					<div class="ligne grd end">
-						<div class="ttl">#f5dkhr4475</div>
-						<div class="numbers">
-							<div class="nbr end black">33</div>
-						</div>
-					</div>
-					<div class="ligne grd">
-						<div class="ttl">#f5dkhr4475</div>
-						<div class="numbers">
-							<div class="nbr end black">4</div>
-						</div>
-					</div>
-					<div class="ligne grd end">
-						<div class="ttl">#f5dkhr4475</div>
-						<div class="numbers">
-							<div class="nbr end black">15</div>
+							<div [class]="'nbr end '+lastNbr.color"> {{lastNbr.number}} </div>
 						</div>
 					</div>
 				</div>
@@ -140,135 +98,33 @@
 			<div class="table">
 				<div class="content-table">
 					<div class="ttl">Numbers (Last 120 Draws)</div>
-					<div class="lignes-container">
-						<div class="ligne-nbrs start">
-							<div class="key red">1</div>
-							<div class="value">5</div>
-							<div class="key black">13</div>
-							<div class="value">5</div>
-							<div class="key red">25</div>
-							<div class="value">5</div>
-						</div>
-						<div class="ligne-nbrs">
-							<div class="key black">2</div>
-							<div class="value">5</div>
-							<div class="key red">14</div>
-							<div class="value">5</div>
-							<div class="key black">26</div>
-							<div class="value">5</div>
-						</div>
-						<div class="ligne-nbrs">
-							<div class="key red">3</div>
-							<div class="value">5</div>
-							<div class="key black">15</div>
-							<div class="value">5</div>
-							<div class="key red">27</div>
-							<div class="value">5</div>
-						</div>
-						<div class="ligne-nbrs">
-							<div class="key black">4</div>
-							<div class="value">5</div>
-							<div class="key red">16</div>
-							<div class="value">5</div>
-							<div class="key black">28</div>
-							<div class="value">5</div>
-						</div>
-						<div class="ligne-nbrs">
-							<div class="key red">5</div>
-							<div class="value">5</div>
-							<div class="key black">17</div>
-							<div class="value">5</div>
-							<div class="key red">29</div>
-							<div class="value">5</div>
-						</div>
-						<div class="ligne-nbrs">
-							<div class="key black">6</div>
-							<div class="value">5</div>
-							<div class="key red">18</div>
-							<div class="value">5</div>
-							<div class="key black">30</div>
-							<div class="value">5</div>
-						</div>
-						<div class="ligne-nbrs">
-							<div class="key red">7</div>
-							<div class="value">5</div>
-							<div class="key black">19</div>
-							<div class="value">5</div>
-							<div class="key red">31</div>
-							<div class="value">5</div>
-						</div>
-						<div class="ligne-nbrs">
-							<div class="key black">8</div>
-							<div class="value">5</div>
-							<div class="key red">20</div>
-							<div class="value">5</div>
-							<div class="key black">32</div>
-							<div class="value">5</div>
-						</div>
-						<div class="ligne-nbrs">
-							<div class="key red">9</div>
-							<div class="value">5</div>
-							<div class="key black">21</div>
-							<div class="value">5</div>
-							<div class="key red">33</div>
-							<div class="value">5</div>
-						</div>
-						<div class="ligne-nbrs">
-							<div class="key black">10</div>
-							<div class="value">5</div>
-							<div class="key red">22</div>
-							<div class="value">5</div>
-							<div class="key black">34</div>
-							<div class="value">5</div>
-						</div>
-						<div class="ligne-nbrs">
-							<div class="key red">11</div>
-							<div class="value">5</div>
-							<div class="key black">22</div>
-							<div class="value">5</div>
-							<div class="key red">35</div>
-							<div class="value">5</div>
-						</div>
-						<div class="ligne-nbrs">
-							<div class="key black">12</div>
-							<div class="value">5</div>
-							<div class="key red">23</div>
-							<div class="value">5</div>
-							<div class="key black">36</div>
-							<div class="value">5</div>
-						</div>
-					</div>
+
+					<div class="lignes-container"></div>
+
+					
 					<div class="ttl">dozens (Last 120 Draws)</div>
 					<div class="ligne">
 						<div class="key">1-12</div>
-						<div class="value">32</div>
+						<div class="value">{{onto12Occur}}</div>
 						<div class="key">13-24</div>
-						<div class="value">15</div>
+						<div class="value">{{thrtto24Occur}}</div>
 						<div class="key">25-36</div>
-						<div class="value">43</div>
+						<div class="value">{{twntfto136ccur}}</div>
 					</div>
 					<div class="ttl">colors (Last 120 Draws)</div>
 					<div class="ligne tg">
-						<div class="key red">15</div>
-						<div class="key black">23</div>
-						<div class="key green">45</div>
+						<div class="key red">{{redOccur}}</div>
+						<div class="key black">{{blackOccur}}</div>
+						<div class="key green">{{greenOccur}}</div>
 					</div>
 					<div class="ttl">hot / cold numbers (Last 120 Draws)</div>
 					<div class="ligne hc">
 						<div class="key tl" style="background-color: #fb6535">Hot</div>
-						<div class="key black">23</div>
-						<div class="key black">45</div>
-						<div class="key red">45</div>
-						<div class="key red">45</div>
-						<div class="key red">45</div>
+						<div [class]="'key '+nb.color" *ngFor="let nb of hotNumbers">{{nb.number}}</div>
 					</div>
 					<div class="ligne hc">
 						<div class="key tl" style="background-color: #355b7f">cold</div>
-						<div class="key red">23</div>
-						<div class="key black">45</div>
-						<div class="key red">45</div>
-						<div class="key red">45</div>
-						<div class="key green">45</div>
+						<div [class]="'key '+nb.color" *ngFor="let nb of coldNumbers">{{nb.number}}</div>
 					</div>
 				</div>
 			</div>

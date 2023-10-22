@@ -4,6 +4,12 @@
 
 	<router-outlet></router-outlet>
 
+	<div class="timer-alert timer-wait" *ngIf="openWaitAlert">
+			
+		Please wait a secondes....
+
+	</div>
+
 	<div class="read-qr-sanc">
 		<video class="stream-scan"></video>
 		<canvas class="canvas-bar-code" style="display: none;"></canvas>
@@ -98,7 +104,6 @@
 						<span>{{userSolde}}</span>
 					</div>
 				</div>
-				<div class="item" (click)="scanBarCode()"><i class="fa-solid fa-qrcode"></i></div>
 				<div class="item" routerLink="/home-mobile/history"><i class="fa-solid fa-clock-rotate-left"></i></div>
 				<div class="item" routerLink="/settings"><i class="fa-solid fa-gears"></i></div>
 				<div class="item" (click)="logout()" ><i class="fa-solid fa-power-off"></i></div>

@@ -10,8 +10,8 @@
 			<div class="item">Action</div>
 		</div>
 		<div class="item-list" *ngFor="let temp of tempList" #item>
-			<div class="it name">dd</div>
-			<div class="it name">dd</div>
+			<div class="it name">{{temp.title}}</div>
+			<div class="it name">{{temp.value}}</div>
 			<div class="it">
 				<div class="btn edit" style="width: 16%;padding: 4% 0;" [routerLink]="'/admin/management/update-template/fds'">
 					<i class="fa-regular fa-pen-to-square"></i>

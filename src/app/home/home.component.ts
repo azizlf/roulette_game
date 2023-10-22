@@ -1131,7 +1131,11 @@ export class HomeComponent implements OnInit {
   chronoConfig(){
 
     this.tiketService.chrono().subscribe((res:any)=>{
-
+      
+      if(res.temp >= 110){
+        this.getUser()
+      }
+      
       if(res.temp >= 40){
 
         this.noEventUser = true
@@ -1141,7 +1145,6 @@ export class HomeComponent implements OnInit {
 
         this.noEventUser = false
         this.timeIsUpSpin = false
-        this.getUser()
 
       }
 

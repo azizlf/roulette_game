@@ -48,18 +48,6 @@
 
 }
 
-
-.spin-app .fullScreenBtnSpin{
-	
-    position: absolute;
-    top: 5%;
-    left: 3%;
-    font-size: 3vw;
-    color: white;
-    cursor: pointer;
-
-}
-
 .spin-app .spin-section{
 
 	width: 60%;
@@ -540,7 +528,7 @@
 
 .spin-app .user-details img{
 
-	width: 30%;
+	width: 26%;
 	margin-bottom: 2%;
 
 }
@@ -557,7 +545,6 @@
 
 .spin-app .jackpot-section{
 
-	width: 100%;
 	padding: 5% 0;
 	text-align: center;
 	background: green;
@@ -568,6 +555,7 @@
 	text-transform: uppercase;
 	margin: 7% 0;
 	color: white;
+	position: fixed;
 
 }
 
@@ -582,7 +570,10 @@
 .spin-app .jackpot-section.blue{
 
 	background-color: #195f99;
-	top: 30%;
+	top: -7%;
+    width: 15%;
+    padding: 1% 0;
+
 }
 
 .spin-app .jackpot-section.red{
@@ -593,6 +584,11 @@
 .spin-app .jackpot-section.orange{
 
 	background-color: #d93a08;
+	bottom: -6%;
+    width: 12%;
+    padding: 1% 0;
+    scale: .8;
+    left: 10%;
 }
 
 @media screen and (max-width:900px){

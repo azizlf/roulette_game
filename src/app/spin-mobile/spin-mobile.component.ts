@@ -390,9 +390,13 @@ export class SpinMobileComponent implements OnInit {
 
           this.element.style.scale = ".4"
 
-          this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
+          this.users.findUser(this.users.user.id).subscribe((r:any)=>{
 
-            this.spinToAngle(res.resultatRoulette)
+            this.users.findAdmin(r.admin).subscribe((res:any)=>{
+
+              this.spinToAngle(res.resultatRoulette)
+
+            })
 
           })
         }

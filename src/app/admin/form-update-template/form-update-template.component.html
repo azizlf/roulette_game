@@ -29,7 +29,7 @@
 
 		<img style="width: 30%;" [src]="imgaeSelected" alt="image_viewer" *ngIf="typeIsImage">
 		
-		<input type="file" accept=".png,.jpg" (change)="selectImage($event)" *ngIf="typeIsImage"/>
+		<input type="file" (change)="selectImage($event)" *ngIf="typeIsImage"/>
 		<br>
 		<button (click)="update()" *ngIf="!isLoadingForm">save</button>
 		<div class="loading-ellipsis" style="

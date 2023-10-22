@@ -352,15 +352,25 @@ export class SpinWheelComponent implements OnInit {
 
   checkNumberColor(n:any){
     
+    var color = ""
+
     if(n === 0){
-      return "green"
+      color = "green"
     }
-    else if(n%2 === 0){
-      return "black"
+    else if(n === 2 || n === 4 || n === 6 || n === 8 || n === 10 || n === 11 || n === 13 || n === 15 || n === 17
+       || n === 20 || n === 22 || n === 24 || n === 26 || n === 28 || n === 29 || n === 31 || n === 33 || n === 35
+      ){
+
+      color = "black"
+
     }
     else{
-      return "red"
+
+      color = "red"
+
     }
+
+    return color
 
   }
 
@@ -448,7 +458,7 @@ export class SpinWheelComponent implements OnInit {
     this.doensOccur = 0
 
 
-    const list = history.slice(0,40)
+    const list = history.slice(0,120)
 
     this.lastTikets = []
 
@@ -572,7 +582,19 @@ export class SpinWheelComponent implements OnInit {
 
         }
 
-      })    
+      })
+
+      this.tempList.forEach((temp:any)=>{
+
+        if(temp.value.includes("img/")){
+          temp.type = "image"
+          temp.value = temp.value.replace("img/","")
+
+        }else{
+          temp.type = "text"
+        }
+
+      })
 
     })
 

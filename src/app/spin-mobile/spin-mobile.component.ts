@@ -379,15 +379,25 @@ export class SpinMobileComponent implements OnInit {
 
   checkNumberColor(n:any){
     
+    var color = ""
+
     if(n === 0){
-      return "green"
+      color = "green"
     }
-    else if(n%2 === 0){
-      return "black"
+    else if(n === 2 || n === 4 || n === 6 || n === 8 || n === 10 || n === 11 || n === 13 || n === 15 || n === 17
+       || n === 20 || n === 22 || n === 24 || n === 26 || n === 28 || n === 29 || n === 31 || n === 33 || n === 35
+      ){
+
+      color = "black"
+
     }
     else{
-      return "red"
+
+      color = "red"
+
     }
+
+    return color
 
   }
 
@@ -557,7 +567,6 @@ export class SpinMobileComponent implements OnInit {
     this.element.innerHTML += html
   }
 
-
   generateSection(){
     this.numbersTable = []
     var counter = 1
@@ -602,33 +611,17 @@ export class SpinMobileComponent implements OnInit {
 
       })
 
-      var html = `<div class="jackpot-section blue">
-                      <div class="ctn">
-                        ${this.tempList[0].title}
-                        <br>
-                        <span>${this.tempList[0].value}</span>
-                      </div>
-                    </div>
-                    <div class="jackpot-section red">
-                      <div class="ctn">
-                        ${this.tempList[1].title}
-                        <br>
-                        <span>${this.tempList[1].value}</span>
-                      </div>
-                    </div>
-                    <div class="jackpot-section orange">
-                      <div class="ctn">
-                        ${this.tempList[2].title}
-                        <br>
-                        <span>${this.tempList[2].value}</span>
-                      </div>
-                    </div>`
+      this.tempList.forEach((temp:any)=>{
 
-      this.element = document.querySelector(".left-section-itm")
+        if(temp.value.includes("img/")){
+          temp.type = "image"
+          temp.value = temp.value.replace("img/","")
 
-      this.element.innerHTML = html
+        }else{
+          temp.type = "text"
+        }
 
-       
+      })
 
     })
 

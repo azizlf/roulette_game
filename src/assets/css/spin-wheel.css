@@ -56,6 +56,8 @@
 	align-items: center;
 	justify-content: center;
 	transition: .5s;
+	pointer-events: none;
+	user-select: none;
 
 }
 
@@ -63,7 +65,7 @@
 
 	width: 74%;
 	padding: 37% 0;
-	margin-top: -5%;
+	margin-top: 0%;
 	position: relative;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -71,6 +73,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	scale: 1.11;
+
 }
 
 .spin-app .spin-section .spin-ctn .spin{
@@ -528,8 +532,9 @@
 
 .spin-app .user-details img{
 
-	width: 26%;
+	width: 43%;
 	margin-bottom: 2%;
+	cursor: pointer;
 
 }
 
@@ -545,19 +550,24 @@
 
 .spin-app .jackpot-section{
 
+	width: 100%;
 	padding: 5% 0;
 	text-align: center;
-	background: green;
-	border: .4vw solid #e1c463;
 	border-radius: .6vw;
 	font-size: 1.1vw;
 	line-height: 1.8vw;
 	text-transform: uppercase;
 	margin: 7% 0;
 	color: white;
-	position: fixed;
 
 }
+
+.spin-app .jackpot-section img{
+
+	width: 100%;
+
+} 
+
 
 .spin-app .jackpot-section span{
 
@@ -569,26 +579,34 @@
 
 .spin-app .jackpot-section.blue{
 
-	background-color: #195f99;
-	top: -7%;
+	/*background-color: #195f99;*/
+	top: -10%;
+    position: fixed;
     width: 15%;
-    padding: 1% 0;
+    padding: 0;
 
 }
 
+.spin-app .jackpot-section.blue span{
+
+	font-size: 1.1vw;
+
+}
+
+
 .spin-app .jackpot-section.red{
 
-	background-color: #b3090a;
+	/*background-color: #b3090a;*/
+    padding: 0;
 }
 
 .spin-app .jackpot-section.orange{
 
 	background-color: #d93a08;
-	bottom: -6%;
-    width: 12%;
-    padding: 1% 0;
-    scale: .8;
-    left: 10%;
+	width: auto;
+    padding: 1.8% 9%;
+	border: .4vw solid #e1c463;
+
 }
 
 @media screen and (max-width:900px){
@@ -605,6 +623,16 @@
 	.spin-app .spin-section .spin-ctn {
 	    width: 90%;
 	    padding: 45% 0;
+	    scale: 1.02;
 
+	}
+	.spin-app .jackpot-section.blue {
+	    top: -1%;
+	    position: fixed;
+	    width: 17%;
+	    padding: 0;
+	}
+	.spin-app .jackpot-section.orange {
+	    padding: 4% 9%;
 	}
 }

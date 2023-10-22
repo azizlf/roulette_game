@@ -1,36 +1,34 @@
 <div class="spin-app" style="background-image: url('/assets/img/image2.jpg')">
 	<div class="user-details">
-		<img src="/assets/img/flag.jpg" alt="flag" />
+		<div style="display: flex;align-items: center;justify-content: space-between;width: 64%;">
+			<img style="pointer-events: all;" class="fullScreenBtnSpin" src="/assets/img/flag.jpg" alt="flag" />
+			<div class="jackpot-section orange">
+				<div class="ctn" *ngIf="tempList[2].type==='text'">
+					{{tempList[2].title}}
+					<br>
+					<span>{{tempList[2].value}}</span>
+				</div>
+				<img  [src]="tempList[2].value" alt="image" *ngIf="tempList[2].type==='image'">
+			</div>
+		</div>
 		<p>Event: {{user_login}}</p>
 	</div>
-	<div class="fullScreenBtnSpin"><i class="fa-solid fa-expand"></i></div>
 	<div class="left-section-itm">
 		<div class="jackpot-section blue">
-			<div class="ctn">
+			<div class="ctn" *ngIf="tempList[0].type==='text'">
 				{{tempList[0].title}}
 				<br>
 				<span>{{tempList[0].value}}</span>
 			</div>
+			<img [src]="tempList[0].value" alt="image" *ngIf="tempList[0].type==='image'">
 		</div>
 		<div class="jackpot-section red">
-			<div class="ctn">
+			<div class="ctn" *ngIf="tempList[1].type==='text'">
 				{{tempList[1].title}}
 				<br>
 				<span>{{tempList[1].value}}</span>
 			</div>
-		</div>
-		<div class="jackpot-section orange">
-			<div class="ctn">
-				{{tempList[2].title}}
-				<br>
-				<span>{{tempList[2].value}}</span>
-			</div>
-		</div>
-	</div>
-	<div class="total-bets">
-		<div class="content">
-			<p>Total Bets</p>
-			<p>143692</p>
+			<img [src]="tempList[1].value" alt="image" *ngIf="tempList[1].type==='image'">
 		</div>
 	</div>
 	<div class="logos"></div>

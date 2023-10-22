@@ -4,11 +4,14 @@ import { TiketService } from '../services/tiket.service'
 import { UsersService } from '../services/users.service'
 import { RouletteService } from '../services/roulette.service'
 import * as QRCode from 'qrcode-generator'
-import * as JsBarcode from 'jsbarcode';
+import * as JsBarcode from 'jsbarcode'
+
+
 
 declare function initFnHome():void
 declare function scanQrTiket():void
 declare function stopCamera():void
+declare function scanBarCode():void
 
 @Component({
   selector: 'app-home',
@@ -290,6 +293,49 @@ export class HomeComponent implements OnInit {
       },3000)
     }
     else{
+      stopCamera()
+      clearInterval(this.scanInterval)
+      this.element = document.querySelector(".read-qr-sanc")
+      this.element.style.opacity = "0"
+      this.element.style.pointerEvents = "none"
+      this.openScanQrCode = false
+    }
+
+  }
+
+  scanBarCode(){
+
+    if(!this.openScanQrCode){
+
+      this.element = document.querySelector(".read-qr-sanc")
+      this.element.style.opacity = "1"
+      this.element.style.pointerEvents = "all"
+      this.openScanQrCode = true
+
+      this.scanInterval =  setInterval(()=>{
+
+        scanBarCode()
+
+        var result = localStorage.getItem("POHUHADFJIOK")
+
+        if(result != "" && result != null && result != undefined){
+          
+          this.tiketService.findTiket(result).subscribe((res:any)=>{
+
+            this.scanTiket.id = result+""
+            this.scanTiket.solde = res.solde
+            this.scanTiket.status = res.gagnion
+            this.scanTiket.realTime = res.realTime
+
+            this.openResultScan = true
+
+          })
+
+        }
+
+      },2000)
+
+    }else{
       stopCamera()
       clearInterval(this.scanInterval)
       this.element = document.querySelector(".read-qr-sanc")

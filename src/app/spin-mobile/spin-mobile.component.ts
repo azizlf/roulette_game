@@ -266,7 +266,7 @@ export class SpinMobileComponent implements OnInit {
 
     this.element = document.querySelector(".spin-section")
 
-    this.element.style.scale = ".5"
+    this.element.style.scale = ".4"
 
 
 

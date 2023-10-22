@@ -3,7 +3,7 @@
 
 	<div class="read-qr-sanc">
 		<video class="stream-scan"></video>
-		<canvas class="canvas-qr" style="display: none;"></canvas>
+		<canvas class="canvas-bar-code" style="display: none;"></canvas>
 		<div class="scan-bar"></div>
 	</div>
 
@@ -113,7 +113,7 @@
 						<span>{{userSolde}}</span>
 					</div>
 				</div>
-				<div class="item" (click)="scanQrImage()"><i class="fa-solid fa-qrcode"></i></div>
+				<div class="item" (click)="scanBarCode()"><i class="fa-solid fa-qrcode"></i></div>
 				<div class="item" routerLink="/home/history"><i class="fa-solid fa-clock-rotate-left"></i></div>
 				<div class="item fullScreenBtn"><i class="fa-solid fa-expand"></i></div>
 				<div class="item" routerLink="/settings"><i class="fa-solid fa-gears"></i></div>

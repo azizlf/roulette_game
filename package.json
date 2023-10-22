@@ -20,6 +20,7 @@
     "@angular/router": "^14.2.0",
     "jsbarcode": "^3.11.5",
     "qrcode-generator": "^1.4.4",
+    "quagga": "^0.12.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

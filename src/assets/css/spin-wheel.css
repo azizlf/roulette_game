@@ -605,4 +605,10 @@
 		position: relative;
 		z-index: 950;
 	}
+
+	.spin-app .spin-section .spin-ctn {
+	    width: 90%;
+	    padding: 45% 0;
+
+	}
 }

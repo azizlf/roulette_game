@@ -210,7 +210,7 @@ export class SpinWheelComponent implements OnInit {
   choosedAngle = 0
 
   totalRotations = 0
-  rotationsToStop = 50
+  rotationsToStop = 65
   isSpinning = false
 
   wheel:any
@@ -284,7 +284,7 @@ export class SpinWheelComponent implements OnInit {
 
     let angle = progress * 360
 
-    this.wheel.style.transform = "rotate(" + (angle-4) + "deg"
+    this.wheel.style.transform = "rotate(" + angle + "deg"
       
     const index = (Math.floor((this.angles.length * angle) / 360) + this.angles.length) % this.angles.length;
 
@@ -292,7 +292,7 @@ export class SpinWheelComponent implements OnInit {
 
     this.indicator.style.backgroundColor = this.angles[index].color
 
-    this.time += 1
+    this.time += .5
 
     if (index !== this.choosedAngle) {
       this.requestAnimationFrame(this.animateSpin)
@@ -344,11 +344,13 @@ export class SpinWheelComponent implements OnInit {
 
     this.tiketService.chrono().subscribe((res:any)=>{
 
+      console.log(res.temp)
+
       this.currentTime = res.temp
 
-      this.timerChrono = ((((this.timeChrono-35) - this.currentTime)/(this.timeChrono-35))*100) +"%"
+      this.timerChrono = ((((this.timeChrono-48) - this.currentTime)/(this.timeChrono-48))*100) +"%"
     
-      if(this.currentTime >= (this.timeChrono-35) && this.currentTime < this.timeChrono && !this.isSpinning){
+      if(this.currentTime >= (this.timeChrono-48) && this.currentTime < this.timeChrono && !this.isSpinning){
 
         this.isSpinning = true
 
@@ -361,7 +363,7 @@ export class SpinWheelComponent implements OnInit {
 
         })
 
-      }else if(this.currentTime < (this.timeChrono-35)){
+      }else if(this.currentTime < (this.timeChrono-48)){
         this.isSpinning = false
       }
 

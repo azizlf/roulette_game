@@ -678,6 +678,8 @@ export class SpinMobileComponent implements OnInit {
         this.element = document.querySelector(".spin")
 
         this.element.addEventListener("transitionend", ()=>{
+
+          this.getWinnersSpin()
             
           this.indicator = document.querySelector(".indicator-number")
 

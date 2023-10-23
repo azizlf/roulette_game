@@ -26,67 +26,52 @@ export class AddAdminComponent implements OnInit {
     if(this.userDetails.status === "VALID"){
 
       if(this.userType === "start_admin"){
-        if(user.prencentage === "0"){
-          this.element = document.querySelector(".error-msg-box")
-          this.element.style.opacity = "1"
-          this.element.style.top = "4%"
-          this.errorMsg = "select one of profit list"
-          setTimeout(()=>{
-            this.element.style.opacity = "0"
-            this.element.style.top = "0%"
-          },3000)
+        
+        var request = {
+          name:user.fname,
+          lastName:user.lname,
+          pseudoName:user.pseudoName,
+          login:user.login,
+          password:user.password,
+          isSuperAdmin:true,
+          teleAdmin:user.teleAdmin,
+          role:"superAdmin",
+          solde:user.solde,
+          prencentage:user.prencentage,
+          Listejoueurs: []
         }
-        else{
-          var request = {
-            name:user.fname,
-            lastName:user.lname,
-            pseudoName:user.pseudoName,
-            login:user.login,
-            password:user.password,
-            isSuperAdmin:false,
-            teleAdmin:user.teleAdmin,
-            role:"admin",
-            solde:user.solde,
-            prencentage:user.prencentage,
-            Listejoueurs: []
+
+        this.isLoadingForm = true
+
+        this.userService.addAdmin(request).subscribe((res:any)=>{
+
+          if(res.message){
+            this.element = document.querySelector(".success-msg-box")
+            setTimeout(()=>{
+              this.element.style.opacity = "1"
+              this.element.style.top = "4%"
+              this.isLoadingForm = false
+              setTimeout(()=>{
+                this.element.style.opacity = "0"
+                this.element.style.top = "0%"
+              },3000)
+            },700)
+          }else if(!res.message){
+            this.element = document.querySelector(".error-msg-box")
+            setTimeout(()=>{
+              this.element.style.opacity = "1"
+              this.element.style.top = "4%"
+              this.isLoadingForm = false
+              this.errorMsg = "Login already exist"
+              setTimeout(()=>{
+                this.element.style.opacity = "0"
+                this.element.style.top = "0%"
+              },3000)
+            },700)
           }
 
-          if(this.userService.user.type = "start_admin"){
-            request.isSuperAdmin = true
-            request.role = "superAdmin"
-          }
-
-          this.isLoadingForm = true
-
-          this.userService.addAdmin(request).subscribe((res:any)=>{
-
-            if(res.message){
-              this.element = document.querySelector(".success-msg-box")
-              setTimeout(()=>{
-                this.element.style.opacity = "1"
-                this.element.style.top = "4%"
-                this.isLoadingForm = false
-                setTimeout(()=>{
-                  this.element.style.opacity = "0"
-                  this.element.style.top = "0%"
-                },3000)
-              },700)
-            }else if(!res.message){
-              this.element = document.querySelector(".error-msg-box")
-              setTimeout(()=>{
-                this.element.style.opacity = "1"
-                this.element.style.top = "4%"
-                this.isLoadingForm = false
-                this.errorMsg = "Login already exist"
-                setTimeout(()=>{
-                  this.element.style.opacity = "0"
-                  this.element.style.top = "0%"
-                },3000)
-              },700)
-            }
-
-          })
-        }
+        })
+      
       }
       else{
       
@@ -102,11 +87,6 @@ export class AddAdminComponent implements OnInit {
           solde:user.solde,
           prencentage:user.prencentage,
           Listejoueurs: []
-        }
-
-        if(this.userService.user.type = "start_admin"){
-          request.isSuperAdmin = true
-          request.role = "superAdmin"
         }
 
         this.isLoadingForm = true

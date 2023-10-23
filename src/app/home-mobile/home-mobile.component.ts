@@ -591,7 +591,7 @@ export class HomeMobileComponent implements OnInit {
       }
     
     }
-
+    
   }
 
   hoverSeq(type:any,choice:any){

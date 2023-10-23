@@ -130,3 +130,24 @@
 	</div>
 
 </div>
+
+<div class="history-player" style="position: absolute;z-index: 156562156365;top: 0;left: 0;" *ngIf="openWinnersSpin">
+	
+	<div class="nav-bar">
+		<div class="return-btn" (click)="returnFromPage()">
+			<i class="fa-solid fa-xmark"></i>
+		</div>
+	</div>
+
+	<div class="content-history-page">
+		<div class="history-list">
+			<div class="head-list">
+				<div class="it">name</div>
+			</div>
+			<div class="item" *ngFor="let item of winners">
+				<div class="it">{{item}}</div>
+			</div>
+		</div>
+	</div>
+
+</div>

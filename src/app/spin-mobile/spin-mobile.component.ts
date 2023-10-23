@@ -258,7 +258,17 @@ export class SpinMobileComponent implements OnInit {
   coldNumbers:any = []
 
 
+  openWinnersSpin = false
+  winners:any = []
+
+
   constructor(private rouletteService:RouletteService,private users:UsersService,private tiketService:TiketService) { }
+
+
+  returnFromPage(){
+    this.openWinnersSpin = false
+  }
+
 
   rotateAnim(choosedNum:any){
 
@@ -611,6 +621,29 @@ export class SpinMobileComponent implements OnInit {
 
   }
 
+  getWinnersSpin(){
+
+    this.winners = []
+
+    this.tiketService.chrono().subscribe((res:any)=>{
+
+      console.log(res.tab)
+      res.tab.forEach((win:any)=>{
+
+        if(!this.winners.includes(win)){
+          this.winners.push(win)
+        }
+
+      })
+
+      console.log(res.tab)
+      
+
+      this.openWinnersSpin = true
+
+    })
+
+  }
 
   ngOnInit(): void {
 

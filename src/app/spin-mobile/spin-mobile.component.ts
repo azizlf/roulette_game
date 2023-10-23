@@ -616,14 +616,29 @@ export class SpinMobileComponent implements OnInit {
 
     this.getJackpots()
 
-    this.users.findAdmin(this.users.user.adminId).subscribe((res:any)=>{
-      this.users.findAdmin(this.users.user.adminId).subscribe((res:any)=>{
+    this.users.findUser(this.users.user.id).subscribe((res:any)=>{
 
-        this.historyMng(res.hist)
+      this.users.findAdmin(this.users.user.adminId).subscribe((re:any)=>{
+
+        this.historyMng(re.hist)
+        this.tiketService.chrono().subscribe((r:any)=>{
+
+          this.currentTime = r.temp
+
+          this.chronoConfig()
+
+          if(r.temp < 90 ){
+            this.initSpin(re.hist[0])
+          }else{
+            this.initSpin(re.hist[1])
+          }
+
+          this.chronoConfig()
+
+        })
 
       })
       
-      this.initSpin(res.resultatRoulette)
 
       setTimeout(()=>{
 
@@ -663,14 +678,6 @@ export class SpinMobileComponent implements OnInit {
         });
 
         initFnHome()
-
-        this.tiketService.chrono().subscribe((res:any)=>{
-          
-          this.currentTime = res.temp
-
-          this.chronoConfig()
-
-        })
 
       },2000)
     })

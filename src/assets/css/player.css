@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "digital-font";
+  src: url('../fonts/digital-7/digital-7.ttf') format('truetype');
+}
+
 :root{
 
 	--nbr-color:#f03030;
@@ -2376,6 +2381,10 @@
 	bottom: 15%;
 
 }
+
+
+
+
 
 
 

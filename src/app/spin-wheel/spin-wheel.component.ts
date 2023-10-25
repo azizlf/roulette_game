@@ -227,9 +227,7 @@ export class SpinWheelComponent implements OnInit {
 
   currentAngle = 0
 
-  timeChrono = 120
 
-  currentTime = 0
 
   currentToken:any
 
@@ -259,6 +257,13 @@ export class SpinWheelComponent implements OnInit {
 
   openWinnersSpin = false
   winners:any = []
+  isNoWinners = false
+  minutesChrono = "00"
+  secondesChrono = "00"
+  timeChrono = 91
+
+  currentTime = 0
+
 
   constructor(private rouletteService:RouletteService,private users:UsersService,private tiketService:TiketService) { }
 
@@ -272,7 +277,6 @@ export class SpinWheelComponent implements OnInit {
 
     this.tiketService.chrono().subscribe((res:any)=>{
 
-      console.log(res.tab)
       res.tab.forEach((win:any)=>{
 
         if(!this.winners.includes(win)){
@@ -281,7 +285,10 @@ export class SpinWheelComponent implements OnInit {
 
       })
 
-      console.log(res.tab)
+      if(this.winners.length === 0){
+        this.isNoWinners = true
+        this.winners.push("no winners!")
+      }
       
 
       this.openWinnersSpin = true
@@ -340,9 +347,23 @@ export class SpinWheelComponent implements OnInit {
 
       this.currentTime = res.temp
 
-      this.timerChrono = ((((this.timeChrono-32) - this.currentTime)/(this.timeChrono-32))*100) +"%"
+
+      this.minutesChrono = Math.floor((this.timeChrono - res.temp) / 60) + ""
+      this.secondesChrono = (this.timeChrono - res.temp)%60 +""
+
+
+      this.timerChrono = (((this.timeChrono - this.currentTime)/this.timeChrono)*100) +"%"
+
+      if(this.timeChrono - res.temp <= 0){
+        this.minutesChrono = "00"
+        this.secondesChrono = "00"
+        this.timerChrono = "0%"
+      }
+
+
+      
     
-      if(this.currentTime >= (this.timeChrono-32) && this.currentTime < this.timeChrono && !this.isSpinning){
+      if(this.currentTime >= this.timeChrono && this.currentTime < (this.timeChrono+29) && !this.isSpinning){
 
         this.isSpinning = true
 
@@ -352,7 +373,7 @@ export class SpinWheelComponent implements OnInit {
 
         })
 
-      }else if(this.currentTime < (this.timeChrono-32)){
+      }else if(this.currentTime < this.timeChrono){
         this.isSpinning = false
       }
 

@@ -42,7 +42,7 @@
 		</div>
 	</div>
 	<div class="timer-bar"><div [ngStyle]="{'height':timerChrono}"></div></div>
-	<div class="chrono-container"><div>05:30</div></div>
+	<div class="chrono-container"><div>{{minutesChrono}} : {{secondesChrono}}</div></div>
 	<div class="dashbord">
 		
 		<div class="flex-tables">
@@ -147,7 +147,11 @@
 				<div class="it">name</div>
 			</div>
 			<div class="item" *ngFor="let item of winners">
-				<div class="it">{{item}}</div>
+				<div class="it" *ngIf="isNoWinners" style="color: gray;">{{item}}</div>
+				<div class="it" *ngIf="!isNoWinners">{{item}}</div>
+			</div>
+			<div class="item" *ngIf="isNoWinners">
+				
 			</div>
 		</div>
 	</div>

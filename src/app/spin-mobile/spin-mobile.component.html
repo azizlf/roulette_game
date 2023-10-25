@@ -32,6 +32,8 @@
 	</div>
 	<div class="logos"></div>
 	<div class="timer-bar"><div [ngStyle]="{'height':timerChrono}"></div></div>
+	<div class="chrono-container"><div>{{minutesChrono}} : {{secondesChrono}}</div></div>
+	
 	<div class="spin-section">
 		<div class="spin-ctn" style="background-image: url('/assets/img/image3.png')">
 			<div class="center-circle-pointer" style="background-image: url('/assets/img/nbr-flc.png')"></div>
@@ -145,7 +147,8 @@
 				<div class="it">name</div>
 			</div>
 			<div class="item" *ngFor="let item of winners">
-				<div class="it">{{item}}</div>
+				<div class="it" *ngIf="isNoWinners" style="color: gray;">{{item}}</div>
+				<div class="it" *ngIf="!isNoWinners">{{item}}</div>
 			</div>
 		</div>
 	</div>

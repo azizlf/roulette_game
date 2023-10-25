@@ -318,6 +318,14 @@ export class SpinWheelComponent implements OnInit {
 
     this.indicator.style.backgroundColor = this.angles[this.angles.findIndex(item => item.val === choosedNum)].color
 
+    var cursorLoop = setInterval(()=>{
+      this.element = document.querySelector(".center-pointer")
+      this.element.style.rotate = "-45deg"
+      setTimeout(()=>{
+        this.element.style.rotate = "0deg"
+      })
+    },100)
+
   }
 
   initSpin(choosedNum:any){
@@ -351,6 +359,14 @@ export class SpinWheelComponent implements OnInit {
       this.minutesChrono = Math.floor((this.timeChrono - res.temp) / 60) + ""
       this.secondesChrono = (this.timeChrono - res.temp)%60 +""
 
+
+      if(this.minutesChrono.split("").length === 1){
+        this.minutesChrono = "0"+this.minutesChrono
+      }
+
+      if(this.secondesChrono.split("").length === 1){
+        this.secondesChrono = "0"+this.secondesChrono
+      }
 
       this.timerChrono = (((this.timeChrono - this.currentTime)/this.timeChrono)*100) +"%"
 

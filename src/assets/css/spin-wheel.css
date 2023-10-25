@@ -27,10 +27,10 @@
 
 .spin-app .chrono-container{
 
-	width: 7%;
+	width: 8%;
 	text-align: center;
-	font-size: 2.6vw;
-	padding: .7% 1%;
+	font-size: 2.8vw;
+	padding: .7% .5%;
 	padding-bottom: 1.4%;
 	border: .4vw solid #c98e15;
 	border-radius: .5vw;
@@ -129,6 +129,7 @@
 	background-repeat: no-repeat;
 	background-size: cover;
 	z-index: 5;
+	transition: .3s;
 }
 
 .spin-app .spin-section .indicator-number{

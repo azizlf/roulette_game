@@ -1502,7 +1502,7 @@ export class HomeComponent implements OnInit {
         
         var waitSc = 120 - res.temp
 
-        if(waitSc <= 48){
+        if(waitSc <= 29){
 
           this.openWaitAlert = true
           this.timeIsUpSpin = true

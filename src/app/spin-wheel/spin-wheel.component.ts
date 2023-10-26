@@ -318,14 +318,6 @@ export class SpinWheelComponent implements OnInit {
 
     this.indicator.style.backgroundColor = this.angles[this.angles.findIndex(item => item.val === choosedNum)].color
 
-    var cursorLoop = setInterval(()=>{
-      this.element = document.querySelector(".center-pointer")
-      this.element.style.rotate = "-45deg"
-      setTimeout(()=>{
-        this.element.style.rotate = "0deg"
-      })
-    },100)
-
   }
 
   initSpin(choosedNum:any){

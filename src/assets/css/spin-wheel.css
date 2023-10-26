@@ -27,30 +27,35 @@
 
 .spin-app .chrono-container{
 
-	width: 8%;
 	text-align: center;
-	font-size: 2.8vw;
-	padding: .7% .5%;
-	padding-bottom: 1.4%;
-	border: .4vw solid #c98e15;
+	font-size: 1.2vw;
 	border-radius: .5vw;
 	position: absolute;
 	z-index: 5445645;
-	bottom: 2%;
-	left: 65%;
-	background-color: #1f1f1f;
-	color: #FF9800;
+	bottom: 1.5%;
+	right: 23.5%;
+	color: white;
+	text-transform: uppercase;
+	font-weight: bold;
+	text-shadow: .19vw -.1vw black;
+
+}
+
+.spin-app .chrono-container span{
+
+	font-size: 2vw;
 	font-family: "digital-font", sans-serif;
 
 }
+
 
 .spin-app .timer-bar{
 
 	position: absolute;
 	right: 23.5%;
-	bottom: 1%;
+	bottom: 8%;
 	width: .8%;
-	height: 97%;
+	height: 91%;
 	background-color: #0000008a;
 	z-index: 1235;
 	overflow: hidden;

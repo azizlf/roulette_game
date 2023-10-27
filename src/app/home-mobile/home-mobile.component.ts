@@ -1124,7 +1124,7 @@ export class HomeMobileComponent implements OnInit {
         this.getUser()
       }
 
-      if(res.temp >= 40 && res.temp < 120){
+      if(res.temp >= 140){
 
         this.timeIsUpSpin = true
 

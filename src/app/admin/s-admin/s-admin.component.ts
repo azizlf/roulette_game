@@ -35,43 +35,17 @@ export class SAdminComponent implements OnInit {
 
       this.adminDetail = res
 
-      if(this.userType === "superAdmin"){
-        this.users.getAllAdmins().subscribe((r:any)=>{
-          var admins:any = []
+      this.users.getAllAdmins().subscribe((r:any)=>{
+        var admins:any = []
 
-          r.forEach((item:any)=>{
-            if(!item.isSuperAdmin){
-              admins.push(item)
-            }
-          })
-
-          this.adminsLength = admins.length
-        })
-        this.users.getAllUsers().subscribe((r:any)=>{
-          this.usersLength = r.length
-        })
-      }else if(this.userType === "start_admin"){
-
-        this.users.getAllAdmins().subscribe((r:any)=>{
-          var admins:any = []
-
-          r.forEach((item:any)=>{
-            if(item.isSuperAdmin){
-              admins.push(item)
-            }
-          })
-
-          this.adminsLength = admins.length
+        r.forEach((item:any)=>{
+          if(item.isSuperAdmin){
+            admins.push(item)
+          }
         })
 
-
-      }else{
-        this.users.findAdmin(this.users.user.id).subscribe((r:any)=>{
-
-          this.usersLength = r.Listejoueurs.length
-
-        })
-      }
+        this.adminsLength = admins.length
+      })
 
     })
   }
@@ -93,9 +67,10 @@ export class SAdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.userType = this.users.user.type
+    this.getAdmin()
     setInterval(()=>{
       this.getAdmin()
-    },1000)
+    },3000)
   }
 
 }

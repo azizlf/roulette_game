@@ -260,7 +260,7 @@ export class SpinWheelComponent implements OnInit {
   isNoWinners = false
   minutesChrono = "00"
   secondesChrono = "00"
-  timeChrono = 91
+  timeChrono = 151
 
   currentTime = 0
 

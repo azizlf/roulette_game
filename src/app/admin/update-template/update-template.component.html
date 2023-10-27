@@ -7,6 +7,7 @@
 		<div class="head-list">
 			<div class="item">Title</div>
 			<div class="item">Value</div>
+			<div class="item">status</div>
 			<div class="item">Action</div>
 		</div>
 		<div class="item-list" *ngFor="let temp of tempList" #item>
@@ -15,6 +16,8 @@
 			<div class="it name" style="height: 100%;display: flex;align-items: center;justify-content: center;overflow: hidden;" *ngIf="temp.type==='image'">
 				<img style="width: 23%;" [src]="temp.value" alt="image">
 			</div>
+			<div class="it name" *ngIf="!temp.status"><button style="border: none;background-color: green;color: white;padding: 2%;cursor: pointer;" (click)="update(temp)">show</button></div>
+			<div class="it name" *ngIf="temp.status"><button style="border: none;background-color: red;color: white;padding: 2%;cursor: pointer;" (click)="update(temp)">hide</button></div>
 			<div class="it">
 				<div class="btn edit" style="width: 16%;padding: 4% 0;" [routerLink]="'/admin/management/update-template/'+temp.title">
 					<i class="fa-regular fa-pen-to-square"></i>

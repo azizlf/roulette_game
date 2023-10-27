@@ -1136,7 +1136,7 @@ export class HomeComponent implements OnInit {
         this.getUser()
       }
       
-      if(res.temp >= 40){
+      if(res.temp >= 138){
 
         this.noEventUser = true
         this.timeIsUpSpin = true

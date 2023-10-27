@@ -30,9 +30,11 @@ export class AdminsComponent implements OnInit {
       res.forEach((item:any)=>{
 
         if(this.userService.user.type === "superAdmin"){
-          if(item.role === "admin"){
-            this.admins.push(item)
-          }
+          this.userService.findAdmin(this.userService.user.id).subscribe((r:any)=>{
+
+            this.admins = r.admins
+
+          })
         }else if(this.userService.user.type === "start_admin"){
           if(item.role === "superAdmin"){
             this.admins.push(item)

@@ -261,7 +261,7 @@ export class SpinMobileComponent implements OnInit {
   isNoWinners = false
   minutesChrono = "00"
   secondesChrono = "00"
-  timeChrono = 91
+  timeChrono = 151
 
   constructor(private rouletteService:RouletteService,private users:UsersService,private tiketService:TiketService) { }
 

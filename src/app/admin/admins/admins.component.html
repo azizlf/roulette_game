@@ -17,7 +17,6 @@
 			<div class="item" *ngIf="userType != 'start_admin'">Profit</div>
 			<div class="item">Telephone</div>
 			<div class="item" *ngIf="userType != 'start_admin'">Players</div>
-			<div class="item" *ngIf="userType != 'start_admin'">Status</div>
 			<div class="item">Action</div>
 		</div>
 		<div class="item-list" *ngFor="let admin of admins" #item>
@@ -27,16 +26,8 @@
 			<div class="it" *ngIf="userType != 'start_admin'">{{admin.prencentage}}%</div>
 			<div class="it">{{admin.teleAdmin}}</div>
 			<div class="it link" *ngIf="userType != 'start_admin'">
-				<i class="fa-solid fa-eye" style="padding: 6% 5%;" (click)="openUserForAdmin(admin)" ></i></div>
-			<div class="it" *ngIf="userType != 'start_admin'">
-				<div class="status-account" *ngIf="admin.status">
-					<i class="fa-solid fa-circle" style="color:#0dd20d;"></i>
-				</div>
-				<div class="status-account" *ngIf="!admin.status">
-					<i class="fa-solid fa-circle" style="color:red;"></i>
-				</div>
+				<i class="fa-solid fa-eye" style="padding: 6% 5%;" (click)="openUserForAdmin(admin)" ></i>
 			</div>
-
 			<div class="it" *ngIf="userType != 'start_admin'">
 				<div class="btn edit" [routerLink]="'/admin/management/update-admin/'+admin._id">
 					<i class="fa-regular fa-pen-to-square"></i>

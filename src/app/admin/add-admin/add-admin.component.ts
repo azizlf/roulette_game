@@ -22,12 +22,13 @@ export class AddAdminComponent implements OnInit {
 
     const user = this.userDetails.value
 
+    var request:any = {}
 
     if(this.userDetails.status === "VALID"){
 
       if(this.userType === "start_admin"){
         
-        var request = {
+        request = {
           name:user.fname,
           lastName:user.lname,
           pseudoName:user.pseudoName,
@@ -75,7 +76,7 @@ export class AddAdminComponent implements OnInit {
       }
       else{
       
-        var request = {
+        request = {
           name:user.fname,
           lastName:user.lname,
           pseudoName:user.pseudoName,
@@ -86,17 +87,27 @@ export class AddAdminComponent implements OnInit {
           role:"admin",
           solde:user.solde,
           prencentage:user.prencentage,
-          Listejoueurs: []
+          Listejoueurs: [],
+          superAdmin:this.userService.user.id
         }
 
         this.isLoadingForm = true
 
-        this.userService.findAdmin(this.userService.user.id).subscribe((res:any)=>{
+        this.userService.findAdmin(this.userService.user.id).subscribe((r:any)=>{
           var sld = parseFloat(request.solde+"")
-          if(sld < res.solde){
+          if(sld < r.solde){
             this.userService.addAdmin(request).subscribe((res:any)=>{
 
               if(res.message){
+                const req = {
+                  solde:r.solde - sld,
+                  id:this.userService.user.id
+                }
+
+                console.log(req)
+
+                this.userService.updateAdmin(req).subscribe()
+
                 this.element = document.querySelector(".success-msg-box")
                 setTimeout(()=>{
                   this.element.style.opacity = "1"

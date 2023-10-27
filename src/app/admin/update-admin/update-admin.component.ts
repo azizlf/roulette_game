@@ -20,6 +20,7 @@ export class UpdateAdminComponent implements OnInit {
     pseudoName:"",
     teleAdmin:"",
     solde:"",
+    prencentage:"",
     id:""
 
   }
@@ -28,6 +29,7 @@ export class UpdateAdminComponent implements OnInit {
   successMsg:any
 
   userSolde:any
+  userType:any
 
   constructor(private userService:UsersService,private route: ActivatedRoute) { }
   
@@ -43,6 +45,8 @@ export class UpdateAdminComponent implements OnInit {
       this.requestUpdateInfos["solde"] = value.target.value
     }else if(key==="teleAdmin"){
       this.requestUpdateInfos["teleAdmin"] = value.target.value
+    }else if(key==="prencentage"){
+      this.requestUpdateInfos["prencentage"] = value.target.value
     }
 
   }
@@ -118,7 +122,6 @@ export class UpdateAdminComponent implements OnInit {
               solde:this.userSolde,
               id:this.userService.user.id
             }
-            console.log(this.userSolde)
 
             this.userService.updateAdmin(request).subscribe()
             setTimeout(()=>{
@@ -149,6 +152,8 @@ export class UpdateAdminComponent implements OnInit {
 
   getAdminDetails(id:any){
 
+    this.userType = this.userService.user.type
+
     this.userService.findAdmin(id).subscribe((res:any)=>{
 
       this.adminEntries = res
@@ -161,6 +166,22 @@ export class UpdateAdminComponent implements OnInit {
       this.requestUpdateInfos.solde = res.solde
       this.requestUpdateInfos.pseudoName = res.pseudoName
       this.requestUpdateInfos.id = res._id
+      this.requestUpdateInfos.prencentage = res.prencentage
+
+      setTimeout(()=>{
+        this.element = document.querySelector(".profit-select")
+      
+        for (var i = 0; i < this.element.options.length; i++) {
+
+          if (this.element.options[i].value === this.requestUpdateInfos.prencentage+"") {
+            
+            this.element.options[i].selected = true;
+
+            break;
+          }
+
+        }
+      },50)
 
     })
 

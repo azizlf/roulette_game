@@ -27,21 +27,11 @@ export class SimpleAdminComponent implements OnInit {
 
       this.adminDetail = res
 
-      if(this.userType === "superAdmin"){
-        this.users.getAllAdmins().subscribe((r:any)=>{
-          this.adminsLength = r.length
-        })
-        this.users.getAllUsers().subscribe((r:any)=>{
-          this.usersLength = r.length
-        })
-      }else{
-        this.users.findAdmin(this.users.user.id).subscribe((r:any)=>{
+      this.users.findAdmin(this.users.user.id).subscribe((r:any)=>{
 
-          this.usersLength = r.Listejoueurs.length
-          console.log(r.Listejoueurs)
+        this.usersLength = r.Listejoueurs.length
 
-        })
-      }
+      })
 
     })
   }
@@ -63,9 +53,10 @@ export class SimpleAdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.userType = this.users.user.type
+    this.getAdmin()
     setInterval(()=>{
       this.getAdmin()
-    },1000)
+    },3000)
   }
 
 }

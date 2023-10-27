@@ -345,6 +345,8 @@ export class SpinWheelComponent implements OnInit {
 
     this.tiketService.chrono().subscribe((res:any)=>{
 
+      console.log(res.temp)
+
       this.currentTime = res.temp
 
 

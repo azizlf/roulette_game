@@ -3,32 +3,31 @@
 		<div style="display: flex;align-items: center;justify-content: space-between;width: 64%;">
 			<img style="pointer-events: all;" class="fullScreenBtnSpin" src="/assets/img/flag.jpg" alt="flag" />
 			<div class="jackpot-section orange">
-				<div class="ctn" *ngIf="tempList[2].type==='text'">
+				<div class="ctn" *ngIf="tempList[2].type==='text' && tempList[2].status">
 					{{tempList[2].title}}
 					<br>
 					<span>{{tempList[2].value}}</span>
 				</div>
-				<img  [src]="tempList[2].value" alt="image" *ngIf="tempList[2].type==='image'">
 			</div>
 		</div>
 		<p>Event: {{user_login}}</p>
 	</div>
 	<div class="left-section-itm">
 		<div class="jackpot-section blue">
-			<div class="ctn" *ngIf="tempList[0].type==='text'">
+			<div class="ctn" *ngIf="tempList[0].type==='text' && tempList[0].status">
 				{{tempList[0].title}}
 				<br>
 				<span>{{tempList[0].value}}</span>
 			</div>
-			<img [src]="tempList[0].value" alt="image" *ngIf="tempList[0].type==='image'">
+			<img [src]="tempList[0].value" alt="image" *ngIf="tempList[0].type==='image' && tempList[0].status">
 		</div>
 		<div class="jackpot-section red">
-			<div class="ctn" *ngIf="tempList[1].type==='text'">
+			<div class="ctn" *ngIf="tempList[1].type==='text' && tempList[1].status">
 				{{tempList[1].title}}
 				<br>
 				<span>{{tempList[1].value}}</span>
 			</div>
-			<img [src]="tempList[1].value" alt="image" *ngIf="tempList[1].type==='image'">
+			<img [src]="tempList[1].value" alt="image" *ngIf="tempList[1].type==='image' && tempList[1].status">
 		</div>
 	</div>
 	<div class="logos"></div>

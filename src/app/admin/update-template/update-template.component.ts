@@ -28,7 +28,6 @@ export class UpdateTemplateComponent implements OnInit {
 
       this.tempList.forEach((temp:any)=>{
 
-        //temp.value += "img/"
         if(temp.value.includes("img/")){
           temp.type = "image"
           temp.value = temp.value.replace("img/","")
@@ -51,71 +50,52 @@ export class UpdateTemplateComponent implements OnInit {
 
     this.userService.findAdmin(this.userService.user.id).subscribe((res:any)=>{
 
+
+      var req = {}
+
       if(res.text1.title === temp.title){
-        textSelected = 1
+        if(temp.status){
+          temp.status = false
+          res.text1.status = false
+        }else{
+          temp.status = true
+          res.text1.status = true
+        }
+        req = {
+          id : this.userService.user.id,
+          text1:res.text1
+        }
       }
       else if(res.text2.title === temp.title){
-        
-        textSelected = 2
+        if(temp.status){
+          temp.status = false
+          res.text2.status = false
+        }else{
+          temp.status = true
+          res.text2.status = true
+        }
+        req = {
+          id : this.userService.user.id,
+          text2:res.text2
+        }
 
       }
       else if(res.text3.title === temp.title){
-        
-        textSelected = 3
-      }
-
-      this.infos.forEach((t:any)=>{
-
-        
-
-        if(t.title === temp.title){
-
-          temp.status = !temp.status
-
-          t.status = !t.status
-
-          if(textSelected === 1){
-            req = {
-              id : this.userService.user.id,
-              text1:temp
-            }
-          }else if(textSelected === 2){
-            req = {
-              id : this.userService.user.id,
-              text2:temp
-            }
-          }else if(textSelected === 3){
-            req = {
-              id : this.userService.user.id,
-              text3:temp
-            }
-          }
-
-          console.log(req)
-
-          ///this.userService.updateAdmin(req).subscribe()
-
-          this.userService.updateAdmin({
-            id : this.userService.user.id,
-            text1:{
-              title:t.title,
-              value:'img/'+t.value,
-              status:false
-            }
-          }).subscribe() 
-
-          this.userService.updateAdmin({
-            id : this.userService.user.id,
-            text2:{
-              title:t.title,
-              value:'img/'+t.value,
-              status:false
-            }
-          }).subscribe()
-
+        if(temp.status){
+          temp.status = false
+          res.text3.status = false
+        }else{
+          temp.status = true
+          res.text3.status = true
         }
+        req = {
+          id : this.userService.user.id,
+          text3:res.text3
+        }
+      }
+      console.log(req)
 
-      })
+      this.userService.updateAdmin(req).subscribe()
 
       
 

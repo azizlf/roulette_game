@@ -710,7 +710,8 @@ export class SpinMobileComponent implements OnInit {
           this.indicator.style.margin = "0"
           setTimeout(()=>{
             this.indicator.style.transform = "scale(1)"
-            this.indicator.style.marginTop = "3.3%"
+            this.indicator.style.marginTop = "1.8%"
+            this.indicator.style.marginLeft = "-.1%"
             setTimeout(()=>{
               this.element = document.querySelector(".spin-app")
               this.element.style.scale = "1"

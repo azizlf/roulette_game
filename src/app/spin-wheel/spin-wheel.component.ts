@@ -308,7 +308,7 @@ export class SpinWheelComponent implements OnInit {
 
     this.element.style.transition = "transform 20s ease-in-out"
 
-    var angle = this.angles[this.angles.findIndex(item => item.val === choosedNum)].ang + (360 * 20)
+    var angle = this.angles[this.angles.findIndex(item => item.val === choosedNum)].ang + (360 * 10)
 
     this.currentAngle = this.angles[this.angles.findIndex(item => item.val === choosedNum)].ang
 
@@ -674,6 +674,8 @@ export class SpinWheelComponent implements OnInit {
 
     this.getJackpots()
 
+
+
     this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
 
       this.generateSection()
@@ -697,7 +699,8 @@ export class SpinWheelComponent implements OnInit {
 
           setTimeout(()=>{
             this.indicator.style.transform = "scale(1)"
-            this.indicator.style.marginTop = "3.3%"
+            this.indicator.style.marginTop = "1.8%"
+            this.indicator.style.marginLeft = "-.1%"
             this.element.style.transition = "transform 0s"
             this.element.style.transform = "rotate(0deg)"
             this.element.style.transform = "rotate("+(this.currentAngle + 2)+"deg)"

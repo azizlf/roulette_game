@@ -2,8 +2,8 @@
 	<div class="user-details">
 		<div style="display: flex;align-items: center;justify-content: space-between;width: 64%;">
 			<img style="pointer-events: all;" class="fullScreenBtnSpin" src="/assets/img/flag.jpg" alt="flag" />
-			<div class="jackpot-section orange">
-				<div class="ctn" *ngIf="tempList[2].type==='text' && tempList[2].status">
+			<div class="jackpot-section orange" *ngIf="tempList[2].status">
+				<div class="ctn" >
 					{{tempList[2].title}}
 					<br>
 					<span>{{tempList[2].value}}</span>

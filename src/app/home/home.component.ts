@@ -1500,7 +1500,7 @@ export class HomeComponent implements OnInit {
 
       this.tiketService.chrono().subscribe((res:any)=>{
         
-        var waitSc = 120 - res.temp
+        var waitSc = 180 - res.temp
 
         if(waitSc <= 29){
 

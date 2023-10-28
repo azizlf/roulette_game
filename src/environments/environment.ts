@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  API:"http://api.eurobet.shop"
+  API:"https://koorea1.onrender.com"
 };

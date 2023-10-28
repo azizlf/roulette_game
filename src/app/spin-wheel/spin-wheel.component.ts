@@ -716,7 +716,7 @@ export class SpinWheelComponent implements OnInit {
 
           this.currentTime = r.temp
 
-          if(r.temp < 90 ){
+          if(r.temp < 151){
             this.initSpin(res.hist[0])
           }else{
             this.initSpin(res.hist[1])

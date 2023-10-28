@@ -682,7 +682,7 @@ export class SpinMobileComponent implements OnInit {
 
           this.chronoConfig()
 
-          if(r.temp < 90 ){
+          if(r.temp < 151 ){
             this.initSpin(re.hist[0])
           }else{
             this.initSpin(re.hist[1])

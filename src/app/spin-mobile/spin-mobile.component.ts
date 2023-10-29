@@ -359,19 +359,13 @@ export class SpinMobileComponent implements OnInit {
 
 
       if(this.timeChrono - res.temp <= 13){
-        this.timerBarCtn = document.querySelector(".timer-bar-content")
-        this.timerBarCtn.style.backgroundColor = "#e72525"
-
-        this.timerBar = document.querySelector(".timer-bar")
-        this.timerBar.style.backgroundColor = "#87141499"
+        this.timerBarCtn = document.querySelector(".timer-num")
+        this.timerBarCtn.style.color = "#e72525"
       }
 
       if(this.timeChrono - res.temp > 13){
-        this.timerBarCtn = document.querySelector(".timer-bar-content")
-        this.timerBarCtn.style.backgroundColor = "#f0b171"
-
-        this.timerBar = document.querySelector(".timer-bar")
-        this.timerBar.style.backgroundColor = "#0000008a"
+        this.timerBarCtn = document.querySelector(".timer-num")
+        this.timerBarCtn.style.color = "white"
 
       }
     

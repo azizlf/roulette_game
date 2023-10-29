@@ -63,7 +63,7 @@
 
 }
 
-.spin-app .timer-bar div{
+.spin-app .timer-bar .timer-bar-content{
 
 	width: 100%;
 	position: absolute;

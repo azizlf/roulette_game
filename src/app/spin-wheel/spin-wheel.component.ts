@@ -264,6 +264,9 @@ export class SpinWheelComponent implements OnInit {
 
   currentTime = 0
 
+  timerBar:any
+  timerBarCtn:any
+
 
   constructor(private rouletteService:RouletteService,private users:UsersService,private tiketService:TiketService) { }
 
@@ -345,8 +348,6 @@ export class SpinWheelComponent implements OnInit {
 
     this.tiketService.chrono().subscribe((res:any)=>{
 
-      console.log(res.temp)
-
       this.currentTime = res.temp
 
 
@@ -371,7 +372,22 @@ export class SpinWheelComponent implements OnInit {
       }
 
 
-      
+      if(this.timeChrono - res.temp <= 13){
+        this.timerBarCtn = document.querySelector(".timer-bar-content")
+        this.timerBarCtn.style.backgroundColor = "#e72525"
+
+        this.timerBar = document.querySelector(".timer-bar")
+        this.timerBar.style.backgroundColor = "#87141499"
+      }
+
+      if(this.timeChrono - res.temp > 13){
+        this.timerBarCtn = document.querySelector(".timer-bar-content")
+        this.timerBarCtn.style.backgroundColor = "#f0b171"
+
+        this.timerBar = document.querySelector(".timer-bar")
+        this.timerBar.style.backgroundColor = "#0000008a"
+
+      }
     
       if(this.currentTime >= this.timeChrono && this.currentTime < (this.timeChrono+29) && !this.isSpinning){
 
@@ -674,15 +690,13 @@ export class SpinWheelComponent implements OnInit {
 
     this.getJackpots()
 
-
-
     this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
 
       this.generateSection()
       this.historyMng(res.hist)
 
       setTimeout(()=>{
-
+        
         this.element = document.querySelector(".spin")
 
         this.element.addEventListener("transitionend", ()=>{

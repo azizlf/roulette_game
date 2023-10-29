@@ -263,6 +263,10 @@ export class SpinMobileComponent implements OnInit {
   secondesChrono = "00"
   timeChrono = 151
 
+
+  timerBar:any
+  timerBarCtn:any
+
   constructor(private rouletteService:RouletteService,private users:UsersService,private tiketService:TiketService) { }
 
 
@@ -351,6 +355,24 @@ export class SpinMobileComponent implements OnInit {
         this.minutesChrono = "00"
         this.secondesChrono = "00"
         this.timerChrono = "0%"
+      }
+
+
+      if(this.timeChrono - res.temp <= 13){
+        this.timerBarCtn = document.querySelector(".timer-bar-content")
+        this.timerBarCtn.style.backgroundColor = "#e72525"
+
+        this.timerBar = document.querySelector(".timer-bar")
+        this.timerBar.style.backgroundColor = "#87141499"
+      }
+
+      if(this.timeChrono - res.temp > 13){
+        this.timerBarCtn = document.querySelector(".timer-bar-content")
+        this.timerBarCtn.style.backgroundColor = "#f0b171"
+
+        this.timerBar = document.querySelector(".timer-bar")
+        this.timerBar.style.backgroundColor = "#0000008a"
+
       }
     
       if(this.currentTime >= this.timeChrono && this.currentTime < (this.timeChrono+29) && !this.isSpinning){

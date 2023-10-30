@@ -106,7 +106,10 @@
 
 	width: 88%;
 	position: absolute;
-
+	transition: transform 10s cubic-bezier(0.3, 1, 0.7, 1),
+      10s filter cubic-bezier(0.1, 1, 0.8, 1),
+      10s -webkit-filter cubic-bezier(0.1, 1, 0.8, 1);
+    will-change: transform;
 }
 
 

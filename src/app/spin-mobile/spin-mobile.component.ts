@@ -275,7 +275,8 @@ export class SpinMobileComponent implements OnInit {
   }
 
 
-  rotateAnim(choosedNum:any){
+
+  rotate(choosedNum:any){
 
     this.element = document.querySelector(".spin-app")
 
@@ -287,20 +288,18 @@ export class SpinMobileComponent implements OnInit {
 
     this.element.style.scale = ".4"
 
-
-
     this.spinFinish = false
 
     this.indicator = document.querySelector(".indicator-number")
 
-    this.element = document.querySelector(".spin")
-
-    this.element.style.transition = "transform 20s ease-in-out"
-
-    var angle = this.angles[this.angles.findIndex(item => item.val === choosedNum)].ang + (360 * 19)
+    var angle = this.angles[this.angles.findIndex(item => item.val === choosedNum)].ang + (360 * 15)
 
     this.currentAngle = this.angles[this.angles.findIndex(item => item.val === choosedNum)].ang
+    
+    this.element = document.querySelector(".spin")
 
+    this.element.style.transition = "transform 21s cubic-bezier(0.3, 1, 0.7, 1),10s filter cubic-bezier(0.1, 1, 0.8, 1),10s -webkit-filter cubic-bezier(0.1, 1, 0.8, 1)"
+    
     this.element.style.transform = "rotate("+(angle + 2)+"deg)"
 
     this.indicator.innerText = choosedNum
@@ -375,7 +374,7 @@ export class SpinMobileComponent implements OnInit {
 
         this.users.findAdmin(this.users.user.adminId).subscribe((res:any)=>{
 
-          this.rotateAnim(res.resultatRoulette)
+          this.rotate(res.resultatRoulette)
 
         })
 

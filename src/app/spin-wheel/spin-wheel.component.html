@@ -33,6 +33,7 @@
 	<div class="logos"></div>
 	<div class="spin-section">
 		<div class="spin-ctn" style="background-image: url('/assets/img/image3.png')">
+			<div class="circle-anim" *ngIf="openAnimCircleSpin"></div>
 			<div class="center-circle-pointer" style="background-image: url('/assets/img/nbr-flc-2.png')"></div>
 			<div class="center-pointer" style="background-image: url('/assets/img/image10.png')"></div>
 			<div class="indicator-number">0</div>
@@ -131,30 +132,29 @@
 		</div>
 
 	</div>
-
-</div>
-
-<div class="history-player" style="position: absolute;z-index: 156562156365;top: 0;left: 0;" *ngIf="openWinnersSpin">
-	
-	<div class="nav-bar">
-		<div class="return-btn" (click)="returnFromPage()">
-			<i class="fa-solid fa-xmark"></i>
-		</div>
-	</div>
-
-	<div class="content-history-page">
-		<div class="history-list" style="margin: 1% 30%;padding: 2%;width: 32%;">
-			<div class="head-list">
-				<div class="it">name</div>
-			</div>
-			<div class="item" *ngFor="let item of winners">
-				<div class="it" *ngIf="isNoWinners" style="color: gray;">{{item}}</div>
-				<div class="it" *ngIf="!isNoWinners">{{item}}</div>
-			</div>
-			<div class="item" *ngIf="isNoWinners">
-				
+	<div class="history-player" style="position: absolute;z-index: 156562156365;top: 0;left: 0;" *ngIf="openWinnersSpin">
+		
+		<div class="nav-bar">
+			<div class="return-btn" (click)="returnFromPage()">
+				<i class="fa-solid fa-xmark"></i>
 			</div>
 		</div>
-	</div>
 
+		<div class="content-history-page">
+			<div class="history-list" style="margin: 1% 30%;padding: 2%;width: 32%;">
+				<div class="head-list">
+					<div class="it">name</div>
+				</div>
+				<div class="item" *ngFor="let item of winners">
+					<div class="it" *ngIf="isNoWinners" style="color: gray;">{{item}}</div>
+					<div class="it" *ngIf="!isNoWinners">{{item}}</div>
+				</div>
+				<div class="item" *ngIf="isNoWinners">
+					
+				</div>
+			</div>
+		</div>
+
+	</div>
 </div>
+

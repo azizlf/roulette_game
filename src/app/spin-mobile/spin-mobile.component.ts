@@ -17,6 +17,8 @@ export class SpinMobileComponent implements OnInit {
 
   showJackpots = false
 
+  openAnimCircleSpin = false
+
   angles = [
 
     {
@@ -716,6 +718,8 @@ export class SpinMobileComponent implements OnInit {
 
         this.element.addEventListener("transitionend", ()=>{
 
+          this.openAnimCircleSpin = true
+
           this.getWinnersSpin()
             
           this.indicator = document.querySelector(".indicator-number")
@@ -724,6 +728,7 @@ export class SpinMobileComponent implements OnInit {
           this.indicator.style.transform = "scale(2)"
           this.indicator.style.margin = "0"
           setTimeout(()=>{
+            this.openAnimCircleSpin = false
             this.indicator.style.transform = "scale(1)"
             this.indicator.style.marginTop = "1.8%"
             this.indicator.style.marginLeft = "-.1%"

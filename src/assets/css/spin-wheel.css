@@ -102,6 +102,59 @@
 
 }
 
+.spin-app .spin-section .spin-ctn .circle-anim{
+
+	width: 88%;
+    height: 88%;
+    position: absolute;
+    border-radius: 100%;
+    border: 0.8vw solid #ebebeb;
+    box-shadow: 0 0 2vw 5px white;
+    animation: circleAnim 3s;
+}
+
+@keyframes circleAnim{
+
+	0%{
+		opacity: 0;
+	}
+
+	20%{
+		opacity: 1;
+	}
+
+	30%{
+		opacity: 0;
+	}
+
+	40%{
+		opacity: 1;
+	}
+	50%{
+		opacity: 0;
+	}
+
+	60%{
+		opacity: 1;
+	}
+
+	70%{
+		opacity: 0;
+	}
+
+	80%{
+		opacity: 1;
+	}
+
+	90%{
+		opacity: 0;
+	}
+
+	100%{
+		opacity: 1;
+	}
+}
+
 .spin-app .spin-section .spin-ctn .spin{
 
 	width: 88%;

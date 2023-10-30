@@ -1,0 +1,21 @@
+name: update on push
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
+
+    steps:
+    - name: Set up SSH key
+      run: |
+        install -m 600 -D /dev/null ~/.ssh/id_rsa
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        ssh-keyscan -H 51.222.111.183 > ~/.ssh/known_hosts
+
+    - name: Run the script on the remote VM
+      run: |
+        ssh ubuntu@51.222.111.183 "cd /home/ubuntu/koorea_project/ && sudo sh ./build_front.sh"

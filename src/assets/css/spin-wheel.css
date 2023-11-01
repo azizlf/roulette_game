@@ -287,7 +287,7 @@
 	padding-left: 8%;
 	text-transform: uppercase;
 	font-weight: 600;
-	font-size: .9vw;
+	font-size: .8vw;
 
 }
 
@@ -332,7 +332,7 @@
 
 .spin-app .dashbord .flex-tables .section .table .ligne.grd .nbr{
 
-	padding: 22% 0;
+	padding: 7% 0;
 
 }
 
@@ -344,7 +344,7 @@
 
 .spin-app .dashbord .flex-tables .section.hist .table .ligne .ttl{
 
-	font-size: .8vw;
+	font-size: .7vw;
 
 }
 
@@ -721,4 +721,5 @@
 	.spin-app .jackpot-section.orange {
 	    padding: 4% 9%;
 	}
+
 }

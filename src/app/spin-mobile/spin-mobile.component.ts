@@ -374,10 +374,10 @@ export class SpinMobileComponent implements OnInit {
 
         this.isSpinning = true
 
-        this.users.findAdmin(this.users.user.adminId).subscribe((res:any)=>{
-
-          this.rotate(res.resultatRoulette)
-
+        this.rouletteService.getNumSpinWin(this.users.user.adminId).subscribe((res:any)=>{
+          if(res.message==true){
+          this.rotate(res.condition)
+        }
         })
 
       }else if(this.currentTime < this.timeChrono){
@@ -720,7 +720,7 @@ export class SpinMobileComponent implements OnInit {
 
           this.openAnimCircleSpin = true
 
-          this.getWinnersSpin()
+        //  this.getWinnersSpin()
             
           this.indicator = document.querySelector(".indicator-number")
 

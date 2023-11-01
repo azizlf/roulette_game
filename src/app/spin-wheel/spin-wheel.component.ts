@@ -11,7 +11,7 @@ declare function SpinWheelEvents():void
   styleUrls: ['./spin-wheel.component.css']
 })
 export class SpinWheelComponent implements OnInit {
-
+spinnbr:any
   angles = [
 
     {
@@ -442,7 +442,17 @@ export class SpinWheelComponent implements OnInit {
         this.timerBarCtn.style.color = "white"
 
       }
-    
+     this.rouletteService.getNumSpinWin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
+            
+              console.log(this.currentTime,'yar7em weldik')
+                console.log(res)
+       
+             this.spinnbr= res
+              // this.spinToAngle(res.condition)
+            
+           
+
+          })
       if(this.currentTime >= this.timeChrono && this.currentTime < (this.timeChrono+29) && !this.isSpinning){
 
         if(!this.isRotated){
@@ -451,18 +461,10 @@ export class SpinWheelComponent implements OnInit {
           this.time = 70
 
           this.totalRotations = 0
- console.log(this.currentTime,'yar7em bouk')
-          this.rouletteService.getNumSpinWin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
-            
-              console.log(this.currentTime,'yar7em weldik')
-                console.log(res)
-            if(res.message==true){
-               this.spinToAngle(res.condition)
-            }
-           
-            
-
-          })
+         if(this.spinnbr.message==true){
+             this.spinToAngle(this.spinnbr.condition)
+         }
+         
         }
 
       }else if(this.currentTime < this.timeChrono){

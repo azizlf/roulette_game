@@ -452,9 +452,13 @@ export class SpinWheelComponent implements OnInit {
 
           this.totalRotations = 0
 
-          this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
-
-            this.spinToAngle(res.resultatRoulette)
+          this.rouletteService.getNumSpinWin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
+                console.log(res)
+            if(res.message==true){
+               this.spinToAngle(res.condition)
+            }
+           
+            
 
           })
         }

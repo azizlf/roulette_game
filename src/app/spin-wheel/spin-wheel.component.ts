@@ -360,7 +360,7 @@ export class SpinWheelComponent implements OnInit {
             setTimeout(()=>{
               this.indicator.style.transform = "scale(1)"
               this.indicator.style.marginTop = "1.8%"
-              this.getWinnersSpin()
+             // this.getWinnersSpin()
               this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
 
                 this.historyMng(res.hist)

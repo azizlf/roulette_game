@@ -48,7 +48,7 @@ export class UsersComponent implements OnInit {
         
 
       })
-    }else if(listOf==="superAdmin"){
+    }else if(listOf==="start_admin"){
       this.usersService.getAllUsers().subscribe((res:any)=>{
 
         this.users = res

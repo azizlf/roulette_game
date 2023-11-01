@@ -406,7 +406,7 @@ export class SpinWheelComponent implements OnInit {
 
     this.tiketService.chrono().subscribe((res:any)=>{
 
-      console.log(res)
+      
       
       this.currentTime = res.temp
 
@@ -453,6 +453,7 @@ export class SpinWheelComponent implements OnInit {
           this.totalRotations = 0
 
           this.rouletteService.getNumSpinWin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
+              console.log('yar7em weldik')
                 console.log(res)
             if(res.message==true){
                this.spinToAngle(res.condition)

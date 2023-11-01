@@ -29,7 +29,7 @@ export class RouletteService {
 
   getNumSpinWin(id:any){
 
-    return this.http.get(this.api+"/resultats/"+id)
+    return this.http.get(this.api+"/re/"+id)
 
   }
 

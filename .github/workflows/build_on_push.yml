@@ -26,17 +26,21 @@ jobs:
       run: npm run build
 
     - name: Sync Files 🚀
-      uses: wlixcc/SFTP-Deploy-Action@v1.2.1
+      uses: appleboy/ssh-action@v1.3.0
       with:
           username: ubuntu
-          server: 51.222.111.183
-          port: 22 # default is 22
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          host: 51.222.111.183
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /home/ubuntu/koorea_project/front/dist/
+            sudo rm -rf *
+            cp -r ./dist/* .
+            sudo service nginx restart
 
-          # will put all file under this path
-          local_path: ./dist/* # default is ./*
-          # files will copy to under remote_path
-          remote_path: /home/ubuntu/koorea_project/front/dist/
+          # # will put all file under this path
+          # local_path: ./dist/* # default is ./*
+          # # files will copy to under remote_path
+          # remote_path: /home/ubuntu/koorea_project/front/dist/
     
-    - name: Restart Nginx
-      run: sudo service nginx restart
+    # - name: Restart Nginx
+    #   run: sudo service nginx restart

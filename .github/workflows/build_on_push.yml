@@ -26,15 +26,21 @@ jobs:
       run: npm run build
 
     - name: Sync Files 🚀
-      uses: appleboy/ssh-action@v1.0.0
+      uses: appleboy/scp-action@v0.1.4
       with:
           username: ubuntu
           host: 51.222.111.183
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "./dist/*"
+          target: "/home/ubuntu/koorea_project/front/dist/"
+          
+    - name: Sync Files 🚀
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+          username: ubuntu
+          host: 51.222.111.183
+          key: ${{ secrets.SSH_PRIVATE_KEY }}          
           script: |
-            cd /home/ubuntu/koorea_project/front/dist/
-            sudo rm -rf *
-            cp -r ./dist/* .
             sudo service nginx restart
 
           # # will put all file under this path

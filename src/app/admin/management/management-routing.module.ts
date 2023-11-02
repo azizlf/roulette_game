@@ -51,6 +51,10 @@ const routes: Routes = [
       {
         path:"update-template/:title",
         loadChildren: () => import('../form-update-template/form-update-template.module').then(m => m.FormUpdateTemplateModule),
+      },
+      {
+        path:"admins/:superId",
+        loadChildren: () => import('../admins-for-super/admins-for-super.module').then(m => m.AdminsForSuperModule),
       }
     ]
   }

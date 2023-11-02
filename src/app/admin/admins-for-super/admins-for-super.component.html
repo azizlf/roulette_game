@@ -1,0 +1,34 @@
+<div class="admins-page">
+	
+	<div class="header">
+		<div class="title">Admins Management</div>
+		<div class="btns">
+			<div class="btn" routerLink="/admin/management/add-admin/">
+				<i class="fa-solid fa-circle-plus"></i>
+				<p>New admin</p>
+			</div>
+		</div>
+	</div>
+	<div class="list">
+		<div class="head-list">
+			<div class="item">login</div>
+			<div class="item">Name</div>
+			<div class="item">solde</div>
+			<div class="item">Profit</div>
+			<div class="item">Telephone</div>
+			<div class="item">Action</div>
+		</div>
+		<div class="item-list" *ngFor="let admin of admins" #item>
+			<div class="it name">{{admin.login}}</div>
+			<div class="it name">{{admin.name}} {{admin.lastName}}</div>
+			<div class="it">{{admin.solde}}</div>
+			<div class="it" *ngIf="userType != 'start_admin'">{{admin.prencentage}}%</div>
+			<div class="it">{{admin.teleAdmin}}</div>
+			<div class="it link" *ngIf="userType === 'start_admin'">
+				<i class="fa-solid fa-eye" style="padding: 6% 5%;" [routerLink]="'/admin/management/admins/'+admin._id" ></i>
+			</div>
+		</div>
+
+	</div>		
+
+</div>

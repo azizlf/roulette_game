@@ -372,12 +372,12 @@ export class SpinMobileComponent implements OnInit {
     
       if(this.currentTime >= this.timeChrono && this.currentTime < (this.timeChrono+29) && !this.isSpinning){
 
-        this.isSpinning = true
-
+        
         this.rouletteService.getNumSpinWin(this.users.user.adminId).subscribe((res:any)=>{
-          if(res.message==true){
-          this.rotate(res.condition)
-        }
+          if(res.message){
+            this.isSpinning = true
+            this.rotate(res.condition)
+          }
         })
 
       }else if(this.currentTime < this.timeChrono){

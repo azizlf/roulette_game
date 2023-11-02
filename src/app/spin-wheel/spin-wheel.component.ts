@@ -3,7 +3,7 @@ import { RouletteService } from '../services/roulette.service'
 import { TiketService } from '../services/tiket.service'
 import { UsersService } from '../services/users.service'
 
-declare function SpinWheelEvents():void
+declare function SpinWheelEvents(): void
 
 @Component({
   selector: 'app-spin-wheel',
@@ -11,219 +11,219 @@ declare function SpinWheelEvents():void
   styleUrls: ['./spin-wheel.component.css']
 })
 export class SpinWheelComponent implements OnInit {
-spinnbr:any
+  spinnbr: any
   angles = [
 
     {
-      ang:0,
-      val:0,
-      color:"#2cc93b"
+      ang: 0,
+      val: 0,
+      color: "#2cc93b"
     },
     {
-      ang:10,
-      val:26,
-      color:"#2c2728"
+      ang: 10,
+      val: 26,
+      color: "#2c2728"
     },
     {
-      ang:19,
-      val:3,
-      color:"#cf1b24"
+      ang: 19,
+      val: 3,
+      color: "#cf1b24"
     },
     {
-      ang:29,
-      val:35,
-      color:"#2c2728"
+      ang: 29,
+      val: 35,
+      color: "#2c2728"
     },
     {
-      ang:39,
-      val:12,
-      color:"#cf1b24"
+      ang: 39,
+      val: 12,
+      color: "#cf1b24"
     },
     {
-      ang:49,
-      val:28,
-      color:"#2c2728"
+      ang: 49,
+      val: 28,
+      color: "#2c2728"
     },
     {
-      ang:58,
-      val:7,
-      color:"#cf1b24"
+      ang: 58,
+      val: 7,
+      color: "#cf1b24"
     },
     {
-      ang:68,
-      val:29,
-      color:"#2c2728"
+      ang: 68,
+      val: 29,
+      color: "#2c2728"
     },
     {
-      ang:77,
-      val:18,
-      color:"#cf1b24"
+      ang: 77,
+      val: 18,
+      color: "#cf1b24"
     },
     {
-      ang:88,
-      val:22,
-      color:"#2c2728"
+      ang: 88,
+      val: 22,
+      color: "#2c2728"
     },
     {
-      ang:97,
-      val:9,
-      color:"#cf1b24"
+      ang: 97,
+      val: 9,
+      color: "#cf1b24"
     },
     {
-      ang:106,
-      val:31,
-      color:"#2c2728"
+      ang: 106,
+      val: 31,
+      color: "#2c2728"
     },
     {
-      ang:117,
-      val:14,
-      color:"#cf1b24"
+      ang: 117,
+      val: 14,
+      color: "#cf1b24"
     },
     {
-      ang:126,
-      val:20,
-      color:"#2c2728"
+      ang: 126,
+      val: 20,
+      color: "#2c2728"
     },
     {
-      ang:136,
-      val:1,
-      color:"#cf1b24"
+      ang: 136,
+      val: 1,
+      color: "#cf1b24"
     },
     {
-      ang:146,
-      val:33,
-      color:"#2c2728"
+      ang: 146,
+      val: 33,
+      color: "#2c2728"
     },
     {
-      ang:155,
-      val:16,
-      color:"#cf1b24"
+      ang: 155,
+      val: 16,
+      color: "#cf1b24"
     },
     {
-      ang:164,
-      val:24,
-      color:"#2c2728"
+      ang: 164,
+      val: 24,
+      color: "#2c2728"
     },
     {
-      ang:175,
-      val:5,
-      color:"#cf1b24"
+      ang: 175,
+      val: 5,
+      color: "#cf1b24"
     },
     {
-      ang:185,
-      val:10,
-      color:"#2c2728"
+      ang: 185,
+      val: 10,
+      color: "#2c2728"
     },
     {
-      ang:195,
-      val:23,
-      color:"#cf1b24"
+      ang: 195,
+      val: 23,
+      color: "#cf1b24"
     },
     {
-      ang:205,
-      val:8,
-      color:"#2c2728"
+      ang: 205,
+      val: 8,
+      color: "#2c2728"
     },
     {
-      ang:213,
-      val:30,
-      color:"#cf1b24"
+      ang: 213,
+      val: 30,
+      color: "#cf1b24"
     },
     {
-      ang:224,
-      val:11,
-      color:"#2c2728"
+      ang: 224,
+      val: 11,
+      color: "#2c2728"
     },
     {
-      ang:233,
-      val:36,
-      color:"#cf1b24"
+      ang: 233,
+      val: 36,
+      color: "#cf1b24"
     },
     {
-      ang:244,
-      val:13,
-      color:"#2c2728"
+      ang: 244,
+      val: 13,
+      color: "#2c2728"
     },
     {
-      ang:253,
-      val:27,
-      color:"#cf1b24"
+      ang: 253,
+      val: 27,
+      color: "#cf1b24"
     },
     {
-      ang:262,
-      val:6,
-      color:"#2c2728"
+      ang: 262,
+      val: 6,
+      color: "#2c2728"
     },
     {
-      ang:271,
-      val:34,
-      color:"#cf1b24"
+      ang: 271,
+      val: 34,
+      color: "#cf1b24"
     },
     {
-      ang:281,
-      val:17,
-      color:"#2c2728"
+      ang: 281,
+      val: 17,
+      color: "#2c2728"
     },
     {
-      ang:290,
-      val:25,
-      color:"#cf1b24"
+      ang: 290,
+      val: 25,
+      color: "#cf1b24"
     },
     {
-      ang:300,
-      val:2,
-      color:"#2c2728"
+      ang: 300,
+      val: 2,
+      color: "#2c2728"
     },
     {
-      ang:311,
-      val:21,
-      color:"#cf1b24"
+      ang: 311,
+      val: 21,
+      color: "#cf1b24"
     },
     {
-      ang:321,
-      val:4,
-      color:"#2c2728"
+      ang: 321,
+      val: 4,
+      color: "#2c2728"
     },
     {
-      ang:330,
-      val:19,
-      color:"#cf1b24"
+      ang: 330,
+      val: 19,
+      color: "#cf1b24"
     },
     {
-      ang:340,
-      val:15,
-      color:"#2c2728"
+      ang: 340,
+      val: 15,
+      color: "#2c2728"
     },
     {
-      ang:349,
-      val:32,
-      color:"#cf1b24"
+      ang: 349,
+      val: 32,
+      color: "#cf1b24"
     }
 
-  ] 
+  ]
 
   openAnimCircleSpin = false
 
   timerChrono = "100%"
 
-  tempList:any = []
+  tempList: any = []
 
 
   choosedAngle = 0
 
   totalRotations = 0
-  rotationsToStop = 37
+  rotationsToStop = 31
   isSpinning = false
 
-  wheel:any
+  wheel: any
 
-  indicator:any
+  indicator: any
 
   spinStartTime = 0
 
   time = 147
 
-  element:any
+  element: any
 
   spinFinish = true
 
@@ -231,15 +231,15 @@ spinnbr:any
 
 
 
-  currentToken:any
+  currentToken: any
 
   user_login = ""
 
-  lastTikets:any = []
+  lastTikets: any = []
 
-  numbersTable:any = []
+  numbersTable: any = []
 
-  numbers:any = [1,13,25,2,14,26,3,15,27,4,16,28,5,17,29,6,18,30,7,19,31,8,20,32,9,21,33,10,22,34,11,23,35,12,24,36]
+  numbers: any = [1, 13, 25, 2, 14, 26, 3, 15, 27, 4, 16, 28, 5, 17, 29, 6, 18, 30, 7, 19, 31, 8, 20, 32, 9, 21, 33, 10, 22, 34, 11, 23, 35, 12, 24, 36]
 
   zeroOccur = 0
 
@@ -253,12 +253,12 @@ spinnbr:any
 
   doensOccur = 0
 
-  hotNumbers:any = []
-  coldNumbers:any = []
+  hotNumbers: any = []
+  coldNumbers: any = []
 
 
   openWinnersSpin = false
-  winners:any = []
+  winners: any = []
   isNoWinners = false
   minutesChrono = "00"
   secondesChrono = "00"
@@ -266,37 +266,37 @@ spinnbr:any
 
   currentTime = 0
 
-  timerBar:any
-  timerBarCtn:any
+  timerBar: any
+  timerBarCtn: any
 
   isRotated = false
 
 
-  constructor(private rouletteService:RouletteService,private users:UsersService,private tiketService:TiketService) { }
+  constructor(private rouletteService: RouletteService, private users: UsersService, private tiketService: TiketService) { }
 
-  returnFromPage(){
+  returnFromPage() {
     this.openWinnersSpin = false
   }
 
-  getWinnersSpin(){
+  getWinnersSpin() {
 
     this.winners = []
 
-    this.tiketService.chrono().subscribe((res:any)=>{
+    this.tiketService.chrono().subscribe((res: any) => {
 
-      res.tab.forEach((win:any)=>{
+      res.tab.forEach((win: any) => {
 
-        if(!this.winners.includes(win)){
+        if (!this.winners.includes(win)) {
           this.winners.push(win)
         }
 
       })
 
-      if(this.winners.length === 0){
+      if (this.winners.length === 0) {
         this.isNoWinners = true
         this.winners.push("no winners!")
       }
-      
+
 
       this.openWinnersSpin = true
 
@@ -304,36 +304,36 @@ spinnbr:any
 
   }
 
-  spinToAngle(desiredAngle:any) {
+  spinToAngle(desiredAngle: any) {
     const index = this.angles.findIndex(item => item.val === desiredAngle)
 
     if (index !== -1) {
-        this.choosedAngle = index
-        this.totalRotations = 0
-        this.isSpinning = true 
-        this.spinStartTime = performance.now()
-        this.requestAnimationFrame(this.animateSpin)
+      this.choosedAngle = index
+      this.totalRotations = 0
+      this.isSpinning = true
+      this.spinStartTime = performance.now()
+      this.requestAnimationFrame(this.animateSpin)
     } else {
-        console.error("Desired angle not found in the angles array.")
+      console.error("Desired angle not found in the angles array.")
     }
   }
 
-  animateSpin(timestamp:any) {
+  animateSpin(timestamp: any) {
 
     this.wheel = document.querySelector(".spin")
 
     this.indicator = document.querySelector(".indicator-number")
 
-    if(this.isSpinning) {
-        
+    if (this.isSpinning) {
+
       const elapsedTime = timestamp - this.spinStartTime;
- 
+
       const progress = (elapsedTime % this.time) / this.time;
 
       let angle = progress * 360
 
-      this.wheel.style.transform = "rotate(" + (angle-4) + "deg"
-        
+      this.wheel.style.transform = "rotate(" + (angle - 4) + "deg"
+
       const index = (Math.floor((this.angles.length * angle) / 360) + this.angles.length) % this.angles.length;
 
       this.indicator.innerText = this.angles[index].val
@@ -344,30 +344,30 @@ spinnbr:any
 
       if (index !== this.choosedAngle) {
         this.requestAnimationFrame(this.animateSpin)
-      } 
+      }
       else {
 
         this.totalRotations++
 
         if (this.totalRotations < this.rotationsToStop) {
           this.requestAnimationFrame(this.animateSpin)
-        } 
-        else if(this.totalRotations === this.rotationsToStop){
-    
-          setTimeout(()=>{
+        }
+        else if (this.totalRotations === this.rotationsToStop) {
+
+          setTimeout(() => {
             this.indicator.style.transform = "scale(2)"
             this.indicator.style.margin = "0"
-            setTimeout(()=>{
+            setTimeout(() => {
               this.indicator.style.transform = "scale(1)"
               this.indicator.style.marginTop = "1.8%"
-             // this.getWinnersSpin()
-              this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
+              // this.getWinnersSpin()
+              this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res: any) => {
 
                 this.historyMng(res.hist)
 
               })
-            },4000)
-          },550) 
+            }, 4000)
+          }, 550)
 
           this.isSpinning = false
           this.isRotated = true
@@ -381,7 +381,7 @@ spinnbr:any
     window.requestAnimationFrame(callback.bind(this));
   }
 
-  initSpin(choosedNum:any){
+  initSpin(choosedNum: any) {
 
     this.spinFinish = true
 
@@ -393,7 +393,7 @@ spinnbr:any
 
     var angle = this.angles[this.angles.findIndex(item => item.val === choosedNum)].ang
 
-    this.element.style.transform = "rotate("+(angle + 2)+"deg)"
+    this.element.style.transform = "rotate(" + (angle + 2) + "deg)"
 
     this.indicator.innerText = choosedNum
 
@@ -402,118 +402,114 @@ spinnbr:any
   }
 
 
-  chronoConfig(){
+  chronoConfig() {
 
-    this.tiketService.chrono().subscribe((res:any)=>{
+    this.tiketService.chrono().subscribe((res: any) => {
 
-      
-      
+
+
       this.currentTime = res.temp
 
 
       this.minutesChrono = Math.floor((this.timeChrono - res.temp) / 60) + ""
-      this.secondesChrono = (this.timeChrono - res.temp)%60 +""
+      this.secondesChrono = (this.timeChrono - res.temp) % 60 + ""
 
 
-      if(this.minutesChrono.split("").length === 1){
-        this.minutesChrono = "0"+this.minutesChrono
+      if (this.minutesChrono.split("").length === 1) {
+        this.minutesChrono = "0" + this.minutesChrono
       }
 
-      if(this.secondesChrono.split("").length === 1){
-        this.secondesChrono = "0"+this.secondesChrono
+      if (this.secondesChrono.split("").length === 1) {
+        this.secondesChrono = "0" + this.secondesChrono
       }
 
-      this.timerChrono = (((this.timeChrono - this.currentTime)/this.timeChrono)*100) +"%"
+      this.timerChrono = (((this.timeChrono - this.currentTime) / this.timeChrono) * 100) + "%"
 
-      if(this.timeChrono - res.temp <= 0){
+      if (this.timeChrono - res.temp <= 0) {
         this.minutesChrono = "00"
         this.secondesChrono = "00"
         this.timerChrono = "0%"
       }
 
 
-      if(this.timeChrono - res.temp <= 13){
+      if (this.timeChrono - res.temp <= 13) {
         this.timerBarCtn = document.querySelector(".timer-num")
         this.timerBarCtn.style.color = "#e72525"
       }
 
-      if(this.timeChrono - res.temp > 13){
+      if (this.timeChrono - res.temp > 13) {
         this.timerBarCtn = document.querySelector(".timer-num")
         this.timerBarCtn.style.color = "white"
 
       }
-     this.rouletteService.getNumSpinWin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
-            
-              console.log(this.currentTime,'yar7em weldik')
-                console.log(res)
-       
-             this.spinnbr= res
-              // this.spinToAngle(res.condition)
-            
-           
 
-          })
-      if(this.currentTime >= this.timeChrono && this.currentTime < (this.timeChrono+29) && !this.isSpinning){
+      if (this.currentTime >= this.timeChrono && this.currentTime < (this.timeChrono + 29) && !this.isSpinning) {
 
-        if(!this.isRotated){
-          this.isSpinning = true
+        if (!this.isRotated) {
 
           this.time = 70
 
           this.totalRotations = 0
-         if(this.spinnbr.message==true){
-           console.log(this.spinnbr.message,'rr')
-             this.spinToAngle(this.spinnbr.condition)
-         }
-         
+
+          this.rouletteService.getNumSpinWin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res: any) => {
+
+            console.log(res)
+
+            if(res.message){
+              this.isSpinning = true
+              this.spinToAngle(res.resultatRoulette)
+            }
+
+          })
+
         }
 
-      }else if(this.currentTime < this.timeChrono){
+      } else if (this.currentTime < this.timeChrono) {
         this.isRotated = false
       }
 
     })
 
-    if(localStorage.getItem("#TKPOLMGFM") != this.currentToken){
+    if (localStorage.getItem("#TKPOLMGFM") != this.currentToken) {
       window.close()
     }
 
-    setTimeout(this.chronoConfig.bind(this),1000)
+    setTimeout(this.chronoConfig.bind(this), 1000)
 
   }
 
-  generateCode(length:any) {
+  generateCode(length: any) {
 
     const numbers = 'azertyuiopqsdfghjklmwxcvbnAZERTYUIOPMLKJHGFDQSWXCVBN0123456789'
 
     var result = ''
 
-    for (var i = 0 ;i < length; i++) {
+    for (var i = 0; i < length; i++) {
 
       const index = Math.floor(Math.random() * numbers.length)
 
       result += numbers.charAt(index)
     }
 
-      return result
+    return result
 
   }
 
-  checkNumberColor(n:any){
-    
+  checkNumberColor(n: any) {
+
     var color = ""
 
-    if(n === 0){
+    if (n === 0) {
       color = "green"
     }
-    else if(n === 2 || n === 4 || n === 6 || n === 8 || n === 10 || n === 11 || n === 13 || n === 15 || n === 17
-       || n === 20 || n === 22 || n === 24 || n === 26 || n === 28 || n === 29 || n === 31 || n === 33 || n === 35
-      ){
+    else if (n === 2 || n === 4 || n === 6 || n === 8 || n === 10 || n === 11 || n === 13 || n === 15 || n === 17
+      || n === 20 || n === 22 || n === 24 || n === 26 || n === 28 || n === 29 || n === 31 || n === 33 || n === 35
+    ) {
 
       color = "black"
 
     }
-    else{
+    else {
 
       color = "red"
 
@@ -523,30 +519,30 @@ spinnbr:any
 
   }
 
-  manageHotCold(){
+  manageHotCold() {
 
     this.hotNumbers = []
     this.coldNumbers = []
 
-    this.numbersTable.forEach((nbr:any)=>{
+    this.numbersTable.forEach((nbr: any) => {
 
-      nbr.forEach((n:any)=>{
+      nbr.forEach((n: any) => {
 
-        if(n.occur >= 2){
-          if(this.hotNumbers.length < 5){
+        if (n.occur >= 2) {
+          if (this.hotNumbers.length < 5) {
             this.hotNumbers.push({
 
-              number:n.number,
-              color:n.color,
+              number: n.number,
+              color: n.color,
 
             })
           }
-        }else{
-          if(this.coldNumbers.length < 5){
+        } else {
+          if (this.coldNumbers.length < 5) {
             this.coldNumbers.push({
 
-              number:n.number,
-              color:n.color,
+              number: n.number,
+              color: n.color,
 
             })
           }
@@ -560,31 +556,31 @@ spinnbr:any
   }
 
 
-  manageColor(n:any){
+  manageColor(n: any) {
 
-    if(n === 0){
+    if (n === 0) {
       this.greenOccur++
     }
-    else if(n%2 === 0){
+    else if (n % 2 === 0) {
       this.blackOccur++
     }
-    else{
+    else {
       this.redOccur++
     }
 
   }
 
-  manageDozens(n:any){
+  manageDozens(n: any) {
 
-    if(n >= 1 && n <= 12){
+    if (n >= 1 && n <= 12) {
       this.onto12Occur++
       this.doensOccur++
     }
-    else if(n >= 13 && n <= 24){
+    else if (n >= 13 && n <= 24) {
       this.thrtto24Occur++
       this.doensOccur++
     }
-    else if(n >= 25 && n <= 36){
+    else if (n >= 25 && n <= 36) {
       this.twntfto136ccur++
       this.doensOccur++
     }
@@ -592,7 +588,7 @@ spinnbr:any
   }
 
 
-  historyMng(history:any){
+  historyMng(history: any) {
 
     this.zeroOccur = 0
 
@@ -607,17 +603,17 @@ spinnbr:any
     this.doensOccur = 0
 
 
-    const list = history.slice(0,120)
+    const list = history.slice(0, 120)
 
     this.lastTikets = []
 
-    for (var i = 0 ;i < 8; i++) {
+    for (var i = 0; i < 8; i++) {
 
       this.lastTikets.push({
 
-        number:list[i],
-        color:this.checkNumberColor(list[i]),
-        code:"#"+this.generateCode(10)
+        number: list[i],
+        color: this.checkNumberColor(list[i]),
+        code: "#" + this.generateCode(10)
 
       })
 
@@ -626,29 +622,29 @@ spinnbr:any
     this.generateSection()
 
 
-    list.forEach((n:any)=>{
+    list.forEach((n: any) => {
 
       this.manageDozens(n)
 
       this.manageColor(n)
 
-      if(n === 0){
+      if (n === 0) {
 
         this.zeroOccur += 1
 
       }
 
-      this.numbersTable.forEach((nbr:any)=>{
-        
-        nbr.forEach((nb:any)=>{
+      this.numbersTable.forEach((nbr: any) => {
+
+        nbr.forEach((nb: any) => {
 
 
-          if(nb.number === n){
+          if (nb.number === n) {
             nb.occur += 1
           }
 
         })
-        
+
 
       })
 
@@ -661,7 +657,7 @@ spinnbr:any
 
     this.element.innerHTML = ""
 
-    this.numbersTable.forEach((sc:any)=>{
+    this.numbersTable.forEach((sc: any) => {
 
       var html = `<div class="ligne-nbrs">
 
@@ -676,7 +672,7 @@ spinnbr:any
 
                   </div>`
 
-      
+
       this.element.innerHTML += html
 
     })
@@ -689,26 +685,26 @@ spinnbr:any
   }
 
 
-  generateSection(){
+  generateSection() {
     this.numbersTable = []
     var counter = 1
-    var section:any = []
+    var section: any = []
 
-    for (var i = 0 ;i < this.numbers.length; i++) {
+    for (var i = 0; i < this.numbers.length; i++) {
 
       section.push({
 
-        number:this.numbers[i],
-        occur:0,
-        color:this.checkNumberColor(this.numbers[i])
+        number: this.numbers[i],
+        occur: 0,
+        color: this.checkNumberColor(this.numbers[i])
 
       })
 
-      if(counter < 3){
-        
+      if (counter < 3) {
+
         counter++
 
-      }else{
+      } else {
         this.numbersTable.push(section)
         section = []
         counter = 1
@@ -717,13 +713,13 @@ spinnbr:any
     }
   }
 
-  getJackpots(){
+  getJackpots() {
 
-    this.users.getAllAdmins().subscribe((res:any)=>{
+    this.users.getAllAdmins().subscribe((res: any) => {
 
-      res.forEach((admin:any)=>{
+      res.forEach((admin: any) => {
 
-        if(admin.role === "start_admin"){
+        if (admin.role === "start_admin") {
 
           this.tempList.push(admin.text1)
           this.tempList.push(admin.text2)
@@ -733,13 +729,13 @@ spinnbr:any
 
       })
 
-      this.tempList.forEach((temp:any)=>{
+      this.tempList.forEach((temp: any) => {
 
-        if(temp.value.includes("img/")){
+        if (temp.value.includes("img/")) {
           temp.type = "image"
-          temp.value = temp.value.replace("img/","")
+          temp.value = temp.value.replace("img/", "")
 
-        }else{
+        } else {
           temp.type = "text"
         }
 
@@ -753,27 +749,27 @@ spinnbr:any
   ngOnInit(): void {
 
 
-    this.user_login = localStorage.getItem("#LOAEREUHDFS")+""
+    this.user_login = localStorage.getItem("#LOAEREUHDFS") + ""
 
     this.currentToken = localStorage.getItem("#TKPOLMGFM")
 
     this.getJackpots()
 
-    this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
+    this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res: any) => {
 
       this.generateSection()
       this.historyMng(res.hist)
 
-      setTimeout(()=>{
-        
+      setTimeout(() => {
+
         this.element = document.querySelector(".spin")
 
-        this.element.addEventListener("transitionend", ()=>{
+        this.element.addEventListener("transitionend", () => {
 
           this.openAnimCircleSpin = true
 
           this.openAnimCircleSpin = true
-            
+
           this.indicator = document.querySelector(".indicator-number")
 
           this.spinFinish = true
@@ -782,7 +778,7 @@ spinnbr:any
 
           this.indicator.style.margin = "0"
 
-          setTimeout(()=>{
+          setTimeout(() => {
             this.getWinnersSpin()
             this.openAnimCircleSpin = false
             this.indicator.style.transform = "scale(1)"
@@ -790,25 +786,25 @@ spinnbr:any
             this.indicator.style.marginLeft = "-.1%"
             this.element.style.transition = "transform 0s"
             this.element.style.transform = "rotate(0deg)"
-            this.element.style.transform = "rotate("+(this.currentAngle + 2)+"deg)"
-            this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res:any)=>{
+            this.element.style.transform = "rotate(" + (this.currentAngle + 2) + "deg)"
+            this.users.findAdmin(localStorage.getItem("#FSDJIOSFDEZ")).subscribe((res: any) => {
 
               this.historyMng(res.hist)
 
             })
-          },4000)
+          }, 4000)
 
         });
 
         SpinWheelEvents()
 
-        this.tiketService.chrono().subscribe((r:any)=>{
+        this.tiketService.chrono().subscribe((r: any) => {
 
           this.currentTime = r.temp
 
-          if(r.temp < 151){
+          if (r.temp < 151) {
             this.initSpin(res.hist[0])
-          }else{
+          } else {
             this.initSpin(res.hist[1])
           }
 
@@ -816,7 +812,7 @@ spinnbr:any
 
         })
 
-      },2000)
+      }, 2000)
     })
 
   }

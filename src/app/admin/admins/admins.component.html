@@ -17,6 +17,7 @@
 			<div class="item" *ngIf="userType != 'start_admin'">Profit</div>
 			<div class="item">Telephone</div>
 			<div class="item" *ngIf="userType != 'start_admin'">Players</div>
+			<div class="item" *ngIf="userType === 'start_admin'">Admins</div>
 			<div class="item">Action</div>
 		</div>
 		<div class="item-list" *ngFor="let admin of admins" #item>
@@ -27,6 +28,9 @@
 			<div class="it">{{admin.teleAdmin}}</div>
 			<div class="it link" *ngIf="userType != 'start_admin'">
 				<i class="fa-solid fa-eye" style="padding: 6% 5%;" (click)="openUserForAdmin(admin)" ></i>
+			</div>
+			<div class="it link" *ngIf="userType === 'start_admin'">
+				<i class="fa-solid fa-eye" style="padding: 6% 5%;" [routerLink]="'/admin/management/admins/'+admin._id" ></i>
 			</div>
 			<div class="it" *ngIf="userType != 'start_admin'">
 				<div class="btn edit" [routerLink]="'/admin/management/update-admin/'+admin._id">

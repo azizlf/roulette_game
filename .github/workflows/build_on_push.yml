@@ -1,4 +1,4 @@
-name: update on push
+name: Deploy prod site on push
 
 on:
   push:
@@ -6,16 +6,34 @@ on:
       - master
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
+  web-deploy:
 
+    name: Deploy Angular App 🚀
+    runs-on: ubuntu-latest
     steps:
-    - name: Set up SSH key
-      run: |
-        install -m 600 -D /dev/null ~/.ssh/id_rsa
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-        ssh-keyscan -H 51.222.111.183 > ~/.ssh/known_hosts
+    - name: Get latest code
+      uses: actions/checkout@v2.3.2
 
-    - name: Run the script on the remote VM
-      run: |
-        ssh ubuntu@51.222.111.183 "cd /home/ubuntu/koorea_project/ && sudo sh ./build_front.sh"
+    - name: Use Node.js 16 LTS
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+
+    - name: Install NPM Modules
+      run: npm install --force
+
+    - name: Build Project ⛏
+      run: npm run build
+
+    - name: Sync Files 🚀
+      uses: wlixcc/SFTP-Deploy-Action@v1.2.1
+      with:
+          username: ubuntu
+          server: 51.222.111.183
+          port: 22 # default is 22
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+          # will put all file under this path
+          local_path: ./dist/* # default is ./*
+          # files will copy to under remote_path
+          remote_path: /home/ubuntu/koorea_project/front/

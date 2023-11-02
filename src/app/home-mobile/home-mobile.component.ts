@@ -210,6 +210,9 @@ export class HomeMobileComponent implements OnInit {
     {
       list:[3,7,12,26,28,35],
       coef:6
+    },{
+      list:[0],
+      coef:50
     }
 
   ]

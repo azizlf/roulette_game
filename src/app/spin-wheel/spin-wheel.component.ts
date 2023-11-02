@@ -462,6 +462,7 @@ spinnbr:any
 
           this.totalRotations = 0
          if(this.spinnbr.message==true){
+           console.log(this.spinnbr.message,'rr')
              this.spinToAngle(this.spinnbr.condition)
          }
          

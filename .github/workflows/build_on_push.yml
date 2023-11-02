@@ -26,7 +26,7 @@ jobs:
       run: npm run build
 
     - name: Sync Files 🚀
-      uses: appleboy/ssh-action@v1.3.0
+      uses: appleboy/ssh-action@v1.0.0
       with:
           username: ubuntu
           host: 51.222.111.183

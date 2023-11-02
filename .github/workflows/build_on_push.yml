@@ -26,6 +26,15 @@ jobs:
       run: npm run build
 
     - name: Sync Files 🚀
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+          username: ubuntu
+          host: 51.222.111.183
+          key: ${{ secrets.SSH_PRIVATE_KEY }}          
+          script: |
+            sudo rm -r /home/ubuntu/koorea_project/front/dist/*
+
+    - name: Sync Files 🚀
       uses: appleboy/scp-action@v0.1.4
       with:
           username: ubuntu

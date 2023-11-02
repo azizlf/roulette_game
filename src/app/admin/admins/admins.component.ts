@@ -36,9 +36,9 @@ export class AdminsComponent implements OnInit {
 
           })
         }else if(this.userService.user.type === "start_admin"){
-          if(item.role === "superAdmin"){
+          
             this.admins.push(item)
-          }
+          
         }
 
       })

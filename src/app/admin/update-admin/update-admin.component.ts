@@ -58,24 +58,27 @@ export class UpdateAdminComponent implements OnInit {
 
       const result = parseFloat(this.requestUpdateInfos.solde)+parseFloat(amount.value)
 
-      if(parseFloat(amount.value) > this.userSolde){
-        this.element = document.querySelector(".error-msg-box")
-        setTimeout(()=>{
-          this.element.style.opacity = "1"
-          this.element.style.top = "4%"
-          this.errorMsg = "insufficient funds"
-          this.isLoadingForm = false
+      if(this.userService.user.type != "start_admin"){
+        if(parseFloat(amount.value) > this.userSolde){
+          this.element = document.querySelector(".error-msg-box")
           setTimeout(()=>{
-            this.element.style.opacity = "0"
-            this.element.style.top = "0%"
-          },3000)
-        },700)
+            this.element.style.opacity = "1"
+            this.element.style.top = "4%"
+            this.errorMsg = "insufficient funds"
+            this.isLoadingForm = false
+            setTimeout(()=>{
+              this.element.style.opacity = "0"
+              this.element.style.top = "0%"
+            },3000)
+          },700)
+        }else{
+          
+          this.requestUpdateInfos.solde = result.toFixed(2)+""
+          this.userSolde -= parseFloat(amount.value)
+        }
       }else{
-        
         this.requestUpdateInfos.solde = result.toFixed(2)+""
-        this.userSolde -= parseFloat(amount.value)
-
-
+        this.userSolde -= parseFloat(amount.value) 
       }
     
     }else if(op === "-"){

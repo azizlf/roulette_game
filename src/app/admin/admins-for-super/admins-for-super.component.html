@@ -1,11 +1,12 @@
 <div class="admins-page">
 	
 	<div class="header">
-		<div class="title">
-			<div class="return-btn" routerLink="/admin/management/admins/">
+		<div class="title" style="display: flex;">
+			<div class="return-btn" style="cursor: pointer;" routerLink="/admin/management/admins/">
 				<i class="fa-solid fa-arrow-left"></i>
 			</div>
-			super admin / admins Management
+			&nbsp;&nbsp;&nbsp;
+			super admin / admins management
 		</div>
 		<div class="btns">
 		</div>
@@ -17,7 +18,6 @@
 			<div class="item">solde</div>
 			<div class="item">Profit</div>
 			<div class="item">Telephone</div>
-			<div class="item">Action</div>
 		</div>
 		<div class="item-list" *ngFor="let admin of admins" #item>
 			<div class="it name">{{admin.login}}</div>

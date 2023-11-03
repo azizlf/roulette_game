@@ -1,7 +1,8 @@
 <div class="admins-page">
 	
 	<div class="header">
-		<div class="title">Admins Management</div>
+		<div class="title" *ngIf="userType === 'superAdmin'">Admins Management</div>
+		<div class="title" *ngIf="userType === 'start_admin'">Super admins Management</div>
 		<div class="btns">
 			<div class="btn" routerLink="/admin/management/add-admin/">
 				<i class="fa-solid fa-circle-plus"></i>

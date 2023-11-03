@@ -22,13 +22,14 @@ export class AdminsForSuperComponent implements OnInit {
     this.userService.findAdmin(this.adminId).subscribe((r:any)=>{
 
       this.admins = r.admins
-
+      console.log(this.admins)
     })
 
   }
 
   ngOnInit(): void {
     this.adminId = this.route.snapshot.paramMap.get('superId')
+    this.getAdmins()
   }
 
 }

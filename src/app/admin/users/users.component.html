@@ -31,7 +31,7 @@
 			<div class="it "> {{user.teleJoueur}}</div>
 			<div class="it">{{user.solde}}</div>
 			<div class="it">
-				<div class="btn edit" [routerLink]="'/admin/management/update-client/'+user._id" >
+				<div *ngIf="userType != 'start_admin'" class="btn edit" [routerLink]="'/admin/management/update-client/'+user._id" >
 					<i class="fa-regular fa-pen-to-square"></i>
 				</div>
 				<!--div class="btn block" *ngIf="userType === 'admin'">
@@ -41,7 +41,7 @@
 					<i class="fa-solid fa-trash-can"></i>
 					<!--i class="fa-solid fa-lock-open"></i-->
 				</div>
-				<div class="btn block" (click)="removeUser(user,item)" *ngIf="userType === 'superAdmin' ">
+				<div class="btn block" (click)="removeUser(user,item)" >
 					<i class="fa-solid fa-trash-can"></i>
 				</div>
 				<div class="btn block" (click)="openUserHistory(user)" style="background-color: #3aa8ff;">

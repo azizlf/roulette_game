@@ -457,7 +457,7 @@ export class SpinWheelComponent implements OnInit {
 
             if(res.message){
               this.isSpinning = true
-              this.spinToAngle(res.resultatRoulette)
+              this.spinToAngle(res.condition)
             }
 
           })

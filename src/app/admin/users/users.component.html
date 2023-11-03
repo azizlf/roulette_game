@@ -41,7 +41,7 @@
 					<i class="fa-solid fa-trash-can"></i>
 					<!--i class="fa-solid fa-lock-open"></i-->
 				</div>
-				<div class="btn block" (click)="removeUser(user,item)" >
+				<div class="btn block" (click)="removeUser(user,item)" *ngIf="userType === 'superAdmin' ">
 					<i class="fa-solid fa-trash-can"></i>
 				</div>
 				<div class="btn block" (click)="openUserHistory(user)" style="background-color: #3aa8ff;">

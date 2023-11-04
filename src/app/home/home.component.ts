@@ -549,7 +549,6 @@ export class HomeComponent implements OnInit {
 
     }
     
-
   }
 
   generateClickArray(length:any){
@@ -604,7 +603,8 @@ export class HomeComponent implements OnInit {
               condition:[res],
               soldeJouer:parseFloat(solde),
               soldeGagner:parseFloat(solde)*36,
-              coefficient:36
+              coefficient:36,
+              title:res
             })
 
             this.element = document.querySelector(".n"+res)

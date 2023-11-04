@@ -15,6 +15,7 @@ export class UsersComponent implements OnInit {
   adminId = ""
 
   users:any = ""
+  usersOffice:any = ""
 
   adminParamId:any
 
@@ -36,12 +37,41 @@ export class UsersComponent implements OnInit {
 
   }
 
+  search(input:any){
+
+    const text = input.target.value.toLowerCase()
+
+    var selected:any = []
+
+    this.usersOffice.forEach((item:any)=>{     
+
+      const login = item.login.toLowerCase()
+      const phone = item.teleJoueur.toLowerCase()
+      const solde = (item.solde + "").toLowerCase()
+      const name = item.name.toLowerCase()
+      const lastName = item.lastName.toLowerCase()
+
+      if(lastName.includes(text) || name.includes(text) || solde.includes(text) || phone.includes(text) || login.includes(text) ){
+        selected.push(item)
+      }
+
+    })
+
+    if(selected.length > 0){
+      this.users = selected
+    }else{
+      this.users = this.usersOffice
+    }
+
+  }
+
   getUsers(listOf:any){
 
     if(listOf==="admin"){
       this.usersService.findAdmin(this.usersService.user.id).subscribe((res:any)=>{
 
         this.users = res.Listejoueurs
+        this.usersOffice = res.Listejoueurs
         this.isLoading = false
 
         this.adminId = res._id
@@ -52,6 +82,7 @@ export class UsersComponent implements OnInit {
       this.usersService.getAllUsers().subscribe((res:any)=>{
 
         this.users = res
+        this.usersOffice = res
         this.isLoading = false
 
       })
@@ -59,6 +90,7 @@ export class UsersComponent implements OnInit {
       this.usersService.findAdmin(listOf).subscribe((res:any)=>{
 
         this.users = res.Listejoueurs
+        this.usersOffice = res.Listejoueurs
         this.isLoading = false
 
         this.adminId = res._id

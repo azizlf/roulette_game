@@ -386,6 +386,14 @@
 
 }
 
+.container-app .main .users-page .header input{
+	width: 43%;
+    padding: .4% 1%;
+    font-size: 1.2vw;
+	position: absolute;
+	left: 35%;
+}
+
 .container-app .main .users-page .header .btns .btn i{
 
 	margin-right: 8%;
@@ -794,16 +802,25 @@
 	align-items: center;
 	justify-content: space-between;
 	box-shadow:  0 0 .5vw 0 #d1d1d1;
+	position: relative;
 
 }
 
 .container-app .main .admins-page .header .title{
 
 	margin-left: 1%;
-	font-size: 1.6vw;
+	font-size: 1.4vw;
 	font-weight: 600;
 	color: #3f3f3f;
 
+}
+
+.container-app .main .admins-page .header input{
+	width: 43%;
+    padding: .4% 1%;
+    font-size: 1.2vw;
+	position: absolute;
+	left: 35%;
 }
 
 .container-app .main .admins-page .header .btns{

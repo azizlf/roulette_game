@@ -10,6 +10,7 @@
 				<span *ngIf="currentAdmin">Players Management</span>
 			</p>
 		</div>
+		<input type="text" placeholder="search" (input)="search($event)" />
 		<div class="btns" *ngIf="userType === 'admin'">
 			<div class="btn"  *ngIf="currentAdmin" routerLink="/admin/management/add-client">
 				<i class="fa-solid fa-circle-plus"></i>

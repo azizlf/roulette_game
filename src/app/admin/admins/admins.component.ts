@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class AdminsComponent implements OnInit {
 
   admins:any = []
+  adminsOffice:any = []
 
   userType:any
 
@@ -33,12 +34,14 @@ export class AdminsComponent implements OnInit {
           this.userService.findAdmin(this.userService.user.id).subscribe((r:any)=>{
 
             this.admins = r.admins
+            this.adminsOffice = r.admins
 
           })
         }else if(this.userService.user.type === "start_admin"){
           
           if(item.role != "start_admin"){
             this.admins.push(item)
+            this.adminsOffice.push(item)
           }
           
         }
@@ -46,6 +49,44 @@ export class AdminsComponent implements OnInit {
       })
 
     })
+
+  }
+
+  search(input:any){
+
+    const text = input.target.value.toLowerCase()
+
+    var selected:any = []
+
+    this.adminsOffice.forEach((item:any)=>{     
+
+      const login = item.login.toLowerCase()
+      const phone = item.teleAdmin.toLowerCase()
+      const solde = (item.solde + "").toLowerCase()
+      const name = item.name.toLowerCase()
+      const lastName = item.lastName.toLowerCase()
+
+      if(this.userService.user.type ===  "start_admin"){
+        if(lastName.includes(text) || name.includes(text) || solde.includes(text) || phone.includes(text) || login.includes(text) ){
+          selected.push(item)
+        }
+      }else{
+        
+        const profit = (item.prencentage+"").toLowerCase()+"%"
+
+        if(lastName.includes(text) || name.includes(text) || solde.includes(text) || phone.includes(text) || login.includes(text)
+        || profit === text ){
+          selected.push(item)
+        }
+      }
+
+    })
+
+    if(selected.length > 0){
+      this.admins = selected
+    }else{
+      this.admins = this.adminsOffice
+    }
 
   }
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../services/users.service'
+import { TiketService } from '../services/tiket.service'
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,7 +14,7 @@ export class PlayerHistoryComponent implements OnInit {
 
   history:any = "nothing"
 
-  constructor(private usersService:UsersService,private router:Router) { }
+  constructor(private usersService:UsersService,private router:Router,private tiketService:TiketService) { }
 
   returnFromPage(){
 
@@ -52,6 +53,15 @@ export class PlayerHistoryComponent implements OnInit {
 
     })
 
+  }
+
+  openToOverview(id:any){
+    this.tiketService.currentTiketSelecedToOverview = this.history
+    if(window.innerWidth <= 950){
+      this.router.navigate(["/home-mobile/tiket/"+id])
+    }else{
+      this.router.navigate(["/home/tiket/"+id])
+    }
   }
 
   ngOnInit(): void {

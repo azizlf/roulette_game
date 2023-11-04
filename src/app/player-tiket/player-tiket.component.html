@@ -1,0 +1,28 @@
+<div class="history-player">
+	
+	<div class="nav-bar">
+		<div class="return-btn" (click)="returnFromPage()" >
+			<i class="fa-solid fa-xmark"></i>
+		</div>
+	</div>
+	<div class="content-history-page" *ngIf="!isLoading">
+		<div class="history-list">
+			<div class="head-list">
+				<div class="it">Selected</div>
+				<div class="it">Solde</div>
+				<div class="it">Coefficient</div>
+			</div>
+			<div class="item" *ngFor="let item of conditions">
+				<div class="it" [innerHTML]="item.condition"></div>
+				<div class="it">{{item.soldeJouer}}</div>
+				<div class="it">x{{item.coefficient}}</div>
+			</div>
+		</div>
+	</div>
+	<div class="loading-ellipsis" style="width: 100%;" *ngIf="isLoading">
+		<div class="r1"></div>
+		<div class="r2"></div>
+		<div class="r3"></div>
+	</div>
+
+</div>

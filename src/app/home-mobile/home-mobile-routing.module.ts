@@ -12,6 +12,10 @@ const routes: Routes = [
       {
         path:"history",
         loadChildren: () => import('../player-history/player-history.module').then(m => m.PlayerHistoryModule),
+      },
+      {
+        path:"tiket/:id",
+        loadChildren: () => import('../player-tiket/player-tiket.module').then(m => m.PlayerTiketModule),
       }
 
     ]

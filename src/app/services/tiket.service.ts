@@ -10,6 +10,8 @@ export class TiketService {
   api = environment.API+"/Roulette"
   
   createdTiketIdForPrint = ""
+
+  currentTiketSelecedToOverview:any = []
   
   constructor(private http:HttpClient) { }
 

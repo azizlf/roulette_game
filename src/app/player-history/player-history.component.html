@@ -11,6 +11,7 @@
 				<div class="it">#</div>
 				<div class="it">Amount</div>
 				<div class="it">Status</div>
+				<div class="it">Action</div>
 			</div>
 			<div class="item" *ngFor="let item of history">
 				<div class="it">{{item._id}}</div>
@@ -18,6 +19,7 @@
 				<div class="it" style="color:green;" *ngIf="item.gagnion && !item.realTime">win</div>
 				<div class="it" style="color:red;" *ngIf="!item.gagnion && !item.realTime">lose</div>
 				<div class="it" style="color:orange;" *ngIf="item.realTime">pending</div>
+				<div class="it"><button (click)="openToOverview(item._id)" ><i class="fa-regular fa-eye"></i></button></div>
 			</div>
 		</div>
 	</div>

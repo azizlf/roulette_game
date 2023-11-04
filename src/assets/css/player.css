@@ -1722,7 +1722,17 @@
 	text-align: center;
 
 }
+.history-player .item .it button{
 
+	padding: 2.5% 2%;
+	font-size: 1.3vw;
+	background-color: #418f0c;
+	color: white;
+	border: none;
+	border-radius: .3vw;
+	cursor: pointer;
+
+}
 .player-settings{
 
 	width: 100%;

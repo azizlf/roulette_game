@@ -68,154 +68,190 @@ export class HomeComponent implements OnInit {
   numbers:any = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]
 
   dashbordAttrsCoef:any = [
-
     {
       list:[12,21],
-      coef:18
+      coef:18,
+      title:"<span>Mirror</span> 12 | 21"
     },
     {
       list:[13,31],
-      coef:18
+      coef:18,
+      title:"<span>Mirror</span> 13 | 31"
     },
     {
       list:[23,32],
-      coef:18
+      coef:18,
+      title:"<span>Mirror</span> 23 | 32"
     },
     {
       list:[11,22,33],
-      coef:12
+      coef:12,
+      title:"<span>Twins</span>"
     },
     {
-      list:[19,21,23,25,27,29,31,33,35],
-      coef:4
+      list:[19,21,23,25,27,30,32,34,36],
+      coef:4,
+      title:"<span>High & Red</span>"
     },
     {
-      list:[20,22,24,26,28,30,32,34,36],
-      coef:4
+      list:[20,22,24,26,28,29,31,33,35],
+      coef:4,
+      title:"<span>High & Black</span>"
     },
     {
-      list:[1,3,5,7,9,11,13,15,17],
-      coef:4
+      list:[1,3,5,7,9,12,14,16,18],
+      coef:4,
+      title:"<span>Low & Red</span>"
     },
     {
-      list:[2,4,6,8,10,12,14,16,18],
-      coef:4
+      list:[2,4,6,8,10,11,13,15,17],
+      coef:4,
+      title:"<span>Low & Black</span>"
     },
     {
       list:[1,2,3,4,5,6,7,8,9,10,11,12],
-      coef:3
+      coef:3,
+      title:"<span>Dozen 1-12</span>"
     },
     {
       list:[13,14,15,16,17,18,19,20,21,22,23,24],
-      coef:3
+      coef:3,
+      title:"<span>Dozen 13-24</span>"
     },
     {
       list:[25,26,27,28,29,30,31,32,33,34,35,36],
-      coef:3
+      coef:3,
+      title:"<span>Dozen 25-36</span>"
     },
     {
       list:[3,6,9,12,15,18,21,24,27,30,33,36],
-      coef:3
+      coef:3,
+      title:"<span>|||</span>"
     },
     {
       list:[2,5,8,11,14,17,20,23,26,29,32,35],
-      coef:3
+      coef:3,
+      title:"<span>||</span>"
     },
     {
       list:[1,4,7,10,13,16,19,22,25,28,31,34],
-      coef:3
+      coef:3,
+      title:"<span>|</span>"
     },
 
     {
       list:[0,10,20,30],
-      coef:9
+      coef:9,
+      title:"<span>Finals 0</span>"
     },
     {
       list:[1,11,21,31],
-      coef:9
+      coef:9,
+      title:"<span>Finals 1</span>"
     },
     {
       list:[2,12,22,32],
-      coef:9
+      coef:9,
+      title:"<span>Finals 2</span>"
     },
     {
       list:[3,13,23,33],
-      coef:9
+      coef:9,
+      title:"<span>Finals 3</span>"
     },
     {
       list:[4,14,24,34],
-      coef:9
+      coef:9,
+      title:"<span>Finals 4</span>"
     },
     {
       list:[5,15,25,35],
-      coef:9
+      coef:9,
+      title:"<span>Finals 5</span>"
     },
     {
       list:[6,16,26,36],
-      coef:9
+      coef:9,
+      title:"<span>Finals 6</span>"
     },
     {
       list:[7,17,27],
-      coef:12
+      coef:12,
+      title:"<span>Finals 7</span>"
     },
     {
       list:[8,18,28],
-      coef:12
+      coef:12,
+      title:"<span>Finals 8</span>"
     },
     {
       list:[9,19,29],
-      coef:12
+      coef:12,
+      title:"<span>Finals 9</span>"
     },
     {
       list:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],
-      coef:2
+      coef:2,
+      title:"<span>Low 1-18</span>"
     },
     {
       list:[2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36],
-      coef:2
+      coef:2,
+      title:"<span>Low 1-18</span>"
+    },
+    {
+      list:[1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36],
+      coef:2,
+      title:"<span>Red</span>"
+    },
+    {
+      list:[2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,31,35,35],
+      coef:2,
+      title:"<span>Black</span>"
     },
     {
       list:[1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35],
-      coef:2
-    },
-    {
-      list:[2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36],
-      coef:2
-    },
-    {
-      list:[1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35],
-      coef:2
+      coef:2,
+      title:"<span>ODD</span>"
     },
     {
       list:[19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36],
-      coef:2
+      coef:2,
+      title:"<span>Hight 19-36</span>"
     },
     {
       list:[2,4,15,19,21,32],
-      coef:6
+      coef:6,
+      title:"<span>Sector A</span>"
     },
     {
       list:[6,13,17,25,27,34],
-      coef:6
+      coef:6,
+      title:"<span>Sector B</span>"
     },
     {
       list:[8,11,10,23,30,36],
-      coef:6
+      coef:6,
+      title:"<span>Sector C</span>"
     },
     {
       list:[1,5,16,20,24,33],
-      coef:6
+      coef:6,
+      title:"<span>Sector D</span>"
     },
     {
       list:[9,14,18,22,29,31],
-      coef:6
+      coef:6,
+      title:"<span>Sector E</span>"
     },
     {
       list:[3,7,12,26,28,35],
-      coef:6
+      coef:6,
+      title:"<span>Sector F</span>"
     },{
       list:[0],
-      coef:50
+      coef:50,
+      title:"0"
     }
 
   ]
@@ -447,7 +483,7 @@ export class HomeComponent implements OnInit {
 
       container.id = condition.condition_id
 
-      selection.innerHTML = "<p>"+arrayNumbers+"</p>"
+      selection.innerHTML = "<p>"+condition.title+"</p>"
 
       coef.innerText = condition.coefficient
 
@@ -654,6 +690,8 @@ export class HomeComponent implements OnInit {
 
       var coef = 0
 
+      var title = ""
+
       if(ele.target.classList.contains("clicked-btn") || ele.target.classList.contains("clicked")){
         itemIsSelected = true
       }
@@ -662,6 +700,7 @@ export class HomeComponent implements OnInit {
 
         if(this.arraysIsEqual(choice,item.list)){
           coef = item.coef
+          title = item.title
         }
 
       })
@@ -679,6 +718,13 @@ export class HomeComponent implements OnInit {
         }
 
       }
+
+      if(title === ""){
+
+        title = choice[0]
+
+      }
+
       if(solde === "05"){
         solde = 0.5
       }
@@ -708,7 +754,8 @@ export class HomeComponent implements OnInit {
             condition:choice,
             soldeJouer:parseFloat(solde),
             soldeGagner:parseFloat(solde)*coef,
-            coefficient:coef
+            coefficient:coef,
+            title:title
           })
 
           if(ele.target.childElementCount === 1){
@@ -763,10 +810,7 @@ export class HomeComponent implements OnInit {
           if(choice.length > 1){
             if(list[list.length-1] === choice[choice.length-1] && list[0] === choice[0]){
 
-              var newSolde = 0
-
-              newSolde = this.totalConditionsSolde - condition.soldeJouer
-              newSolde += parseFloat(solde)
+              var newSolde = parseFloat(solde)+this.totalConditionsSolde
 
               if(newSolde != 0){
                 if(newSolde <= this.userSolde){
@@ -809,10 +853,7 @@ export class HomeComponent implements OnInit {
           }else{
             if(list[0] === choice[0]){
 
-              var newSolde = 0
-
-              newSolde = this.totalConditionsSolde - condition.soldeJouer
-              newSolde += parseFloat(solde)
+              var newSolde = parseFloat(solde)+this.totalConditionsSolde
 
               if(newSolde != 0){
                 if(newSolde <= this.userSolde){

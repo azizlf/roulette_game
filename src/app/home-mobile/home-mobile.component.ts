@@ -755,9 +755,7 @@ export class HomeMobileComponent implements OnInit {
 
           ele.target.classList.add("clicked-btn")
 
-          this.element = document.querySelector(".create-tiket")
-
-          this.element.style.display = "block" 
+          
 
           this.totalConditionsSolde += parseFloat(solde)
 
@@ -874,8 +872,10 @@ export class HomeMobileComponent implements OnInit {
 
         })
       }    
-
-      this.initConditions(ele)
+      this.conditionsIn = true
+      setTimeout(()=>{
+        this.initConditions(ele)
+      },250)
     }
 
   }

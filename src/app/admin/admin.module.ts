@@ -15,4 +15,5 @@ import { UpdateTemplateComponent } from './update-template/update-template.compo
     AdminRoutingModule
   ]
 })
+
 export class AdminModule { }

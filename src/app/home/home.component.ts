@@ -765,17 +765,11 @@ export class HomeComponent implements OnInit {
 
               var newSolde = 0
 
-              if(parseFloat(solde)!=condition.soldeJouer){
-                newSolde = this.totalConditionsSolde - condition.soldeJouer
-                newSolde += parseFloat(solde)
-              }
+              newSolde = this.totalConditionsSolde - condition.soldeJouer
+              newSolde += parseFloat(solde)
 
               if(newSolde != 0){
                 if(newSolde <= this.userSolde){
-
-                  this.totalConditionsSolde -= condition.soldeJouer
-
-                  this.currentRestSolde += condition.soldeJouer
 
                   this.totalConditionsSolde += parseFloat(solde)
 
@@ -798,7 +792,7 @@ export class HomeComponent implements OnInit {
 
                   }
                   
-                  condition.soldeJouer = parseFloat(solde)
+                  condition.soldeJouer += parseFloat(solde)
 
                 }
                 else{
@@ -817,17 +811,11 @@ export class HomeComponent implements OnInit {
 
               var newSolde = 0
 
-              if(parseFloat(solde)!=condition.soldeJouer){
-                newSolde = this.totalConditionsSolde - condition.soldeJouer
-                newSolde += parseFloat(solde)
-              }
+              newSolde = this.totalConditionsSolde - condition.soldeJouer
+              newSolde += parseFloat(solde)
 
               if(newSolde != 0){
                 if(newSolde <= this.userSolde){
-
-                  this.totalConditionsSolde -= condition.soldeJouer
-
-                  this.currentRestSolde += condition.soldeJouer
 
                   this.totalConditionsSolde += parseFloat(solde)
 
@@ -850,7 +838,7 @@ export class HomeComponent implements OnInit {
 
                   }
                   
-                  condition.soldeJouer = parseFloat(solde)
+                  condition.soldeJouer += parseFloat(solde)
 
                 }
                 else{
@@ -1141,8 +1129,8 @@ export class HomeComponent implements OnInit {
       
       if(res.temp >= 138){
 
-        this.noEventUser = true
-        this.timeIsUpSpin = true
+        // this.noEventUser = true
+        // this.timeIsUpSpin = true
 
       }else{
 

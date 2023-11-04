@@ -595,7 +595,8 @@ export class HomeMobileComponent implements OnInit {
               condition:[res],
               soldeJouer:parseFloat(solde),
               soldeGagner:parseFloat(solde)*36,
-              coefficient:36
+              coefficient:36,
+              title:res
             })
 
             this.element = document.querySelector(".n"+res)

@@ -745,17 +745,11 @@ export class HomeMobileComponent implements OnInit {
 
               var newSolde = 0
 
-              if(parseFloat(solde)!=condition.soldeJouer){
-                newSolde = this.totalConditionsSolde - condition.soldeJouer
-                newSolde += parseFloat(solde)
-              }
+              newSolde = this.totalConditionsSolde - condition.soldeJouer
+              newSolde += parseFloat(solde)
 
               if(newSolde != 0){
                 if(newSolde <= this.userSolde){
-
-                  this.totalConditionsSolde -= condition.soldeJouer
-
-                  this.currentRestSolde += condition.soldeJouer
 
                   this.totalConditionsSolde += parseFloat(solde)
 
@@ -778,7 +772,7 @@ export class HomeMobileComponent implements OnInit {
 
                   }
                   
-                  condition.soldeJouer = parseFloat(solde)
+                  condition.soldeJouer += parseFloat(solde)
 
                 }
                 else{
@@ -786,24 +780,22 @@ export class HomeMobileComponent implements OnInit {
                 }
               }
 
+              
+
+
+
+
             }
-          }
-          else{
+          }else{
             if(list[0] === choice[0]){
 
               var newSolde = 0
 
-              if(parseFloat(solde)!=condition.soldeJouer){
-                newSolde = this.totalConditionsSolde - condition.soldeJouer
-                newSolde += parseFloat(solde)
-              }
+              newSolde = this.totalConditionsSolde - condition.soldeJouer
+              newSolde += parseFloat(solde)
 
               if(newSolde != 0){
                 if(newSolde <= this.userSolde){
-
-                  this.totalConditionsSolde -= condition.soldeJouer
-
-                  this.currentRestSolde += condition.soldeJouer
 
                   this.totalConditionsSolde += parseFloat(solde)
 
@@ -826,7 +818,7 @@ export class HomeMobileComponent implements OnInit {
 
                   }
                   
-                  condition.soldeJouer = parseFloat(solde)
+                  condition.soldeJouer += parseFloat(solde)
 
                 }
                 else{

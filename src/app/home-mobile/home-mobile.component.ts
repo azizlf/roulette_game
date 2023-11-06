@@ -1149,6 +1149,8 @@ export class HomeMobileComponent implements OnInit {
     hint.style.opacity = "0"
   }
 
+
+  //loop timeout
   chronoConfig(){
 
     this.tiketService.chrono().subscribe((res:any)=>{
@@ -1157,7 +1159,11 @@ export class HomeMobileComponent implements OnInit {
         this.getUser()
       }
 
-      if(res.temp >= 140){
+      if(res.temp < 149){
+        this.updateSolde()
+      }
+
+      if(res.temp >= 135){
 
         this.timeIsUpSpin = true
 
@@ -1177,6 +1183,14 @@ export class HomeMobileComponent implements OnInit {
 
   }
 
+
+  updateSolde(){
+    this.users.findUser(this.users.user.id).subscribe((res:any)=>{
+      
+      this.userSolde = parseFloat(res.solde)
+
+    })
+  }
   generateQRCode(data:any) {
 
     const qr = QRCode(0, 'L')

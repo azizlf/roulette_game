@@ -1094,10 +1094,12 @@ export class HomeComponent implements OnInit {
   
   getUser(){
 
-    this.tikets = []
+    
 
     this.users.findUser(this.users.user.id).subscribe((res:any)=>{
       
+      this.tikets = []
+
       this.userDetails.name = res.name+""+res.lastName
       this.userDetails.login = res.login
       this.userDetails.solde = parseFloat(res.solde)
@@ -1123,6 +1125,14 @@ export class HomeComponent implements OnInit {
     this.users.user.id = ""
     this.router.navigate(['/'])
 
+  }
+
+  updateSolde(){
+    this.users.findUser(this.users.user.id).subscribe((res:any)=>{
+      
+      this.userSolde = parseFloat(res.solde)
+
+    })
   }
 
   cancelEventFromBtns(){
@@ -1168,6 +1178,10 @@ export class HomeComponent implements OnInit {
       
       if(res.temp === 180){
         this.getUser()
+      }
+
+      if(res.temp < 149){
+        this.updateSolde()
       }
       
       if(res.temp >= 138){

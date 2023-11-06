@@ -837,6 +837,7 @@ export class HomeComponent implements OnInit {
                   }
                   
                   condition.soldeJouer += parseFloat(solde)
+                  condition.soldeGagner = condition.soldeJouer * condition.coefficient
 
                 }
                 else{
@@ -880,6 +881,7 @@ export class HomeComponent implements OnInit {
                   }
                   
                   condition.soldeJouer += parseFloat(solde)
+                  condition.soldeGagner = condition.soldeJouer * condition.coefficient
 
                 }
                 else{
@@ -893,7 +895,7 @@ export class HomeComponent implements OnInit {
 
         })
       }    
-
+      console.log(this.conditions)
       this.initConditions(ele)
     }
 

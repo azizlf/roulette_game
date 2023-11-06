@@ -476,7 +476,7 @@ export class HomeMobileComponent implements OnInit {
 
       coef.innerText = "x"+condition.coefficient
 
-      solde.innerHTML = condition.soldeJouer
+      solde.innerHTML = (condition.soldeJouer * condition.coefficient) + ""
 
       removeBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>'
 

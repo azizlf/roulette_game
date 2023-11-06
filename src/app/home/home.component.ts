@@ -487,7 +487,7 @@ export class HomeComponent implements OnInit {
 
       coef.innerText = condition.coefficient
 
-      solde.innerHTML = '<input type="text" value="'+condition.soldeJouer+'" placeholder="solde">'
+      solde.innerHTML = '<input type="text" value="'+(condition.soldeJouer * condition.coefficient)+'" placeholder="solde">'
 
       removeBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>'
 

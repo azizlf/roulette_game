@@ -205,7 +205,7 @@ export class HomeComponent implements OnInit {
       title:"<span>Red</span>"
     },
     {
-      list:[2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,31,35,35],
+      list:[2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,31,33,35,35],
       coef:2,
       title:"<span>Black</span>"
     },
@@ -1166,14 +1166,14 @@ export class HomeComponent implements OnInit {
 
     this.tiketService.chrono().subscribe((res:any)=>{
       
-      if(res.temp >= 177){
+      if(res.temp === 180){
         this.getUser()
       }
       
       if(res.temp >= 138){
 
-        // this.noEventUser = true
-        // this.timeIsUpSpin = true
+        this.noEventUser = true
+        this.timeIsUpSpin = true
 
       }else{
 

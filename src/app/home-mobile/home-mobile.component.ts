@@ -472,7 +472,7 @@ export class HomeMobileComponent implements OnInit {
 
       container.id = condition.condition_id
 
-      selection.innerHTML = '<p>'+arrayNumbers+'</p>'
+      selection.innerHTML = '<p>'+condition.title+'</p>'
 
       coef.innerText = "x"+condition.coefficient
 
@@ -1153,7 +1153,7 @@ export class HomeMobileComponent implements OnInit {
 
     this.tiketService.chrono().subscribe((res:any)=>{
 
-      if(res.temp >= 177){
+      if(res.temp === 180){
         this.getUser()
       }
 

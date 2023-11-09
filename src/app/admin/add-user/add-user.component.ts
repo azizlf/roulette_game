@@ -31,12 +31,9 @@ export class AddUserComponent implements OnInit {
 
       const request = {
     
-        name:user.fname,
-        lastName:user.lname,
-        pseudoName:user.pseudoName,
+      
         login:user.login,
         password:user.password,
-        teleJoueur:user.teleJoueur,
         tiket:[],
         tiketRealTime:[],
         solde:user.solde,

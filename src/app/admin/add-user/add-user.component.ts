@@ -14,8 +14,12 @@ export class AddUserComponent implements OnInit {
   element:any
   userDetails = new FormGroup({
 
-    login: new FormControl('',[Validators.required ]),
+    fname :new FormControl('',[Validators.required ]),
+    lname : new FormControl('',[Validators.required ]),
+    pseudoName: new FormControl('',[Validators.required ]),
+    teleJoueur: new FormControl('',[Validators.required ]),
     solde: new FormControl('',[Validators.required ]),
+    login: new FormControl('',[Validators.required ]),
     password: new FormControl('',[Validators.required ])
 
   })
@@ -31,9 +35,12 @@ export class AddUserComponent implements OnInit {
 
       const request = {
     
-      
+        name:user.fname,
+        lastName:user.lname,
+        pseudoName:user.pseudoName,
         login:user.login,
         password:user.password,
+        teleJoueur:user.teleJoueur,
         tiket:[],
         tiketRealTime:[],
         solde:user.solde,

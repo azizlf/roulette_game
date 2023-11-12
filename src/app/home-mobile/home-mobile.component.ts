@@ -958,9 +958,7 @@ export class HomeMobileComponent implements OnInit {
   
             this.tiketService.createdTiketIdForPrint = res.ticket
   
-            this.element = document.querySelector(".create-tiket")
-  
-            this.element.style.display = "none"
+            this.conditionsIn = false
   
             this.getUser()
   

@@ -121,7 +121,7 @@ export class UpdateUserComponent implements OnInit {
     if(op === "+"){
       
       if(this.userService.user.type === "admin"){
-        if(parseFloat(amount.value) < this.adminSolde){
+        if(parseFloat(amount.value) < this.adminSolde || parseFloat(amount.value) === this.adminSolde){
           const result = parseFloat(this.requestUpdateInfos.solde)+parseFloat(amount.value)
           this.requestUpdateInfos.solde = result.toFixed(2)+""
           this.adminSolde -= parseFloat(amount.value)

@@ -999,8 +999,6 @@ export class HomeComponent implements OnInit {
 
     })
 
- 
-
   }
 
   cancelTiket(){
@@ -1099,7 +1097,6 @@ export class HomeComponent implements OnInit {
     }*/
 
   }
-
   
   getUser(){
 

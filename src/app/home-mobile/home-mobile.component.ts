@@ -28,7 +28,7 @@ export class HomeMobileComponent implements OnInit {
 
   conditionsIn = false
 
-  openNoEventAlert = true
+  openNoEventAlert = false
 
   openSpinMobile = false
 

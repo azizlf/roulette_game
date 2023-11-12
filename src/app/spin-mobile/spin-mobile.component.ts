@@ -290,8 +290,6 @@ export class SpinMobileComponent implements OnInit {
 
     this.element.style.scale = ".4"
 
-    this.spinFinish = false
-
     this.indicator = document.querySelector(".indicator-number")
 
     var angle = this.angles[this.angles.findIndex(item => item.val === choosedNum)].ang + (360 * 15)
@@ -368,6 +366,10 @@ export class SpinMobileComponent implements OnInit {
         this.timerBarCtn = document.querySelector(".timer-num")
         this.timerBarCtn.style.color = "white"
 
+      }
+
+      if(this.currentTime >= 149 && !this.isSpinning){
+        this.spinFinish = false
       }
     
       if(this.currentTime >= this.timeChrono && this.currentTime < (this.timeChrono+29) && !this.isSpinning){

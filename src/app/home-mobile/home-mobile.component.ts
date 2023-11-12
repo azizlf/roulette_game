@@ -1163,7 +1163,7 @@ export class HomeMobileComponent implements OnInit {
         this.updateSolde()
       }
 
-      if(res.temp >= 135){
+      if(res.temp >= 121){
 
         this.timeIsUpSpin = true
 

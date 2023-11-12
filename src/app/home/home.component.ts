@@ -391,7 +391,9 @@ export class HomeComponent implements OnInit {
 
     const token = this.generateTiketCode(12)
 
-    window.open("http://"+url+"/spin/desktop")
+    console.log("http://"+url+"/spin/desktop")
+
+    this.doc = window.open("http://"+url+"/spin/desktop", '', 'width="100%",height="100%"');
     
     localStorage.setItem("#TKPOLMGFM",token)
 
@@ -1129,6 +1131,8 @@ export class HomeComponent implements OnInit {
 
   updateSolde(){
     this.users.findUser(this.users.user.id).subscribe((res:any)=>{
+
+      console.log(parseFloat(res.solde))
       
       this.userSolde = parseFloat(res.solde)
 
@@ -1184,7 +1188,7 @@ export class HomeComponent implements OnInit {
         this.updateSolde()
       }
       
-      if(res.temp >= 138){
+      if(res.temp >= 121){
 
         this.noEventUser = true
         this.timeIsUpSpin = true

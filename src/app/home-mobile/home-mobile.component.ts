@@ -779,7 +779,14 @@ export class HomeMobileComponent implements OnInit {
 
             }
           }
+
+          this.conditionsIn = true
+          setTimeout(()=>{
+            this.initConditions(ele)
+          },250)
         }
+
+        
         
       }
       else{
@@ -816,6 +823,11 @@ export class HomeMobileComponent implements OnInit {
                   }
                   
                   condition.soldeJouer += parseFloat(solde)
+
+                  this.conditionsIn = true
+                  setTimeout(()=>{
+                    this.initConditions(ele)
+                  },250)
 
                 }
                 else{
@@ -860,6 +872,12 @@ export class HomeMobileComponent implements OnInit {
                   
                   condition.soldeJouer += parseFloat(solde)
 
+                  this.conditionsIn = true
+      
+                  setTimeout(()=>{
+                    this.initConditions(ele)
+                  },250)
+
                 }
                 else{
                   alert("insufficient funds!")
@@ -872,10 +890,6 @@ export class HomeMobileComponent implements OnInit {
 
         })
       }    
-      this.conditionsIn = true
-      setTimeout(()=>{
-        this.initConditions(ele)
-      },250)
     }
 
   }
@@ -963,6 +977,8 @@ export class HomeMobileComponent implements OnInit {
             this.getUser()
   
             this.userSolde = newSolde
+
+            this.cancelTiket()
   
           }
   

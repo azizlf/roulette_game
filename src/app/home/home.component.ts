@@ -897,7 +897,6 @@ export class HomeComponent implements OnInit {
 
         })
       }    
-      console.log(this.conditions)
       this.initConditions(ele)
     }
 

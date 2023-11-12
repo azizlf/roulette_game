@@ -899,91 +899,84 @@ export class HomeMobileComponent implements OnInit {
 
   validateTiket(){
 
-    var solde = 0, soldeMin = 0, soldeMax = 0 , soldeList:any = []
+    this.users.findUser(this.users.user.id).subscribe((res:any)=>{
 
-    this.conditions.forEach((condition:any)=>{
+      this.userSolde = parseFloat(res.solde)
 
-      solde += condition.soldeJouer
-      soldeList.push(condition.soldeJouer)
+      var solde = 0, soldeMin = 0, soldeMax = 0 , soldeList:any = []
+
+      this.conditions.forEach((condition:any)=>{
+  
+        solde += condition.soldeJouer
+        soldeList.push(condition.soldeJouer)
+  
+      })
+  
+      soldeMin = soldeList[0]
+  
+      soldeMax = soldeList[0]
+  
+      for (var i = 0; i < soldeList.length; i++) {
+        
+        if(soldeList[i] < soldeMin){
+          
+          soldeMin = soldeList[i]
+  
+        }
+        if(soldeList[i] > soldeMax){
+          
+          soldeMax = soldeList[i]
+  
+        }
+      }
+  
+      var newSolde = this.userSolde - solde
+  
+      var request = {
+        ticket:{
+          condition:this.conditions,
+          solde:solde,
+          coefficient:36,
+          gagnion:false,
+          realTime:true,
+          soldeMax:soldeMax,
+          SoldeMin:soldeMin,
+          joueur:this.users.user.id
+        },
+        joueur:{    
+          solde:newSolde,
+          id:this.users.user.id,
+          admin:this.adminId
+        }
+      }
+  
+      if(solde > 0){
+        
+        this.tiketService.create(request).subscribe((res:any)=>{
+  
+          if(res.message){
+  
+            this.tiketService.createdTiketIdForPrint = res.ticket
+  
+            this.element = document.querySelector(".create-tiket")
+  
+            this.element.style.display = "none"
+  
+            this.getUser()
+  
+            this.userSolde = newSolde
+  
+          }
+  
+        })
+        
+      }
 
     })
 
-    soldeMin = soldeList[0]
-
-    soldeMax = soldeList[0]
-
-    for (var i = 0; i < soldeList.length; i++) {
-      
-      if(soldeList[i] < soldeMin){
-        
-        soldeMin = soldeList[i]
-
-      }
-      if(soldeList[i] > soldeMax){
-        
-        soldeMax = soldeList[i]
-
-      }
-    }
-
-    var newSolde = this.userDetails.solde - solde
-
-    var request = {
-      ticket:{
-        condition:this.conditions,
-        solde:solde,
-        coefficient:36,
-        gagnion:false,
-        realTime:true,
-        soldeMax:soldeMax,
-        SoldeMin:soldeMin,
-        joueur:this.users.user.id
-      },
-      joueur:{    
-        solde:newSolde,
-        id:this.users.user.id,
-        admin:this.adminId
-      }
-    }
-
-
-    if(solde > 0){
-      
-      this.tiketService.create(request).subscribe((res:any)=>{
-
-        if(res.message){
-
-          this.tiketService.createdTiketIdForPrint = res.ticket
-
-          this.conditions = []
-
-          this.conditionsIn = false
-
-          this.getUser()
-
-          this.userSolde = newSolde
-
-          this.cancelEventFromBtns()
-
-          this.numbers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]
-
-          this.totalConditionsSolde = 0
-
-
-        }
-
-      })
-      
-    }
-
-    else{
-
-      alert("select condition")
-
-    }
+ 
 
   }
-
   cancelTiket(){
     
     this.conditions = []

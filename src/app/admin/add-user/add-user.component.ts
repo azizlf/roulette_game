@@ -53,7 +53,7 @@ export class AddUserComponent implements OnInit {
 
       this.userService.findAdmin(this.userService.user.id).subscribe((res:any)=>{
         var sld = parseFloat(request.solde+"")
-        if(sld < res.solde){
+        if(sld < res.solde || sld === res.solde){
 
           this.userService.addUser(request).subscribe((res:any)=>{
 

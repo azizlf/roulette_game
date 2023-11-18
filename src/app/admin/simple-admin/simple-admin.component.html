@@ -1,9 +1,12 @@
 <div class="container-app">
 	
-	<div class="menu">
+	<div class="menu" #menu>
 		
 		<div class="header">
 			<div class="logo"></div>
+			<div class="close-menu-side-bar" (click)="closeSideBarMobile(menu)">
+				<i class="fa-solid fa-xmark"></i>
+			</div>
 		</div>
 		<div class="title" (click)="openList('detail')" >
 			<p>Profile</p>&nbsp;&nbsp; 
@@ -44,6 +47,9 @@
 		</div>
 	</div>
 	<div class="main">
+		<div class="nav-bar">
+			<div class="open-menu-side-bar" (click)="openSideBarMobile(menu)"><i class="fa-solid fa-bars"></i></div>
+		</div>
 		<router-outlet></router-outlet>
 	</div>
 

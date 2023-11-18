@@ -140,6 +140,7 @@
 }
 
 
+
 /*********************************************************************************************************************/
 /**********************************************                       ************************************************/
 /**********************************************   Admin component     ************************************************/
@@ -925,6 +926,14 @@
 	-webkit-box-orient: vertical;
 }
 
+.container-app .main .admins-page .list .item-list .it.name button{
+	border: none;
+    color: white;
+    padding: 2%;
+    cursor: pointer;
+    font-size: 1.2vw;
+}
+
 .container-app .main .admins-page .list .item-list .it.link{
 
 	color: var(--btnColor);
@@ -1488,212 +1497,83 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+@media screen and (max-width:1024px){
+
+	.login-page .form{
+		width: 86%;
+		box-shadow: 0 0 0 0 transparent;
+	}
+	
+	.login-page .form .title{
+		font-size: 5vw;
+	}
+
+	.login-page .form input{
+		font-size: 3vw;
+	}
+
+	.login-page .form .footer-form button{
+		font-size: 4vw;
+	}
+
+	.login-page .error-msg{
+		width: 57%;
+	}
+
+	.login-page .error-msg .text{
+		font-size: 2.5vw;
+		line-height: 3.5vw;
+	}
+
+	.login-page .error-msg .text span{
+		font-size: 2.2vw;
+	}
+
+	.login-page .error-msg i{
+		font-size: 4vw;
+	}
+	.container-app .main .admins-page .list .item-list .it.name button{
+		border: none;
+		color: white;
+		padding: 5%;
+		cursor: pointer;
+		font-size: 2.2vw;
+	}
+	.title-form-update-template{
+		font-size: 3.3vw !important;
+	}
+
+	.container-app .main .settings-page .title {
+		font-size: 5vw;
+		padding: 2% 3%;
+		color: gray;
+		display: flex;
+		align-items: center;
+		position: absolute;
+		top: 0;
+		margin: 3%;
+	}
+
+	.container-app .main .settings-page .form .content-form-settings{
+		width: 82%;
+	}
+
+	.container-app .main .settings-page .form .content-form-settings .sc .label{
+		font-size: 2.7vw;
+	}
+
+	.container-app .main .settings-page .form .content-form-settings .sc p{
+		font-size: 2.2vw;
+	}
+	.container-app .main .settings-page .form .content-form-settings .sc input{
+		font-size: 2.3vw;
+	}
+	.container-app .main .settings-page .form .content-form-settings button{
+		font-size: 3.3vw;
+	}
+
+	.container-app .main .settings-page .form .content-form-settings .sc{
+		margin: 9% 0;
+	}
+
+}

@@ -3,7 +3,7 @@
 @import url('./player.css');
 
 
-.alert-orient{
+.alert-orient {
 
 	width: 100%;
 	height: 100%;
@@ -22,9 +22,269 @@
 
 }
 
-.alert-orient i{
+.alert-orient i {
 
 	font-size: 18vw;
 	margin-bottom: 15%;
 
+}
+
+.container-app .menu .header .close-menu-side-bar {
+	display: none;
+}
+
+.container-app .nav-bar {
+	display: none;
+}
+
+@media screen and (max-width:1024px) {
+
+	.container-app .main .admins-page .list .item-list .it .btn,
+	.container-app .main .users-page .list .item-list .it .btn {
+
+		width: 28% !important;
+		padding: 8% 0 !important;
+	}
+
+	.container-app .main .admins-page .list .item-list .it,
+	.container-app .main .users-page .list .item-list .it {
+
+		font-size: 2vw;
+	}
+
+	.container-app .main .admins-page .list .head-list .item,
+	.container-app .main .users-page .list .head-list .item {
+		font-size: 2.3vw;
+	}
+
+	.container-app .nav-bar .open-menu-side-bar {
+		font-size: 4vw;
+		margin: 2% 4%;
+	}
+
+	.container-app .main .admins-page .header .btns .btn i {
+		font-size: 2vw;
+	}
+
+	.container-app .main .admins-page .header .btns .btn,
+	.container-app .main .users-page .header .btns .btn {
+
+		width: 56%;
+		padding: 6%;
+		background-color: var(--btnColor);
+		display: flex;
+		align-items: center;
+		margin-right: 8%;
+		font-size: 2.2vw;
+		color: white;
+		cursor: pointer;
+	}
+
+	.container-app .main .admins-page .header input,
+	.container-app .main .users-page .header input {
+
+		width: 72%;
+		padding: 1%;
+		font-size: 2.2vw;
+		position: relative;
+		left: 2%;
+	}
+
+	.container-app .main .admins-page .header .title,
+	.container-app .main .users-page .header .title {
+		margin-left: 1%;
+		font-size: 3vw;
+		font-weight: 600;
+		color: #3f3f3f;
+		position: fixed;
+		top: 0;
+		margin: 4%;
+		width: 77%;
+	}
+
+
+
+	.container-app .main .admins-page {
+		height: 91%;
+	}
+
+	.container-app .nav-bar {
+		display: flex;
+		justify-content: right;
+		padding: 2% 0;
+		height: 5%;
+	}
+
+	.container-app .menu .header .close-menu-side-bar {
+		display: block;
+		margin-right: 5%;
+		font-size: 3.2vw;
+	}
+
+	.container-app .menu {
+		width: 65%;
+		height: 100%;
+		background-color: var(--themeColor);
+		overflow: hidden;
+		overflow-y: auto;
+		position: fixed;
+		right: -100%;
+		z-index: 4678897987;
+		transition: .4s;
+	}
+
+	.container-app .menu .title {
+
+		font-size: 2.2vw;
+
+	}
+
+	.container-app .menu .detail {
+		font-size: 2vw;
+	}
+
+	.container-app .menu .detail p.name {
+		font-size: 2.2vw;
+	}
+
+	.container-app .menu .list .ctn .item {
+		width: 100%;
+		padding: 6% 6%;
+		font-size: 2.2vw;
+		cursor: pointer;
+		color: white;
+		border-left: .2vw solid transparent;
+	}
+
+	.container-app .main .user-form .form {
+		width: 85%;
+	}
+
+	.container-app .main .user-form .form input {
+		width: 96%;
+		padding: 3% 2%;
+		font-size: 2vw;
+		margin-bottom: 7%;
+		border: .1vw solid gray;
+		background-color: transparent;
+		border-radius: .3vw;
+	}
+
+	.container-app .main .user-form {
+		width: 100%;
+		height: 91%;
+		background-color: white;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.container-app .main .user-form .form button {
+		font-size: 2.4vw;
+	}
+
+	.container-app .main .user-form .form select {
+		width: 100%;
+		padding: 2.5% 2%;
+		font-size: 2.1vw;
+		margin-bottom: 5%;
+		border: .1vw solid gray;
+		background-color: transparent;
+		border-radius: .3vw;
+		margin-top: 3%;
+	}
+
+	.container-app .main .user-form .form label {
+		font-size: 2.3vw;
+	}
+
+	.container-app .main .user-form .return-btn {
+		position: absolute;
+		font-size: 4vw;
+		top: 3%;
+		left: 6%;
+		color: #363535;
+		z-index: 4515665;
+		cursor: pointer;
+	}
+
+	.container-app .main .user-form .form .flex-input {
+		margin-bottom: 5%;
+	}
+
+	.container-app .main .user-form .form .flex-input .input input {
+		width: 94%;
+		padding: 6% 4%;
+		font-size: 2.1vw;
+		margin: 0;
+		border: .1vw solid gray;
+		background-color: transparent;
+		border-radius: .3vw;
+	}
+
+	.success-msg-box,
+	.error-msg-box {
+		width: 55%;
+		left: 22%;
+	}
+
+	.success-msg-box i,
+	.error-msg-box i {
+		font-size: 3vw;
+	}
+
+	.success-msg-box .text,
+	.error-msg-box .text {
+		font-size: 1.8vw;
+		line-height: 3vw;
+	}
+
+	.success-msg-box .text span,
+	.error-msg-box .text span {
+		font-size: 2.2vw;
+	}
+
+	.container-app .main .history-user .nav-bar .user-details {
+		font-weight: 600;
+		font-size: 2.3vw;
+		margin-left: 4%;
+	}
+
+	.container-app .main .history-user .nav-bar {
+		box-shadow: 0 0 0 0 transparent;
+		position: static;
+		height: 1%;
+	}
+
+	.container-app .main .history-user .nav-bar .return-btn {
+		margin-right: 5%;
+		cursor: pointer;
+		padding: .7% 1%;
+		border-radius: 100%;
+		color: #4c4c4c;
+		font-size: 4.5vw;
+		margin: 2% 4%;
+		position: absolute;
+		top: 0;
+	}
+
+	.container-app .main .content-history-page {
+		height: 86%;
+	}
+
+	.container-app .main .content-history-page .head-list .it {
+		font-size: 2.2vw;
+		padding: 2% 0;
+	}
+
+	.container-app .main .content-history-page .item .it {
+		width: 50%;
+		font-size: 2.2vw;
+		text-align: center;
+		padding: 2% 0;
+	}
+
+	.container-app .main .users-page .list {
+		height: 82%;
+	}
 }

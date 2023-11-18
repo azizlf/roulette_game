@@ -23,6 +23,18 @@ export class SAdminComponent implements OnInit {
 
   userType:any
 
+  closeSideBarMobile(sideBar:any){
+
+    sideBar.style.right = "-100%"
+
+  }
+
+  openSideBarMobile(sideBar:any){
+
+    sideBar.style.right = "0%"
+
+  }
+
   returnFromPage(){
 
     this.users.usersShowAllList = true

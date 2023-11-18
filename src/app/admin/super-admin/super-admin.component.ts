@@ -23,6 +23,18 @@ export class SuperAdminComponent implements OnInit {
 
   userSolde:any
 
+  closeSideBarMobile(sideBar:any){
+
+    sideBar.style.right = "-100%"
+
+  }
+
+  openSideBarMobile(sideBar:any){
+
+    sideBar.style.right = "0%"
+
+  }
+
   returnFromPage(){
 
     this.users.usersShowAllList = true

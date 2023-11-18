@@ -22,6 +22,18 @@ export class SimpleAdminComponent implements OnInit {
 
   constructor(private router: Router,private users:UsersService) { }
 
+  closeSideBarMobile(sideBar:any){
+
+    sideBar.style.right = "-100%"
+
+  }
+
+  openSideBarMobile(sideBar:any){
+
+    sideBar.style.right = "0%"
+
+  }
+
   getAdmin(){
     this.users.findAdmin(this.users.user.id).subscribe((res:any)=>{
 

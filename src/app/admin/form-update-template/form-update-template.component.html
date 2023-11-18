@@ -18,9 +18,8 @@
 	<div class="return-btn" [routerLink]="'/admin/management/template'" ><i class="fa-solid fa-arrow-left"></i></div>
 	<div class="form" *ngIf="!isLoading">
 		<div style="width: 100%;margin-bottom: 3%;font-size: 1.4vw;display: flex;align-items: center;justify-content: center;">
-			<p (click)="changeFormType('text')" [ngStyle]="{'cursor':'pointer', 'width':'50%','text-align':'center', 'border-bottom': getBorderColor('text'),'padding': '3% 0'}">change text</p>
-			<p (click)="changeFormType('image')" [ngStyle]="{'cursor':'pointer', 'width':'50%','text-align':'center', 'border-bottom': getBorderColor('image'),'padding': '3% 0'}">change image</p>
-
+			<p class="title-form-update-template" (click)="changeFormType('text')" [ngStyle]="{'cursor':'pointer', 'width':'50%','font-size': '1.5vw','text-align':'center', 'border-bottom': getBorderColor('text'),'padding': '3% 0'}">change text</p>
+			<p class="title-form-update-template" (click)="changeFormType('image')" [ngStyle]="{'cursor':'pointer', 'width':'50%','font-size': '1.5vw','text-align':'center', 'border-bottom': getBorderColor('image'),'padding': '3% 0'}">change image</p>
 		</div>
 		<input type="text" placeholder="Title" (input)="updateInfos('title',$event)"  [value]="requestInfos.title"/>
 		<br>

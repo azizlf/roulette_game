@@ -41,7 +41,7 @@ jobs:
           host: 51.222.111.183
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "./dist/*"
-          target: "/home/ubuntu/koorea_project/front/"
+          target: "/home/ubuntu/koorea_project/front/dist/"
           
     - name: Sync Files 🚀
       uses: appleboy/ssh-action@v1.0.0

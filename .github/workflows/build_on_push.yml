@@ -1,4 +1,4 @@
-name: Deploy prod site on push
+name: CI/CD for Backend
 
 on:
   push:
@@ -6,56 +6,21 @@ on:
       - master
 
 jobs:
-  web-deploy:
-
-    name: Deploy Angular App 🚀
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-    - name: Get latest code
-      uses: actions/checkout@v2.3.2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-    - name: Use Node.js 16 LTS
-      uses: actions/setup-node@v2
+    - name: Run sshpass commands
+      uses: matheusvanzan/sshpass-action@v2
       with:
-        node-version: '16'
-
-    - name: Install NPM Modules
-      run: npm install --force
-
-    - name: Build Project ⛏
-      run: npm run build
-
-    - name: Sync Files 🚀
-      uses: appleboy/ssh-action@v1.0.0
-      with:
-          username: ubuntu
-          host: 51.222.111.183
-          key: ${{ secrets.SSH_PRIVATE_KEY }}          
-          script: |
-            sudo rm -r /home/ubuntu/koorea_project/front/dist/*
-
-    - name: Sync Files 🚀
-      uses: appleboy/scp-action@v0.1.4
-      with:
-          username: ubuntu
-          host: 51.222.111.183
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "./dist/*"
-          target: "/home/ubuntu/koorea_project/front/dist/"
-          
-    - name: Sync Files 🚀
-      uses: appleboy/ssh-action@v1.0.0
-      with:
-          username: ubuntu
-          host: 51.222.111.183
-          key: ${{ secrets.SSH_PRIVATE_KEY }}          
-          script: |
-            sudo service nginx restart
-
-          # # will put all file under this path
-          # local_path: ./dist/* # default is ./*
-          # # files will copy to under remote_path
-          # remote_path: /home/ubuntu/koorea_project/front/dist/
-    
-    # - name: Restart Nginx
-    #   run: sudo service nginx restart
+        host: 51.222.111.183
+        user: root
+        pass: ${{ secrets.SSH_PASSWORD }}
+        run: |
+          cd /home/ubuntu/roulette_game
+          git pull origin master
+          cd /home/ubuntu/
+          docker-compose up -d --build 
